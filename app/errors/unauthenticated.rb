@@ -1,0 +1,1 @@
+Unauthenticated = Class.new HumanizedError
