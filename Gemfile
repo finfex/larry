@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -26,20 +28,20 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
+gem 'auto_logger'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'env-tweaks', '~> 1.0.0'
-gem 'auto_logger'
-gem 'settingslogic'
-gem 'simple_form'
 gem 'gravatarify', '~> 3.1'
-gem "kaminari", "~> 1.2"
-gem "rails-i18n", "~> 6.0"
+gem 'kaminari', '~> 1.2'
+gem 'rails-i18n', '~> 6.0'
 gem 'semver2', '~> 3.4'
+gem 'settingslogic'
 gem 'sidekiq'
+gem 'simple_form'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry'
   gem 'pry-byebug'
   gem 'pry-rails'
@@ -51,8 +53,8 @@ group :development do
   gem 'web-console', '>= 4.1.0'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
-  gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
+  gem 'rack-mini-profiler', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
@@ -66,26 +68,21 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 group :deploy do
-  gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'pry'
-  gem 'pry-byebug'
-  gem 'semver2', '~> 3.4'
-  gem 'capistrano-dotenv-tasks'
-  gem 'capistrano3-puma'
+  gem 'bugsnag-capistrano', require: false
   gem 'capistrano', require: false
-  gem 'capistrano-rbenv', require: false
-  gem 'capistrano-rails', require: false
-  gem 'capistrano-nvm', require: false
+  gem 'capistrano3-puma'
   gem 'capistrano-bundler', require: false
-  gem 'capistrano-yarn', require: false
-  gem 'capistrano-shell', require: false
   gem 'capistrano-db-tasks', require: false
-  gem 'capistrano-systemd-multiservice', github: 'groovenauts/capistrano-systemd-multiservice', require: false
-  gem 'capistrano-master-key', require: false, github: 'virgoproz/capistrano-master-key'
+  gem 'capistrano-dotenv-tasks'
   gem 'capistrano-faster-assets', require: false
   gem 'capistrano-git-with-submodules'
-  gem 'bugsnag-capistrano', require: false
+  gem 'capistrano-master-key', require: false, github: 'virgoproz/capistrano-master-key'
+  gem 'capistrano-nvm', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-rbenv', require: false
+  gem 'capistrano-shell', require: false
+  gem 'capistrano-systemd-multiservice', github: 'groovenauts/capistrano-systemd-multiservice', require: false
+  gem 'capistrano-yarn', require: false
 end
-

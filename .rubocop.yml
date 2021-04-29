@@ -63,19 +63,8 @@ Lint/MissingSuper:
   Exclude:
     - 'config/initializers/net_http.rb'
 
-Naming/MethodParameterName:
-  Exclude:
-    - 'app/models/currency.rb'
-    - 'app/models/market.rb'
 Style/StringConcatenation:
   Enabled: false
-
-# Offense count: 13
-# Configuration parameters: MaxUnannotatedPlaceholdersAllowed, IgnoredMethods.
-# SupportedStyles: annotated, template, unannotated
-Style/FormatStringToken:
-  Exclude:
-    - 'app/models/trade.rb'
 
 # Offense count: 13
 # Cop supports --auto-correct.
@@ -83,19 +72,6 @@ Style/FormatStringToken:
 # URISchemes: http, https
 Layout/LineLength:
   Exclude:
-    - app/models/trade.rb
     - config/initializers/simple_form_bootstrap.rb
     - config/initializers/simple_form.rb
   Max: 160
-
-# Offense count: 1
-Style/MissingRespondToMissing:
-  Exclude:
-    - 'app/decorators/member_decorator.rb'
-
-# Offense count: 2
-# Configuration parameters: MinBodyLength.
-Style/GuardClause:
-  Exclude:
-    - 'app/models/currency.rb'
-    - 'app/models/order.rb'
