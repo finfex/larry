@@ -1,0 +1,13 @@
+language: ruby
+cache: bundler
+env:
+  - DATABASE_ADAPTER=postgresql
+before_script:
+  - RAILS_ENV=test bundle exec rake --trace db:setup
+script:
+  - RAILS_ENV=test bundle exec rake --trace test
+  - bundle exec rubocop
+services:
+  - postgresql
+dist: xenial
+sudo: required
