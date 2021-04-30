@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_30_060050) do
+ActiveRecord::Schema.define(version: 2021_04_30_072457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,8 +147,8 @@ ActiveRecord::Schema.define(version: 2021_04_30_060050) do
 
   create_table "gera_exchange_rates", force: :cascade do |t|
     t.bigint "income_payment_system_id", null: false
-    t.string "in_cur", limit: 4, null: false
-    t.string "out_cur", limit: 4, null: false
+    t.string "in_cur", limit: 6, null: false
+    t.string "out_cur", limit: 6, null: false
     t.bigint "outcome_payment_system_id", null: false
     t.float "value", null: false
     t.boolean "is_enabled", default: false, null: false

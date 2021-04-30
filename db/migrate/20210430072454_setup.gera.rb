@@ -176,8 +176,8 @@ class Setup < ActiveRecord::Migration[5.2]
 
     create_table 'gera_exchange_rates', options: table_options, force: :cascade do |t|
       t.bigint 'income_payment_system_id', null: false
-      t.string 'in_cur', limit: 4, null: false
-      t.string 'out_cur', limit: 4, null: false
+      t.string 'in_cur', limit: 6, null: false
+      t.string 'out_cur', limit: 6, null: false
       t.bigint 'outcome_payment_system_id', null: false
       t.float 'value', null: false
       t.boolean 'is_enabled', default: false, null: false

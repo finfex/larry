@@ -9,10 +9,15 @@
 
 ## Development
 
-> rake db:seed
+> rake db:create db:migrate db:seed
 
 Update source, basic and public rates
 
 > rake gera:update_rates
 
 Then look into logs/gera_*.log for logs
+
+
+## Update gera migration
+
+> rm db/migrate/*.gera.*; rake gera:install:migrations  
