@@ -4,7 +4,8 @@
 
 ## Specification
 
-* [ ] All database primary keys are UUID's
+* All database primary keys are UUID's
+* Предварительно рассчитанный курс
 
 ## Install for development
 
