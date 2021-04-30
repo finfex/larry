@@ -1,20 +1,25 @@
 # frozen_string_literal: true
 
+# Adjectives concern for Authorizer
+#
+# TODO: Move to Authority gem
+#
 module AuthorizerAdjectives
   extend ActiveSupport::Concern
 
   DEFAULT_ADJECTIVES = %i[readable creatable updatable deletable].freeze
-  # TODO: Вынести в Authority
-  VERBS = Authority.abilities.invert.symbolize_keys
-  # adjective -> verbs
+
+  # Map to convert adjective -> verbs
   # {:creatable=>:create, :readable=>:read, :updatable=>:update, :deletable=>:destroy, :acceptable=>:accept, :rejectable=>:reject}
+  #
+  VERBS = Authority.abilities.invert.symbolize_keys
 
   included do
-    # Атрибуты запрещенные менять НЕ админам
-    class_attribute :restricted_attributes
+    class_attribute :restricted_attributes # Attributes resitrected to change by NOT admin
     class_attribute :adjectives
   end
 
+  # Class methods
   module ClassMethods
     def restricted_attributes_set
       Set.new(Array(restricted_attributes).map(&:to_s)).freeze

@@ -4,12 +4,12 @@ class User < ApplicationRecord
   include Authority::UserAbilities
   authenticates_with_sorcery!
 
-  def has_permission?(_subject, _method)
+  def permission?(_subject, _method)
     # TODO: use role [Danil]
     true
   end
 
-  def is_superuser?
+  def superuser?
     true
   end
 end

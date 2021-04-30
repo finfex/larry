@@ -15,6 +15,13 @@ AllCops:
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
 Metrics/AbcSize:
   Max: 30
+  Exclude:
+    - 'db/migrate/*'
+
+
+Metrics/ClassLength:
+  Exclude:
+    - 'db/migrate/*'
 
 # Offense count: 3
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
@@ -31,6 +38,8 @@ Metrics/CyclomaticComplexity:
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
 Metrics/MethodLength:
   Max: 16
+  Exclude:
+    - 'db/migrate/*'
 
 # Offense count: 2
 # Configuration parameters: IgnoredMethods.
@@ -53,6 +62,8 @@ Style/Documentation:
     - 'app/controllers/**/*'
     - 'app/decorators/**/*'
     - 'test/**/*'
+    - 'db/migrate/*'
+    - 'app/helpers/**/*.rb'
 
 Naming/PredicateName:
   Exclude:

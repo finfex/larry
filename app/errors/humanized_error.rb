@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Use this error class in cases you want to interrupt flow and show user some message
-
+#
 class HumanizedError < StandardError
   def initialize(options = {}, opts2 = {})
     case options
@@ -17,6 +17,7 @@ class HumanizedError < StandardError
       @options = options
       @message = I18n.t [:errors, class_key].join('.'), @options
     end
+    super
   end
 
   def title

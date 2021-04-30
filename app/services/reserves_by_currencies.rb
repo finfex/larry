@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Observe reserces by currencies
+#
 class ReservesByCurrencies
   def order_reservations
     @order_reservations ||=

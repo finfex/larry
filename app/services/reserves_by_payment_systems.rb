@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Service to observe payment systems reservers
 class ReservesByPaymentSystems
   class << self
     delegate :order_reservations, :wallets_balances, :final_reserves, :get_reserve_by_payment_system_id, :delta,
@@ -10,11 +11,11 @@ class ReservesByPaymentSystems
     end
   end
 
-  # Для резерва на главной считается баланс по агрегаторам
-
+  # Reserves for main page
+  #
   def order_reservations
-    # Можно вычитать все суммы по текущим заявкам
-    # order_reservation.amount = order.transfer_fee + комиссия ПС
+    # TODO: Substract amounts of current orders
+    # order_reservation.amount = order.transfer_fee + payment system fee
     # Order.where(status1: :open).group(:id_ps2).sum(:transfer_fee)
     @order_reservations ||= OrderReservation.joins(:wallet_to).group(:id_ps).sum(:amount)
   end

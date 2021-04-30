@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Namespace support authorizer concern
+#
 module AuthorizerNamespace
   extend ActiveSupport::Concern
   included do

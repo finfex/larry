@@ -7,8 +7,8 @@ module ApplicationHelper
   end
 
   # TODO: show icon of payment system
-  def ps_icon(ps)
-    ps
+  def ps_icon(payment_system)
+    payment_system.to_s
   end
 
   def show_direction_popover?

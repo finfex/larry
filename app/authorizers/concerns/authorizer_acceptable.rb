@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# Concert for authorizers gives acceptable and rejectable methods
+#
 module AuthorizerAcceptable
   extend ActiveSupport::Concern
   included do
@@ -8,11 +10,11 @@ module AuthorizerAcceptable
 
   def acceptable_by?(user)
     user.is_super_admin? ||
-      user.has_permission(resource, :accept) && resource.pending?
+      user.permission(resource, :accept) && resource.pending?
   end
 
   def rejectable_by?(user)
     user.is_super_admin? ||
-      user.has_permission(resource, :reject) && resource.pending?
+      user.permission(resource, :reject) && resource.pending?
   end
 end
