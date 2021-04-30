@@ -1,0 +1,12 @@
+defaults: &defaults
+  default_url_options: &default_url_options
+    protocol: <%= ENV.fetch('HTTP_PROTOCOL', 'https') %>
+    host: <%= ENV.fetch('LARRY_HOST', 'localhost') %>
+development:
+  <<: *defaults
+staging:
+  <<: *defaults
+production:
+  <<: *defaults
+test:
+  <<: *defaults

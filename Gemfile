@@ -43,6 +43,8 @@ gem 'gera', path: 'vendor/gera'
 gem 'money'
 gem 'money-rails'
 gem 'noty_flash', github: 'BrandyMint/noty_flash'
+gem 'foreman'
+gem 'slim-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -91,3 +93,5 @@ group :deploy do
   gem 'capistrano-systemd-multiservice', github: 'groovenauts/capistrano-systemd-multiservice', require: false
   gem 'capistrano-yarn', require: false
 end
+
+gem "title", "~> 0.0.8"
