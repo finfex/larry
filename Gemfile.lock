@@ -247,6 +247,9 @@ GEM
     guard-minitest (2.4.6)
       guard-compat (~> 1.2)
       minitest (>= 3.0)
+    guard-rubocop (1.4.0)
+      guard (~> 2.0)
+      rubocop (< 2.0)
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
@@ -533,6 +536,7 @@ DEPENDENCIES
   gravatarify (~> 3.1)
   guard
   guard-minitest
+  guard-rubocop
   jbuilder (~> 2.7)
   kaminari (~> 1.2)
   listen (~> 3.3)

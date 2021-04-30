@@ -10,6 +10,7 @@ AllCops:
     - '.git/**/*'
     - 'storage/**/*'
     - db/schema.rb
+    - Guardfile
 
 # Offense count: 4
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
