@@ -4,7 +4,9 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   default_url_options Settings.default_url_options.symbolize_keys
 
-  root to: 'home#index'
+  namespace :public do
+    root to: 'home#index'
+  end
   namespace :operator do
     mount Sidekiq::Web => 'sidekiq'
     mount Gera::Engine => '/'
