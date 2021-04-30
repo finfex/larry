@@ -12,6 +12,9 @@
 # end
 
 # These inflection rules are supported but not enabled by default:
-# ActiveSupport::Inflector.inflections(:en) do |inflect|
-#   inflect.acronym 'RESTful'
-# end
+#
+# TODO move to gera gem
+ActiveSupport::Inflector.inflections(:en) do |inflect|
+  #inflect.acronym 'CBR'
+  #inflect.acronym 'EXMO'
+end

@@ -102,3 +102,6 @@ gem "sorcery", "~> 0.16.0"
 gem "active_link_to", "~> 1.0"
 
 gem "authority", "~> 3.3"
+
+gem "factory_bot", "~> 6.1"
+gem 'factory_bot_rails'

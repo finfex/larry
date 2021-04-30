@@ -1,7 +1,16 @@
 namespace :gera do
   desc 'Update rates'
   task :update_rates => :environment do
-    Gera::CurrencyRatesWorker.new.perform
-    Gera::DirectionsRatesWorker.new.perform
+    # TODO Automaticaly find necessary sources
+    [
+      Gera::CBRRatesWorker,
+      Gera::EXMORatesWorker,
+      Gera::BitfinexRatesWorker,
+      Gera::CurrencyRatesWorker,
+      Gera::DirectionsRatesWorker
+    ].each do |worker|
+      puts worker
+      worker.new.perform
+    end
   end
 end

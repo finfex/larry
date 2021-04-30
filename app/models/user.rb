@@ -6,4 +6,8 @@ class User < ApplicationRecord
     # TODO use role [Danil]
     true
   end
+
+  def is_superuser?
+    true
+  end
 end

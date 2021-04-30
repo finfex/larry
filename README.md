@@ -9,6 +9,8 @@
 
 ## Development
 
+> rake db:seed
+
 Update source, basic and public rates
 
 > rake gera:update_rates

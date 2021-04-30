@@ -214,6 +214,11 @@ GEM
       activesupport (>= 3.0, < 7.0)
     equalizer (0.0.11)
     erubi (1.10.0)
+    factory_bot (6.1.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.1.0)
+      factory_bot (~> 6.1.0)
+      railties (>= 5.0.0)
     faraday (1.4.1)
       faraday-excon (~> 1.1)
       faraday-net_http (~> 1.0)
@@ -501,6 +506,8 @@ DEPENDENCIES
   capybara (>= 3.26)
   dapi-archivable
   env-tweaks (~> 1.0.0)
+  factory_bot (~> 6.1)
+  factory_bot_rails
   foreman
   gera!
   gravatarify (~> 3.1)
