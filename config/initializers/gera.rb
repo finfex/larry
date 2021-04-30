@@ -8,9 +8,9 @@ end
 ##
 ## но в development происходит перезагрузку классов и поэтому их нужно миксировать снова
 ##
-#Rails.application.config.to_prepare do
-  #module Gera
-    #ApplicationController.before_action :require_login
+Rails.application.config.to_prepare do
+  module Gera
+    ApplicationController.before_action :require_login
     #[
       #BitfinexRatesWorker, CBRAvgRatesWorker, EXMORatesWorker, BinanceRatesWorker,
       #CreateHistoryIntervalsWorker, CurrencyRatesWorker, DirectionsRatesWorker, DumpValutaWorker,
@@ -44,11 +44,11 @@ end
     #ExchangeRate.include ExchangeRateConcern
     #ExchangeRate.has_many :order_reservations, foreign_key: :emoney_id2
 
-    #[
-      #CurrencyRate, CurrencyRateMode, ExchangeRate, PaymentSystem
-    #].each { |model| model.include Authority::Abilities }
-  #end
-#end
+    [
+      CurrencyRate, CurrencyRateMode, ExchangeRate, PaymentSystem
+    ].each { |model| model.include Authority::Abilities }
+  end
+end
 
 ## Другой вариант:
 ##
