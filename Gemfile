@@ -39,6 +39,10 @@ gem 'settingslogic'
 gem 'sidekiq'
 gem 'simple_form'
 gem 'bugsnag'
+gem 'gera', path: 'vendor/gera'
+gem 'money'
+gem 'money-rails'
+gem 'noty_flash', github: 'BrandyMint/noty_flash'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
