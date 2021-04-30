@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   helper Gera::CurrencyRateHelper
 
   def self.ensure_authorization_performed
-    # TODO use sorcery
+    # TODO: use sorcery
   end
 
   def current_user

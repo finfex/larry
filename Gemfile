@@ -30,22 +30,22 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'auto_logger'
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'bugsnag'
+gem 'dapi-archivable', require: 'archivable'
 gem 'env-tweaks', '~> 1.0.0'
+gem 'foreman'
+gem 'gera', path: 'vendor/gera'
 gem 'gravatarify', '~> 3.1'
 gem 'kaminari', '~> 1.2'
+gem 'money'
+gem 'money-rails'
+gem 'noty_flash', github: 'BrandyMint/noty_flash'
 gem 'rails-i18n', '~> 6.0'
 gem 'semver2', '~> 3.4'
 gem 'settingslogic'
 gem 'sidekiq'
 gem 'simple_form'
-gem 'bugsnag'
-gem 'gera', path: 'vendor/gera'
-gem 'money'
-gem 'money-rails'
-gem 'noty_flash', github: 'BrandyMint/noty_flash'
-gem 'foreman'
 gem 'slim-rails'
-gem 'dapi-archivable', require: 'archivable'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -95,13 +95,13 @@ group :deploy do
   gem 'capistrano-yarn', require: false
 end
 
-gem "title", "~> 0.0.8"
+gem 'title', '~> 0.0.8'
 
-gem "sorcery", "~> 0.16.0"
+gem 'sorcery', '~> 0.16.0'
 
-gem "active_link_to", "~> 1.0"
+gem 'active_link_to', '~> 1.0'
 
-gem "authority", "~> 3.3"
+gem 'authority', '~> 3.3'
 
-gem "factory_bot", "~> 6.1"
+gem 'factory_bot', '~> 6.1'
 gem 'factory_bot_rails'

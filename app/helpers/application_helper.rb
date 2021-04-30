@@ -2,11 +2,11 @@
 
 module ApplicationHelper
   def app_title
-    # TODO depends on namespace
+    # TODO: depends on namespace
     title
   end
 
-  # TODO show icon of payment system
+  # TODO: show icon of payment system
   def ps_icon(ps)
     ps
   end

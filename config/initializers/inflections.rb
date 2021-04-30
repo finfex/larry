@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # Be sure to restart your server when you modify this file.
 
 # Add new inflection rules using the following format. Inflections
@@ -15,6 +16,6 @@
 #
 # TODO move to gera gem
 ActiveSupport::Inflector.inflections(:en) do |inflect|
-  #inflect.acronym 'CBR'
-  #inflect.acronym 'EXMO'
+  # inflect.acronym 'CBR'
+  # inflect.acronym 'EXMO'
 end

@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'factory_bot'
 
-puts  FactoryBot.definition_file_paths
+puts FactoryBot.definition_file_paths
 puts 'Seed database'
 
 FactoryBot.create :rate_source_exmo, title: 'exmo'

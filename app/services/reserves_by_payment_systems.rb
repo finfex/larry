@@ -51,7 +51,7 @@ class ReservesByPaymentSystems
     ids.each do |id|
       value = wallets_balances[id].to_f - order_reservations[id].to_f
       value += delta[id].to_f
-      value = 0 if value < 0
+      value = 0 if value.negative?
       fr[id] = value
     end
 

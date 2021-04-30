@@ -4,10 +4,11 @@
 
 class HumanizedError < StandardError
   def initialize(options = {}, opts2 = {})
-    if options.is_a? String
+    case options
+    when String
       @message = options
       @options = {}
-    elsif options.is_a? Symbol
+    when Symbol
       key = options
       opts2.reverse_merge! default: key.to_s, scope: [:errors, class_key]
       @options = opts2

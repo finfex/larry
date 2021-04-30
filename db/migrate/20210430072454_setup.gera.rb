@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from gera (originally 20180912130000)
 
 class Setup < ActiveRecord::Migration[5.2]

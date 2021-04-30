@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # This migration comes from gera (originally 20190315113046)
 
 class AddIconUrlToPaymentSystems < ActiveRecord::Migration[5.2]

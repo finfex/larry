@@ -1,2 +1,6 @@
-module Operator::ApplicationHelper
+# frozen_string_literal: true
+
+module Operator
+  module ApplicationHelper
+  end
 end

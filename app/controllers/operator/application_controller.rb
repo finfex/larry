@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
 # Base controller for operator namespace
 #
-class Operator::ApplicationController < ApplicationController
+module Operator
+  class ApplicationController < ApplicationController
+  end
 end
