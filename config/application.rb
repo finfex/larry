@@ -14,6 +14,10 @@ module Larry
     config.load_defaults 6.1
     config.i18n.default_locale = :ru
 
+    config.generators do |g|
+      g.template_engine :slim
+    end
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
