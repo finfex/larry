@@ -99,3 +99,5 @@ gem "title", "~> 0.0.8"
 gem "sorcery", "~> 0.16.0"
 
 gem "active_link_to", "~> 1.0"
+
+gem "authority", "~> 3.3"

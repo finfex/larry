@@ -478,6 +478,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_link_to (~> 1.0)
+  authority (~> 3.3)
   auto_logger
   bootsnap (>= 1.4.4)
   bugsnag

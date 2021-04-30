@@ -8,6 +8,8 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light.flex-column.flex-md-row.sticky
       span.navbar-toggler-icon
     #navbarSupportedContent.collapse.navbar-collapse
       ul.navbar-nav.mr-auto
+        = active_link_to operator_root_url, class: 'nav-link', wrap_tag: :li, wrap_class: 'nav-item' do
+          = t '.operator'
         = active_link_to '#rules', class: 'nav-link', wrap_tag: :li, wrap_class: 'nav-item' do
           = t '.rules'
       - if logged_in?

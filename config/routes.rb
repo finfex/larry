@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
   namespace :operator do
     mount Sidekiq::Web => 'sidekiq'
+    mount Gera::Engine => '/'
     root to: 'dashboard#index'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
