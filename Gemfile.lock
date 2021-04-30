@@ -477,6 +477,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_link_to (~> 1.0)
   auto_logger
   bootsnap (>= 1.4.4)
   bugsnag
