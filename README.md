@@ -28,6 +28,13 @@ Update source, basic and public rates
 
 Then look into logs/gera_*.log for logs
 
+Run services
+
+> bundle exec foreman start
+
+Run auto tests:
+
+> bundle exec guard
 
 ## Update gera migration
 

@@ -54,6 +54,8 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rubocop-rails'
+  gem 'guard'
+  gem 'guard-minitest'
 end
 
 group :development do
