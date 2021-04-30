@@ -1,0 +1,6 @@
+CRONTAB_FILE = "./config/crontab_#{Rails.env}.yml"
+
+if Rails.env.staging? || Rails.env.production? || ENV.true?( 'LOAD_SIDEKIQ_CRONTAB' )
+  Sidekiq::Cron::Job.destroy_all!
+  Sidekiq::Cron::Job.load_from_hash YAML.load_file(CRONTAB_FILE)
+end

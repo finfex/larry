@@ -45,6 +45,7 @@ gem 'money-rails'
 gem 'noty_flash', github: 'BrandyMint/noty_flash'
 gem 'foreman'
 gem 'slim-rails'
+gem 'dapi-archivable', require: 'archivable'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

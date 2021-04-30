@@ -499,6 +499,7 @@ DEPENDENCIES
   capistrano-yarn
   capistrano3-puma
   capybara (>= 3.26)
+  dapi-archivable
   env-tweaks (~> 1.0.0)
   foreman
   gera!

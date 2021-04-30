@@ -5,3 +5,12 @@
 ## Specification
 
 * [ ] All database primary keys are UUID's
+
+
+## Development
+
+Update source, basic and public rates
+
+> rake gera:update_rates
+
+Then look into logs/gera_*.log for logs
