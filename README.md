@@ -6,6 +6,16 @@
 
 * [ ] All database primary keys are UUID's
 
+## Install for development
+
+```
+rbenv install
+git submodule init
+git submodule update
+bundle
+nvm install
+yarn install
+```
 
 ## Development
 
