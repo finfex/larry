@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   namespace :operator do
     mount Sidekiq::Web => 'sidekiq'
     root to: 'dashboard#index'
+    resources :wallets
   end
   mount Gera::Engine => '/gera'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

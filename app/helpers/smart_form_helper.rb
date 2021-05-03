@@ -30,7 +30,7 @@ module SmartFormHelper
       # PaymentSystem#currency
       if %w[currency currency_iso_code].include?(attribute_name)
         as = :select
-        collection = Money::Currency.all.map(&:iso_code).map { |v| [v,v] }
+        collection = Money::Currency.all.map(&:iso_code).map { |v| [v, v] }
       else
         as = :input
       end
@@ -48,7 +48,7 @@ module SmartFormHelper
     [as, collection]
   end
 
-  def smart_get_collection(record_class, attribute_name, record = nil)
+  def smart_get_collection(record_class, attribute_name, _record = nil)
     if record_class.respond_to?(:enumerized_attributes) && record_class.enumerized_attributes[attribute_name.to_sym].present? # gem enumerize
       [[t('.not_selected'), '']] + record_class.enumerized_attributes[attribute_name.to_sym].values.map { |v| [v, v] }
     elsif record_class.defined_enums[attribute_name.to_s].present? # рельсовый enum

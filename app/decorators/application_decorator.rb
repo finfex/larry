@@ -12,7 +12,6 @@ class ApplicationDecorator < Draper::Decorator
       locale_postfix = " (#{postfix})"
     end
 
-    # TODO: взять в active_record если не хватает
     buffer = I18n.t attr,
                     scope: [:decorators, decorated_class_key],
                     default: decorated_class.human_attribute_name(attr)
