@@ -114,3 +114,5 @@ gem 'breadcrumbs_on_rails', '~> 4.1'
 gem 'draper', '~> 4.0'
 
 gem 'best_in_place', git: 'https://github.com/mmotherwell/best_in_place'
+
+gem "ransack", "~> 2.4"

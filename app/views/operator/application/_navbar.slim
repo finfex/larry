@@ -1,5 +1,5 @@
 = render 'application/navbar' do
-  li.nav-item.dropdown
+  li.nav-item.dropdown.mr-2.d-flex.align-items-center
     = link_to '#', class: 'my-lg-0 py-lg-0 nav-link dropdown-toggle', data: { toggle: 'dropdown' }, id: :geraDropdown, role: :button, 'aria-haspopup' => true, 'aria-expanded' => false do
       = t '.gera'
     .dropdown-menu.dropdown-menu-left[aria-labelledby="geraDropdown"]
@@ -10,3 +10,4 @@
       = link_to 'Платежные системы', gera.payment_systems_path, class: 'dropdown-item'
       = link_to 'Методы расчета', gera.currency_rate_mode_snapshots_path, class: 'dropdown-item'
       = link_to 'Источники курсов', gera.rate_sources_path, class: 'dropdown-item'
+  = active_link_to t('.wallets'), operator_wallets_path, class: 'nav-link', wrap_tag: :li, wrap_class: 'nav-item'

@@ -3,7 +3,7 @@
 - else
   - if items.respond_to?(:decorate)
     - items = items.decorate unless items.respond_to?(:decorated?) && items.decorated?
-  - decorator ||= items.first.decorator_class
+  - decorator ||= items.first.is_a?(ApplicationDecorator) ? items.first.class : items.first.decorator_class
   - columns = decorator.table_columns unless defined?(columns) && columns.present?
   table.table.table-striped.table-hover.table-narrow
     thead.thead-dark
@@ -17,7 +17,7 @@
     tbody
       - items.each do |item|
         - item_decorated = item.decorated? ? item : decorator.decorate(item)
-        tr is='dapi-tr' data-href=url_for(item) class=item_decorated.class.table_tr_class(item)
+        tr is='dapi-tr' data-href=url_for([namespace, item]) class=item_decorated.class.table_tr_class(item)
           - columns.each do |column|
             td class=item_decorated.class.table_td_class(column)
               = item_decorated.send column

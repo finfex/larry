@@ -12,6 +12,15 @@ module ApplicationHelper
     end
   end
 
+  def namespace
+    controller_path.split('/').first
+  end
+
+  def sort_column(column, title)
+    next_order = :desc
+    sort_link q, column, title
+  end
+
   def app_title
     # TODO: depends on namespace
     title
