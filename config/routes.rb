@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   scope subdomain: '', as: :public do
     scope module: :public do
       root to: 'home#index'
+      resources :pages, only: [:index, :show]
     end
   end
 
