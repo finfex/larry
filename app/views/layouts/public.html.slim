@@ -4,10 +4,10 @@ html lang=I18n.locale
     = render 'head'
   body
     = render 'navbar'
-    - if @container == :fluid
+    - if page_layout_container == :fluid
       .container-fluid.px-3.py-3
         = yield
-    - elsif @container == :fixed
+    - elsif page_layout_container == :fixed
       .container
         = yield
     - else

@@ -1,6 +1,18 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+
+  def page_layout_container
+    @container || :fluid
+  end
+
+  def page_layout_container_class
+    case page_layout_container
+    when :fluid then 'container-fluid'
+    when :fixed then 'container'
+    end
+  end
+
   def app_title
     # TODO: depends on namespace
     title
