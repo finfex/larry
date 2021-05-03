@@ -5,6 +5,14 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   default_url_options Settings.default_url_options.symbolize_keys
 
+  get :logout, to: 'sessions#destroy'
+
+  resources :sessions, only: %i[new create] do
+    collection do
+      delete :destroy
+    end
+  end
+
   scope subdomain: '', as: :public do
     scope module: :public do
       root to: 'home#index'
@@ -14,8 +22,8 @@ Rails.application.routes.draw do
 
   namespace :operator do
     mount Sidekiq::Web => 'sidekiq'
-    mount Gera::Engine => '/'
     root to: 'dashboard#index'
   end
+  mount Gera::Engine => '/gera'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -16,6 +16,7 @@ end
 Rails.application.config.to_prepare do
   module Gera
     ApplicationController.before_action :require_login
+    ApplicationController.layout 'operator'
     # [
     # BitfinexRatesWorker, CBRAvgRatesWorker, EXMORatesWorker, BinanceRatesWorker,
     # CreateHistoryIntervalsWorker, CurrencyRatesWorker, DirectionsRatesWorker, DumpValutaWorker,

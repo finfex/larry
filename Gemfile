@@ -108,3 +108,5 @@ gem 'authority', '~> 3.3'
 
 gem 'factory_bot', '~> 6.1'
 gem 'factory_bot_rails'
+
+gem "breadcrumbs_on_rails", "~> 4.1"

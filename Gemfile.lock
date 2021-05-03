@@ -509,6 +509,7 @@ DEPENDENCIES
   authority (~> 3.3)
   auto_logger
   bootsnap (>= 1.4.4)
+  breadcrumbs_on_rails (~> 4.1)
   bugsnag
   bugsnag-capistrano
   byebug
