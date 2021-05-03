@@ -1,3 +1,6 @@
 [submodule "vendor/gera"]
 	path = vendor/gera
 	url = https://github.com/finfex/gera.git
+[submodule "vendor/openbill"]
+	path = vendor/openbill
+	url = git@github.com:openbill-service/openbill-core.git

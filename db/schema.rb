@@ -10,11 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_03_083524) do
+ActiveRecord::Schema.define(version: 2021_05_03_091001) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "hstore"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
   create_table "gera_cbr_external_rates", force: :cascade do |t|
     t.date "date", null: false
@@ -210,6 +212,76 @@ ActiveRecord::Schema.define(version: 2021_05_03_083524) do
     t.index ["title"], name: "index_rate_sources_on_title", unique: true
   end
 
+  create_table "openbill_accounts", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid "owner_id"
+    t.uuid "category_id", null: false
+    t.string "key", limit: 256, null: false
+    t.decimal "amount_cents", default: "0.0", null: false
+    t.string "amount_currency", limit: 3, default: "USD", null: false
+    t.text "details"
+    t.integer "transactions_count", default: 0, null: false
+    t.hstore "meta", default: {}, null: false
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }
+    t.index ["created_at"], name: "index_accounts_on_created_at"
+    t.index ["id"], name: "index_accounts_on_id", unique: true
+    t.index ["key"], name: "index_accounts_on_key", unique: true
+    t.index ["meta"], name: "index_accounts_on_meta", using: :gin
+  end
+
+  create_table "openbill_categories", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string "name", limit: 256, null: false
+    t.uuid "parent_id"
+    t.index ["parent_id", "name"], name: "index_openbill_categories_name", unique: true
+  end
+
+  create_table "openbill_invoices", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.datetime "date", default: -> { "CURRENT_DATE" }, null: false
+    t.string "number", limit: 256, null: false
+    t.string "title", limit: 256, null: false
+    t.uuid "destination_account_id", null: false
+    t.decimal "amount_cents", default: "0.0", null: false
+    t.string "amount_currency", limit: 3, default: "USD", null: false
+    t.decimal "paid_cents", default: "0.0", null: false
+    t.datetime "created_at", default: -> { "now()" }
+    t.datetime "updated_at", default: -> { "now()" }
+    t.jsonb "meta", default: {}
+    t.text "details"
+    t.index ["id"], name: "index_invoices_on_id", unique: true
+    t.index ["number"], name: "index_invoices_on_number", unique: true
+  end
+
+  create_table "openbill_policies", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string "name", limit: 256, null: false
+    t.uuid "from_category_id"
+    t.uuid "to_category_id"
+    t.uuid "from_account_id"
+    t.uuid "to_account_id"
+    t.boolean "allow_reverse", default: true, null: false
+    t.index ["name"], name: "index_openbill_policies_name", unique: true
+  end
+
+  create_table "openbill_transactions", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.uuid "owner_id"
+    t.string "username", limit: 255, null: false
+    t.date "date", default: -> { "CURRENT_DATE" }, null: false
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }
+    t.uuid "from_account_id", null: false
+    t.uuid "to_account_id", null: false
+    t.decimal "amount_cents", null: false
+    t.string "amount_currency", limit: 3, null: false
+    t.string "key", limit: 256, null: false
+    t.text "details", null: false
+    t.hstore "meta", default: {}, null: false
+    t.uuid "reverse_transaction_id"
+    t.uuid "invoice_id"
+    t.index ["created_at"], name: "index_transactions_on_created_at"
+    t.index ["key"], name: "index_transactions_on_key", unique: true
+    t.index ["meta"], name: "index_transactions_on_meta", using: :gin
+    t.check_constraint "amount_cents > (0)::numeric", name: "positive"
+    t.check_constraint "to_account_id <> from_account_id", name: "different_accounts"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "crypted_password"
@@ -224,13 +296,13 @@ ActiveRecord::Schema.define(version: 2021_05_03_083524) do
 
   create_table "wallets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "payment_system_id", null: false
-    t.string "currency_code", null: false
-    t.decimal "amount_cents", default: "0.0", null: false
-    t.decimal "locked_cents", default: "0.0", null: false
-    t.decimal "total_cents", default: "0.0", null: false
     t.text "details"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "available_account_id", null: false
+    t.uuid "locked_account_id", null: false
+    t.index ["available_account_id"], name: "index_wallets_on_available_account_id"
+    t.index ["locked_account_id"], name: "index_wallets_on_locked_account_id"
     t.index ["payment_system_id"], name: "index_wallets_on_payment_system_id"
   end
 
@@ -257,5 +329,18 @@ ActiveRecord::Schema.define(version: 2021_05_03_083524) do
   add_foreign_key "gera_exchange_rates", "gera_payment_systems", column: "outcome_payment_system_id", on_delete: :cascade
   add_foreign_key "gera_external_rates", "gera_external_rate_snapshots", column: "snapshot_id", on_delete: :cascade
   add_foreign_key "gera_external_rates", "gera_rate_sources", column: "source_id", on_delete: :cascade
+  add_foreign_key "openbill_accounts", "openbill_categories", column: "category_id", name: "openbill_accounts_category_id_fkey", on_delete: :restrict
+  add_foreign_key "openbill_categories", "openbill_categories", column: "parent_id", name: "openbill_categories_parent_id_fkey", on_delete: :restrict
+  add_foreign_key "openbill_invoices", "openbill_accounts", column: "destination_account_id", name: "openbill_invoices_destination_account_id_fkey", on_delete: :restrict
+  add_foreign_key "openbill_policies", "openbill_accounts", column: "from_account_id", name: "openbill_policies_from_account_id_fkey"
+  add_foreign_key "openbill_policies", "openbill_accounts", column: "to_account_id", name: "openbill_policies_to_account_id_fkey"
+  add_foreign_key "openbill_policies", "openbill_categories", column: "from_category_id", name: "openbill_policies_from_category_id_fkey"
+  add_foreign_key "openbill_policies", "openbill_categories", column: "to_category_id", name: "openbill_policies_to_category_id_fkey"
+  add_foreign_key "openbill_transactions", "openbill_accounts", column: "from_account_id", name: "openbill_transactions_from_account_id_fkey", on_update: :restrict, on_delete: :restrict
+  add_foreign_key "openbill_transactions", "openbill_accounts", column: "to_account_id", name: "openbill_transactions_to_account_id_fkey"
+  add_foreign_key "openbill_transactions", "openbill_invoices", column: "invoice_id", name: "openbill_transactions_invoice_id_fk", on_delete: :restrict
+  add_foreign_key "openbill_transactions", "openbill_transactions", column: "reverse_transaction_id", name: "reverse_transaction_foreign_key"
   add_foreign_key "wallets", "gera_payment_systems", column: "payment_system_id"
+  add_foreign_key "wallets", "openbill_accounts", column: "available_account_id"
+  add_foreign_key "wallets", "openbill_accounts", column: "locked_account_id"
 end

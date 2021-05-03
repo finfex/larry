@@ -2,6 +2,11 @@ defaults: &defaults
   default_url_options: &default_url_options
     protocol: <%= ENV.fetch('HTTP_PROTOCOL', 'https') %>
     host: <%= ENV.fetch('LARRY_HOST', 'localhost') %>
+  openbill:
+    categories:
+      system:  a8237d74-e30d-4123-8f26-eda8ba593209
+      wallets: a8237d74-e30d-4123-8f26-eda8ba593208
+
 development:
   <<: *defaults
 staging:
