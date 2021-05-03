@@ -2,13 +2,13 @@
 
 class ApplicationDecorator < Draper::Decorator
   TEXT_RIGHT = %i[debit balance credit amount locked total price volume origin_volume origin_locked funds_received maker_fee
-  total_deposit_amount total_withdraw_amount estimated_amount divergence total_sell total_buy
-  taker_fee].freeze
+                  total_deposit_amount total_withdraw_amount estimated_amount divergence total_sell total_buy
+                  taker_fee].freeze
 
   delegate :current_user, :humanized_money_with_currency, to: :h
 
   def self.table_columns
-    object_class.attribute_names.map &:to_sym
+    object_class.attribute_names.map(&:to_sym)
   end
 
   def self.table_th_class(column)
@@ -19,8 +19,7 @@ class ApplicationDecorator < Draper::Decorator
     table_th_class column
   end
 
-  def self.table_tr_class(record)
-  end
+  def self.table_tr_class(record); end
 
   def self.attributes
     table_columns

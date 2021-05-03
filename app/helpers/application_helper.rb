@@ -17,7 +17,6 @@ module ApplicationHelper
   end
 
   def sort_column(column, title)
-    next_order = :desc
     sort_link q, column, title
   end
 

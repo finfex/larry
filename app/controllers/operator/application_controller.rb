@@ -7,6 +7,7 @@ module Operator
     layout 'operator'
     include RansackSupport
     helper_method :model_class
+
     private
 
     def model_class
