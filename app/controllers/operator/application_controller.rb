@@ -4,5 +4,6 @@
 #
 module Operator
   class ApplicationController < ApplicationController
+    layout 'operator'
   end
 end
