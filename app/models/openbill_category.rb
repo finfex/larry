@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OpenbillCategory < OpenbillRecord
   has_many :accounts, class_name: 'OpenbillAccount', foreign_key: :category_id
 

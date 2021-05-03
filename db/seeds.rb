@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
 require './db/seeds/gera'
-require './db/seeds/openbill_accounts'
+require './db/seeds/openbill'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CurrencySupport
   def currency
     return unless currency_iso_code

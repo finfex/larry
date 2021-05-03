@@ -1,13 +1,15 @@
-if OpenbillAccount.count.zero?
-  puts 'Initialize Openbill accounts'
-  connection = OpenbillAccount.connection
+# frozen_string_literal: true
 
-  Settings.openbill.categories.each_pair do |name, id|
-    OpenbillCategory.create_with(name: name).find_or_create_by!(id: id)
-  end
+puts 'Seed openbill categories and accounts'
 
-  # connection.execute "INSERT INTO OPENBILL_ACCOUNTS (key, id, category_id, details, amount_currency) VALUES ('#{key}', '#{Billing::SYSTEM_ACCOUNTS[key]}', '#{Billing::SYSTEM_CATEGORY_ID}', '#{title}', '#{Money.default_currency.iso_code}')"
-  # TODO Make specific policies
-  OpenbillPolicy.find_or_create_by(name: 'Allow all')
+Settings.openbill.categories.each_pair do |name, id|
+  OpenbillCategory.create_with(name: name).find_or_create_by!(id: id)
 end
 
+# TODO: Make specific policies
+OpenbillPolicy.find_or_create_by(name: 'Allow all')
+
+puts 'Create wallets for payment systems'
+Gera::PaymentSystem.find_each do |ps|
+  ps.wallets.create_for_payment_system! ps
+end

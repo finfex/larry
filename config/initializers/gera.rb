@@ -40,7 +40,7 @@ Rails.application.config.to_prepare do
     # PaymentSystem.include PaymentSystemAccountFormats
     # PaymentSystem.include PaymentSystemCommands
     # PaymentSystem.include PaymentSystemServices
-    # PaymentSystem.include PaymentSystemConcern
+    PaymentSystem.include PaymentSystemConcern
     # PaymentSystem.include PaymentSystemIndexDefaultConcern
 
     # DirectionRate.include DirectionRateConcern

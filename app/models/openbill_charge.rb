@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OpenbillCharge < ApplicationRecord
   belongs_to :invoice, class_name: 'OpenbillInvoice'
   belongs_to :payment_account

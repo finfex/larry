@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OpenbillService < ApplicationRecord
   SERVICES = Billing::SERVICES.keys
 

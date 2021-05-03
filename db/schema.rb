@@ -215,7 +215,7 @@ ActiveRecord::Schema.define(version: 2021_05_03_091001) do
   create_table "openbill_accounts", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid "owner_id"
     t.uuid "category_id", null: false
-    t.string "key", limit: 256, null: false
+    t.string "key", limit: 256
     t.decimal "amount_cents", default: "0.0", null: false
     t.string "amount_currency", limit: 3, default: "USD", null: false
     t.text "details"
@@ -223,10 +223,13 @@ ActiveRecord::Schema.define(version: 2021_05_03_091001) do
     t.hstore "meta", default: {}, null: false
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }
+    t.string "reference_type"
+    t.bigint "reference_id"
     t.index ["created_at"], name: "index_accounts_on_created_at"
     t.index ["id"], name: "index_accounts_on_id", unique: true
-    t.index ["key"], name: "index_accounts_on_key", unique: true
+    t.index ["key"], name: "index_accounts_on_key", unique: true, where: "(key IS NOT NULL)"
     t.index ["meta"], name: "index_accounts_on_meta", using: :gin
+    t.index ["reference_type", "reference_id"], name: "index_openbill_accounts_on_reference"
   end
 
   create_table "openbill_categories", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|

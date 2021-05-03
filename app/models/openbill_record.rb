@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OpenbillRecord < ApplicationRecord
   self.abstract_class = true
 

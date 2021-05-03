@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class OpenbillTransaction < OpenbillRecord
   include MetaSupport
   include OpenbillTransactionMetrics
 
-  NOTIFIED_MESSAGE = 'Notified'.freeze
+  NOTIFIED_MESSAGE = 'Notified'
   upsert_keys [:key]
 
   belongs_to :from_account, class_name: 'OpenbillAccount'
@@ -42,6 +44,7 @@ class OpenbillTransaction < OpenbillRecord
 
   def partner
     return unless partner_id.present?
+
     Partner.find_by(id: partner_id) || raise("Partner #{partner_id} is not found")
   end
 
@@ -65,6 +68,7 @@ class OpenbillTransaction < OpenbillRecord
 
   def meta_vendor
     return unless meta_vendor_id.present?
+
     Vendor.find_by(id: meta_vendor_id) || raise("Vendor #{meta_vendor_id} is not found")
   end
 
@@ -85,6 +89,7 @@ class OpenbillTransaction < OpenbillRecord
 
   def perform_worker
     return if Rails.env.development?
+
     Billing::TransactionWorker.perform_async id
   end
 end
