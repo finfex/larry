@@ -12,6 +12,14 @@ GIT
       capistrano (>= 3.7.0, < 3.17.0)
 
 GIT
+  remote: https://github.com/mmotherwell/best_in_place
+  revision: 88eb3052623a9a6cd346864d2aca05021c2f80d0
+  specs:
+    best_in_place (3.1.1)
+      actionpack (>= 3.2)
+      railties (>= 3.2)
+
+GIT
   remote: https://github.com/virgoproz/capistrano-master-key.git
   revision: aa99a50e41733288a5d4e1884af16385855847de
   specs:
@@ -133,9 +141,6 @@ GEM
     beautiful-log (0.2.2)
       awesome_print (~> 1.8.0)
       colorize (~> 0.8.1)
-    best_in_place (3.1.1)
-      actionpack (>= 3.2)
-      railties (>= 3.2)
     bindex (0.8.1)
     bootsnap (1.7.4)
       msgpack (~> 1.0)
@@ -508,6 +513,7 @@ DEPENDENCIES
   active_link_to (~> 1.0)
   authority (~> 3.3)
   auto_logger
+  best_in_place!
   bootsnap (>= 1.4.4)
   breadcrumbs_on_rails (~> 4.1)
   bugsnag
@@ -529,6 +535,7 @@ DEPENDENCIES
   capistrano3-puma
   capybara (>= 3.26)
   dapi-archivable
+  draper (~> 4.0)
   env-tweaks (~> 1.0.0)
   factory_bot (~> 6.1)
   factory_bot_rails

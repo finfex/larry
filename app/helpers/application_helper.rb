@@ -12,6 +12,11 @@ module ApplicationHelper
     end
   end
 
+  def allow_edit_column?(column, base)
+    # TODO use permission
+    true
+  end
+
   def app_title
     # TODO: depends on namespace
     title

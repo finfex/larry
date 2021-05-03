@@ -9,12 +9,12 @@ module AuthorizerAcceptable
   end
 
   def acceptable_by?(user)
-    user.is_super_admin? ||
+    user.superadmin? ||
       user.permission(resource, :accept) && resource.pending?
   end
 
   def rejectable_by?(user)
-    user.is_super_admin? ||
+    user.superadmin? ||
       user.permission(resource, :reject) && resource.pending?
   end
 end
