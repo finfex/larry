@@ -11,6 +11,7 @@
     "jquery": "3.3.1",
     "popper.js": "^1.16.1",
     "turbolinks": "^5.2.0",
+    "sticky-table-headers": "https://github.com/jhyland87/StickyTableHeaders.git",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
   },
