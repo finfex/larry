@@ -3,7 +3,7 @@
 module Operator
   class WalletsController < ApplicationController
     def index
-      render locals: { wallets: Wallet.all }
+      render locals: { wallets: Wallet.includes(:payment_system, :available_account, :locked_account) }
     end
   end
 end

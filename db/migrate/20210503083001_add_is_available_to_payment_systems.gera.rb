@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # This migration comes from gera (originally 20190314114844)
 
 class AddIsAvailableToPaymentSystems < ActiveRecord::Migration[5.2]

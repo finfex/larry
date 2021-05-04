@@ -14,3 +14,9 @@ MoneyRails.configure do |config|
     drop_trailing_zeros: true
   }
 end
+
+class Money::Currency
+  def precision
+    8
+  end
+end
