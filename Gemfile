@@ -44,6 +44,7 @@ gem 'rails-i18n', '~> 6.0'
 gem 'semver2', '~> 3.4'
 gem 'settingslogic'
 gem 'sidekiq'
+gem 'sidekiq-cron'
 gem 'simple_form'
 gem 'slim-rails'
 
