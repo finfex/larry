@@ -8,6 +8,7 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import 'peaces/sticky-table-headers'
+import 'elements/trHref'
 
 Rails.start()
 Turbolinks.start()
