@@ -1,2 +1,5 @@
 h1= t '.wallet'
 = render 'table', items: [wallet]
+
+= simple_form_for [:operator, wallet.activities] do |f|
+
