@@ -4,6 +4,7 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
+  resources :wallet_activities
   default_url_options Settings.default_url_options.symbolize_keys
 
   get :logout, to: 'sessions#destroy'

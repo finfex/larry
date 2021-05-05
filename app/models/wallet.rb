@@ -7,6 +7,8 @@ class Wallet < ApplicationRecord
   belongs_to :available_account, class_name: 'OpenbillAccount'
   belongs_to :locked_account, class_name: 'OpenbillAccount'
 
+  has_many :activities, class_name: 'WalletActivity'
+
   delegate :currency, to: :payment_system
 
   def self.create_for_payment_system!(payment_system)

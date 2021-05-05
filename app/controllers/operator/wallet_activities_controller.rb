@@ -1,0 +1,2 @@
+class WalletActivitiesController < ApplicationController
+end
