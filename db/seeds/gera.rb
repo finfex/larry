@@ -13,7 +13,7 @@ FactoryBot.create :rate_source_manual, title: 'Manual'
 FactoryBot.create :rate_source_bitfinex, title: 'bitfinex'
 
 puts 'Create payments systems for every currencies'
-Money::Currency.all.each { |cur| Gera::PaymentSystem.create! name: cur.name, currency: cur }
+Money::Currency.all.each { |cur| Gera::PaymentSystem.create! name: cur.name, currency: cur, income_enabled: true, outcome_enabled: true }
 
 puts 'Fetch rates'
 
@@ -28,3 +28,5 @@ Gera::DirectionsRatesWorker.new.perform
 
 puts 'Build BitfinexRates'
 Gera::BitfinexRatesWorker.new.perform
+
+Gera::ExchangeRate.update_all is_enabled: true

@@ -47,6 +47,12 @@ default: &default
     - .jpeg
     - .jpg
 
+  resolved_paths: []
+  resolved_gems_output_path: 'config/environments/_add_gem_paths.js'
+  resolved_gems: [
+    'best_in_place'
+  ]
+
 development:
   <<: *default
   compile: true

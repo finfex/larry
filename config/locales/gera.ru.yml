@@ -1,0 +1,7 @@
+ru:
+  gera:
+    application:
+      currencies_table: 
+        calculation_method: Метод расчёта %{rate}
+        same_currency: Таже валюта
+
