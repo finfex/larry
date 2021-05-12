@@ -1,4 +1,7 @@
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 # frozen_string_literal: true
+
 # This migration comes from gera (originally 20190315132137)
 
 class AddCommissionToPaymentSystems < ActiveRecord::Migration[5.2]

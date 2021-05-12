@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 # Source: https://gist.github.com/justinvdk/b8b40a9b8a22e32275bb846590883cbf
 
 def default_assets_path(gem)
@@ -16,9 +20,7 @@ end
 def resolve_gem_path(gem)
   if gem.present?
     gem_path = Gem.loaded_specs[gem]&.full_gem_path
-    if gem_path.present?
-      return "#{gem_path}/#{default_assets_path(gem)}"
-    end
+    return "#{gem_path}/#{default_assets_path(gem)}" if gem_path.present?
   end
   abort("Gem '#{gem}' not found, please check webpacker config (#{Webpacker.config.config_path})")
 end
@@ -49,12 +51,14 @@ File.write(
 
 module WebpackerGemAssets
   def resolved_paths
-    self.send(:data)[:resolved_gems].map do |gem|
+    send(:data)[:resolved_gems].map do |gem|
       resolve_gem_path gem
     end.compact.concat(super)
   end
 end
 
-class Webpacker::Configuration
-  prepend WebpackerGemAssets
+module Webpacker
+  class Configuration
+    prepend WebpackerGemAssets
+  end
 end

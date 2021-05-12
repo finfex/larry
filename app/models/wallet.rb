@@ -1,3 +1,5 @@
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 # frozen_string_literal: true
 
 class Wallet < ApplicationRecord
@@ -13,8 +15,10 @@ class Wallet < ApplicationRecord
 
   def self.create_for_payment_system!(payment_system)
     Wallet.transaction do
-      available_account = OpenbillAccount.create!(category_id: Settings.openbill.categories.wallets, amount_cents: 0, amount_currency: payment_system.currency.iso_code)
-      locked_account = OpenbillAccount.create!(category_id: Settings.openbill.categories.wallets, amount_cents: 0, amount_currency: payment_system.currency.iso_code)
+      available_account = OpenbillAccount.create!(category_id: Settings.openbill.categories.wallets, amount_cents: 0,
+                                                  amount_currency: payment_system.currency.iso_code)
+      locked_account = OpenbillAccount.create!(category_id: Settings.openbill.categories.wallets, amount_cents: 0,
+                                               amount_currency: payment_system.currency.iso_code)
       wallet = create! payment_system: payment_system, available_account: available_account, locked_account: locked_account,
                        details: "Wallet for #{payment_system.name} (#{payment_system.currency})"
       available_account.update details: "Availability account for wallet #{wallet.id}", reference: wallet
