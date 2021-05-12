@@ -17,10 +17,10 @@ MoneyRails.configure do |config|
   }
 end
 
-module Money
-  class Currency
-    def precision
-      8
-    end
+# rubocop:disable Style/ClassAndModuleChildren
+class Money::Currency
+  def precision
+    8
   end
 end
+# rubocop:enable Style/ClassAndModuleChildren

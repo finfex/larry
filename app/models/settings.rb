@@ -15,3 +15,9 @@ else
     namespace 'development'
   end
 end
+
+class Settings
+  def tld_length
+    default_url_options.host.split('.').count - 1
+  end
+end

@@ -27,5 +27,9 @@ module Larry
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    if ENV.key? 'LARRY_HOST'
+      config.hosts << ENV['LARRY_HOST']
+      config.hosts << '*.' + ENV['LARRY_HOST']
+    end
   end
 end

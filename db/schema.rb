@@ -19,16 +19,15 @@ ActiveRecord::Schema.define(version: 2021_05_05_062944) do
   enable_extension "uuid-ossp"
 
   create_table "admin_users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "email", null: false
-    t.string "crypted_password"
-    t.string "salt"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "remember_me_token"
-    t.datetime "remember_me_token_expires_at"
-    t.boolean "superadmin", default: false, null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
-    t.index ["remember_me_token"], name: "index_admin_users_on_remember_me_token"
+    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
   create_table "gera_cbr_external_rates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -298,15 +297,15 @@ ActiveRecord::Schema.define(version: 2021_05_05_062944) do
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "email", null: false
-    t.string "crypted_password"
-    t.string "salt"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "remember_me_token"
-    t.datetime "remember_me_token_expires_at"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["remember_me_token"], name: "index_users_on_remember_me_token"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   create_table "wallet_activities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -314,11 +313,11 @@ ActiveRecord::Schema.define(version: 2021_05_05_062944) do
     t.money "amount", scale: 2, null: false
     t.uuid "opposit_account_id", null: false
     t.string "details", null: false
-    t.uuid "author_id", null: false
+    t.bigint "admin_user_id", null: false
     t.string "activity_type", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["author_id"], name: "index_wallet_activities_on_author_id"
+    t.index ["admin_user_id"], name: "index_wallet_activities_on_admin_user_id"
     t.index ["opposit_account_id"], name: "index_wallet_activities_on_opposit_account_id"
     t.index ["wallet_id"], name: "index_wallet_activities_on_wallet_id"
   end
@@ -369,7 +368,6 @@ ActiveRecord::Schema.define(version: 2021_05_05_062944) do
   add_foreign_key "openbill_transactions", "openbill_accounts", column: "to_account_id", name: "openbill_transactions_to_account_id_fkey"
   add_foreign_key "openbill_transactions", "openbill_invoices", column: "invoice_id", name: "openbill_transactions_invoice_id_fk", on_delete: :restrict
   add_foreign_key "openbill_transactions", "openbill_transactions", column: "reverse_transaction_id", name: "reverse_transaction_foreign_key"
-  add_foreign_key "wallet_activities", "admin_users", column: "author_id"
   add_foreign_key "wallet_activities", "openbill_accounts", column: "opposit_account_id"
   add_foreign_key "wallet_activities", "wallets"
   add_foreign_key "wallets", "gera_payment_systems", column: "payment_system_id"

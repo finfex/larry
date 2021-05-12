@@ -8,4 +8,5 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light.flex-column.flex-md-row.sticky
     #navbarSupportedContent.collapse.navbar-collapse
       ul.navbar-nav.mr-auto
         = yield
-      = render 'navbar_user_dropdown'
+      = render 'navbar_user_dropdown' if namespace == 'public'
+      = render 'navbar_admin_user_dropdown'

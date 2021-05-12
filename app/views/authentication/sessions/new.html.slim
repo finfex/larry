@@ -1,0 +1,8 @@
+h1
+  = t('.sign_in')
+= simple_form_for resource, url: sessions_path do |f|
+  = f.hidden_field :scope, value: resource.class.name.underscore
+  = f.input :email, as: :email, input_html: { autofocus: true, autocomplete: :email }
+  = f.input :password, as: :password, input_html: { autocomplete: 'current-password' }
+  = f.submit t('.sign_in'), class: 'btn btn-primary'
+= render 'authentication/shared/links'

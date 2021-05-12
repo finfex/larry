@@ -4,31 +4,34 @@
 
 require 'sidekiq/web'
 require 'sidekiq/cron/web'
+require 'route_contraints'
 
 Rails.application.routes.draw do
-  resources :wallet_activities
   default_url_options Settings.default_url_options.symbolize_keys
 
-  get :logout, to: 'sessions#destroy'
-
-  resources :sessions, only: %i[new create] do
-    collection do
-      delete :destroy
-    end
+  scope module: :authentication do
+    resources :sessions #, only: [:new, :create]
   end
 
-  scope subdomain: '', as: :public do
+  scope subdomain: 'operator', as: :operator, constraints: { subdomain: 'operator' } do
+    scope constraints: RouteConstraints::AdminRequiredConstraint.new do
+      mount Sidekiq::Web => 'sidekiq'
+      mount Gera::Engine => '/gera'
+      scope module: :operator do
+        root to: 'dashboard#index'
+        resources :wallets
+        resources :wallet_activities
+      end
+    end
+    match '*anything', to: 'application#not_found', via: %i[get post]
+  end
+
+  scope subdomain: '', as: :public, constraints: RouteConstraints::PublicConstraint.new do
     scope module: :public do
       root to: 'home#index'
       resources :pages, only: %i[index show]
     end
   end
 
-  namespace :operator do
-    mount Sidekiq::Web => 'sidekiq'
-    root to: 'dashboard#index'
-    resources :wallets
-  end
-  mount Gera::Engine => '/gera'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  match '*anything', to: 'application#not_found', via: %i[get post]
 end

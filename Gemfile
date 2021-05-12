@@ -22,9 +22,9 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -103,8 +103,6 @@ end
 
 gem 'title', '~> 0.0.8'
 
-gem 'sorcery', '~> 0.16.0'
-
 gem 'active_link_to', '~> 1.0'
 
 gem 'authority', '~> 3.3'
@@ -119,3 +117,7 @@ gem 'draper', '~> 4.0'
 gem 'best_in_place', git: 'https://github.com/mmotherwell/best_in_place'
 
 gem 'ransack', '~> 2.4'
+
+gem "warden", "~> 1.2"
+
+gem "rails_warden", "~> 0.6.0"

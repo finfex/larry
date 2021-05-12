@@ -1,0 +1,5 @@
+ru:
+  authentication:
+    sessions:
+      new:
+        sign_in: Войти
