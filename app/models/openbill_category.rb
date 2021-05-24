@@ -7,4 +7,8 @@ class OpenbillCategory < OpenbillRecord
 
   has_many :income_transactions, through: :accounts
   has_many :outcome_transactions, through: :accounts
+
+  def self.storno
+    OpenbillCategory.find_by(name: 'storno')
+  end
 end

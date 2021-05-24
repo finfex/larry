@@ -313,8 +313,8 @@ ActiveRecord::Schema.define(version: 2021_05_05_062944) do
     t.decimal "amount_cents", null: false
     t.uuid "opposit_account_id", null: false
     t.text "details", null: false
-    t.bigint "admin_user_id", null: false
-    t.string "activity_type", null: false
+    t.uuid "admin_user_id", null: false
+    t.integer "activity_type", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["admin_user_id"], name: "index_wallet_activities_on_admin_user_id"

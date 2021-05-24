@@ -9,8 +9,8 @@ class CreateWalletActivities < ActiveRecord::Migration[6.1]
       t.decimal :amount_cents, null: false
       t.references :opposit_account, null: false, foreign_key: { to_table: :openbill_accounts }, type: :uuid
       t.text :details, null: false
-      t.references :admin_user, null: false
-      t.string :activity_type, null: false
+      t.references :admin_user, null: false, type: :uuid
+      t.integer :activity_type, null: false
 
       t.timestamps
     end

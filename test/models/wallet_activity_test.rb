@@ -5,7 +5,13 @@
 require 'test_helper'
 
 class WalletActivityTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  setup do
+    @wallet = Wallet.new
+  end
+
+  test "the truth" do
+    wa= WalletActivity.new wallet: @wallet
+    bnding.pry
+    assert true
+  end
 end

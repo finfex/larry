@@ -10,7 +10,7 @@ module Operator
 
     def show
       wallet = Wallet.find params[:id]
-      render locals: { wallet: wallet }
+      render locals: { wallet: wallet, wallet_activity: wallet.activities.build }
     end
 
     def create

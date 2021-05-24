@@ -1,0 +1,12 @@
+= simple_form_for [:operator, wallet_activity] do |f|
+  = f.hidden_field :wallet_id
+  = f.hidden_field :activity_type
+  .row
+    .col-md-8
+      = f.input :amount, as: :money
+  .row
+    .col-md-12
+      = f.input :details
+  .row
+    .col-md-2
+      = f.submit class: 'btn btn-primary'

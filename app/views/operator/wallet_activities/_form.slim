@@ -1,0 +1,17 @@
+
+ul.nav.nav-tabs#activityTabs role=:tablist
+  - WalletActivity::ACTIVITY_TYPES.each do |activity_type|
+    li.nav-item role="presentation"
+      = link_to t(activity_type), '#' + activity_type.to_s, class: 'nav-link active', id: activity_type, role: :tab, data: { toggle: :tab },  'aria-selected' =>"true"
+
+
+.tab-content
+  - WalletActivity::ACTIVITY_TYPES.each do |activity_type|
+    .tab-pane.active id=activity_type
+      = render "form_#{activity_type}", wallet_activity: wallet_activity
+
+javascript:
+  $('#activityTabs a').on('click', function (event) {
+    event.preventDefault()
+    $(this).tab('show')
+  })

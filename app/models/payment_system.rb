@@ -3,3 +3,9 @@
 # frozen_string_literal: true
 
 PaymentSystem = Gera::PaymentSystem
+
+class PaymentSystem
+  def storno_account
+    OpenbillCategory.storno.accounts.where(reference: self).take
+  end
+end
