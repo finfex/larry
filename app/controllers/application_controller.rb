@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_admin_user
 
+  private
+
   def current_admin_user
     user :admin_user
   end

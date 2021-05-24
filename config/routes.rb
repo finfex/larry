@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   default_url_options Settings.default_url_options.symbolize_keys
 
   scope module: :authentication do
-    resources :sessions, only: [:new, :create]
+    resources :sessions, only: [:new, :create, :destroy]
   end
 
   scope subdomain: 'operator', constraints: { subdomain: 'operator' } do

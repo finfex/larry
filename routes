@@ -1,6 +1,7 @@
                                   Prefix Verb     URI Pattern                                                                                       Controller#Action
                                 sessions POST     /sessions(.:format)                                                                               authentication/sessions#create
                              new_session GET      /sessions/new(.:format)                                                                           authentication/sessions#new
+                                 session DELETE   /sessions/:id(.:format)                                                                           authentication/sessions#destroy
                                     gera          /gera                                                                                             Gera::Engine {:subdomain=>"operator"}
                              sidekiq_web          /sidekiq                                                                                          Sidekiq::Web {:subdomain=>"operator"}
                            operator_root GET      /                                                                                                 operator/dashboard#index {:subdomain=>"operator"}
