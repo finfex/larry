@@ -8,7 +8,9 @@ ul.nav.nav-tabs#activityTabs role=:tablist
 .tab-content
   - WalletActivity::ACTIVITY_TYPES.each do |activity_type|
     .tab-pane.active id=activity_type
-      = render "form_#{activity_type}", wallet_activity: wallet_activity
+      = render "operator/wallet_activities/form_#{activity_type}", 
+        wallet_activity: wallet_activity, 
+        activity_type: activity_type
 
 javascript:
   $('#activityTabs a').on('click', function (event) {

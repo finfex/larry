@@ -13,13 +13,15 @@ module Operator
     }.freeze
 
     def create
-      wallet = Wallet.find params[:wallet_activity][:wallet_id]
-      command = COMMANDS.fetch(params[:wallet_activity][:activity_type])
+      attrs = params.require(:wallet_activity)
+      wallet = Wallet.find attrs.fetch(:wallet_id)
+      command = COMMANDS.fetch attrs.fetch(:activity_type)
 
-      command.call wallet: wallet, attrs: params[:wallet_activity].permit!, admin_user: current_admin_user
+      command.call wallet: wallet, attrs: attrs.permit!, admin_user: current_admin_user
 
       redirect_to operator_wallet_path(wallet), notice: t('.created')
     rescue ActiveRecord::RecordInvalid => e
+      raise e unless e.record.is_a? WalletActivity
       render 'operator/wallets/show', locals: { wallet: wallet, wallet_activity: e.record }
     end
   end

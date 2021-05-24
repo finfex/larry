@@ -7,9 +7,19 @@ module Authentication
     SCOPE_RESOURCES = { default: User, admin_user: AdminUser }.freeze
     helper_method :session_resource, :session_resoruce_class, :session_scope
 
+    def new
+      redirect_url = request.env['warden.options'].fetch(:redirect_url, request.url) unless request.original_url.include?('/session')
+      render locals: { redirect_url: redirect_url }
+    end
+
     def create
       authenticate! scope: params.fetch(:scope)
-      redirect_to request.session[:admin_user_redirect_back].presence || welcome_url
+      redirect_to params[:redirect_url] || welcome_url
+    end
+
+    def destroy
+      logout!
+      redirect_to public_root_url, notice: t('.logged_out')
     end
 
     private

@@ -235,7 +235,7 @@ ActiveRecord::Schema.define(version: 2021_05_05_062944) do
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }
     t.string "reference_type"
-    t.bigint "reference_id"
+    t.uuid "reference_id"
     t.index ["created_at"], name: "index_accounts_on_created_at"
     t.index ["id"], name: "index_accounts_on_id", unique: true
     t.index ["key"], name: "index_accounts_on_key", unique: true, where: "(key IS NOT NULL)"

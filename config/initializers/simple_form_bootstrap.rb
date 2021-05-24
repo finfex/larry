@@ -414,7 +414,7 @@ SimpleForm.setup do |config|
     b.optional :min_max
     b.optional :readonly
     b.use :label, class: 'form-control-label'
-    b.wrapper :input_group_tag, tag: 'div', class: 'input-group' do |ba|
+    b.wrapper :input_group_tag, tag: 'div', class: 'input-group', error_class: 'is-invalid' do |ba|
       ba.optional :prepend
       ba.use :input, class: 'form-control', error_class: 'is-invalid', valid_class: 'is-valid'
       ba.optional :append

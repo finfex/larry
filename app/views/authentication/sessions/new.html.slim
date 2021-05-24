@@ -1,7 +1,8 @@
 h1
   = t('.sign_in')
-= simple_form_for session_resource, url: sessions_path do |f|
+= simple_form_for session_resource, url: session_path do |f|
   = hidden_field_tag :scope, session_scope
+  = hidden_field_tag :redirect_url, redirect_url
   = f.input :email, as: :email, input_html: { autofocus: true, autocomplete: :email }
   = f.input :password, as: :password, input_html: { autocomplete: 'current-password' }
   = f.submit t('.sign_in'), class: 'btn btn-primary'

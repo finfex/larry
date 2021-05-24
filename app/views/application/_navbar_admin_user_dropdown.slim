@@ -15,4 +15,4 @@
             /= link_to 'Mail templates preview', '/rails/mailers', class: 'dropdown-item' if Rails.env.development?
             /= link_to 'Super login as other user', new_super_user_url, class: 'dropdown-item'
         .dropdown-divider
-        = link_to t('.logout'), main_app.sessions_url, method: :delete, class: 'dropdown-item'
+        = link_to t('.logout'), main_app.session_url, method: :delete, class: 'dropdown-item'

@@ -12,6 +12,6 @@ class AddOpenbill < ActiveRecord::Migration[6.1]
       end
     end
 
-    add_reference :openbill_accounts, :reference, polymorphic: true
+    add_reference :openbill_accounts, :reference, polymorphic: true, type: :uuid
   end
 end

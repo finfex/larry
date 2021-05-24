@@ -15,8 +15,7 @@ module RouteConstraints
     def matches?(request)
       return true if request.env['warden'].user(:admin_user).present?
 
-      request.session[:admin_user_redirect_back] = request.url
-      throw(:warden, scope: :admin_user)
+      throw(:warden, scope: :admin_user, redirect_url: request.url)
     end
   end
 
