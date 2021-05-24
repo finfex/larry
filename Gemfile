@@ -120,3 +120,5 @@ gem 'ransack', '~> 2.4'
 
 gem "warden", "~> 1.2"
 gem "rails_warden", github: 'wardencommunity/rails_warden'
+
+gem 'openbill', path: 'vendor/openbill'
