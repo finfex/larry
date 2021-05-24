@@ -3,7 +3,7 @@
 # frozen_string_literal: true
 
 class AddOpenbill < ActiveRecord::Migration[6.1]
-  DIR = Rails.root.join './vendor/openbill/sql/'
+  DIR = Rails.root.join './vendor/openbill-core/sql/'
 
   def change
     Dir.entries(DIR).select { |f| File.file? DIR.join f }.sort.each do |file|
