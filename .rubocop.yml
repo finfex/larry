@@ -20,6 +20,9 @@ Metrics/AbcSize:
   Exclude:
     - 'db/migrate/*'
 
+Lint/EmptyBlock:
+  Exclude:
+    - 'test/factories/*'
 
 Metrics/ClassLength:
   Exclude:
@@ -42,6 +45,7 @@ Metrics/MethodLength:
   Max: 16
   Exclude:
     - 'db/migrate/*'
+    - 'app/commands/*'
 
 # Offense count: 2
 # Configuration parameters: IgnoredMethods.
