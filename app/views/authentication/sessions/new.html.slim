@@ -1,8 +1,13 @@
 h1
   = t('.sign_in')
-= simple_form_for resource, url: sessions_path do |f|
-  = f.hidden_field :scope, value: resource.class.name.underscore
+= simple_form_for session_resource, url: sessions_path do |f|
+  = hidden_field_tag :scope, session_scope
   = f.input :email, as: :email, input_html: { autofocus: true, autocomplete: :email }
   = f.input :password, as: :password, input_html: { autocomplete: 'current-password' }
   = f.submit t('.sign_in'), class: 'btn btn-primary'
 = render 'authentication/shared/links'
+hr
+
+- if Rails.env.development?
+  p Session scope:
+  div= session_scope

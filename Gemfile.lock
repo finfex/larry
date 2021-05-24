@@ -27,6 +27,14 @@ GIT
       capistrano (~> 3.11)
       sshkit (~> 1.17)
 
+GIT
+  remote: https://github.com/wardencommunity/rails_warden.git
+  revision: 89d83685b23febce521fae41f793616c8a412c04
+  specs:
+    rails_warden (1.0.0)
+      rails (>= 5)
+      warden (>= 1.2.0)
+
 PATH
   remote: vendor/gera
   specs:
@@ -359,8 +367,6 @@ GEM
     rails-i18n (6.0.0)
       i18n (>= 0.7, < 2)
       railties (>= 6.0.0, < 7)
-    rails_warden (0.6.0)
-      warden (>= 1.2.0)
     railties (6.1.3.1)
       actionpack (= 6.1.3.1)
       activesupport (= 6.1.3.1)
@@ -552,7 +558,7 @@ DEPENDENCIES
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.3, >= 6.1.3.1)
   rails-i18n (~> 6.0)
-  rails_warden (~> 0.6.0)
+  rails_warden!
   ransack (~> 2.4)
   redis (~> 4.0)
   rubocop-rails

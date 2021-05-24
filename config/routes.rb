@@ -10,20 +10,22 @@ Rails.application.routes.draw do
   default_url_options Settings.default_url_options.symbolize_keys
 
   scope module: :authentication do
-    resources :sessions #, only: [:new, :create]
+    resources :sessions, only: [:new, :create]
   end
 
-  scope subdomain: 'operator', as: :operator, constraints: { subdomain: 'operator' } do
+  scope subdomain: 'operator', constraints: { subdomain: 'operator' } do
     scope constraints: RouteConstraints::AdminRequiredConstraint.new do
+      mount Gera::Engine => 'gera'
       mount Sidekiq::Web => 'sidekiq'
-      mount Gera::Engine => '/gera'
-      scope module: :operator do
-        root to: 'dashboard#index'
-        resources :wallets
-        resources :wallet_activities
+      scope as: :operator do
+        scope module: :operator do
+          root to: 'dashboard#index'
+          resources :wallets
+          resources :wallet_activities
+        end
       end
+      match '*anything', to: 'application#not_found', via: %i[get post]
     end
-    match '*anything', to: 'application#not_found', via: %i[get post]
   end
 
   scope subdomain: '', as: :public, constraints: RouteConstraints::PublicConstraint.new do

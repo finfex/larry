@@ -119,5 +119,4 @@ gem 'best_in_place', git: 'https://github.com/mmotherwell/best_in_place'
 gem 'ransack', '~> 2.4'
 
 gem "warden", "~> 1.2"
-
-gem "rails_warden", "~> 0.6.0"
+gem "rails_warden", github: 'wardencommunity/rails_warden'

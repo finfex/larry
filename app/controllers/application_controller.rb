@@ -5,5 +5,12 @@
 class ApplicationController < ActionController::Base
   helper NotyFlash::ApplicationHelper
   helper Gera::CurrencyRateHelper
+  include RailsWarden::Authentication
   layout 'simple'
+
+  helper_method :current_admin_user
+
+  def current_admin_user
+    user :admin_user
+  end
 end

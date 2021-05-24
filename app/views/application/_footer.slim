@@ -2,6 +2,8 @@ hr style='margin-top: 4em'
 .container.text-muted
   .float-left
     = link_to t('.operator'), operator_root_url unless Rails.env.production?
+    - if authenticated?(:admin_user)
+      div= current_admin_user.email
     div=  Rails.application.routes.url_helpers.operator_root_url
     div= operator_root_url(subdomain: 'a', tld_length: 3)
   .float-right

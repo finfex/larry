@@ -1,8 +1,8 @@
                                   Prefix Verb     URI Pattern                                                                                       Controller#Action
                                 sessions POST     /sessions(.:format)                                                                               authentication/sessions#create
                              new_session GET      /sessions/new(.:format)                                                                           authentication/sessions#new
-                    operator_sidekiq_web          /sidekiq                                                                                          Sidekiq::Web {:subdomain=>"operator"}
-                           operator_gera          /gera                                                                                             Gera::Engine {:subdomain=>"operator"}
+                                    gera          /gera                                                                                             Gera::Engine {:subdomain=>"operator"}
+                             sidekiq_web          /sidekiq                                                                                          Sidekiq::Web {:subdomain=>"operator"}
                            operator_root GET      /                                                                                                 operator/dashboard#index {:subdomain=>"operator"}
                         operator_wallets GET      /wallets(.:format)                                                                                operator/wallets#index {:subdomain=>"operator"}
                                          POST     /wallets(.:format)                                                                                operator/wallets#create {:subdomain=>"operator"}
@@ -20,7 +20,7 @@
                                          PATCH    /wallet_activities/:id(.:format)                                                                  operator/wallet_activities#update {:subdomain=>"operator"}
                                          PUT      /wallet_activities/:id(.:format)                                                                  operator/wallet_activities#update {:subdomain=>"operator"}
                                          DELETE   /wallet_activities/:id(.:format)                                                                  operator/wallet_activities#destroy {:subdomain=>"operator"}
-                                operator GET|POST /*anything(.:format)                                                                              application#not_found {:subdomain=>"operator"}
+                                         GET|POST /*anything(.:format)                                                                              application#not_found {:subdomain=>"operator"}
                              public_root GET      /                                                                                                 public/home#index {:subdomain=>""}
                             public_pages GET      /pages(.:format)                                                                                  public/pages#index {:subdomain=>""}
                              public_page GET      /pages/:id(.:format)                                                                              public/pages#show {:subdomain=>""}

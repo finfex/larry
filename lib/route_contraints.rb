@@ -1,9 +1,17 @@
 # frozen_string_literal: true
 
 module RouteConstraints
+  class UserRequiredConstraint
+    def matches?(request)
+      request.env['warden'].user(:user).present? || throw(:warden, scope: :user)
+    end
+  end
+
   class AdminRequiredConstraint
     def matches?(request)
-      request.env['warden'].user(:admin_user).present? || throw(:warden, scope: :admin_user)
+      return true if request.env['warden'].user(:admin_user).present?
+      request.session[:admin_user_redirect_back] = request.url
+      throw(:warden, scope: :admin_user)
     end
   end
 

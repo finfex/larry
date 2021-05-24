@@ -1,13 +1,11 @@
 class Warden::SessionSerializer
   def serialize(record)
-    binding.pry
     [record.class.name, record.id]
   end
 
   def deserialize(keys)
-    binding.pry
     klass, id = keys
-    klass.find_by(id: id)
+    klass.constantize.find_by(id: id)
   end
 end
 
@@ -18,16 +16,26 @@ end
 
 Warden::Strategies.add(:password) do
   def valid?
-    params['email'] && params['password']
+    params.fetch(scope).keys.sort ==  ["password", "email"].sort
   end
 
   def authenticate!
-    binding.pry
-    user = User.find_by_email(params['email'])
-    if user && user.authenticate(params['password'])
-      success! user
+    person = scope_class.find_by(email: session_form_attrs.fetch(:email))
+    if person.present? && person.authenticate(session_form_attrs.fetch(:password))
+      # env['warden'].set_user person, scope: scope
+      # request.session[:admin_user_redirect_back]
+      success! person, 'You are welcome!'
+      binding.pry
     else
-      fail "Invalid email or password"
+      fail! 'Wring credentials'
     end
+  end
+
+  def scope_class
+    params.fetch(:scope).classify.constantize
+  end
+
+  def session_form_attrs
+    params.fetch scope
   end
 end
