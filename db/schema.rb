@@ -310,9 +310,9 @@ ActiveRecord::Schema.define(version: 2021_05_05_062944) do
 
   create_table "wallet_activities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "wallet_id", null: false
-    t.money "amount", scale: 2, null: false
+    t.decimal "amount_cents", null: false
     t.uuid "opposit_account_id", null: false
-    t.string "details", null: false
+    t.text "details", null: false
     t.bigint "admin_user_id", null: false
     t.string "activity_type", null: false
     t.datetime "created_at", precision: 6, null: false

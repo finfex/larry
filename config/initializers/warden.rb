@@ -22,10 +22,7 @@ Warden::Strategies.add(:password) do
   def authenticate!
     person = scope_class.find_by(email: session_form_attrs.fetch(:email))
     if person.present? && person.authenticate(session_form_attrs.fetch(:password))
-      # env['warden'].set_user person, scope: scope
-      # request.session[:admin_user_redirect_back]
       success! person, 'You are welcome!'
-      binding.pry
     else
       fail! 'Wring credentials'
     end

@@ -1,5 +1,22 @@
 h1= t '.wallet'
 = render 'table', items: [wallet]
 
-= simple_form_for [:operator, wallet.activities] do |f|
+h2= t '.wallet_activities'
 
+ul
+  - wallet.activities.order(:created_at).each do |wa|
+    li= wa
+
+
+h3= t '.create_deposit'
+div style='max-width: 400px'
+  = simple_form_for [:operator, wallet.activities.build] do |f|
+    .row
+      .col-md-6
+        = f.input :amount, as: :money
+    .row
+      .col-md-12
+        = f.input :details
+    .row
+      .col-md-2
+        = f.submit class: 'btn btn-primary'

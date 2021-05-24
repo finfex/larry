@@ -12,5 +12,8 @@ module Operator
       wallet = Wallet.find params[:id]
       render locals: { wallet: wallet }
     end
+
+    def create
+    end
   end
 end

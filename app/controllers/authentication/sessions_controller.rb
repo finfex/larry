@@ -4,7 +4,6 @@ class Authentication::SessionsController < ApplicationController
 
   def create
     authenticate! scope: params.fetch(:scope)
-    binding.pry
     redirect_to request.session[:admin_user_redirect_back].presence || welcome_url
   end
 

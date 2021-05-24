@@ -22,5 +22,9 @@ class Money::Currency
   def precision
     8
   end
+
+  def zero_money
+    0.to_money self
+  end
 end
 # rubocop:enable Style/ClassAndModuleChildren
