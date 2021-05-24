@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 module DeviseBootstrapViewsHelper
   def bootstrap_devise_error_messages!
     return '' if resource.errors.empty?

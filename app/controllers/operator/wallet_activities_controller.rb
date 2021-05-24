@@ -7,10 +7,10 @@ module Operator
     authorize_actions_for WalletActivity
 
     COMMANDS = {
-      #'deposit' => WalletDepositCommand,
-      #'withdrawal' => WalletWithdrawalCommand,
+      # 'deposit' => WalletDepositCommand,
+      # 'withdrawal' => WalletWithdrawalCommand,
       'correction' => WalletCorrectionCommand
-    }
+    }.freeze
 
     def create
       wallet = Wallet.find params[:wallet_activity][:wallet_id]
@@ -19,8 +19,8 @@ module Operator
       command.call wallet: wallet, attrs: params[:wallet_activity].permit!, admin_user: current_admin_user
 
       redirect_to operator_wallet_path(wallet), notice: t('.created')
-    rescue ActiveRecord::RecordInvalid => err
-      render 'operator/wallets/show', locals: { wallet: wallet, wallet_activity: err.record }
+    rescue ActiveRecord::RecordInvalid => e
+      render 'operator/wallets/show', locals: { wallet: wallet, wallet_activity: e.record }
     end
   end
 end

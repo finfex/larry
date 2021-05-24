@@ -15,6 +15,7 @@ class ApplicationAuthorizer < Authority::Authorizer
       return false if user.nil?
 
       return true if user.superadmin?
+
       user.has_permission? resource_name, verb_from_adjective(adjective)
     end
 

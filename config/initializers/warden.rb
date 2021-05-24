@@ -1,22 +1,28 @@
-class Warden::SessionSerializer
-  def serialize(record)
-    [record.class.name, record.id]
-  end
+# frozen_string_literal: true
 
-  def deserialize(keys)
-    klass, id = keys
-    klass.constantize.find_by(id: id)
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
+module Warden
+  class SessionSerializer
+    def serialize(record)
+      [record.class.name, record.id]
+    end
+
+    def deserialize(keys)
+      klass, id = keys
+      klass.constantize.find_by(id: id)
+    end
   end
 end
 
 Rails.application.config.middleware.use Warden::Manager do |manager|
   manager.default_strategies :password
-  manager.failure_app = lambda { |env| Authentication::SessionsController.action(:new).call(env) }
+  manager.failure_app = ->(env) { Authentication::SessionsController.action(:new).call(env) }
 end
 
 Warden::Strategies.add(:password) do
   def valid?
-    params.fetch(scope).keys.sort ==  ["password", "email"].sort
+    params.fetch(scope).keys.sort == %w[password email].sort
   end
 
   def authenticate!

@@ -13,7 +13,6 @@ module Operator
       render locals: { wallet: wallet, wallet_activity: wallet.activities.build }
     end
 
-    def create
-    end
+    def create; end
   end
 end

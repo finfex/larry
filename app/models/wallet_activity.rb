@@ -14,7 +14,7 @@ class WalletActivity < ApplicationRecord
   validates :amount, presence: true
   validates :activity_type, presence: true
 
-  ACTIVITY_TYPES = [:correction] #, :deposit, :withdrawal]
+  ACTIVITY_TYPES = [:correction].freeze # , :deposit, :withdrawal]
   enum activity_type: ACTIVITY_TYPES
 
   delegate :currency, to: :wallet

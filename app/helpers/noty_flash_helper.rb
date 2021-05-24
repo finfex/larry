@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 module NotyFlashHelper
   DEFAULT_TYPE = :warning
-  TYPES = { alert: :error, notice: :info }
+  TYPES = { alert: :error, notice: :info }.freeze
 
   def noty_flashes
     flash.map do |key, value|

@@ -1,9 +1,13 @@
+# frozen_string_literal: true
+
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 class MoneyInput < SimpleForm::Inputs::Base
   def input(wrapper_options)
     value = object.send attribute_name
     merged_input_options = merge_wrapper_options(input_html_options, wrapper_options)
     merged_input_options[:class] << 'text-right'
-    template.content_tag(:div, input_group(value.currency, merged_input_options), class: "input-group")
+    template.content_tag(:div, input_group(value.currency, merged_input_options), class: 'input-group')
   end
 
   private

@@ -9,8 +9,8 @@ class WalletActivityTest < ActiveSupport::TestCase
     @wallet = Wallet.new
   end
 
-  test "the truth" do
-    wa= WalletActivity.new wallet: @wallet
+  test 'the truth' do
+    wa = WalletActivity.new wallet: @wallet
     bnding.pry
     assert true
   end
