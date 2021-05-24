@@ -4,3 +4,4 @@
 
 require './db/seeds/gera'
 require './db/seeds/openbill'
+require './db/seeds/users'

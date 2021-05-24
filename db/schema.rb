@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2021_05_05_062944) do
   enable_extension "uuid-ossp"
 
   create_table "admin_users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
+    t.string "email", null: false
+    t.string "password_digest", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -297,8 +297,8 @@ ActiveRecord::Schema.define(version: 2021_05_05_062944) do
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
+    t.string "email", null: false
+    t.string "password_digest", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
