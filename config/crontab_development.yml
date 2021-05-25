@@ -1,26 +1,7 @@
 Gera::ExportToBestchangeWorker:
-  cron: '*/3 * * * * *'
+  cron: '*/15 * * * * *'
   class: Gera::ExportToBestchangeWorker
   queue: critical
-
-### Cleaners
-#
-# PurgeRateCalculationsWorker:
-#  cron: '12 */3 * * *'
-#  class: PurgeRateCalculationsWorker
-#  queue: purgers
-
-# Чистка во время тех перерыва 00:30-01:00
-# CurrencyRateHistoryIntervalCleanerWorker:
-#  cron: '40 0 * * *'
-#  class: Gera::CurrencyRateHistoryIntervalCleanerWorker
-#  queue: default
-
-# DirectionRateHistoryIntervalCleanerWorker:
-#   cron: '50 0 * * *'
-#   class: Gera::DirectionRateHistoryIntervalCleanerWorker
-#  queue: default
-
 
 ###
 #### Gera
@@ -33,7 +14,7 @@ Gera::CurrencyRatesWorker:
   queue: default
 
 Gera::DirectionsRatesWorker:
-  cron: '3 * * * *'
+  cron: '*/15 * * * *'
   class: Gera::DirectionsRatesWorker
   queue: critical
 
@@ -64,7 +45,7 @@ Gera::CBRRatesWorker:
 # EXMO разрешает 180 раз в минуту
 # https://support.exmoney.com/hc/ru/articles/360013113933-%D0%94%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%BD%D0%BE%D0%B5-%D0%BA%D0%BE%D0%BB%D0%B8%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%BE-%D0%B2%D1%8B%D0%B7%D0%BE%D0%B2%D0%BE%D0%B2-API
 Gera::EXMORatesWorker:
-  cron: '*/1 * * * *'
+  cron: '*/15 * * * *'
   class: Gera::EXMORatesWorker
   queue: critical
 
@@ -72,7 +53,7 @@ Gera::EXMORatesWorker:
 # API разрешают дергать 30 раз в минуту у нас на каждый worker по 4 запроса
 #
 Gera::BitfinexRatesWorker:
-  cron: '*/1 * * * *'
+  cron: '*/15 * * * *'
   class: Gera::BitfinexRatesWorker
   queue: critical
 

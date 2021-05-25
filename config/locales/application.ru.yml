@@ -1,0 +1,8 @@
+ru:
+  application:
+    navbar:
+      rules: 'Правила обмена'
+      wallets: 'Кошельки'
+      gera: Управление курсами
+    footer:
+      operator: 'Операторская'

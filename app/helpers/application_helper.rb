@@ -44,7 +44,12 @@ module ApplicationHelper
     true
   end
 
+  REPLACE_ICONS = {
+    'ios-close-empty' => 'ios-close'
+  }
+
   def ion_icon(icon, css_class: nil, text: nil, title: nil)
+    icon = REPLACE_ICONS.fetch(icon, icon)
     buffer = content_tag :i, '', class: ['icon', 'ion-' + icon.to_s, css_class]
     buffer << content_tag(:span, text, class: 'icon-text', title: title) if text.present?
 
