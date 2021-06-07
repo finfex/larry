@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_05_062944) do
+ActiveRecord::Schema.define(version: 2021_06_07_065841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 2021_05_05_062944) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "currencies", id: :string, force: :cascade do |t|
+    t.datetime "archived_at"
+    t.datetime "updated_at"
+    t.decimal "minimal_input_value_cents", null: false
+    t.decimal "minimal_output_value_cents", null: false
   end
 
   create_table "gera_cbr_external_rates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -199,7 +206,7 @@ ActiveRecord::Schema.define(version: 2021_05_05_062944) do
     t.string "currency_iso_code", null: false
     t.boolean "income_enabled", default: false, null: false
     t.boolean "outcome_enabled", default: false, null: false
-    t.datetime "deleted_at"
+    t.datetime "archived_at"
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.boolean "is_available", default: true, null: false

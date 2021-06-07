@@ -1,0 +1,4 @@
+.mb-2
+  = link_to '&larr; '.html_safe + t('.payment_systems'), operator_payment_systems_path
+
+= render 'attributes_table', object: PaymentSystemDecorator.decorate(payment_system)

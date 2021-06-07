@@ -19,7 +19,9 @@ class ApplicationDecorator < Draper::Decorator
     table_th_class column
   end
 
-  def self.table_tr_class(record); end
+  def self.table_tr_class(record)
+    'table-dark' if record.respond_to?(:archived?) && record.archived?
+  end
 
   def self.attributes
     table_columns

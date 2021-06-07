@@ -5,7 +5,7 @@
 module RansackSupport
   extend ActiveSupport::Concern
   included do
-    helper_method :q, :index_form
+    helper_method :q
   end
 
   def index
@@ -20,7 +20,6 @@ module RansackSupport
       format.html do
         render locals: {
           records: records,
-          summary: SummaryQuery.new.summary(records),
           paginated_records: paginate(records)
         }
       end
@@ -28,10 +27,6 @@ module RansackSupport
   end
 
   private
-
-  def index_form
-    'time_form'
-  end
 
   def q
     @q ||= build_q
@@ -43,7 +38,14 @@ module RansackSupport
     qq
   end
 
+  def query_includes
+    model_class
+      .reflections
+      .select { |_k, r| r.is_a?(ActiveRecord::Reflection::BelongsToReflection) && !r.options[:polymorphic] }
+      .keys
+  end
+
   def records
-    q.result.includes(model_class.reflections.select { |_k, r| r.is_a?(ActiveRecord::Reflection::BelongsToReflection) && !r.options[:polymorphic] }.keys)
+    q.result.includes(query_includes)
   end
 end

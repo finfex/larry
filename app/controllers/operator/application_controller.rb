@@ -7,7 +7,10 @@
 module Operator
   class ApplicationController < ApplicationController
     layout 'operator'
+
     include RansackSupport
+    include PaginationSupport
+
     helper_method :model_class
 
     private

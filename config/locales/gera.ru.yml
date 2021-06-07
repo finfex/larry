@@ -1,5 +1,8 @@
 ru:
   gera:
+    payment_systems:
+      show: 
+        payment_systems: '&larr; Платежные системы'
     application:
       currencies_table: 
         calculation_method: Метод расчёта %{rate}

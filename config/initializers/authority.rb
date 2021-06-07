@@ -23,15 +23,17 @@ Authority.configure do |config|
   #
   # Defaults are as follows:
   #
-  # config.controller_action_map = {
-  #   :index   => 'read',
-  #   :show    => 'read',
-  #   :new     => 'create',
-  #   :create  => 'create',
-  #   :edit    => 'update',
-  #   :update  => 'update',
-  #   :destroy => 'delete'
-  # }
+  config.controller_action_map = {
+    archive: 'archive',
+    restore: 'restore',
+    :index   => 'read',
+    :show    => 'read',
+    :new     => 'create',
+    :create  => 'create',
+    :edit    => 'update',
+    :update  => 'update',
+    :destroy => 'delete'
+  }
 
   # ABILITIES
   # =========
@@ -41,12 +43,14 @@ Authority.configure do |config|
   #
   # Defaults are as follows:
   #
-  # config.abilities =  {
-  #   :create => 'creatable',
-  #   :read   => 'readable',
-  #   :update => 'updatable',
-  #   :delete => 'deletable'
-  # }
+  config.abilities =  {
+    archive: 'archivable',
+    restore: 'restorable',
+    :create => 'creatable',
+    :read   => 'readable',
+    :update => 'updatable',
+    :delete => 'deletable'
+  }
 
   # LOGGER
   # ======

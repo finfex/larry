@@ -1,0 +1,25 @@
+table.table.table-narrow.table-striped.table-condensed.table-bordered
+  thead.bg-white
+    tr
+      th Валюта
+      th Тип
+      th Минимальная сумма на ввод
+      th Минимальная сумма на вывод
+      th Платежные системы
+      th Действия
+  - currencies.each do |c|
+    tr
+      td.text-nowrap.text-right
+        = c.id
+      td
+        = c.is_crypto? ? 'Крипта' : 'Фиат'
+      td.text-right= c.minimal_input_value.format
+      td.text-right= c.minimal_output_value.format
+      td
+        ul.list-inline
+          - c.payment_systems.each do |ps|
+            li.list-inline-item= link_to ps.name, operator_payment_system_path(ps)
+      td
+
+        = archive_button(c)
+

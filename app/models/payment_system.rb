@@ -5,6 +5,9 @@
 PaymentSystem = Gera::PaymentSystem
 
 class PaymentSystem
+  scope :by_currency, -> (currency)  { where(currency_iso_code: currency.iso_code) }
+
+
   def storno_account
     OpenbillCategory.storno.accounts.where(reference: self).take
   end

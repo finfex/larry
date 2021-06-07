@@ -9,6 +9,13 @@ require 'route_contraints'
 Rails.application.routes.draw do
   default_url_options Settings.default_url_options.symbolize_keys
 
+  concern :archivable do
+    member do
+      put :archive
+      put :restore
+    end
+  end
+
   scope module: :authentication do
     resource :session, only: %i[new create destroy]
   end
@@ -20,8 +27,16 @@ Rails.application.routes.draw do
       scope as: :operator do
         scope module: :operator do
           root to: 'dashboard#index'
-          resources :wallets
+          resources :wallets do
+            concerns :archivable
+          end
           resources :wallet_activities
+          resources :payment_systems do
+            concerns :archivable
+          end
+          resources :currencies do
+            concerns :archivable
+          end
         end
       end
       match '*anything', to: 'application#not_found', via: %i[get post]

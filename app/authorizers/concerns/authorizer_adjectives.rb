@@ -9,7 +9,7 @@
 module AuthorizerAdjectives
   extend ActiveSupport::Concern
 
-  DEFAULT_ADJECTIVES = %i[readable creatable updatable deletable].freeze
+  DEFAULT_ADJECTIVES = %i[archivable restorable readable creatable updatable deletable].freeze
 
   # Map to convert adjective -> verbs
   # {:creatable=>:create, :readable=>:read, :updatable=>:update, :deletable=>:destroy, :acceptable=>:accept, :rejectable=>:reject}

@@ -1,4 +1,5 @@
 defaults: &defaults
+  max_export_records_count: 1000
   default_url_options: &default_url_options
     protocol: <%= ENV.fetch('HTTP_PROTOCOL', 'https') %>
     host: <%= ENV.fetch('LARRY_HOST', 'localhost') %>
