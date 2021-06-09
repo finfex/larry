@@ -4,7 +4,11 @@
                                          POST     /session(.:format)                                                                                authentication/sessions#create
                                     gera          /gera                                                                                             Gera::Engine {:subdomain=>"operator"}
                              sidekiq_web          /sidekiq                                                                                          Sidekiq::Web {:subdomain=>"operator"}
-                           operator_root GET      /                                                                                                 operator/dashboard#index {:subdomain=>"operator"}
+                           operator_root GET      /                                                                                                 operator/orders#index {:subdomain=>"operator"}
+                         operator_orders GET      /orders(.:format)                                                                                 operator/orders#index {:subdomain=>"operator"}
+                          operator_order GET      /orders/:id(.:format)                                                                             operator/orders#show {:subdomain=>"operator"}
+                 archive_operator_wallet PUT      /wallets/:id/archive(.:format)                                                                    operator/wallets#archive {:subdomain=>"operator"}
+                 restore_operator_wallet PUT      /wallets/:id/restore(.:format)                                                                    operator/wallets#restore {:subdomain=>"operator"}
                         operator_wallets GET      /wallets(.:format)                                                                                operator/wallets#index {:subdomain=>"operator"}
                                          POST     /wallets(.:format)                                                                                operator/wallets#create {:subdomain=>"operator"}
                      new_operator_wallet GET      /wallets/new(.:format)                                                                            operator/wallets#new {:subdomain=>"operator"}
@@ -45,6 +49,8 @@
                              public_root GET      /                                                                                                 public/home#index {:subdomain=>""}
                             public_pages GET      /pages(.:format)                                                                                  public/pages#index {:subdomain=>""}
                              public_page GET      /pages/:id(.:format)                                                                              public/pages#show {:subdomain=>""}
+                           public_orders POST     /orders(.:format)                                                                                 public/orders#create {:subdomain=>""}
+                            public_order GET      /orders/:id(.:format)                                                                             public/orders#show {:subdomain=>""}
                                          GET|POST /*anything(.:format)                                                                              application#not_found
            rails_postmark_inbound_emails POST     /rails/action_mailbox/postmark/inbound_emails(.:format)                                           action_mailbox/ingresses/postmark/inbound_emails#create
               rails_relay_inbound_emails POST     /rails/action_mailbox/relay/inbound_emails(.:format)                                              action_mailbox/ingresses/relay/inbound_emails#create

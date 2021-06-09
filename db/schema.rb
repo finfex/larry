@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_09_100430) do
+ActiveRecord::Schema.define(version: 2021_06_09_141254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -219,6 +219,7 @@ ActiveRecord::Schema.define(version: 2021_06_09_100430) do
     t.string "bestchange_key", null: false
     t.decimal "reserves_delta_cents", default: "0.0", null: false
     t.uuid "reserves_aggregator_id"
+    t.string "system_type"
     t.index ["bestchange_key"], name: "index_gera_payment_systems_on_bestchange_key", unique: true
     t.index ["income_enabled"], name: "index_payment_systems_on_income_enabled"
     t.index ["outcome_enabled"], name: "index_payment_systems_on_outcome_enabled"

@@ -12,7 +12,12 @@ module PaymentSystemConcern
 
     monetize :reserves_delta_cents, as: :reserves_delta, with_model_currency: :currency_iso_code
 
+    enum system_type: %i[payment_system crypto bank cheque], _prefix: true
     validates :bestchange_key, presence: true, uniqueness: true
+
+    before_create do
+      system_type == :crypto if currency.is_crypto?
+    end
 
     after_create do
       Wallet.create_for_payment_system! self

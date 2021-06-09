@@ -40,7 +40,7 @@ module ApplicationHelper
   end
 
   # TODO: show icon of payment system
-  def ps_icon(payment_system)
+  def ps_icon(payment_system, options = {})
     payment_system.to_s
   end
 

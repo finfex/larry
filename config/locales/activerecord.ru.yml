@@ -34,6 +34,7 @@ ru:
     locked_amount: Заблокировано
     total_amount: Всего на счету
     is_available: Доступно
+    is_enabled: Разрешено
 
   activerecord:
     models:
@@ -49,8 +50,11 @@ ru:
       user: Пользователи
       direction_rate: Конечный курс
       currency_rate: Базовый курс
+      exchange_rate: Направления обмена
 
     attributes:
+      gera/exchange_rate:
+        value: Курс
       nomenclature_in_stock_cell:
         in_stock_quantity: В Наличии
         to_selection_quantity: К Отбору
