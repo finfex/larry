@@ -19,14 +19,23 @@ module Public
     end
 
     def build_order
-      Order.new(
-        income_amount: income_amount,
-        outcome_amount: direction_rate.exchange(income_amount),
-        income_payment_system: income_payment_system,
-        outcome_payment_system: outcome_payment_system,
-        direction_rate: direction_rate,
-        rate_calculation: RateCalculation.create_from_income!(direction_rate: direction_rate, income_amount: income_amount)
-      )
+      if direction_rate.present?
+        Order.new(
+          income_amount: income_amount,
+          income_payment_system: income_payment_system,
+          outcome_payment_system: outcome_payment_system,
+          outcome_amount: direction_rate.exchange(income_amount),
+          direction_rate: direction_rate,
+          rate_calculation: RateCalculation.create_from_income!(direction_rate: direction_rate, income_amount: income_amount)
+        )
+      else
+        Order.new(
+          income_amount: income_amount,
+          income_payment_system: income_payment_system,
+          outcome_payment_system: outcome_payment_system,
+          outcome_amount: outcome_payment_system.currency.zero_money
+        )
+      end
     end
 
     def direction_rate
@@ -46,13 +55,20 @@ module Public
     end
 
     def income_payment_system
-      ps = income_payment_systems.find_by(bestchange_key: params[:cur_from]) if params[:cur_from]
+      ps = income_payment_systems.find_by(id: params[:cur_from]) if params[:cur_from]
       ps || income_payment_systems.first
     end
 
     def outcome_payment_system
-      ps = outcome_payment_systems.find_by(bestchange_key: params[:cur_to]) if params[:cur_to]
+      ps = outcome_payment_systems.find_by(id: params[:cur_to]) if params[:cur_to]
       ps || outcome_payment_systems.where.not(id: income_payment_system).first
+      # Подбор платежной системы из доступных в exchange_rate и для которых есть direction_rate
+      #
+      # exchange_rate.outcome_payment_system
+    end
+
+    def exchange_rate
+      Gera::ExchangeRate.available.where(payment_system_from_id: income_payment_system.id).take
     end
   end
 end

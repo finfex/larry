@@ -25,7 +25,10 @@
 
       .col-md-4
         h2.mb-3 3. Ввод данных
-        p Обмен по курсу: #{humanized_rate direction.direction_rate.rate_value}
-        = f.input :income_amount, as: :money, wrapper: :input_group, append: f.object.income_amount.currency, disabled: true, label: false
-        = f.input :outcome_amount, as: :money, wrapper: :input_group, append: f.object.income_amount.currency, disabled: true, label: false
-        = f.submit 'Обменять сейчас', class: 'btn btn-primary', style: 'width: 100%'
+        - if direction_rate.present?
+          p Обмен по курсу: #{humanized_rate direction_rate.rate_value}
+          = f.input :income_amount, as: :money, wrapper: :input_group, append: f.object.income_amount.currency, disabled: true, label: false
+          = f.input :outcome_amount, as: :money, wrapper: :input_group, append: f.object.income_amount.currency, disabled: true, label: false
+          = f.submit 'Обменять сейчас', class: 'btn btn-primary', style: 'width: 100%'
+        - else
+          .alert Нет обмена по этому направлению
