@@ -1,1 +1,27 @@
-= render 'public_reserves'
+.container
+  = simple_form_for [:public, order] do |f|
+    .row
+      .col-md-4
+        h2 1. Отдаёте
+        = f.input :income_amount, as: :money, wrapper: :input_group,  append: f.object.income_amount.currency, label: false
+      .col-md-4
+        h2 2. Получаете
+        = f.input :outcome_amount, as: :money, wrapper: :input_group,  append: f.object.outcome_amount.currency, label: false
+      .col-md-4
+        h2 3. Ввод данных
+        p Обмен по курсу: #{humanized_rate direction.direction_rate.rate_value}
+        = f.input :income_amount, as: :money, wrapper: :input_group, append: f.object.income_amount.currency, disabled: true, label: false
+        = f.input :outcome_amount, as: :money, wrapper: :input_group, append: f.object.income_amount.currency, disabled: true, label: false
+        = f.submit 'Обменять сейчас', class: 'btn btn-primary', style: 'width: 100%'
+  .row
+    .col-md-4
+      = render 'payment_systems', payment_systems: income_payment_systems, param_name: :cur_from, active_ps: income_payment_system do |ps|
+        = present_payment_system ps
+
+    .col-md-4
+      = render 'payment_systems', payment_systems: outcome_payment_systems, param_name: :cur_to, active_ps: outcome_payment_system do |ps|
+        = present_payment_system ps
+        - direction = Gera::Direction.new(ps_from: income_payment_system, ps_to: ps).freeze
+        .float-right.text-small= humanized_money_with_currency direction.direction_rate.exchange(income_amount)
+
+    .col-md-4

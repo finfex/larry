@@ -22,6 +22,10 @@ module ApplicationHelper
     end
   end
 
+  def present_payment_system(ps)
+    ps_icon ps
+  end
+
   def namespace
     controller_path.split('/').first
   end

@@ -47,6 +47,7 @@ Rails.application.routes.draw do
     scope module: :public do
       root to: 'home#index'
       resources :pages, only: %i[index show]
+      resources :orders, only: %i[create show]
     end
   end
 

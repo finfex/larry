@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_09_055537) do
+ActiveRecord::Schema.define(version: 2021_06_09_085949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -212,6 +212,12 @@ ActiveRecord::Schema.define(version: 2021_06_09_055537) do
     t.boolean "is_available", default: true, null: false
     t.string "icon_url"
     t.float "commission", default: 0.0, null: false
+    t.decimal "minimal_income_amount_cents", default: "0.0", null: false
+    t.decimal "maximal_income_amount_cents"
+    t.decimal "minimal_outcome_amount_cents"
+    t.decimal "maximal_outcome_amount_cents"
+    t.string "bestchange_key", null: false
+    t.index ["bestchange_key"], name: "index_gera_payment_systems_on_bestchange_key", unique: true
     t.index ["income_enabled"], name: "index_payment_systems_on_income_enabled"
     t.index ["outcome_enabled"], name: "index_payment_systems_on_outcome_enabled"
   end
@@ -303,6 +309,22 @@ ActiveRecord::Schema.define(version: 2021_06_09_055537) do
     t.check_constraint "to_account_id <> from_account_id", name: "different_accounts"
   end
 
+  create_table "orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.decimal "income_amount_cents", null: false
+    t.string "income_amount_currency", null: false
+    t.decimal "outcome_amount_cents", null: false
+    t.string "outcome_amount_currency", null: false
+    t.uuid "income_payment_system_id", null: false
+    t.uuid "outcome_payment_system_id", null: false
+    t.uuid "direction_rate_id"
+    t.json "direction_rate_dump", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["direction_rate_id"], name: "index_orders_on_direction_rate_id"
+    t.index ["income_payment_system_id"], name: "index_orders_on_income_payment_system_id"
+    t.index ["outcome_payment_system_id"], name: "index_orders_on_outcome_payment_system_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
@@ -376,6 +398,9 @@ ActiveRecord::Schema.define(version: 2021_06_09_055537) do
   add_foreign_key "openbill_transactions", "openbill_accounts", column: "to_account_id", name: "openbill_transactions_to_account_id_fkey"
   add_foreign_key "openbill_transactions", "openbill_invoices", column: "invoice_id", name: "openbill_transactions_invoice_id_fk", on_delete: :restrict
   add_foreign_key "openbill_transactions", "openbill_transactions", column: "reverse_transaction_id", name: "reverse_transaction_foreign_key"
+  add_foreign_key "orders", "gera_direction_rates", column: "direction_rate_id"
+  add_foreign_key "orders", "gera_payment_systems", column: "income_payment_system_id"
+  add_foreign_key "orders", "gera_payment_systems", column: "outcome_payment_system_id"
   add_foreign_key "wallet_activities", "openbill_accounts", column: "opposit_account_id"
   add_foreign_key "wallet_activities", "wallets"
   add_foreign_key "wallets", "gera_payment_systems", column: "payment_system_id"

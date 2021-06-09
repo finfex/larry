@@ -1,0 +1,5 @@
+div.nav.flex-column.nav-pills role="tablist" aria-orientation="vertical"
+  - payment_systems.each do |ps|
+    - active = ps == active_ps
+    a class=("nav-link" + (active ? ' active' : '')) role="tab" aria-controls="v-pills-home" aria-selected=active.to_s href=public_root_url( param_name => ps.id)
+      = yield ps
