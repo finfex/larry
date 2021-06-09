@@ -23,7 +23,8 @@ module Public
         income_amount: income_amount,
         outcome_amount: direction.direction_rate.exchange(income_amount),
         income_payment_system: income_payment_system,
-        outcome_payment_system: outcome_payment_system
+        outcome_payment_system: outcome_payment_system,
+        direction_rate: direction.direction_rate
       )
     end
 

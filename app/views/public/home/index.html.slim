@@ -1,5 +1,8 @@
 .container
   = simple_form_for [:public, order] do |f|
+    = f.input :income_payment_system_id, as: :hidden
+    = f.input :outcome_payment_system_id, as: :hidden
+    = f.input :direction_rate_id, as: :hidden
     .row
       .col-md-4
         h2 1. Отдаёте
