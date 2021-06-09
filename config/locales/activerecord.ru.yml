@@ -1,0 +1,34 @@
+ru:
+  attributes:
+    created_at: Создан
+    archived_at: Архивирован
+    updated_at: Обновлён
+    direction: Направление
+    inverse_direction: Обратное направление
+    base_rate_value: Базовый курс
+    rate_percent: Комиссия обмена
+    ps_comission: Комиссия платёжной системы
+    rate_value: Курс обмена
+    id: ID
+    mode: Режим
+    external_rate: Курс источника
+    tooltip: Подсказка
+    metadata: meta
+
+  activerecord:
+    models:
+      order:
+        one: Заказ
+        few: Заказы
+        many: Заказы
+        other: Заказы
+      admin_user: Сотрудники
+      user: Пользователи
+      direction_rate: Конечный курс
+      currency_rate: Базовый курс
+
+    attributes:
+      nomenclature_in_stock_cell:
+        in_stock_quantity: В Наличии
+        to_selection_quantity: К Отбору
+

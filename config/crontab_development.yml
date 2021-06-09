@@ -1,7 +1,7 @@
-Gera::ExportToBestchangeWorker:
-  cron: '*/15 * * * * *'
-  class: Gera::ExportToBestchangeWorker
-  queue: critical
+# Gera::ExportToBestchangeWorker:
+  # cron: '*/15 * * * * *'
+  # class: Gera::ExportToBestchangeWorker
+  # queue: critical
 
 ###
 #### Gera

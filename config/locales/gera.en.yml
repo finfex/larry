@@ -1,0 +1,18 @@
+en:
+  gera:
+    application:
+      attributes_table:
+        sell_for: "Sell 1 %{cur_to} for %{value} %{cur_from}"
+        buy_for: "Buy 1 %{cur_from} for %{value} %{cur_to}"
+        same_currency: Same currency
+
+      direction_rate:
+        title: 'Direction Rate #%{id}'
+
+      currencies_table:
+        same_currency: Same currency
+        calculation_method: Calculation method
+
+    currency_rates:
+      currency_rate:
+        title: 'Currency Rate %{title}'

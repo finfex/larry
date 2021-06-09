@@ -38,7 +38,7 @@ module Authentication
 
     def session_resoruce_class
       SCOPE_RESOURCES[
-        (request.env['warden.options'] || {}).fetch(:scope, :default)
+        (request.env['warden.options'] || {}).fetch(:scope, :default).to_sym
       ] || raise('Unknown session_resource')
     end
 

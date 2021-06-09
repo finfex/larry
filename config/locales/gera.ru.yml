@@ -1,10 +1,27 @@
 ru:
+  direction_rate: Конечный курс
+  currency_rate: Базовый курс
+  calculation: Расчёт
   gera:
-    payment_systems:
-      show: 
-        payment_systems: '&larr; Платежные системы'
     application:
-      currencies_table: 
+      attributes_table:
+        sell_for: "Продадим 1 %{cur_to} за %{value} %{cur_from}"
+        buy_for: "Купим 1 %{cur_from} за %{value} %{cur_to}"
+        same_currency: Та-же валюта
+
+      direction_rate:
+        title: 'Конечный курс #%{id}'
+
+      currencies_table:
         calculation_method: Метод расчёта %{rate}
         same_currency: Таже валюта
 
+    direction_rates:
+      currency_rate:
+        used_direction_rates: Использованы базовые курсы
+    currency_rates:
+      currency_rate:
+        currency_rate: 'Currency Rate %{title}'
+    payment_systems:
+      show: 
+        payment_systems: '&larr; Платежные системы'

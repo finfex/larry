@@ -4,6 +4,7 @@
 
 class Wallet < ApplicationRecord
   include CurrencySupport
+  include Archivable
 
   belongs_to :payment_system, class_name: '::PaymentSystem'
   belongs_to :available_account, class_name: 'OpenbillAccount'
