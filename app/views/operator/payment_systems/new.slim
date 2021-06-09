@@ -3,8 +3,6 @@ hr
 .page-header
   h2 Создаем новую платежную ситсему
 
-.row
-  .col-md-6
-    = render 'form', payment_system: payment_system, columns: edit_columns
-  .col-md-6
-    .alert.alert-info Сохраните форму, чтобы иметь возможность редактировать банки карт заршеренные к приему
+= render 'form', payment_system: payment_system, columns: edit_columns
+br
+.alert.alert-info Сохраните форму, чтобы иметь возможность редактировать банки карт заршеренные к приему

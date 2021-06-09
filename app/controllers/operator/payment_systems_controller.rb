@@ -11,7 +11,8 @@ module Operator
     end
 
     def new
-      render locals: { payment_system: PaymentSystem.new, edit_columns: EDIT_COLUMNS }
+      @resource ||= PaymentSystem.new
+      render :new, locals: { payment_system: resource, edit_columns: EDIT_COLUMNS }
     end
 
     def show
@@ -23,10 +24,18 @@ module Operator
     end
 
     def update
-      resource.update! params.require(:payment_system).permit!
+      resource.update! payment_system_params
       redirect_to operator_payment_system_path(resource), notice: "Изменения приняты"
     rescue ActiveRecord::RecordInvalid  => error
       edit
+    end
+
+    def create
+      @resource = PaymentSystem.new payment_system_params
+      resource.save!
+      redirect_to operator_payment_system_path(resource), notice: "Платежная система создана"
+    rescue ActiveRecord::RecordInvalid => error
+      new
     end
 
     private
@@ -36,7 +45,11 @@ module Operator
     end
 
     def resource
-      @currency ||= PaymentSystem.find params[:id]
+      @resource ||= PaymentSystem.find params[:id]
+    end
+
+    def payment_system_params
+      params.require(:payment_system).permit!
     end
   end
 end

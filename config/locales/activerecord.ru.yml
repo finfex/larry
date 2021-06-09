@@ -25,7 +25,7 @@ ru:
     minimal_outcome_amount: Минимальная сумма на выплату
     maximal_income_amount: Максимальная сумма на приём
     maximal_outcome_amount: Максимальная сумма на выплату
-    reserves_delta_amount: Дельта резервов
+    reserves_delta: Дельта резервов
     reservers_aggregator: Агрегатор по резервам
     payment_system: Платежная система
     currency: Валюта

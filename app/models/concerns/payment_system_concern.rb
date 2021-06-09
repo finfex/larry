@@ -11,16 +11,25 @@ module PaymentSystemConcern
     belongs_to :reservers_aggregator, class_name: 'Gera::PaymentSystem', optional: true
 
     monetize :reserves_delta_cents, as: :reserves_delta, with_model_currency: :currency_iso_code
+
+    validates :bestchange_key, presence: true, uniqueness: true
+
+    after_create do
+      Wallet.create_for_payment_system! self
+      OpenbillCategory.storno.accounts.create! details: "Storno account for #{self}", reference: self, amount: self.currency.zero_money
+    end
   end
 
   def archive!
     super
-    wallet.archive!
+    # TODO Stop if there are active orders
+    wallets.find_each &:archive!
   end
 
   def storno_account
     OpenbillCategory.storno.accounts.where(reference: self).take
   end
+
   def reserve_amount
     @reserve_amount ||= Money.from_amount ReservesByPaymentSystems.get_reserve_by_payment_system_id(id), currency
   end

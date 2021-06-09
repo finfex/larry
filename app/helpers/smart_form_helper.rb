@@ -6,16 +6,19 @@ module SmartFormHelper
     checkbox: :boolean
   }.freeze
 
+  DISABLED_COLUMNS = %i[currency_iso_code currency]
+
   def smart_input(form, column, params = {})
-    as, collection = smart_get_as_input form.object, column
+    as, collection, disabled = smart_get_as_input form.object, column
     as = SIMPLE_FORM_AS[as] || as
-    form.input column, { as: as, collection: collection, include_blank: false }.merge(params)
+    form.input column, { as: as, collection: collection, include_blank: false, disabled: disabled }.merge(params)
   end
 
   def smart_best_in_place(scope, column, value, collection: nil)
     record = scope.last
-    as, builded_collection = smart_get_as_input record, column
-    best_in_place scope, column, as: as, value: value, collection: collection || builded_collection
+    as, builded_collection, disabled = smart_get_as_input record, column
+    collection ||= builded_collection
+    best_in_place scope, column, as: as, value: value, collection: collection
   end
 
   def smart_get_as_input(record, column)
@@ -24,11 +27,13 @@ module SmartFormHelper
     attribute_name = record_class.attribute_aliases[column.to_s] || column.to_s
     column_type = record_class.columns_hash[attribute_name]
 
+    value = record.send column
     # best in place
     # [:input, :textarea, :select, :checkbox, :date]
     if %w[currency currency_iso_code].include?(attribute_name)
       as = :select
       collection = Currency.alive.pluck(:id).map { |v| [v, v] }
+      collection = collection + [[value, value]] if value.present? && !collection.find { |c| c.first == value }
     elsif column_type.nil?
       # PaymentSystem#currency
       as = :input
@@ -43,7 +48,9 @@ module SmartFormHelper
       as = :input
     end
 
-    [as, collection]
+    disabled = false
+    disabled = true if record.persisted? && DISABLED_COLUMNS.include?(column.to_sym)
+    [as, collection, disabled]
   end
 
   def smart_get_collection(record_class, attribute_name, _record = nil)
