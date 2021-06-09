@@ -35,7 +35,6 @@ Gera::CurrencyRatesWorker:
 Gera::DirectionsRatesWorker:
   cron: '3 * * * *'
   class: Gera::DirectionsRatesWorker
-  queue: critical
 
 Gera::PurgeCurrencyRatesWorker:
   cron: '27 2 * * *'

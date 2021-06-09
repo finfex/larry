@@ -5,14 +5,19 @@
 module Public
   class HomeController < ApplicationController
     helper Gera::ApplicationHelper
+    helper Gera::DirectionRateHelper
 
-    helper_method :income_payment_system, :outcome_payment_system, :income_payment_systems, :outcome_payment_systems, :income_amount, :direction, :direction_rate
+    helper_method :income_payment_system, :outcome_payment_system, :income_payment_systems, :outcome_payment_systems, :income_amount, :direction, :direction_rate, :final_reserves
 
     def index
       render locals: { order: build_order }
     end
 
     private
+
+    def final_reserves
+      @final_reserves ||= ReservesByPaymentSystems.new.final_reserves
+    end
 
     def direction
       direction = Gera::Direction.new(ps_from: income_payment_system, ps_to: outcome_payment_system).freeze

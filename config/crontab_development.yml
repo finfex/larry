@@ -14,9 +14,8 @@ Gera::CurrencyRatesWorker:
   queue: default
 
 Gera::DirectionsRatesWorker:
-  cron: '*/15 * * * *'
+  cron: '*/1 * * * *'
   class: Gera::DirectionsRatesWorker
-  queue: critical
 
 Gera::PurgeCurrencyRatesWorker:
   cron: '27 2 * * *'

@@ -7,28 +7,38 @@
     .row
       .col-md-4
         h2.mb-3 1. Отдаёте
-        = f.input :income_amount, as: :money, wrapper: :input_group,  append: f.object.income_amount.currency, label: false
-        = render 'payment_systems', payment_systems: income_payment_systems, param_name: :cur_from, active_ps: income_payment_system do |ps|
+        = f.input :income_amount, as: :money, wrapper: :input_group,  append: f.object.income_amount.currency, label: false, input_html: { autofocus: true }
+        = render 'payment_systems', payment_systems: income_payment_systems, param_name: :cur_from, active_ps: income_payment_system, disabled: false  do |ps|
           = present_payment_system ps
 
       .col-md-4
         h2.mb-3 2. Получаете
         = f.input :outcome_amount, as: :money, wrapper: :input_group,  append: f.object.outcome_amount.currency, label: false
-        = render 'payment_systems', payment_systems: outcome_payment_systems, param_name: :cur_to, active_ps: outcome_payment_system do |ps|
-          = present_payment_system ps
-          - direction = Gera::Direction.new(ps_from: income_payment_system, ps_to: ps).freeze
-          .float-right.text-small
-            - if direction.nil? || direction.direction_rate.nil?
-              | Нет обмена
-            - else
-              = humanized_money_with_currency direction.direction_rate.exchange(income_amount)
+        div.nav.flex-column.nav-pills role="tablist" aria-orientation="vertical"
+          - outcome_payment_systems.each do |ps|
+            - active = ps == outcome_payment_system
+            - direction = Gera::Direction.new(ps_from: income_payment_system, ps_to: ps).freeze
+            - disabled = direction.direction_rate.nil?
+            a class=("nav-link" + (active ? ' active' : '') + (disabled ? ' disabled' : '')) role="tab" aria-controls="v-pills-home" aria-selected=active.to_s href=public_root_url( request.query_parameters.merge cur_to: ps.id)
+              = present_payment_system ps
+              .text-small.float-right
+                - if disabled
+                  | Нет обмена
+                - else
+                  -# = humanized_money_with_currency direction.direction_rate.exchange(income_amount)
+                  = humanized_money_with_currency Money.new(final_reserves[ps.id], ps.currency)
 
       .col-md-4
         h2.mb-3 3. Ввод данных
         - if direction_rate.present?
-          p Обмен по курсу: #{humanized_rate direction_rate.rate_value}
-          = f.input :income_amount, as: :money, wrapper: :input_group, append: f.object.income_amount.currency, disabled: true, label: false
-          = f.input :outcome_amount, as: :money, wrapper: :input_group, append: f.object.income_amount.currency, disabled: true, label: false
-          = f.submit 'Обменять сейчас', class: 'btn btn-primary', style: 'width: 100%'
+          p 
+            | Обмен по курсу: 
+            span.text-nowrap #{humanized_rate direction_rate.rate_value} #{direction_rate.outcome_payment_system.currency}
+          = f.input :income_amount, as: :money, wrapper: :input_group, append: f.object.income_amount.currency, disabled: true, label: 'Отдаёте'
+          = f.input :outcome_amount, as: :money, wrapper: :input_group, append: f.object.income_amount.currency, disabled: true, label: 'Получаете'
+          = f.submit 'Обменять сейчас', class: 'btn btn-primary btn-lg mt-4', style: 'width: 100%'
+
+          - if Rails.env.development? && params[:debug]
+            code.mt-4 direction_rate_id: #{direction_rate.id}
         - else
           .alert Нет обмена по этому направлению

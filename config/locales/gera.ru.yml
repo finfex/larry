@@ -3,6 +3,7 @@ ru:
   currency_rate: Базовый курс
   calculation: Расчёт
   gera:
+    used_direction_rates: Использовался в конечных курсах
     alive_payment_systems: Доступные платежные системы
     archived_payment_systems: Архив
     alive_currency: Действующие валюты
