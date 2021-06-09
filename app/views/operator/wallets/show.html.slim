@@ -1,8 +1,9 @@
-h1= t '.wallet'
-= render 'table', items: [wallet]
-h2= t '.manual_update'
-div style='max-width: 400px'
-  = render 'operator/wallet_activities/form', wallet_activity: wallet_activity
-hr
-h2= t '.wallet_activities'
-= render 'table', items: wallet.activities.order('created_at desc')
+.container
+  h1= t '.wallet'
+  = render 'table', items: [wallet]
+  h2= t '.manual_update'
+  div style='max-width: 400px'
+    = render 'operator/wallet_activities/form', wallet_activity: wallet_activity
+  hr
+  h2= t '.wallet_activities'
+  = render 'table', items: wallet.activities.order('created_at desc')

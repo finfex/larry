@@ -14,4 +14,8 @@ class WalletDecorator < ApplicationDecorator
       h.format_money object.send(method)
     end
   end
+
+  def payment_system
+    h.link_to object.payment_system, h.operator_payment_system_path(object.payment_system)
+  end
 end

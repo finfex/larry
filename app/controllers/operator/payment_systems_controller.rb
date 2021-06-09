@@ -5,7 +5,7 @@ module Operator
     authorize_actions_for PaymentSystem
 
     # TODO наладить smart_input и добавить reservers_aggregator
-    EDIT_COLUMNS = %i[name priority currency_iso_code income_enabled outcome_enabled icon_url commission minimal_income_amount minimal_outcome_amount maximal_income_amount maximal_outcome_amount bestchange_key reserves_delta_amount]
+    EDIT_COLUMNS = %i[name priority currency_iso_code is_available income_enabled outcome_enabled icon_url commission minimal_income_amount minimal_outcome_amount maximal_income_amount maximal_outcome_amount bestchange_key reserves_delta]
 
     def index
     end

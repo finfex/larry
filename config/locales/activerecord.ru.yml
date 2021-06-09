@@ -27,9 +27,17 @@ ru:
     maximal_outcome_amount: Максимальная сумма на выплату
     reserves_delta_amount: Дельта резервов
     reservers_aggregator: Агрегатор по резервам
+    payment_system: Платежная система
+    currency: Валюта
+    details: Описание
+    available_amount: Доступный баланс
+    locked_amount: Заблокировано
+    total_amount: Всего на счету
+    is_available: Доступно
 
   activerecord:
     models:
+      wallet: Кошельки
       currency: Валюты
       gera/payment_system: Платежные системы
       order:

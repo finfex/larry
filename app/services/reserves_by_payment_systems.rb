@@ -41,7 +41,7 @@ class ReservesByPaymentSystems
   end
 
   def build_delta
-    Gera::PaymentSystem.all.each_with_object({}) { |ps, a| a[ps.id] = ps.reserves_delta_amount }
+    Gera::PaymentSystem.all.each_with_object({}) { |ps, a| a[ps.id] = ps.reserves_delta }
   end
 
   def build_final_reserves

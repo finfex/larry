@@ -3,16 +3,16 @@
 # frozen_string_literal: true
 
 class ApplicationDecorator < Draper::Decorator
-  TEXT_RIGHT = %i[debit balance credit amount locked total price available_amount locked_amount total_amount].freeze
+  TEXT_RIGHT = %i[debit balance credit locked total price reserves_delta].freeze
 
   delegate :current_user, :humanized_money_with_currency, to: :h
 
   def self.table_columns
-    object_class.attribute_names.map(&:to_sym)
+    object_class.attribute_names.map { |c| c.gsub(/_cents$/,'').to_sym }
   end
 
   def self.table_th_class(column)
-    return 'text-right' if TEXT_RIGHT.include? column
+    return 'text-right' if TEXT_RIGHT.include?(column) || column.to_s.ends_with?('amount')
   end
 
   def self.table_td_class(column)
