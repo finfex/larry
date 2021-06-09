@@ -1,10 +1,10 @@
 .mb-2
-  = link_to t('.currencies') + ' &rarr;'.html_safe, operator_currencies_path
+  = link_to (Currency.model_name.human + ' &rarr;').html_safe, operator_currencies_path
 .float-right= link_to t('.create_payment_system'), new_operator_payment_system_path, class: 'btn btn-success' if current_admin_user.has_permission?(Gera::PaymentSystem, :create)
-h1= t('.alive_payment_systems')
+h1= t('gera.alive_payment_systems')
 .clearfix
 .mt-2
   = render 'table', items: PaymentSystemDecorator.decorate(PaymentSystem.alive.ordered)
-h1= t('.archived_payment_systems')
+h1= t('gera.archived_payment_systems')
 .mt-2
   = render 'table', items: PaymentSystemDecorator.decorate(PaymentSystem.archive.ordered)

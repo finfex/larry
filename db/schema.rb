@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_09_085949) do
+ActiveRecord::Schema.define(version: 2021_06_09_100430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -217,9 +217,12 @@ ActiveRecord::Schema.define(version: 2021_06_09_085949) do
     t.decimal "minimal_outcome_amount_cents"
     t.decimal "maximal_outcome_amount_cents"
     t.string "bestchange_key", null: false
+    t.decimal "reserves_delta_cents", default: "0.0", null: false
+    t.uuid "reserves_aggregator_id"
     t.index ["bestchange_key"], name: "index_gera_payment_systems_on_bestchange_key", unique: true
     t.index ["income_enabled"], name: "index_payment_systems_on_income_enabled"
     t.index ["outcome_enabled"], name: "index_payment_systems_on_outcome_enabled"
+    t.index ["reserves_aggregator_id"], name: "index_gera_payment_systems_on_reserves_aggregator_id"
   end
 
   create_table "gera_rate_sources", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -318,11 +321,38 @@ ActiveRecord::Schema.define(version: 2021_06_09_085949) do
     t.uuid "outcome_payment_system_id", null: false
     t.uuid "direction_rate_id"
     t.json "direction_rate_dump", null: false
+    t.decimal "rate_value", null: false
+    t.decimal "base_rate_value", null: false
+    t.decimal "rate_percent", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "rate_calculation_id", null: false
     t.index ["direction_rate_id"], name: "index_orders_on_direction_rate_id"
     t.index ["income_payment_system_id"], name: "index_orders_on_income_payment_system_id"
     t.index ["outcome_payment_system_id"], name: "index_orders_on_outcome_payment_system_id"
+    t.index ["rate_calculation_id"], name: "index_orders_on_rate_calculation_id"
+  end
+
+  create_table "rate_calculations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.decimal "income_amount_cents", default: "0.0", null: false
+    t.string "income_amount_currency", default: "USD", null: false
+    t.decimal "outcome_amount_cents", default: "0.0", null: false
+    t.string "outcome_amount_currency", default: "USD", null: false
+    t.uuid "direction_rate_id", null: false
+    t.integer "direction", default: 0, null: false
+    t.decimal "suggested_income_amount_cents"
+    t.boolean "require_reserves", default: false
+    t.boolean "invalid_maximal_income_requirements", default: false
+    t.boolean "invalid_minimal_income_requirements", default: false
+    t.decimal "maximal_income_amount_cents"
+    t.decimal "minimal_income_amount_cents"
+    t.decimal "rate_value", null: false
+    t.decimal "base_rate_value", null: false
+    t.decimal "rate_percent", null: false
+    t.json "direction_rate_dump", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["direction_rate_id"], name: "index_rate_calculations_on_direction_rate_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -387,6 +417,7 @@ ActiveRecord::Schema.define(version: 2021_06_09_085949) do
   add_foreign_key "gera_exchange_rates", "gera_payment_systems", column: "outcome_payment_system_id", on_delete: :cascade
   add_foreign_key "gera_external_rates", "gera_external_rate_snapshots", column: "snapshot_id", on_delete: :cascade
   add_foreign_key "gera_external_rates", "gera_rate_sources", column: "source_id", on_delete: :cascade
+  add_foreign_key "gera_payment_systems", "gera_payment_systems", column: "reserves_aggregator_id"
   add_foreign_key "openbill_accounts", "openbill_categories", column: "category_id", name: "openbill_accounts_category_id_fkey", on_delete: :restrict
   add_foreign_key "openbill_categories", "openbill_categories", column: "parent_id", name: "openbill_categories_parent_id_fkey", on_delete: :restrict
   add_foreign_key "openbill_invoices", "openbill_accounts", column: "destination_account_id", name: "openbill_invoices_destination_account_id_fkey", on_delete: :restrict
@@ -401,6 +432,7 @@ ActiveRecord::Schema.define(version: 2021_06_09_085949) do
   add_foreign_key "orders", "gera_direction_rates", column: "direction_rate_id"
   add_foreign_key "orders", "gera_payment_systems", column: "income_payment_system_id"
   add_foreign_key "orders", "gera_payment_systems", column: "outcome_payment_system_id"
+  add_foreign_key "rate_calculations", "gera_direction_rates", column: "direction_rate_id"
   add_foreign_key "wallet_activities", "openbill_accounts", column: "opposit_account_id"
   add_foreign_key "wallet_activities", "wallets"
   add_foreign_key "wallets", "gera_payment_systems", column: "payment_system_id"

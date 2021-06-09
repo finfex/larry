@@ -9,6 +9,9 @@ class CreateOrders < ActiveRecord::Migration[6.1]
       t.references :outcome_payment_system, null: false, foreign_key: { to_table: :gera_payment_systems }, type: :uuid
       t.references :direction_rate, null: true, foreign_key: { to_table: :gera_direction_rates }, type: :uuid
       t.json :direction_rate_dump, null: false
+      t.decimal "rate_value", null: false
+      t.decimal "base_rate_value", null: false
+      t.decimal "rate_percent", null: false
 
       t.timestamps
     end

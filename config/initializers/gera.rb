@@ -53,7 +53,7 @@ Rails.application.config.to_prepare do
     PaymentSystem.include PaymentSystemConcern
     # PaymentSystem.include PaymentSystemIndexDefaultConcern
 
-    # DirectionRate.include DirectionRateConcern
+    DirectionRate.include DirectionRateConcern
 
     # Direction.include DirectionConcern
 

@@ -3,8 +3,15 @@ ru:
   currency_rate: Базовый курс
   calculation: Расчёт
   gera:
+    alive_payment_systems: Доступные платежные системы
+    archived_payment_systems: Архив
+    alive_currency: Действующие валюты
+    archived_currency: Архив
+
     links:
       direction_rates: Конечные курсы
+      payment_systems: Платежные системы
+      currencies: Валюты
     application:
       attributes_table:
         sell_for: "Продадим 1 %{cur_to} за %{value} %{cur_from}"
@@ -24,6 +31,3 @@ ru:
     currency_rates:
       currency_rate:
         currency_rate: 'Currency Rate %{title}'
-    payment_systems:
-      show: 
-        payment_systems: '&larr; Платежные системы'

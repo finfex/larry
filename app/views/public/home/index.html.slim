@@ -3,6 +3,7 @@
     = f.input :income_payment_system_id, as: :hidden
     = f.input :outcome_payment_system_id, as: :hidden
     = f.input :direction_rate_id, as: :hidden
+    = f.input :rate_calculation_id, as: :hidden
     .row
       .col-md-4
         h2 1. Отдаёте
@@ -25,6 +26,10 @@
       = render 'payment_systems', payment_systems: outcome_payment_systems, param_name: :cur_to, active_ps: outcome_payment_system do |ps|
         = present_payment_system ps
         - direction = Gera::Direction.new(ps_from: income_payment_system, ps_to: ps).freeze
-        .float-right.text-small= humanized_money_with_currency direction.direction_rate.exchange(income_amount)
+        .float-right.text-small
+          - if direction.nil? || direction.direction_rate.nil?
+            | Нет обмена
+          - else
+            = humanized_money_with_currency direction.direction_rate.exchange(income_amount)
 
     .col-md-4

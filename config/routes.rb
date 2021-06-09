@@ -26,7 +26,8 @@ Rails.application.routes.draw do
       mount Sidekiq::Web => 'sidekiq'
       scope as: :operator do
         scope module: :operator do
-          root to: 'dashboard#index'
+          root to: 'orders#index'
+          resources :orders, only: [:index, :show]
           resources :wallets do
             concerns :archivable
           end

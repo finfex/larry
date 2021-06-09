@@ -5,7 +5,7 @@
 # Service to observe payment systems reservers
 class ReservesByPaymentSystems
   class << self
-    delegate :order_reservations, :wallets_balances, :final_reserves, :get_reserve_by_payment_system_id, :delta,
+    delegate :order_reservations, :wallet_available_balances, :final_reserves, :get_reserve_by_payment_system_id, :delta,
              to: :instance
 
     def instance
@@ -13,17 +13,13 @@ class ReservesByPaymentSystems
     end
   end
 
-  # Reserves for main page
-  #
-  def order_reservations
-    # TODO: Substract amounts of current orders
-    # order_reservation.amount = order.transfer_fee + payment system fee
-    # Order.where(status1: :open).group(:id_ps2).sum(:transfer_fee)
-    @order_reservations ||= OrderReservation.joins(:wallet_to).group(:id_ps).sum(:amount)
-  end
+  #def order_reservations
+    #@order_reservations ||= OrderReservation.joins(:wallet_to).group(:id_ps).sum(:amount)
+  #end
 
-  def wallets_balances
-    @wallets_balances ||= Wallet.alive.group('id_ps').sum(:balance)
+  # Returns balances in cents
+  def wallet_available_balances
+    @wallet_available_balances ||= Wallet.alive.joins(:available_account).group(:payment_system_id).sum(:amount_cents)
   end
 
   def final_reserves
@@ -52,7 +48,7 @@ class ReservesByPaymentSystems
     fr = {}
 
     ids.each do |id|
-      value = wallets_balances[id].to_f - order_reservations[id].to_f
+      value = wallet_available_balances[id].to_f
       value += delta[id].to_f
       value = 0 if value.negative?
       fr[id] = value

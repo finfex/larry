@@ -22,7 +22,9 @@ module Public
     end
 
     def order_params
-      params.require(:order).permit(:income_payment_system_id, :outcome_payment_system_id, :income_amount, :outcome_amount, :direction_rate_id)
+      params.
+        require(:order).
+        permit(:income_payment_system_id, :outcome_payment_system_id, :income_amount, :outcome_amount, :direction_rate_id, :rate_calculation_id)
     end
   end
 end

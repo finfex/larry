@@ -1,0 +1,2 @@
+class OrderDecorator < ApplicationDecorator
+end

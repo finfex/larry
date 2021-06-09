@@ -1,0 +1,16 @@
+.container
+  - orders.each do |order|
+    .card.mb-4
+      .card-header
+        = l order.created_at
+      .card-body
+        .row
+          .col-md-4
+            = present_payment_system order.income_payment_system
+          .col-md-4
+            = humanized_money_with_currency order.income_amount
+        .row
+          .col-md-4
+            = present_payment_system order.outcome_payment_system
+          .col-md-4
+            = humanized_money_with_currency order.outcome_amount

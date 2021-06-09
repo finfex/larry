@@ -1,9 +1,9 @@
 .mb-2
-  = link_to '&larr; '.html_safe + t('.payment_systems'), operator_payment_systems_path
+  = link_to '&larr; '.html_safe + PaymentSystem.model_name.human, operator_payment_systems_path
 .row
   .col-md-6
-    h1= t '.alive_currency'
+    h1= t 'gera.alive_currency'
     = render 'currencies', currencies: Currency.alive
   .col-md-6
-    h1= t '.archived_currency'
+    h1= t 'gera.archived_currency'
     = render 'currencies', currencies: Currency.archive

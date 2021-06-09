@@ -1,9 +1,10 @@
-= link_to '&larr; назад в список платежных систем'.html_safe, payment_systems_path
+= link_to '&larr; назад в список платежных систем'.html_safe, operator_payment_systems_path
+hr
 .page-header
   h2 Создаем новую платежную ситсему
 
 .row
   .col-md-6
-    = render 'form', payment_system: payment_system, columns: columns
+    = render 'form', payment_system: payment_system, columns: edit_columns
   .col-md-6
     .alert.alert-info Сохраните форму, чтобы иметь возможность редактировать банки карт заршеренные к приему

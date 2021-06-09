@@ -6,7 +6,7 @@ module Public
   class HomeController < ApplicationController
     helper Gera::ApplicationHelper
 
-    helper_method :income_payment_system, :outcome_payment_system, :income_payment_systems, :outcome_payment_systems, :income_amount, :direction
+    helper_method :income_payment_system, :outcome_payment_system, :income_payment_systems, :outcome_payment_systems, :income_amount, :direction, :direction_rate
 
     def index
       render locals: { order: build_order }
@@ -21,11 +21,16 @@ module Public
     def build_order
       Order.new(
         income_amount: income_amount,
-        outcome_amount: direction.direction_rate.exchange(income_amount),
+        outcome_amount: direction_rate.exchange(income_amount),
         income_payment_system: income_payment_system,
         outcome_payment_system: outcome_payment_system,
-        direction_rate: direction.direction_rate
+        direction_rate: direction_rate,
+        rate_calculation: RateCalculation.create_from_income!(direction_rate: direction_rate, income_amount: income_amount)
       )
+    end
+
+    def direction_rate
+      @direction_rate ||= direction.direction_rate
     end
 
     def income_amount

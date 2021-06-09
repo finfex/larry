@@ -14,9 +14,24 @@ ru:
     external_rate: Курс источника
     tooltip: Подсказка
     metadata: meta
+    name: Наименование
+    priority: Позиция
+    currency_iso_code: Валюта
+    income_enabled: Разрешается приём
+    outcome_enabled: Разрешается выплата
+    icon_url: Ссылка на иконку
+    commission: Комиссия
+    minimal_income_amount: Минимальная сумма на приём
+    minimal_outcome_amount: Минимальная сумма на выплату
+    maximal_income_amount: Максимальная сумма на приём
+    maximal_outcome_amount: Максимальная сумма на выплату
+    reserves_delta_amount: Дельта резервов
+    reservers_aggregator: Агрегатор по резервам
 
   activerecord:
     models:
+      currency: Валюты
+      gera/payment_system: Платежные системы
       order:
         one: Заказ
         few: Заказы
