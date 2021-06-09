@@ -3,6 +3,8 @@ ru:
   currency_rate: Базовый курс
   calculation: Расчёт
   gera:
+    links:
+      direction_rates: Конечные курсы
     application:
       attributes_table:
         sell_for: "Продадим 1 %{cur_to} за %{value} %{cur_from}"
