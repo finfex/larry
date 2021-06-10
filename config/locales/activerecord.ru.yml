@@ -55,6 +55,7 @@ ru:
     attributes:
       gera/exchange_rate:
         value: Курс
+        is_enabled: Разрешён обмен
       nomenclature_in_stock_cell:
         in_stock_quantity: В Наличии
         to_selection_quantity: К Отбору
