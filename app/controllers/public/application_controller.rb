@@ -5,5 +5,9 @@
 module Public
   class ApplicationController < ApplicationController
     layout 'public'
+
+    before_action do
+      @container = :fixed
+    end
   end
 end
