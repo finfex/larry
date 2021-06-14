@@ -11,8 +11,10 @@ class ReservesByCurrencies
                           .joins(:available_account)
                           .group(:amount_currency)
                           .sum(:amount_cents)
-                          .map { |k, v| c = Money::Currency.find(k); [c, Money.new(v, c)] }
-                          .to_h
+                          .map do |k, v|
+      c = Money::Currency.find(k)
+      [c, Money.new(v, c)]
+    end.to_h
   end
 
   def final_reserves

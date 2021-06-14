@@ -17,7 +17,7 @@ module Operator
     end
 
     def resource
-      @currency ||= Currency.find params[:id]
+      @resource ||= Currency.find params[:id]
     end
   end
 end

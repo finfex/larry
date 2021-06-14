@@ -2,6 +2,8 @@
 
 # frozen_string_literal: true
 
+# Переодически очищает не актуальные расчеты курсов для заявок
+#
 class PurgeRateCalculationsWorker
   KEEP_PERIOD = 1.week
 

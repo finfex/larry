@@ -22,8 +22,8 @@ module ApplicationHelper
     end
   end
 
-  def present_payment_system(ps)
-    ps_icon ps
+  def present_payment_system(payment_system)
+    ps_icon payment_system
   end
 
   def namespace

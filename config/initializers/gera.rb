@@ -2,7 +2,6 @@
 
 # frozen_string_literal: true
 
-# rubocop:disable Style/AsciiComments
 # rubocop:disable Lint/ConstantDefinitionInBlock
 #
 Gera.configure do |config|
@@ -78,5 +77,4 @@ end
 ##
 ## Хороший пример: https://simonecarletti.com/blog/2011/04/understanding-ruby-and-rails-lazy-load-hooks/
 ##
-# rubocop:enable Style/AsciiComments
 # rubocop:enable Lint/ConstantDefinitionInBlock

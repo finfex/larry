@@ -30,7 +30,7 @@ module Operator
     def update
       resource.update! payment_system_params
       redirect_to operator_payment_system_path(resource), notice: 'Изменения приняты'
-    rescue ActiveRecord::RecordInvalid => e
+    rescue ActiveRecord::RecordInvalid
       edit
     end
 
@@ -38,7 +38,7 @@ module Operator
       @resource = PaymentSystem.new payment_system_params
       resource.save!
       redirect_to operator_payment_system_path(resource), notice: 'Платежная система создана'
-    rescue ActiveRecord::RecordInvalid => e
+    rescue ActiveRecord::RecordInvalid
       new
     end
 

@@ -21,27 +21,35 @@ module Public
     end
 
     def direction
-      direction = Gera::Direction.new(ps_from: income_payment_system, ps_to: outcome_payment_system).freeze
+      Gera::Direction.new(ps_from: income_payment_system, ps_to: outcome_payment_system).freeze
     end
 
     def build_order
       if direction_rate.present?
-        Order.new(
-          income_amount: income_amount,
-          income_payment_system: income_payment_system,
-          outcome_payment_system: outcome_payment_system,
-          outcome_amount: direction_rate.exchange(income_amount),
-          direction_rate: direction_rate,
-          rate_calculation: RateCalculation.create_from_income!(direction_rate: direction_rate, income_amount: income_amount)
-        )
+        build_order_with_direction_rate
       else
-        Order.new(
-          income_amount: income_amount,
-          income_payment_system: income_payment_system,
-          outcome_payment_system: outcome_payment_system,
-          outcome_amount: outcome_payment_system.currency.zero_money
-        )
+        build_order_without_direction_rate
       end
+    end
+
+    def build_order_without_direction_rate
+      Order.new(
+        income_amount: income_amount,
+        income_payment_system: income_payment_system,
+        outcome_payment_system: outcome_payment_system,
+        outcome_amount: outcome_payment_system.currency.zero_money
+      )
+    end
+
+    def build_order_with_direction_rate
+      Order.new(
+        income_amount: income_amount,
+        income_payment_system: income_payment_system,
+        outcome_payment_system: outcome_payment_system,
+        outcome_amount: direction_rate.exchange(income_amount),
+        direction_rate: direction_rate,
+        rate_calculation: RateCalculation.create_from_income!(direction_rate: direction_rate, income_amount: income_amount)
+      )
     end
 
     def direction_rate
