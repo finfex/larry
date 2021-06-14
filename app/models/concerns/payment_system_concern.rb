@@ -6,7 +6,7 @@ module PaymentSystemConcern
   extend ActiveSupport::Concern
   included do
     has_many :wallets
-    scope :by_currency, -> (currency)  { where(currency_iso_code: currency.iso_code) }
+    scope :by_currency, ->(currency) { where(currency_iso_code: currency.iso_code) }
 
     belongs_to :reservers_aggregator, class_name: 'Gera::PaymentSystem', optional: true
 
@@ -27,8 +27,8 @@ module PaymentSystemConcern
 
   def archive!
     super
-    # TODO Stop if there are active orders
-    wallets.find_each &:archive!
+    # TODO: Stop if there are active orders
+    wallets.find_each(&:archive!)
   end
 
   def storno_account

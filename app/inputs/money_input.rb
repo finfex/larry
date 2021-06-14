@@ -7,7 +7,7 @@ class MoneyInput < SimpleForm::Inputs::StringInput
     value = object.send attribute_name
     input_options[:wrapper] = :input_group
     input_options[:append] = value.currency
-    input_html_options[:type]=:string
+    input_html_options[:type] = :string
 
     merged_input_options = merge_wrapper_options(input_html_options, wrapper_options)
     merged_input_options[:class] << 'text-right'

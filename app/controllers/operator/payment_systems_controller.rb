@@ -1,14 +1,18 @@
+# frozen_string_literal: true
+
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 module Operator
   class PaymentSystemsController < ApplicationController
     include ArchivableActions
 
     authorize_actions_for PaymentSystem
 
-    # TODO наладить smart_input и добавить reservers_aggregator
-    EDIT_COLUMNS = %i[name priority currency_iso_code is_available income_enabled outcome_enabled icon_url commission minimal_income_amount minimal_outcome_amount maximal_income_amount maximal_outcome_amount bestchange_key reserves_delta]
+    # TODO: наладить smart_input и добавить reservers_aggregator
+    EDIT_COLUMNS = %i[name priority currency_iso_code is_available income_enabled outcome_enabled icon_url commission minimal_income_amount
+                      minimal_outcome_amount maximal_income_amount maximal_outcome_amount bestchange_key reserves_delta].freeze
 
-    def index
-    end
+    def index; end
 
     def new
       @resource ||= PaymentSystem.new
@@ -25,16 +29,16 @@ module Operator
 
     def update
       resource.update! payment_system_params
-      redirect_to operator_payment_system_path(resource), notice: "Изменения приняты"
-    rescue ActiveRecord::RecordInvalid  => error
+      redirect_to operator_payment_system_path(resource), notice: 'Изменения приняты'
+    rescue ActiveRecord::RecordInvalid => e
       edit
     end
 
     def create
       @resource = PaymentSystem.new payment_system_params
       resource.save!
-      redirect_to operator_payment_system_path(resource), notice: "Платежная система создана"
-    rescue ActiveRecord::RecordInvalid => error
+      redirect_to operator_payment_system_path(resource), notice: 'Платежная система создана'
+    rescue ActiveRecord::RecordInvalid => e
       new
     end
 

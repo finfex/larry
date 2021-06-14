@@ -40,7 +40,7 @@ module ApplicationHelper
   end
 
   # TODO: show icon of payment system
-  def ps_icon(payment_system, options = {})
+  def ps_icon(payment_system, _options = {})
     payment_system.to_s
   end
 
@@ -50,7 +50,7 @@ module ApplicationHelper
 
   REPLACE_ICONS = {
     'ios-close-empty' => 'ios-close'
-  }
+  }.freeze
 
   def ion_icon(icon, css_class: nil, text: nil, title: nil)
     icon = REPLACE_ICONS.fetch(icon, icon)

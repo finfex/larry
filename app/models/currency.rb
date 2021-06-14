@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 class Currency < ApplicationRecord
   include Archivable
   include Authority::Abilities
@@ -17,6 +21,6 @@ class Currency < ApplicationRecord
 
   def archive!
     super
-    payment_systems.alive.find_each &:archive!
+    payment_systems.alive.find_each(&:archive!)
   end
 end

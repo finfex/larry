@@ -8,5 +8,4 @@ class CurrencyDecorator < ApplicationDecorator
   def self.table_columns
     %i[iso_code]
   end
-
 end

@@ -27,7 +27,7 @@ Rails.application.routes.draw do
       scope as: :operator do
         scope module: :operator do
           root to: 'orders#index'
-          resources :orders, only: [:index, :show]
+          resources :orders, only: %i[index show]
           resources :wallets do
             concerns :archivable
           end

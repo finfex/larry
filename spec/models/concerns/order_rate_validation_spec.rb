@@ -1,3 +1,5 @@
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 # frozen_string_literal: true
 
 require 'rails_helper'
@@ -13,7 +15,9 @@ describe OrderRateValidation do
       create(:exchange_rate, outcome_payment_system: outcome_payment_system, income_payment_system: income_payment_system, is_enabled: true)
   end
   let(:direction_rate)          { create :direction_rate, exchange_rate: exchange_rate }
-  let(:rate_calculation)        { RateCalculation.create_from_income! direction_rate: direction_rate, income_money: Money.from_amount(income_amount, income_currency) }
+  let(:rate_calculation)        do
+    RateCalculation.create_from_income! direction_rate: direction_rate, income_money: Money.from_amount(income_amount, income_currency)
+  end
   let(:wallet_balance)          { 100 }
   let(:outcome_account)         { '' }
   let(:income_account)          { 'P39219692' }
@@ -26,7 +30,10 @@ describe OrderRateValidation do
     allow_any_instance_of(Gera::PaymentSystem).to receive(:has_enough_reserves?).and_return true
   end
 
-  subject { build :preliminary_order, rate_calculation: rate_calculation, income_account: income_account, direction_rate: direction_rate, income_amount: income_amount, outcome_amount: outcome_amount, outcome_account: outcome_account }
+  subject do
+    build :preliminary_order, rate_calculation: rate_calculation, income_account: income_account, direction_rate: direction_rate, income_amount: income_amount,
+                              outcome_amount: outcome_amount, outcome_account: outcome_account
+  end
 
   let(:direction_rate) { create :direction_rate, exchange_rate: exchange_rate, finite_rate: finite_rate, base_rate_value: 1, rate_percent: 1 }
 

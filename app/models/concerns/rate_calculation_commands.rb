@@ -1,3 +1,5 @@
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 # frozen_string_literal: true
 
 module RateCalculationCommands
@@ -15,7 +17,10 @@ module RateCalculationCommands
     suggested_income_amount = direction_rate.reverse_exchange attrs[:outcome_amount]
 
     # Если есть более выгодный обмен, предлагаем клиенту
-    attrs[:suggested_income_amount] = suggested_income_amount if income_amount.to_d.positive? && (income_amount.to_d - suggested_income_amount.to_d).as_percentage_of(income_amount.to_d) > MAX_INCOME_DIFF_TO_SUGGEST
+    if income_amount.to_d.positive? && (income_amount.to_d - suggested_income_amount.to_d).as_percentage_of(income_amount.to_d) > MAX_INCOME_DIFF_TO_SUGGEST
+      attrs[:suggested_income_amount] =
+        suggested_income_amount
+    end
 
     create! attrs
   end

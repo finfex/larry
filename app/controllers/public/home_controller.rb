@@ -7,7 +7,8 @@ module Public
     helper Gera::ApplicationHelper
     helper Gera::DirectionRateHelper
 
-    helper_method :income_payment_system, :outcome_payment_system, :income_payment_systems, :outcome_payment_systems, :income_amount, :direction, :direction_rate, :final_reserves
+    helper_method :income_payment_system, :outcome_payment_system, :income_payment_systems, :outcome_payment_systems, :income_amount, :direction,
+                  :direction_rate, :final_reserves
 
     def index
       render locals: { order: build_order }

@@ -13,9 +13,9 @@ class ReservesByPaymentSystems
     end
   end
 
-  #def order_reservations
-    #@order_reservations ||= OrderReservation.joins(:wallet_to).group(:id_ps).sum(:amount)
-  #end
+  # def order_reservations
+  # @order_reservations ||= OrderReservation.joins(:wallet_to).group(:id_ps).sum(:amount)
+  # end
 
   # Returns balances in cents
   def wallet_available_balances

@@ -1,3 +1,5 @@
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 # frozen_string_literal: true
 
 require 'rails_helper'
@@ -20,7 +22,7 @@ describe OrderSaveUserWallets do
       expect { save_wallets }.to change(UserWallet, :count).from(0).to(2)
     end
 
-    context "when order has no user accounts" do
+    context 'when order has no user accounts' do
       let(:order) { build :order }
 
       it 'do nothing' do

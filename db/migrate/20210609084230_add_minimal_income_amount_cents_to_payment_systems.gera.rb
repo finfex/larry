@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 # This migration comes from gera (originally 20210609083541)
 class AddMinimalIncomeAmountCentsToPaymentSystems < ActiveRecord::Migration[5.2]
   def change

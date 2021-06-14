@@ -1,9 +1,11 @@
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 # frozen_string_literal: true
 
 class PaymentSystemDecorator < ApplicationDecorator
   delegate_all
 
-  MONEY_COLUMNS = %i[minimal_outcome_amount minimal_income_amount maximal_outcome_amount maximal_income_amount reserves_delta]
+  MONEY_COLUMNS = %i[minimal_outcome_amount minimal_income_amount maximal_outcome_amount maximal_income_amount reserves_delta].freeze
 
   MONEY_COLUMNS.each do |method|
     define_method method do

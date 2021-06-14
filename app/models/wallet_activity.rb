@@ -9,9 +9,9 @@ class WalletActivity < ApplicationRecord
   belongs_to :admin_user
 
   monetize :amount_cents,
-    as: :amount,
-    with_model_currency: :currency,
-    numericality: { greater_than: 0 }
+           as: :amount,
+           with_model_currency: :currency,
+           numericality: { greater_than: 0 }
 
   validates :details, presence: true
   validates :amount, presence: true

@@ -22,6 +22,7 @@ module Operator
       redirect_to operator_wallet_path(wallet), notice: t('.created')
     rescue ActiveRecord::RecordInvalid => e
       raise e unless e.record.is_a? WalletActivity
+
       render 'operator/wallets/show', locals: { wallet: wallet, wallet_activity: e.record }
     end
   end
