@@ -46,11 +46,12 @@
                                          PUT      /currencies/:id(.:format)                                                                         operator/currencies#update {:subdomain=>"operator"}
                                          DELETE   /currencies/:id(.:format)                                                                         operator/currencies#destroy {:subdomain=>"operator"}
                                          GET|POST /*anything(.:format)                                                                              application#not_found {:subdomain=>"operator"}
-                             public_root GET      /                                                                                                 public/home#index {:subdomain=>""}
+                             public_root GET      /                                                                                                 public/orders#new {:subdomain=>""}
                             public_pages GET      /pages(.:format)                                                                                  public/pages#index {:subdomain=>""}
                              public_page GET      /pages/:id(.:format)                                                                              public/pages#show {:subdomain=>""}
                            public_orders POST     /orders(.:format)                                                                                 public/orders#create {:subdomain=>""}
                             public_order GET      /orders/:id(.:format)                                                                             public/orders#show {:subdomain=>""}
+                public_rate_calculations POST     /rate_calculations(.:format)                                                                      public/rate_calculations#create {:subdomain=>""}
                                          GET|POST /*anything(.:format)                                                                              application#not_found
            rails_postmark_inbound_emails POST     /rails/action_mailbox/postmark/inbound_emails(.:format)                                           action_mailbox/ingresses/postmark/inbound_emails#create
               rails_relay_inbound_emails POST     /rails/action_mailbox/relay/inbound_emails(.:format)                                              action_mailbox/ingresses/relay/inbound_emails#create
@@ -104,7 +105,10 @@ Routes for Gera::Engine:
                       external_rates GET    /external_rates(.:format)                            gera/external_rates#index
                        external_rate GET    /external_rates/:id(.:format)                        gera/external_rates#show
                details_exchange_rate GET    /exchange_rates/:id/details(.:format)                gera/exchange_rates#details
+                      exchange_rates GET    /exchange_rates(.:format)                            gera/exchange_rates#index
                        exchange_rate GET    /exchange_rates/:id(.:format)                        gera/exchange_rates#show
+                                     PATCH  /exchange_rates/:id(.:format)                        gera/exchange_rates#update
+                                     PUT    /exchange_rates/:id(.:format)                        gera/exchange_rates#update
              external_rate_snapshots GET    /external_rate_snapshots(.:format)                   gera/external_rate_snapshots#index
               external_rate_snapshot GET    /external_rate_snapshots/:id(.:format)               gera/external_rate_snapshots#show
                       currency_rates GET    /currency_rates(.:format)                            gera/currency_rates#index

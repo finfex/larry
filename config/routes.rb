@@ -49,6 +49,9 @@ Rails.application.routes.draw do
       root to: 'orders#new'
       resources :pages, only: %i[index show]
       resources :orders, only: %i[create show]
+      constraints ->(request) { request.xhr? } do
+        resources :rate_calculations, only: %i[create]
+      end
     end
   end
 
