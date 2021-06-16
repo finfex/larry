@@ -7,6 +7,7 @@ module Public
     helper Gera::ApplicationHelper
     helper Gera::DirectionRateHelper
 
+    # rubocop:disable Metrics/AbcSize
     def new
       income_payment_system = income_payment_systems.find_by(id: params[:cur_from]) if params[:cur_from]
       income_payment_system ||= income_payment_systems.first
@@ -31,6 +32,7 @@ module Public
 
       render locals: { order: rate_calculation.build_order, rate_calculation: rate_calculation }
     end
+    # rubocop:enable Metrics/AbcSize
 
     def create
       direction_rate = Gera::DirectionRate.find order_params.fetch(:direction_rate_id)

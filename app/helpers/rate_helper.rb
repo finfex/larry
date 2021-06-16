@@ -51,7 +51,7 @@ module RateHelper
     }
   end
 
-  def rate_diff(rv1, rv2, _reverse = false)
+  def rate_diff(rv1, rv2)
     return rate_diff(1.0 / rv1, 1.0 / rv2, true) if rv1 < 1
 
     diff = rv2 - rv1
@@ -75,11 +75,11 @@ module RateHelper
   end
 
   # = '%.12f' % humanized_money rate.buy_money
-  def humanized_rate(rate, _currency = nil)
+  def humanized_rate(rate)
     rate = rate.to_f if rate.is_a? Gera::Rate
-    if rate.is_a? Money
-      raise 'Валюту отдавать запрещено, она округляет не удачно'
-    elsif rate < 1
+    raise 'Валюту отдавать запрещено, она округляет не удачно' if rate.is_a? Money
+
+    if rate < 1
       rate1 = format('%.3f', (1.0 / rate))
       "<span class=text-muted>1/</span>#{rate1}".html_safe
     else
@@ -89,7 +89,7 @@ module RateHelper
     end
   end
 
-  def humanized_rate_text(rate, _currency = nil)
+  def humanized_rate_text(rate)
     if rate < 1
       rate1 = format('%.3f', (1.0 / rate))
       "1/#{rate1}".html_safe
