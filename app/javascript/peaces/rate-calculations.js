@@ -7,6 +7,20 @@ const INCOME_AMOUNT='#order_income_amount'
 const OUTCOME_AMOUNT='#order_outcome_amount'
 const REQUEST_DIRECTION='#order_request_direction'
 
+const showErrors = (errors) => {
+  const list = $('#form_errors')
+  list.html('')
+  Object.values(errors).flat().forEach((element) => {
+    const d = document.createElement('li');
+    $(d)
+    .addClass(list.data('element-classes'))
+    .html(element)
+    .appendTo(list)
+  })
+
+  $(SUBMIT).attr('disabled', !jQuery.isEmptyObject(errors));
+}
+
 const sendRequest = () => {
   const id = uuidv4();
   window.current_rate_calculation_id = id;
@@ -28,6 +42,7 @@ const sendRequest = () => {
       } else {
         $(INCOME_AMOUNT).val(response.income_amount).parent().clearQueue().effect('bounce', 'fase');
       }
+      showErrors(response.errors)
     }
   };
 

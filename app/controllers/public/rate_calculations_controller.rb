@@ -19,6 +19,7 @@ module Public
                          end
 
       rate_calculation.id = params[:id]
+      rate_calculation.validate
       render json: present(rate_calculation)
     end
 

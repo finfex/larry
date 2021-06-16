@@ -1,5 +1,5 @@
-ul.list-group.mb-4
-  - order.errors.full_messages.each do |message|
-    li.list-group-item.list-group-item-danger= message
-  - rate_calculation.errors.full_messages.each do |message|
-    li.list-group-item.list-group-item-danger= message
+ul.list-group.mb-4#form_errors data-element-classes="list-group-item list-group-item-danger"
+  - order.errors.messages.values.flatten.each do |message|
+    li.list-group-item.list-group-item-danger= message.html_safe
+  - rate_calculation.errors.messages.values.flatten.each do |message|
+    li.list-group-item.list-group-item-danger= message.html_safe

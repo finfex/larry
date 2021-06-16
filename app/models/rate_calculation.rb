@@ -55,19 +55,19 @@ class RateCalculation
   def validate_minimal_income
     return unless income_amount < minimal_income_amount
 
-    errors.add :income_amount, "Минимальная допустима сумма для обмена в этом направлении #{minimal_income_amount}"
+    errors.add :income_amount, "Минимальная допустима сумма для обмена в этом направлении <span class='text-nowrap text-monospace'>#{minimal_income_amount.format}</span>"
   end
 
   def validate_maximal_income
     return unless maximal_income_amount.present? && income_amount > maximal_income_amount
 
-    errors.add :income_amount, "Максимальная допустима сумма для обмена в этом направлении #{maximal_income_amount}"
+    errors.add :income_amount, "Максимальная допустима сумма для обмена в этом направлении <span class='text-nowrap text-monospace'>#{maximal_income_amount.format}</span>"
   end
 
   def validate_reserves
     if outcome_amount > outcome_payment_system.reserve_amount
       self.require_reserving = true
-      errors.add :require_reserving, "Недостаточно резервов, есть всего #{outcome_payment_system.reserve_amount}"
+      errors.add :require_reserving, "Недостаточно резервов, есть всего <span class='text-nowrap text-monospace'>#{outcome_payment_system.reserve_amount.format}</span>"
     else
       self.require_reserving = false
     end
