@@ -7,6 +7,8 @@ module Public
     def create
       order = OrderCreator.call build_rate_calculation
       redirect_to public_order_path(order), notice: 'Принята заявка на обмен. Ждём от Вас оплаты.'
+    rescue OrderCreator::InvalidRateCalculation => e
+      render :humanized_error, locals: { error: error }, layout: 'simple'
     end
 
     def show

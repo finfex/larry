@@ -1,3 +1,5 @@
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 # frozen_string_literal: true
 
 module RateHelper
@@ -53,7 +55,7 @@ module RateHelper
     return rate_diff(1.0 / rv1, 1.0 / rv2, true) if rv1 < 1
 
     diff = rv2 - rv1
-    return 0 if diff.abs.round(3) == 0
+    return 0 if diff.abs.round(3).zero?
 
     p = 100 * diff / rv2
 

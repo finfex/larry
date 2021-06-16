@@ -9,13 +9,11 @@ class RateCalculationTest < ActiveSupport::TestCase
     @direction_rate = FactoryBot.create :gera_direction_rate
   end
 
-  def test_build_from_income
-    income_amount = Money.new(123, @direction_rate.income_currency)
-    rate_calculation = RateCalculation
-                       .new(direction_rate: @direction_rate)
-                       .build_from_income(income_amount)
+  def test_new
+    assert RateCalculation.new
+  end
 
-    assert_equal rate_calculation.request_direction, :from_income
-    assert_equal rate_calculation.outcome_amount, Money.new(6642, @direction_rate.outcome_currency)
+  def test_invalid
+    refute RateCalculation.new.valid?
   end
 end

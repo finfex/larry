@@ -8,22 +8,26 @@
 class RateCalculation
   DIRECTIONS = %i[from_income from_outcome].freeze
 
+  # include ActiveModel::Model
+  include ActiveModel::Validations
   include Virtus.model
 
   attribute :direction_rate, Gera::DirectionRate
   attribute :income_amount, Money
   attribute :outcome_amount, Money
-  attribute :invalid_maximal_income_requirements, Boolean, default: false
-  attribute :invalid_minimal_income_requirements, Boolean, default: false
-  attribute :require_reserving, Boolean, default: false
   attribute :suggested_income_amount, Money
-  attribute :minimal_income_amount, Money
-  attribute :maximal_income_amount, Money
+
+  attribute :require_reserving, Boolean, default: false
 
   # С какого направление пользователь спрашивает обмен с ввода или с вывода
   attribute :request_direction, Symbol
 
-  delegate :income_payment_system, :outcome_payment_system, to: :direction_rate
+  delegate :minimal_income_amount, :maximal_income_amount, :income_payment_system, :outcome_payment_system, to: :direction_rate, allow_nil: true
+
+  validates :direction_rate, presence: true
+  validate :validate_minimal_income, if: :direction_rate
+  validate :validate_maximal_income, if: :direction_rate
+  validate :validate_reserves, if: :outcome_payment_system
 
   def build_order
     Order.new(
@@ -41,39 +45,26 @@ class RateCalculation
     as_json
   end
 
-  def valid?
-    direction_rate.present? &&
-      !invalid_minimal_income_requirements &&
-      !invalid_maximal_income_requirements &&
-      !require_reserving
-  end
-
-  def validate
-    return self if direction_rate.nil?
-
-    validate_reserves
-    validate_minimal_income
-    validate_maximal_income
-    self
-  end
-
   private
 
   def validate_minimal_income
-    return unless income_amount < direction_rate.minimal_income_amount
+    return unless income_amount < minimal_income_amount
 
-    self.invalid_minimal_income_requirements = true
-    self.minimal_income_amount = direction_rate.minimal_income_amount
+    errors.add :income_amount, "Минимальная допустима сумма для обмена в этом направлении #{minimal_income_amount}"
   end
 
   def validate_maximal_income
-    return unless direction_rate.maximal_income_amount.present? && income_amount > direction_rate.maximal_income_amount
+    return unless maximal_income_amount.present? && income_amount > maximal_income_amount
 
-    self.invalid_maximal_income_requirements = true
-    self.maximal_income_amount = direction_rate.maximal_income_amount
+    errors.add :income_amount, "Максимальная допустима сумма для обмена в этом направлении #{maximal_income_amount}"
   end
 
   def validate_reserves
-    self.require_reserving = outcome_amount > outcome_payment_system.reserve_amount unless Rails.env.test?
+    if outcome_amount > outcome_payment_system.reserve_amount
+      self.require_reserving = true
+      errors.add :require_reserving, "Недостаточно резервов, есть всего #{outcome_payment_system.reserve_amount}"
+    else
+      self.require_reserving = false
+    end
   end
 end

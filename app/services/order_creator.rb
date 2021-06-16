@@ -10,14 +10,15 @@
 #
 class OrderCreator
   Error = Class.new StandardError
-  InvalidRateCalculation = Error.new
+  class InvalidRateCalculation < Error
+  end
 
   self.class.delegate :call, to: :new
 
   def call(rate_calculation)
     raise InvalidRateCalculation, rate_calculation unless rate_calculation.valid?
 
-    rate_calculation.build_order.tap { |o| o.save! }
+    rate_calculation.build_order.tap(&:save!)
   end
 
   private
