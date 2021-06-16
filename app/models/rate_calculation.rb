@@ -29,6 +29,10 @@ class RateCalculation
   validate :validate_maximal_income, if: :direction_rate
   validate :validate_reserves, if: :outcome_payment_system
 
+  def self.load(attrs)
+    new attrs
+  end
+
   def build_order
     Order.new(
       income_amount: income_amount,

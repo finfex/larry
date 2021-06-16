@@ -52,7 +52,7 @@ module Public
 
     private
 
-    def build_rate_calculation direction_rate, income_amount, outcome_amount, request_direction
+    def build_rate_calculation(direction_rate, income_amount, outcome_amount, request_direction)
       calculator = RateCalculator.new(direction_rate)
       request_direction.to_s == 'from_income' ? calculator.build_from_income(income_amount) : calculator.build_from_outcome(outcome_amount)
     end

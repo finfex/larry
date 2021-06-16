@@ -18,8 +18,6 @@ module Public
 
     private
 
-
-    def exchange_rate
-    end
+    def exchange_rate; end
   end
 end
