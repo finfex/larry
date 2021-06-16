@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_09_141254) do
+ActiveRecord::Schema.define(version: 2021_06_14_095342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -327,33 +327,11 @@ ActiveRecord::Schema.define(version: 2021_06_09_141254) do
     t.decimal "rate_percent", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.uuid "rate_calculation_id", null: false
+    t.jsonb "rate_calculation_dump", null: false
+    t.string "request_direction", null: false
     t.index ["direction_rate_id"], name: "index_orders_on_direction_rate_id"
     t.index ["income_payment_system_id"], name: "index_orders_on_income_payment_system_id"
     t.index ["outcome_payment_system_id"], name: "index_orders_on_outcome_payment_system_id"
-    t.index ["rate_calculation_id"], name: "index_orders_on_rate_calculation_id"
-  end
-
-  create_table "rate_calculations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.decimal "income_amount_cents", default: "0.0", null: false
-    t.string "income_amount_currency", default: "USD", null: false
-    t.decimal "outcome_amount_cents", default: "0.0", null: false
-    t.string "outcome_amount_currency", default: "USD", null: false
-    t.uuid "direction_rate_id", null: false
-    t.integer "direction", default: 0, null: false
-    t.decimal "suggested_income_amount_cents"
-    t.boolean "require_reserves", default: false
-    t.boolean "invalid_maximal_income_requirements", default: false
-    t.boolean "invalid_minimal_income_requirements", default: false
-    t.decimal "maximal_income_amount_cents"
-    t.decimal "minimal_income_amount_cents"
-    t.decimal "rate_value", null: false
-    t.decimal "base_rate_value", null: false
-    t.decimal "rate_percent", null: false
-    t.json "direction_rate_dump", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["direction_rate_id"], name: "index_rate_calculations_on_direction_rate_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -433,7 +411,6 @@ ActiveRecord::Schema.define(version: 2021_06_09_141254) do
   add_foreign_key "orders", "gera_direction_rates", column: "direction_rate_id"
   add_foreign_key "orders", "gera_payment_systems", column: "income_payment_system_id"
   add_foreign_key "orders", "gera_payment_systems", column: "outcome_payment_system_id"
-  add_foreign_key "rate_calculations", "gera_direction_rates", column: "direction_rate_id"
   add_foreign_key "wallet_activities", "openbill_accounts", column: "opposit_account_id"
   add_foreign_key "wallet_activities", "wallets"
   add_foreign_key "wallets", "gera_payment_systems", column: "payment_system_id"

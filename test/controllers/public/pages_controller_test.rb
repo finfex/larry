@@ -6,12 +6,12 @@ require 'test_helper'
 
 module Public
   class PagesControllerTest < ActionDispatch::IntegrationTest
-    test 'should get index' do
+    def test_index
       get public_pages_url
       assert_response :success
     end
 
-    test 'should get show' do
+    def test_show
       get public_page_url(:rules)
       assert_response :success
     end

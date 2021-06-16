@@ -7,11 +7,13 @@ module Public
     helper Gera::ApplicationHelper
     helper Gera::DirectionRateHelper
 
-    helper_method :income_payment_system, :outcome_payment_system, :income_payment_systems, :outcome_payment_systems, :income_amount, :direction,
-                  :direction_rate, :final_reserves
+    helper_method :income_payment_system, :outcome_payment_system,
+                  :income_payment_systems, :outcome_payment_systems,
+                  :income_amount,
+                  :direction, :direction_rate, :final_reserves
 
     def index
-      render locals: { order: build_order }
+      render locals: { order: rate_calculation.build_order, rate_calculation: rate_calculation }
     end
 
     private
@@ -20,36 +22,25 @@ module Public
       @final_reserves ||= ReservesByPaymentSystems.new.final_reserves
     end
 
+    def rate_calculation
+      @rate_calculation ||= RateCalculation.new(direction_rate: direction_rate).tap do |rc|
+        request_direction == :from_income ? rc.build_from_income(income_amount) : rc.build_from_outcome(outcome_amount)
+      end
+    end
+
+    def request_direction
+      rd = params.fetch(:request_direction, :from_income).to_sym
+      return rd if RateCalculation::DIRECTIONS.include?(rd)
+
+      :from_income
+    end
+
     def direction
       Gera::Direction.new(ps_from: income_payment_system, ps_to: outcome_payment_system).freeze
     end
 
-    def build_order
-      if direction_rate.present?
-        build_order_with_direction_rate
-      else
-        build_order_without_direction_rate
-      end
-    end
-
-    def build_order_without_direction_rate
-      Order.new(
-        income_amount: income_amount,
-        income_payment_system: income_payment_system,
-        outcome_payment_system: outcome_payment_system,
-        outcome_amount: outcome_payment_system.currency.zero_money
-      )
-    end
-
-    def build_order_with_direction_rate
-      Order.new(
-        income_amount: income_amount,
-        income_payment_system: income_payment_system,
-        outcome_payment_system: outcome_payment_system,
-        outcome_amount: direction_rate.exchange(income_amount),
-        direction_rate: direction_rate,
-        rate_calculation: RateCalculation.create_from_income!(direction_rate: direction_rate, income_amount: income_amount)
-      )
+    def outcome_amount
+      direction_rate.nil? ? outcome_payment_system.currency.zero_money : direction_rate.exchange(income_amount)
     end
 
     def direction_rate
@@ -57,7 +48,10 @@ module Public
     end
 
     def income_amount
-      @income_amount ||= [params[:income_amount].to_f.to_money(income_payment_system.currency), income_payment_system.minimal_income_amount].max
+      @income_amount ||= [
+        params[:income_amount].to_f.to_money(income_payment_system.currency),
+        income_payment_system.minimal_income_amount
+      ].max
     end
 
     def income_payment_systems

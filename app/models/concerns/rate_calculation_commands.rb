@@ -3,10 +3,9 @@
 # frozen_string_literal: true
 
 module RateCalculationCommands
-  # Максимально
-  MAX_INCOME_DIFF_TO_SUGGEST = 5.percents
+  MAX_INCOME_DIFF_TO_SUGGEST = Settings.max_incomde_diff_to_suggest.percents
 
-  def create_from_income!(direction_rate:, income_amount:)
+  def build_from_income(direction_rate:, income_amount:)
     attrs = {
       direction_rate: direction_rate,
       income_amount: income_amount,
@@ -22,15 +21,31 @@ module RateCalculationCommands
         suggested_income_amount
     end
 
-    create! attrs
+    build attrs
   end
 
-  def create_from_outcome!(direction_rate:, outcome_amount:)
-    create!(
+  def build_from_outcome(direction_rate:, outcome_amount:)
+    build(
       direction_rate: direction_rate,
       income_amount: direction_rate.reverse_exchange(outcome_amount),
       outcome_amount: outcome_amount,
       direction: :from_outcome
     )
+  end
+
+  def build(*args)
+    new(args).tap do |_rc|
+      self.require_reserving = outcome_amount > outcome_payment_system.reserve_amount unless Rails.env.test?
+
+      if income_amount < direction_rate.minimal_income_amount
+        self.invalid_minimal_income_requirements = true
+        self.minimal_income_amount = direction_rate.minimal_income_amount
+      end
+
+      if direction_rate.maximal_income_amount.present? && income_amount > direction_rate.maximal_income_amount
+        self.invalid_maximal_income_requirements = true
+        self.maximal_income_amount = direction_rate.maximal_income_amount
+      end
+    end
   end
 end

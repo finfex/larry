@@ -6,7 +6,7 @@ require 'test_helper'
 
 module Operator
   class DashboardControllerTest < ActionDispatch::IntegrationTest
-    test 'should get index' do
+    def test_index
       skip 'ActionView::Template::Error: No actual DirectionRate snapshot'
       get operator_root_url
       assert_response :success

@@ -3,17 +3,26 @@
     = f.input :income_payment_system_id, as: :hidden
     = f.input :outcome_payment_system_id, as: :hidden
     = f.input :direction_rate_id, as: :hidden
-    = f.input :rate_calculation_id, as: :hidden
+    = f.input :request_direction, as: :hidden
     .row
       .col-md-4
         h2.mb-3 1. Отдаёте
-        = f.input :income_amount, as: :money, wrapper: :input_group,  append: f.object.income_amount.currency, label: false, input_html: { autofocus: true }
-        = render 'payment_systems', payment_systems: income_payment_systems, param_name: :cur_from, active_ps: income_payment_system, disabled: false  do |ps|
+        = f.input :income_amount, 
+          as: :money, 
+          wrapper: :input_group,  
+          append: f.object.income_amount.try(:currency) || f.object.income_currency, 
+          label: false, 
+          input_html: { autofocus: true }
+        = render 'payment_systems', 
+          payment_systems: income_payment_systems, 
+          param_name: :cur_from, 
+          active_ps: income_payment_system, 
+          disabled: false  do |ps|
           = present_payment_system ps
 
       .col-md-4
         h2.mb-3 2. Получаете
-        = f.input :outcome_amount, as: :money, wrapper: :input_group,  append: f.object.outcome_amount.currency, label: false
+        = f.input :outcome_amount, as: :money, wrapper: :input_group,  append: f.object.outcome_amount.try(:currency) || f.object.outcome_currency, label: false
         div.nav.flex-column.nav-pills role="tablist" aria-orientation="vertical"
           - outcome_payment_systems.each do |ps|
             - active = ps == outcome_payment_system

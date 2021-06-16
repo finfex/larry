@@ -1,4 +1,8 @@
 defaults: &defaults
+  # Если курс принимаемой заявки отличается от текущего более чем на этот процент,
+  # то ставим новый курс
+  max_incomde_diff_to_suggest: 5
+
   max_export_records_count: 1000
   default_url_options: &default_url_options
     protocol: <%= ENV.fetch('HTTP_PROTOCOL', 'https') %>
