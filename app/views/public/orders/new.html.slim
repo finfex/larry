@@ -41,13 +41,27 @@
         h2.mb-3 3. Ввод данных
         = render 'errors', order: order, rate_calculation: rate_calculation
         - if order.direction_rate.present?
-          = f.input :income_amount, as: :money, wrapper: :input_group, append: f.object.income_amount.currency, disabled: true, label: 'Отдаёте'
-          = f.input :rate_value, as: :string, wrapper: :input_group, 
+          = f.input :income_amount, 
+            as: :money, 
+            wrapper: :input_group, 
+            append: f.object.income_amount.currency, 
+            disabled: true, 
+            label: 'Отдаёте', 
+            input_html: { id: :disabled_income_amount }
+          = f.input :rate_value, 
+            as: :string, 
+            wrapper: :input_group, 
             append: [order.direction_rate.outcome_payment_system.currency, order.direction_rate.income_payment_system.currency].join('/'), 
             disabled: true, 
             label: 'Обмениваете по курсу', 
             input_html: { class: 'text-right', value: humanized_rate_text(order.direction_rate.rate_value) }
-          = f.input :outcome_amount, as: :money, wrapper: :input_group, append: f.object.income_amount.currency, disabled: true, label: 'Получаете'
+          = f.input :outcome_amount, 
+            as: :money, 
+            wrapper: :input_group, 
+            append: f.object.income_amount.currency, 
+            disabled: true, 
+            label: 'Получаете', 
+            input_html: { id: :disabled_outcome_amount }
           = f.submit 'Обменять сейчас', class: 'btn btn-primary btn-lg mt-4 pt-3 pb-3', style: 'width: 100%'
 
           - if Rails.env.development? && params[:debug]

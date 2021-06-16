@@ -12,6 +12,7 @@ class RateCalculation
   include ActiveModel::Validations
   include Virtus.model
 
+  attribute :id, String # Front generated UUID
   attribute :direction_rate, Gera::DirectionRate
   attribute :income_amount, Money
   attribute :outcome_amount, Money

@@ -18,6 +18,7 @@ module Public
                              .build_from_outcome(params[:outcome_amount].to_d.to_money(direction_rate.outcome_payment_system.currency))
                          end
 
+      rate_calculation.id = params[:id]
       render json: present(rate_calculation)
     end
 
@@ -25,8 +26,10 @@ module Public
 
     def present(rate_calculation)
       {
-        income_amount: rate_calculation.income_amount.to_d,
-        outcome_amount: rate_calculation.outcome_amount.to_d,
+        id: rate_calculation.id,
+        request_direction: rate_calculation.request_direction,
+        income_amount: rate_calculation.income_amount.to_s,
+        outcome_amount: rate_calculation.outcome_amount.to_s,
         require_reserving: rate_calculation.require_reserving,
         suggested_income_amount: rate_calculation.suggested_income_amount.nil? ? nil : rate_calculation.suggested_income_amount.to_d,
         errors: rate_calculation.errors.as_json

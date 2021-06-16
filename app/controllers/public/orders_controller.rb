@@ -44,6 +44,7 @@ module Public
 
     def create
       direction_rate = Gera::DirectionRate.find order_params.fetch(:direction_rate_id)
+      calculator = RateCalculator.new(direction_rate)
 
       rate_calculation = if order_params.fetch(:request_direction).to_s == 'from_income'
                            calculator.build_from_income(order_params.fetch(:income_amount).to_money(direction_rate.income_currency))

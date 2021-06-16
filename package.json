@@ -13,6 +13,7 @@
     "popper.js": "^1.16.1",
     "sticky-table-headers": "https://github.com/jhyland87/StickyTableHeaders.git",
     "turbolinks": "^5.2.0",
+    "uuid": "^8.3.2",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
   },
