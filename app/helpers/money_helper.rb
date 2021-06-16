@@ -5,12 +5,12 @@
 module MoneyHelper
   MAX_PRECISION = 8
 
-  def humanized_money_with_currency(money, text_if_empty: '-', thousands_separator: ' ')
+  def humanized_money_with_currency(money, text_if_empty: '-', thousands_separator: '')
     return text_if_empty if money.nil?
 
     # money.format(with_currency: true, symbol: false)
     symbol = "<span class='text-muted'>#{money.currency}</span></span>".html_safe
-    "<span>#{money.format(symbol: symbol, format: '%n %u', decimal_mark: '.', thousands_separator: thousands_separator)}</span>".html_safe
+    "<span class=\"text-nowrap text-monospace\">#{money.format(symbol: symbol, format: '%n %u', decimal_mark: '.', thousands_separator: thousands_separator)}</span>".html_safe
   end
 
   def present_fee(fee, amount = nil)

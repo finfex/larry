@@ -36,6 +36,6 @@ module PaymentSystemConcern
   end
 
   def reserve_amount
-    @reserve_amount ||= Money.from_amount ReservesByPaymentSystems.get_reserve_by_payment_system_id(id), currency
+    @reserve_amount ||= Money.new ReservesByPaymentSystems.get_reserve_by_payment_system_id(id), currency
   end
 end

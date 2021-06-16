@@ -35,8 +35,11 @@ module Public
                              direction_rate.nil? ? outcome_payment_system.currency.zero_money : direction_rate.exchange(income_amount)
                            )
                          end
-
-      render locals: { order: rate_calculation.build_order, rate_calculation: rate_calculation }
+      rate_calculation.validate
+      order=rate_calculation.build_order
+      order.income_payment_system = income_payment_system
+      order.outcome_payment_system = outcome_payment_system
+      render locals: { order: order, rate_calculation: rate_calculation }
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Layout/LineLength

@@ -6,6 +6,7 @@
 # Такой service-entity
 #
 class RateCalculation
+  include MoneyHelper
   DIRECTIONS = %i[from_income from_outcome].freeze
 
   # include ActiveModel::Model
@@ -35,7 +36,7 @@ class RateCalculation
   end
 
   def build_order
-    Order.new(
+    order=Order.new(
       income_amount: income_amount,
       income_payment_system: income_payment_system,
       outcome_payment_system: outcome_payment_system,
@@ -44,6 +45,10 @@ class RateCalculation
       request_direction: request_direction,
       rate_calculation: self
     )
+    errors.each do |error|
+      order.errors.add error.attribute, error.message
+    end
+    order
   end
 
   def dump
@@ -55,19 +60,19 @@ class RateCalculation
   def validate_minimal_income
     return unless income_amount < minimal_income_amount
 
-    errors.add :income_amount, "Минимальная допустима сумма для обмена в этом направлении <span class='text-nowrap text-monospace'>#{minimal_income_amount.format}</span>"
+    errors.add :income_amount, "Минимальная допустима сумма для обмена в этом направлении #{humanized_money_with_currency minimal_income_amount}</span>".html_safe
   end
 
   def validate_maximal_income
     return unless maximal_income_amount.present? && income_amount > maximal_income_amount
 
-    errors.add :income_amount, "Максимальная допустима сумма для обмена в этом направлении <span class='text-nowrap text-monospace'>#{maximal_income_amount.format}</span>"
+    errors.add :income_amount, "Максимальная допустима сумма для обмена в этом направлении #{humanized_money_with_currency maximal_income_amount}</span>".html_safe
   end
 
   def validate_reserves
     if outcome_amount > outcome_payment_system.reserve_amount
       self.require_reserving = true
-      errors.add :require_reserving, "Недостаточно резервов, есть всего <span class='text-nowrap text-monospace'>#{outcome_payment_system.reserve_amount.format}</span>"
+      errors.add :outcome_amount, "Недостаточно резервов, есть всего #{humanized_money_with_currency outcome_payment_system.reserve_amount}".html_safe
     else
       self.require_reserving = false
     end

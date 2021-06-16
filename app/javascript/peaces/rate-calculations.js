@@ -10,13 +10,24 @@ const REQUEST_DIRECTION='#order_request_direction'
 const showErrors = (errors) => {
   const list = $('#form_errors')
   list.html('')
-  Object.values(errors).flat().forEach((element) => {
+  $(INCOME_AMOUNT).removeClass('is-invalid')
+  $(OUTCOME_AMOUNT).removeClass('is-invalid')
+  for (const [key, value] of Object.entries(errors)) {
+    switch(key) {
+      case 'income_amount':
+        $(INCOME_AMOUNT).addClass('is-invalid')
+        break
+      case 'outcome_amount':
+        $(OUTCOME_AMOUNT).addClass('is-invalid')
+        break
+    }
+    //Object.values(errors).flat().forEach((element) => {
     const d = document.createElement('li');
     $(d)
     .addClass(list.data('element-classes'))
-    .html(element)
+    .html(value)
     .appendTo(list)
-  })
+  }
 
   $(SUBMIT).attr('disabled', !jQuery.isEmptyObject(errors));
 }

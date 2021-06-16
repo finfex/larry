@@ -12,7 +12,8 @@
           wrapper: :input_group,  
           append: f.object.income_amount.try(:currency) || f.object.income_currency, 
           label: false, 
-          input_html: { autofocus: true }
+          input_html: { autofocus: true },
+          error: ''
         = render 'payment_systems', 
           payment_systems: income_payment_systems, 
           param_name: :cur_from, 
@@ -22,12 +23,12 @@
 
       .col-md-4
         h2.mb-3 2. Получаете
-        = f.input :outcome_amount, as: :money, wrapper: :input_group,  append: f.object.outcome_amount.try(:currency) || f.object.outcome_currency, label: false
+        = f.input :outcome_amount, as: :money, wrapper: :input_group,  append: f.object.outcome_amount.try(:currency) || f.object.outcome_currency, label: false, error: ''
         div.nav.flex-column.nav-pills role="tablist" aria-orientation="vertical"
           - outcome_payment_systems.each do |ps|
             - active = ps == order.outcome_payment_system
             - direction = Gera::Direction.new(ps_from: order.income_payment_system, ps_to: ps).freeze
-            - disabled = !direction.valid? || direction.direction_rate.nil?
+            - disabled = direction.direction_rate.nil?
             a class=("nav-link" + (active ? ' active' : '') + (disabled ? ' disabled' : '')) role="tab" aria-controls="v-pills-home" aria-selected=active.to_s href=public_root_url( request.query_parameters.merge cur_to: ps.id)
               = present_payment_system ps
               .text-small.float-right
@@ -40,13 +41,16 @@
       .col-md-4
         h2.mb-3 3. Ввод данных
         = render 'errors', order: order, rate_calculation: rate_calculation
+
         - if order.direction_rate.present?
           = f.input :income_amount, 
             as: :money, 
-            wrapper: :input_group, 
+            error: '',
             append: f.object.income_amount.currency, 
+            wrapper: :input_group, 
             disabled: true, 
             label: 'Отдаёте', 
+            disable_errors: true,
             input_html: { id: :disabled_income_amount }
           = f.input :rate_value, 
             as: :string, 
@@ -58,13 +62,15 @@
           = f.input :outcome_amount, 
             as: :money, 
             wrapper: :input_group, 
-            append: f.object.income_amount.currency, 
+            append: f.object.outcome_amount.currency, 
             disabled: true, 
+            error: '',
             label: 'Получаете', 
+            disable_errors: true,
             input_html: { id: :disabled_outcome_amount }
           = f.submit 'Обменять сейчас', class: 'btn btn-primary btn-lg mt-4 pt-3 pb-3', style: 'width: 100%', disabled: rate_calculation.errors.any?
 
           - if Rails.env.development? && params[:debug]
             code.mt-4 direction_rate_id: #{direction_rate.id}
         - else
-          .alert Нет обмена по этому направлению
+          .alert.alert-warning Нет обмена по этому направлению
