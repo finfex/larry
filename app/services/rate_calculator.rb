@@ -21,7 +21,6 @@ class RateCalculator
         outcome_amount: direction_rate.try(:exchange, income_amount)
       )
       .tap { |rc| suggest_profitable_income rc }
-      .validate
   end
 
   def build_from_outcome(outcome_amount)
@@ -32,7 +31,6 @@ class RateCalculator
         request_direction: :from_outcome,
         income_amount: direction_rate.try(:reverse_exchange, outcome_amount)
       )
-      .validate
   end
 
   private

@@ -46,7 +46,7 @@ Rails.application.routes.draw do
 
   scope subdomain: '', as: :public, constraints: RouteConstraints::PublicConstraint.new do
     scope module: :public do
-      root to: 'home#index'
+      root to: 'orders#new'
       resources :pages, only: %i[index show]
       resources :orders, only: %i[create show]
     end

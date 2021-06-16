@@ -20,12 +20,4 @@ class OrderCreator
 
     rate_calculation.build_order.tap(&:save!)
   end
-
-  private
-
-  def create_order(order_params)
-    order = Order.new order_params
-    order.save!
-    order
-  end
 end

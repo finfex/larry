@@ -16,7 +16,7 @@
         = render 'payment_systems', 
           payment_systems: income_payment_systems, 
           param_name: :cur_from, 
-          active_ps: income_payment_system, 
+          active_ps: order.income_payment_system, 
           disabled: false  do |ps|
           = present_payment_system ps
 
@@ -25,8 +25,8 @@
         = f.input :outcome_amount, as: :money, wrapper: :input_group,  append: f.object.outcome_amount.try(:currency) || f.object.outcome_currency, label: false
         div.nav.flex-column.nav-pills role="tablist" aria-orientation="vertical"
           - outcome_payment_systems.each do |ps|
-            - active = ps == outcome_payment_system
-            - direction = Gera::Direction.new(ps_from: income_payment_system, ps_to: ps).freeze
+            - active = ps == order.outcome_payment_system
+            - direction = Gera::Direction.new(ps_from: order.income_payment_system, ps_to: ps).freeze
             - disabled = direction.direction_rate.nil?
             a class=("nav-link" + (active ? ' active' : '') + (disabled ? ' disabled' : '')) role="tab" aria-controls="v-pills-home" aria-selected=active.to_s href=public_root_url( request.query_parameters.merge cur_to: ps.id)
               = present_payment_system ps
@@ -39,11 +39,14 @@
 
       .col-md-4
         h2.mb-3 3. Ввод данных
-        - if direction_rate.present?
-          p 
-            | Обмен по курсу: 
-            span.text-nowrap #{humanized_rate direction_rate.rate_value} #{direction_rate.outcome_payment_system.currency}
+        = render 'errors', order: order, rate_calculation: rate_calculation
+        - if order.direction_rate.present?
           = f.input :income_amount, as: :money, wrapper: :input_group, append: f.object.income_amount.currency, disabled: true, label: 'Отдаёте'
+          = f.input :rate_value, as: :string, wrapper: :input_group, 
+            append: order.direction_rate.outcome_payment_system.currency, 
+            disabled: true, 
+            label: 'Обмениваете по курсу', 
+            input_html: { value: humanized_rate_text(order.direction_rate.rate_value) }
           = f.input :outcome_amount, as: :money, wrapper: :input_group, append: f.object.income_amount.currency, disabled: true, label: 'Получаете'
           = f.submit 'Обменять сейчас', class: 'btn btn-primary btn-lg mt-4', style: 'width: 100%'
 
