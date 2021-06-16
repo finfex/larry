@@ -32,7 +32,8 @@ module Public
         outcome_amount: rate_calculation.outcome_amount.to_s,
         require_reserving: rate_calculation.require_reserving,
         suggested_income_amount: rate_calculation.suggested_income_amount.nil? ? nil : rate_calculation.suggested_income_amount.to_d,
-        errors: rate_calculation.errors.as_json
+        errors: rate_calculation.errors.as_json,
+        rate_value: helpers.humanized_rate_text(rate_calculation.direction_rate.rate_value)
       }
     end
   end

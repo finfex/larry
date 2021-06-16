@@ -20,6 +20,9 @@ const sendRequest = () => {
 
   const onSuccess = (response) => {
     if (response.id == window.current_rate_calculation_id) {
+      $("#disabled_outcome_amount").val(response.outcome_amount)
+      $("#disabled_income_amount").val(response.income_amount)
+      $("#order_rate_value").val(response.rate_value)
       if (request_direction == 'from_income') {
         $(OUTCOME_AMOUNT).val(response.outcome_amount).parent().clearQueue().effect('bounce', 'fast');
       } else {
