@@ -47,5 +47,6 @@ module RateCalculationCommands
         self.maximal_income_amount = direction_rate.maximal_income_amount
       end
     end
+    self
   end
 end

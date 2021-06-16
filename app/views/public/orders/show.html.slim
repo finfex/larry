@@ -1,3 +1,3 @@
-h1 Заявка на обмен
+h1 Заявка на обмен #{order.id}
 
-= order.as_json
+= render 'attributes_table', object: OrderDecorator.decorate(order), columns: %i[created_at income_amount outcome_amount income_payment_system outcome_payment_system rate]

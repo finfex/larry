@@ -6,10 +6,10 @@ require 'test_helper'
 
 class WalletActivityTest < ActiveSupport::TestCase
   setup do
-    @wallet = Wallet.new
+    @wallet = FactoryBot.create :wallet
   end
 
-  test 'the truth' do
+  def test_save_wallet_activity
     assert WalletActivity.new wallet: @wallet
   end
 end

@@ -5,7 +5,11 @@
 require 'test_helper'
 
 class WalletTest < ActiveSupport::TestCase
-  test 'the truth' do
-    assert true
+  setup do
+    @wallet = FactoryBot.create :wallet
+  end
+
+  def test_wallet_creation
+    assert @wallet
   end
 end

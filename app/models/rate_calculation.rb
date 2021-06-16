@@ -10,8 +10,6 @@ class RateCalculation
 
   include Virtus.model
 
-  MAX_INCOME_DIFF_TO_SUGGEST = Settings.max_incomde_diff_to_suggest.percents
-
   attribute :direction_rate, Gera::DirectionRate
   attribute :income_amount, Money
   attribute :outcome_amount, Money
@@ -27,36 +25,6 @@ class RateCalculation
 
   delegate :income_payment_system, :outcome_payment_system, to: :direction_rate
 
-  def build_from_income(income_amount)
-    self.income_amount = income_amount
-    self.request_direction = :from_income
-    return self if direction_rate.nil?
-
-    self.outcome_amount = direction_rate.exchange(income_amount)
-
-    suggested_income_amount = direction_rate.reverse_exchange outcome_amount
-
-    # Если есть более выгодный обмен, предлагаем клиенту
-    self.suggested_income_amount = suggested_income_amount if income_amount.to_d.positive? &&
-                                                              (income_amount.to_d - suggested_income_amount.to_d).as_percentage_of(income_amount.to_d) > MAX_INCOME_DIFF_TO_SUGGEST
-
-    prepare
-
-    self
-  end
-
-  def build_from_outcome(outcome_amount)
-    self.outcome_amount = outcome_amount
-    self.request_direction = :from_outcome
-    return self if direction_rate.nil?
-
-    self.income_amount = direction_rate.reverse_exchange(outcome_amount)
-
-    prepare
-
-    self
-  end
-
   def build_order
     Order.new(
       income_amount: income_amount,
@@ -64,8 +32,13 @@ class RateCalculation
       outcome_payment_system: outcome_payment_system,
       outcome_amount: outcome_amount,
       direction_rate: direction_rate,
-      request_direction: request_direction
+      request_direction: request_direction,
+      rate_calculation: self
     )
+  end
+
+  def dump
+    as_json
   end
 
   def valid?
@@ -75,13 +48,16 @@ class RateCalculation
       !require_reserving
   end
 
-  private
+  def validate
+    return self if direction_rate.nil?
 
-  def prepare
     validate_reserves
     validate_minimal_income
     validate_maximal_income
+    self
   end
+
+  private
 
   def validate_minimal_income
     return unless income_amount < direction_rate.minimal_income_amount

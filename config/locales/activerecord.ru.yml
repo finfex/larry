@@ -35,6 +35,11 @@ ru:
     total_amount: Всего на счету
     is_available: Доступно
     is_enabled: Разрешено
+    income_amount: Входящая сумма
+    outcome_amount: Выходящая сумма
+    income_payment_system: Входящая платёжная система
+    outcome_payment_system: Исходящая платёжная система
+    rate: Курс
 
   activerecord:
     models:

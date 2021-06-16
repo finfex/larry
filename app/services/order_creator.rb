@@ -9,7 +9,16 @@
 # 3. Notify managers
 #
 class OrderCreator
-  def call(income_payment_system_id:, outcome_payment_system_id:, income_amount:, outcome_amount:, direction_rate_id:, rate_calculation_id:); end
+  Error = Class.new StandardError
+  InvalidRateCalculation = Error.new
+
+  self.class.delegate :call, to: :new
+
+  def call(rate_calculation)
+    raise InvalidRateCalculation, rate_calculation unless rate_calculation.valid?
+
+    rate_calculation.build_order.tap { |o| o.save! }
+  end
 
   private
 

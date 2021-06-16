@@ -6,13 +6,14 @@ require 'test_helper'
 
 class RateCalculationSerializationTest < ActiveSupport::TestCase
   setup do
-    @direction_rate = create :direction_rate
+    @direction_rate = FactoryBot.create :gera_direction_rate
     @income_amount = 123
   end
 
   def test_build_from_income
     rate_calculation = RateCalculation
-                       .build_from_income(direction_rate: @direction_rate, income_amount: @income_amount)
+                       .new(@direction_rate)
+                       .build_from_income(@income_amount)
 
     o = Order.new
     o.rate_calculation = rate_calculation

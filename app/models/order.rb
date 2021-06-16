@@ -22,4 +22,8 @@ class Order < ApplicationRecord
   def outcome_currency
     outcome_payment_system.currency
   end
+
+  def currency_pair
+    Gera::CurrencyPair.new income_currency, outcome_currency
+  end
 end

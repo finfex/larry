@@ -23,9 +23,12 @@ module Public
     end
 
     def rate_calculation
-      @rate_calculation ||= RateCalculation.new(direction_rate: direction_rate).tap do |rc|
-        request_direction == :from_income ? rc.build_from_income(income_amount) : rc.build_from_outcome(outcome_amount)
-      end
+      @rate_calculation ||= build_rate_calculation
+    end
+
+    def build_rate_calculation
+      calculator = RateCalculator.new(direction_rate)
+      request_direction == :from_income ? calculator.build_from_income(income_amount) : calculator.build_from_outcome(outcome_amount)
     end
 
     def request_direction
