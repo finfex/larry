@@ -8,7 +8,7 @@ class PurgeRateCalculationsWorker
   KEEP_PERIOD = 1.week
 
   include Sidekiq::Worker
-  prepend UniqueWorker
+  # prepend UniqueWorker
 
   sidekiq_options queue: :purgers, retry: false
 
