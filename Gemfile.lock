@@ -225,6 +225,10 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     draper (4.0.1)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -545,6 +549,8 @@ DEPENDENCIES
   caxlsx (~> 3.0)
   caxlsx_rails
   dapi-archivable
+  dotenv
+  dotenv-rails
   draper (~> 4.0)
   env-tweaks (~> 1.0.0)
   factory_bot (~> 6.1)
