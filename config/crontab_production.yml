@@ -1,7 +1,7 @@
-Gera::ExportToBestchangeWorker:
-  cron: '*/3 * * * * *'
-  class: Gera::ExportToBestchangeWorker
-  queue: critical
+# Gera::ExportToBestchangeWorker:
+#  cron: '*/3 * * * * *'
+#  class: Gera::ExportToBestchangeWorker
+#  queue: critical
 
 ### Cleaners
 #
