@@ -434,6 +434,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    sd_notify (0.1.1)
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
@@ -580,6 +581,7 @@ DEPENDENCIES
   redis (~> 4.0)
   rubocop-rails
   sass-rails (>= 6)
+  sd_notify (~> 0.1.1)
   selenium-webdriver
   semver2 (~> 3.4)
   settingslogic

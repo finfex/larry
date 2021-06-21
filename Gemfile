@@ -125,3 +125,5 @@ gem 'ransack', '~> 2.4'
 
 gem 'rails_warden', github: 'wardencommunity/rails_warden'
 gem 'warden', '~> 1.2'
+
+gem "sd_notify", "~> 0.1.1"
