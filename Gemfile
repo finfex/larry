@@ -93,6 +93,7 @@ group :deploy do
   gem 'capistrano', require: false
   gem 'capistrano3-puma'
   gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails-console', require: false
   gem 'capistrano-db-tasks', require: false
   gem 'capistrano-dotenv-tasks'
   gem 'capistrano-faster-assets', require: false
