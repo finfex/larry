@@ -39,3 +39,13 @@ Run auto tests:
 ## Update gera migration
 
 > rm db/migrate/*.gera.*; rake gera:install:migrations  
+
+
+# Deploy with capistrano
+
+> bundle exec cap production deploy:check
+> bundle exec cap production master_key:setup  
+> bundle exec cap production config:set RAILS_ENV=production
+> bundle exec cap production systemd:puma:setup systemd:sidekiq:setup 
+
+
