@@ -5,7 +5,7 @@
 lock '3.16'
 
 set :user, 'app'
-set :application, 'larry'
+set :application, ENV.fetch('APP_NAME', 'larry')
 
 set :repo_url, 'git@github.com:finfex/larry.git' if ENV['USE_LOCAL_REPO'].nil?
 set :keep_releases, 10
@@ -57,13 +57,12 @@ set :puma_preload_app, false
 set :puma_prune_bundler, true
 set :puma_init_active_record, true
 set :puma_workers, 0
-set :puma_bind, %w[tcp://0.0.0.0:9292]
 set :puma_start_task, 'systemd:puma:start'
 
 set :init_system, :systemd
 
 set :systemd_sidekiq_role, :sidekiq
-set :systemd_sidekiq_instances, -> { %i[default reports] }
+set :systemd_sidekiq_instances, -> { 4.times }
 
 set :bugsnag_api_key, ENV['BUGSNAG_API_KEY']
 set :app_version, SemVer.find.to_s
