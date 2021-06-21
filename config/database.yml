@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: larry_production
-  username: larry
+  database: <%= ENV.fetch( 'LARRY_DATABASE_NAME', 'larry_production' ) %>
+  username: <%= ENV.fetch('LARRY_DATABASE_USER', 'larry') %>
   password: <%= ENV['LARRY_DATABASE_PASSWORD'] %>
