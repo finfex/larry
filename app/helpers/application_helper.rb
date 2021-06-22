@@ -7,6 +7,10 @@ module ApplicationHelper
     flag ? "#{css_classes} active" : css_classes
   end
 
+  def logo_image(size: 32)
+    image_tag '/logo.png', width: size
+  end
+
   def middot
     content_tag :div, '&middot;'.html_safe, class: 'text-muted'
   end

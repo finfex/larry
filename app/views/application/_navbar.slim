@@ -1,7 +1,7 @@
 nav.navbar.navbar-expand-lg.navbar-light.bg-light.flex-column.flex-md-row.sticky-top[style="background-color: #e3f2fd;"]
   = content_tag :div, class: (page_layout_container == :fluid ? 'container-fluid' : 'container') do
     a.navbar-brand( href=main_app.public_root_url title=AppVersion.to_s)
-      = image_tag asset_url('logo.png'), width: 32
+      = logo_image size: 32
       span.ml-2= app_title
     button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Navigation"]
       span.navbar-toggler-icon
