@@ -44,6 +44,8 @@ module SmartFormHelper
 
       as = :select
       collection = smart_get_collection(record_class, attribute_name, record)
+    elsif record.class.uploaders.include? column.to_sym
+      as = :file
     else
       as = :input
     end
