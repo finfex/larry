@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   layout 'simple'
 
   rescue_from Gera::DirectionRatesRepository::NoActualSnapshot, with: :rescue_humanized_error
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   helper_method :current_admin_user
 
@@ -16,6 +17,10 @@ class ApplicationController < ActionController::Base
 
   def rescue_humanized_error(exception)
     render :exception, locals: { exception: exception }
+  end
+
+  def not_found
+    render :not_found, layout: 'simple'
   end
 
   def current_admin_user

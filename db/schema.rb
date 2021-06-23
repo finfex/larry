@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_23_141829) do
+ActiveRecord::Schema.define(version: 2021_06_23_144835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -332,6 +332,16 @@ ActiveRecord::Schema.define(version: 2021_06_23_141829) do
     t.index ["direction_rate_id"], name: "index_orders_on_direction_rate_id"
     t.index ["income_payment_system_id"], name: "index_orders_on_income_payment_system_id"
     t.index ["outcome_payment_system_id"], name: "index_orders_on_outcome_payment_system_id"
+  end
+
+  create_table "pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "path", null: false
+    t.string "menu_title", null: false
+    t.string "html_title", null: false
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["path"], name: "index_pages_on_path", unique: true
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

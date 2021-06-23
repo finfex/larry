@@ -44,6 +44,7 @@ ru:
   activerecord:
     models:
       wallet: Кошельки
+      page: Страницы
       currency: Валюты
       gera/payment_system: Платежные системы
       order:
@@ -61,6 +62,11 @@ ru:
       gera/exchange_rate:
         value: Курс
         is_enabled: Разрешён обмен
+      page:
+        path: Путь
+        menu_title: Название в меню
+        html_title: Заголовок в HTML
+        content: Содержимое
       nomenclature_in_stock_cell:
         in_stock_quantity: В Наличии
         to_selection_quantity: К Отбору

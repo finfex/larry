@@ -28,6 +28,9 @@ Rails.application.routes.draw do
         scope module: :operator do
           root to: 'orders#index'
           resources :orders, only: %i[index show]
+          resources :pages do
+            concerns :archivable
+          end
           resources :wallets do
             concerns :archivable
           end
@@ -47,11 +50,11 @@ Rails.application.routes.draw do
   scope subdomain: '', as: :public, constraints: RouteConstraints::PublicConstraint.new do
     scope module: :public do
       root to: 'orders#new'
-      resources :pages, only: %i[index show]
       resources :orders, only: %i[create show]
       constraints ->(request) { request.xhr? } do
         resources :rate_calculations, only: %i[create]
       end
+      match '*path', to: 'pages#show', via: %i[get], as: :page
     end
   end
 

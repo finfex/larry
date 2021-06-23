@@ -511,6 +511,9 @@ GEM
       unf_ext
     unf_ext (0.0.7.7)
     unicode-display_width (2.0.0)
+    validates (1.0.0)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
     virtus (2.0.0)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -616,6 +619,7 @@ DEPENDENCIES
   title (~> 0.0.8)
   turbolinks (~> 5)
   tzinfo-data
+  validates
   warden (~> 1.2)
   web-console (>= 4.1.0)
   webdrivers

@@ -3,6 +3,7 @@ ru:
     navbar:
       rules: 'Правила обмена'
       wallets: 'Кошельки'
+      pages: 'Страницы'
       gera: Управление курсами
     footer:
       operator: 'Операторская'

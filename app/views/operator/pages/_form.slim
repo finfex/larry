@@ -1,0 +1,13 @@
+= simple_form_for [:operator, page] do |f|
+  .row
+    .col-md-4
+      = f.input :path
+    .col-md-4
+      = f.input :menu_title
+    .col-md-4
+      = f.input :html_title
+  .row
+    .col-md-12
+      = f.input :content
+
+  = f.submit class: 'btn btn-primary'

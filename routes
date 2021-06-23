@@ -7,6 +7,16 @@
                            operator_root GET      /                                                                                                 operator/orders#index {:subdomain=>"operator"}
                          operator_orders GET      /orders(.:format)                                                                                 operator/orders#index {:subdomain=>"operator"}
                           operator_order GET      /orders/:id(.:format)                                                                             operator/orders#show {:subdomain=>"operator"}
+                   archive_operator_page PUT      /pages/:id/archive(.:format)                                                                      operator/pages#archive {:subdomain=>"operator"}
+                   restore_operator_page PUT      /pages/:id/restore(.:format)                                                                      operator/pages#restore {:subdomain=>"operator"}
+                          operator_pages GET      /pages(.:format)                                                                                  operator/pages#index {:subdomain=>"operator"}
+                                         POST     /pages(.:format)                                                                                  operator/pages#create {:subdomain=>"operator"}
+                       new_operator_page GET      /pages/new(.:format)                                                                              operator/pages#new {:subdomain=>"operator"}
+                      edit_operator_page GET      /pages/:id/edit(.:format)                                                                         operator/pages#edit {:subdomain=>"operator"}
+                           operator_page GET      /pages/:id(.:format)                                                                              operator/pages#show {:subdomain=>"operator"}
+                                         PATCH    /pages/:id(.:format)                                                                              operator/pages#update {:subdomain=>"operator"}
+                                         PUT      /pages/:id(.:format)                                                                              operator/pages#update {:subdomain=>"operator"}
+                                         DELETE   /pages/:id(.:format)                                                                              operator/pages#destroy {:subdomain=>"operator"}
                  archive_operator_wallet PUT      /wallets/:id/archive(.:format)                                                                    operator/wallets#archive {:subdomain=>"operator"}
                  restore_operator_wallet PUT      /wallets/:id/restore(.:format)                                                                    operator/wallets#restore {:subdomain=>"operator"}
                         operator_wallets GET      /wallets(.:format)                                                                                operator/wallets#index {:subdomain=>"operator"}
@@ -47,11 +57,10 @@
                                          DELETE   /currencies/:id(.:format)                                                                         operator/currencies#destroy {:subdomain=>"operator"}
                                          GET|POST /*anything(.:format)                                                                              application#not_found {:subdomain=>"operator"}
                              public_root GET      /                                                                                                 public/orders#new {:subdomain=>""}
-                            public_pages GET      /pages(.:format)                                                                                  public/pages#index {:subdomain=>""}
-                             public_page GET      /pages/:id(.:format)                                                                              public/pages#show {:subdomain=>""}
                            public_orders POST     /orders(.:format)                                                                                 public/orders#create {:subdomain=>""}
                             public_order GET      /orders/:id(.:format)                                                                             public/orders#show {:subdomain=>""}
                 public_rate_calculations POST     /rate_calculations(.:format)                                                                      public/rate_calculations#create {:subdomain=>""}
+                             public_page GET      /*path(.:format)                                                                                  public/pages#show {:subdomain=>""}
                                          GET|POST /*anything(.:format)                                                                              application#not_found
            rails_postmark_inbound_emails POST     /rails/action_mailbox/postmark/inbound_emails(.:format)                                           action_mailbox/ingresses/postmark/inbound_emails#create
               rails_relay_inbound_emails POST     /rails/action_mailbox/relay/inbound_emails(.:format)                                              action_mailbox/ingresses/relay/inbound_emails#create

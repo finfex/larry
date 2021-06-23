@@ -1,0 +1,4 @@
+.float-right= link_to t('.create_page'), new_operator_page_path, class: 'btn btn-success' if current_admin_user.has_permission?(Page, :create)
+h1= Page.model_name.human
+
+= render 'table', items: pages, columns: %i[path menu_title html_title actions]

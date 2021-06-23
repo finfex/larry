@@ -8,10 +8,9 @@ module Public
       @container = :fixed
     end
 
-    def index; end
-
     def show
-      # TODO: Find page
+      page = Page.find_by!(path: params[:path])
+      render locals: { page: page }
     end
   end
 end
