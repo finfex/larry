@@ -6,7 +6,7 @@ module Operator
   class PaymentSystemsController < ApplicationController
     include ArchivableActions
 
-    authorize_actions_for PaymentSystem
+    authorize_actions_for Gera::PaymentSystem
 
     # TODO: наладить smart_input и добавить reservers_aggregator
     EDIT_COLUMNS = %i[name priority currency_iso_code is_available income_enabled outcome_enabled icon_url commission minimal_income_amount
@@ -15,7 +15,7 @@ module Operator
     def index; end
 
     def new
-      @resource ||= PaymentSystem.new
+      @resource ||= Gera::PaymentSystem.new
       render :new, locals: { payment_system: resource, edit_columns: EDIT_COLUMNS }
     end
 
@@ -35,7 +35,7 @@ module Operator
     end
 
     def create
-      @resource = PaymentSystem.new payment_system_params
+      @resource = Gera::PaymentSystem.new payment_system_params
       resource.save!
       redirect_to operator_payment_system_path(resource), notice: 'Платежная система создана'
     rescue ActiveRecord::RecordInvalid
@@ -49,7 +49,7 @@ module Operator
     end
 
     def resource
-      @resource ||= PaymentSystem.find params[:id]
+      @resource ||= Gera::PaymentSystem.find params[:id]
     end
 
     def payment_system_params
