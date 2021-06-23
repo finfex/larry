@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def logo_image(size: 32)
-    image_tag '/logo.png', width: size
+    image_tag '/images/logo.png', width: size
   end
 
   def middot

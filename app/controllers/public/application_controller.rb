@@ -15,11 +15,11 @@ module Public
     private
 
     def income_payment_systems
-      PaymentSystem.alive.available.enabled.where(income_enabled: true).ordered
+      Gera::PaymentSystem.alive.available.enabled.where(income_enabled: true).ordered
     end
 
     def outcome_payment_systems
-      PaymentSystem.alive.available.enabled.where(outcome_enabled: true).ordered
+      Gera::PaymentSystem.alive.available.enabled.where(outcome_enabled: true).ordered
     end
 
     def final_reserves
