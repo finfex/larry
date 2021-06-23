@@ -4,7 +4,6 @@ class CreatePages < ActiveRecord::Migration[6.1]
       t.string :path, null: false
       t.string :menu_title, null: false
       t.string :html_title, null: false
-      t.text :content
 
       t.timestamps
     end

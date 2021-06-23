@@ -10,6 +10,9 @@ import 'channels'
 import 'peaces'
 import 'elements'
 
+import 'trix'
+import '@rails/actiontext'
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
@@ -18,3 +21,6 @@ document.addEventListener("turbolinks:load", function() {
   $('[data-toggle="tooltip"]').tooltip();
   $('[data-toggle="popover"]').popover();
 });
+
+require("trix")
+require("@rails/actiontext")

@@ -1,2 +1,5 @@
-h1 Public::Pages#show
-p Find me in app/views/public/pages/show.html.slim
+= raw page.content
+
+- if current_admin_user.present?
+  hr
+  = link_to t('actions.edit'), edit_operator_page_path(page.id)

@@ -442,6 +442,7 @@ GEM
     ruby-vips (2.1.2)
       ffi (~> 1.12)
     rubyzip (2.3.0)
+    sass (3.2.10)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
@@ -452,6 +453,9 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    scss-lint (0.10.1)
+      colorize
+      sass (= 3.2.10)
     sd_notify (0.1.1)
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
@@ -511,9 +515,6 @@ GEM
       unf_ext
     unf_ext (0.0.7.7)
     unicode-display_width (2.0.0)
-    validates (1.0.0)
-      activemodel (>= 3.0.0)
-      activesupport (>= 3.0.0)
     virtus (2.0.0)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -607,6 +608,7 @@ DEPENDENCIES
   redis (~> 4.0)
   rubocop-rails
   sass-rails (>= 6)
+  scss-lint
   sd_notify (~> 0.1.1)
   selenium-webdriver
   semver2 (~> 3.4)
@@ -619,7 +621,6 @@ DEPENDENCIES
   title (~> 0.0.8)
   turbolinks (~> 5)
   tzinfo-data
-  validates
   warden (~> 1.2)
   web-console (>= 4.1.0)
   webdrivers

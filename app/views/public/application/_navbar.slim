@@ -1,3 +1,6 @@
 = render 'application/navbar' do
-  = active_link_to public_page_path(:rules), class: 'nav-link', wrap_tag: :li, wrap_class: 'nav-item' do
-    = t '.rules'
+  = active_link_to public_root_url, class: 'nav-link', wrap_tag: :li, wrap_class: 'nav-item', active: controller_name == 'orders' do
+    = t '.exchange'
+  - Page.for_menu.each do |page|
+    = active_link_to public_page_url(page.path), class: 'nav-link', wrap_tag: :li, wrap_class: 'nav-item' do
+      = page.menu_title
