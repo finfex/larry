@@ -12,6 +12,7 @@ defaults: &defaults
       system:  a8237d74-e30d-4123-8f26-eda8ba593209
       wallets: a8237d74-e30d-4123-8f26-eda8ba593208
       storno:  a8237d74-e30d-4123-8f26-eda8ba593207
+      partners:  a8237d74-e30d-4123-8f26-eda8ba593206
 
 development:
   <<: *defaults
