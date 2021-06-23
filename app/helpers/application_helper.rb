@@ -26,8 +26,10 @@ module ApplicationHelper
     end
   end
 
-  def present_payment_system(payment_system)
-    ps_icon payment_system
+  def present_payment_system(payment_system, size: 16)
+    buffer = ps_icon(payment_system, size: size)
+    buffer << content_tag(:span, payment_system.name, class: 'ml-2')
+    buffer
   end
 
   def namespace
@@ -44,8 +46,8 @@ module ApplicationHelper
   end
 
   # TODO: show icon of payment system
-  def ps_icon(payment_system, _options = {})
-    payment_system.to_s
+  def ps_icon(payment_system, size: 32)
+    image_tag payment_system.icon.url, width: size, title: payment_system.name
   end
 
   def show_direction_popover?

@@ -4,7 +4,7 @@
 h1= t('gera.alive_payment_systems')
 .clearfix
 .mt-2
-  = render 'table', items: PaymentSystemDecorator.decorate(PaymentSystem.alive.ordered)
+  = render 'table', items: PaymentSystemDecorator.decorate(Gera::PaymentSystem.alive.ordered)
 h1= t('gera.archived_payment_systems')
 .mt-2
-  = render 'table', items: PaymentSystemDecorator.decorate(PaymentSystem.archive.ordered)
+  = render 'table', items: PaymentSystemDecorator.decorate(Gera::PaymentSystem.archive.ordered)

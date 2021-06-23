@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_14_095342) do
+ActiveRecord::Schema.define(version: 2021_06_23_141829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -210,7 +210,7 @@ ActiveRecord::Schema.define(version: 2021_06_14_095342) do
     t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.boolean "is_available", default: true, null: false
-    t.string "icon_url"
+    t.string "icon"
     t.float "commission", default: 0.0, null: false
     t.decimal "minimal_income_amount_cents", default: "0.0", null: false
     t.decimal "maximal_income_amount_cents"

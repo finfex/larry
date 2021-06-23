@@ -15,6 +15,8 @@ module PaymentSystemConcern
     enum system_type: %i[payment_system crypto bank cheque], _prefix: true
     validates :bestchange_key, presence: true, uniqueness: true
 
+    mount_uploader :icon, PaymentSystemLogoUploader
+
     before_create do
       system_type == :crypto if currency.is_crypto?
     end

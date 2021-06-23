@@ -17,8 +17,12 @@ class PaymentSystemDecorator < ApplicationDecorator
     super - %i[id archived_at updated_at created_at total_computation_method transfer_comission_payer] + %i[is_crypto? actions]
   end
 
+  def self.object_class
+    Gera::PaymentSystem
+  end
+
   def icon
-    h.ps_icon object, size: 32
+    h.ps_icon object
   end
 
   def actions
