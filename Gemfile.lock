@@ -5,6 +5,34 @@ GIT
     noty_flash (0.1.2)
 
 GIT
+  remote: https://github.com/finfex/gera.git
+  revision: fe8748bceeff9fd48a8bced60693074d2b1758bb
+  branch: master
+  specs:
+    gera (0.3.4)
+      active_link_to
+      authority
+      auto_logger (> 0.1.4)
+      best_in_place
+      breadcrumbs_on_rails
+      business_time
+      dapi-archivable
+      draper (> 3.0.0)
+      kaminari
+      money
+      money-rails
+      noty_flash
+      percentable
+      psych
+      rails (> 5.2.0)
+      request_store
+      require_all
+      rest-client (~> 2.0)
+      sidekiq
+      simple_form
+      virtus
+
+GIT
   remote: https://github.com/groovenauts/capistrano-systemd-multiservice.git
   revision: 955b99cc7588521ddc26ccd523ebba306e16fa0a
   specs:
@@ -34,32 +62,6 @@ GIT
     rails_warden (1.0.0)
       rails (>= 5)
       warden (>= 1.2.0)
-
-PATH
-  remote: vendor/gera
-  specs:
-    gera (0.3.4)
-      active_link_to
-      authority
-      auto_logger (> 0.1.4)
-      best_in_place
-      breadcrumbs_on_rails
-      business_time
-      dapi-archivable
-      draper (> 3.0.0)
-      kaminari
-      money
-      money-rails
-      noty_flash
-      percentable
-      psych
-      rails (> 5.2.0)
-      request_store
-      require_all
-      rest-client (~> 2.0)
-      sidekiq
-      simple_form
-      virtus
 
 GEM
   remote: https://rubygems.org/
@@ -240,7 +242,6 @@ GEM
       request_store (>= 1.0)
     env-tweaks (1.0.1)
       activesupport (>= 3.0, < 7.0)
-    equalizer (0.0.11)
     erubi (1.10.0)
     et-orbi (1.2.4)
       tzinfo
@@ -276,7 +277,7 @@ GEM
       rubocop (< 2.0)
     htmlentities (4.3.4)
     http-accept (1.7.0)
-    http-cookie (1.0.3)
+    http-cookie (1.0.4)
       domain_name (~> 0.5)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
@@ -347,7 +348,7 @@ GEM
       pry (~> 0.10)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
-    psych (3.3.1)
+    psych (4.0.1)
     public_suffix (4.0.6)
     puma (5.2.2)
       nio4r (~> 2.0)
@@ -495,11 +496,10 @@ GEM
       unf_ext
     unf_ext (0.0.7.7)
     unicode-display_width (2.0.0)
-    virtus (1.0.5)
+    virtus (2.0.0)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
       descendants_tracker (~> 0.0, >= 0.0.3)
-      equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.1.0)

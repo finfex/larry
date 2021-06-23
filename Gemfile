@@ -38,7 +38,8 @@ gem 'bugsnag'
 gem 'dapi-archivable', require: 'archivable'
 gem 'env-tweaks', '~> 1.0.0'
 gem 'foreman'
-gem 'gera', path: 'vendor/gera'
+# gem 'gera', path: 'vendor/gera'
+gem 'gera', github: 'finfex/gera', branch: 'master'
 gem 'gravatarify', '~> 3.1'
 gem 'kaminari', '~> 1.2'
 gem 'money'
@@ -55,7 +56,7 @@ gem 'slim-rails'
 gem 'dotenv'
 gem 'dotenv-rails'
 
-group :development, :test do
+group :development, :test, :production do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'guard'
