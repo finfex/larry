@@ -47,6 +47,7 @@ gem 'money-rails'
 gem 'noty_flash', github: 'BrandyMint/noty_flash' # for gera
 gem 'rails-i18n', '~> 6.0'
 gem 'semver2', '~> 3.4'
+gem 'psych', '< 4.0'
 gem 'settingslogic'
 gem 'sidekiq'
 gem 'sidekiq-cron'
