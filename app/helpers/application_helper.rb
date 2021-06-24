@@ -16,7 +16,7 @@ module ApplicationHelper
   end
 
   def page_layout_container
-    @container || :fluid
+    @container || :fixed # or fluid
   end
 
   def page_layout_container_class

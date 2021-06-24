@@ -8,10 +8,6 @@ module Public
 
     helper_method :final_reserves, :income_payment_systems, :outcome_payment_systems
 
-    before_action do
-      @container = :fixed
-    end
-
     private
 
     def income_payment_systems

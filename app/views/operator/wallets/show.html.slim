@@ -1,4 +1,6 @@
 .container
+  = link_to operator_wallets_path do
+    = '&larr;'.html_safe + Wallet.model_name.human
   h1= t '.wallet'
   = render 'table', items: [wallet]
   h2= t '.manual_update'

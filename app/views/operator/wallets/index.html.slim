@@ -1,2 +1,3 @@
 .container
-  = render 'table', items: wallets
+  h1= Wallet.model_name.human
+  = render 'table', items: WalletDecorator.decorate_collection(wallets)

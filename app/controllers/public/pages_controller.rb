@@ -4,10 +4,6 @@
 
 module Public
   class PagesController < ApplicationController
-    before_action do
-      @container = :fixed
-    end
-
     def show
       page = Page.find_by!(path: params[:path])
       render locals: { page: page }
