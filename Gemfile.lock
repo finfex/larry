@@ -605,6 +605,7 @@ DEPENDENCIES
   ransack (~> 2.4)
   redis (~> 4.0)
   rubocop-rails
+  ruby-progressbar
   sass-rails (>= 6)
   scss-lint
   sd_notify (~> 0.1.1)
