@@ -22,6 +22,7 @@
 #
 # Copyright (c) Samuel Cochran 2012, under the [MIT license](http://www.opensource.org/licenses/mit-license).
 
+# rubocop:disable Metrics/ClassLength
 class FileUploaderInput < Formtastic::Inputs::FileInput
   def linkable?
     options[:linkable] != false
@@ -154,33 +155,35 @@ class FileUploaderInput < Formtastic::Inputs::FileInput
 
   protected
 
+  # rubocop:disable Metrics/MethodLength
   def expand_html_options(opts)
-    (opts || {}).dup.tap do |opts|
-      opts[:class] =
-        case opts[:class]
+    (opts || {}).dup.tap do |local_opts|
+      local_opts[:class] =
+        case local_opts[:class]
         when Array
-          opts[:class].dup
+          local_opts[:class].dup
         when nil
           []
         else
-          [opts[:class].to_s]
+          [local_opts[:class].to_s]
         end
-      opts[:data] =
-        case opts[:data]
+      local_opts[:data] =
+        case local_opts[:data]
         when Hash
-          opts[:data].dup
+          local_opts[:data].dup
         when nil
           {}
         else
-          { '' => opts[:data].to_s }
+          { '' => local_opts[:data].to_s }
         end
 
-      yield opts if block_given?
+      yield local_opts if block_given?
 
-      opts[:class] = opts[:class].join(' ')
+      local_opts[:class] = local_opts[:class].join(' ')
     end
   end
 end
+# rubocop:enable Metrics/MethodLength
 
 # class FileUploaderInput < Formtastic::Inputs::FileInput
 

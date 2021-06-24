@@ -14,11 +14,13 @@ class MoneyInput < SimpleForm::Inputs::StringInput
     super merged_input_options
   end
 
+  # rubocop:disable Naming/PredicateName
   def has_errors?
     return false if input_options[:disable_errors]
 
     super
   end
+  # rubocop:enable Naming/PredicateName
 
   def valid?
     return false if input_options[:disable_errors]

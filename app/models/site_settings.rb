@@ -14,4 +14,8 @@ module SiteSettings
 
     raise UnknownSettingsKey
   end
+
+  def self.respond_to_missing?(_key)
+    true
+  end
 end

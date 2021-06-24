@@ -2,6 +2,7 @@
 
 # Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
 
+# Uploader for payment system logo
 class PaymentSystemLogoUploader < ApplicationUploader
   include CarrierWave::MiniMagick
 

@@ -1,4 +1,6 @@
 = simple_form_for [:operator, page] do |f|
+  = f.error :base
+  = f.error_notification
   .row
     .col-md-4
       = f.input :path
@@ -10,4 +12,5 @@
     .col-md-12
       = f.rich_text_area :content
 
-  = f.submit class: 'btn btn-primary'
+  .mt-4 
+    = f.submit class: 'btn btn-primary'

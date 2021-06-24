@@ -2,6 +2,8 @@
 
 # frozen_string_literal: true
 
+# Application uploader
+#
 class ApplicationUploader < CarrierWave::Uploader::Base
   include SecureUniqueFilename
   include FileDetails

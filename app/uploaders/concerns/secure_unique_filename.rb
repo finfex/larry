@@ -2,6 +2,7 @@
 
 # frozen_string_literal: true
 
+# Securify uploaded file name
 module SecureUniqueFilename
   def filename
     "#{secure_token}.#{file.extension}" if original_filename.present?

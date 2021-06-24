@@ -2,6 +2,8 @@
 
 # frozen_string_literal: true
 
+# Save uplaoded file details in model
+#
 module FileDetails
   extend ActiveSupport::Concern
   included do

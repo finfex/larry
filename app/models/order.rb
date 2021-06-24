@@ -6,7 +6,7 @@ class Order < ApplicationRecord
   include DirectionRateSerialization
   include RateCalculationSerialization
 
-  STATES = %i(draft published)
+  STATES = %i[draft published].freeze
 
   belongs_to :income_payment_system, class_name: 'Gera::PaymentSystem'
   belongs_to :outcome_payment_system, class_name: 'Gera::PaymentSystem'
