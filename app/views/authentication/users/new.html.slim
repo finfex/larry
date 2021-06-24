@@ -1,13 +1,14 @@
 h1.mb-4
-  = t('.sign_in')
+  = t('.sign_up')
 
 .row
   .col-md-8
-    = simple_form_for session_resource, url: session_path do |f|
+    = simple_form_for user, url: user_path do |f|
       = hidden_field_tag :scope, session_scope
-      = hidden_field_tag :redirect_url, redirect_url
+      -# = hidden_field_tag :redirect_url, redirect_url
       = f.input :email, as: :email, input_html: { autofocus: true, autocomplete: :email }
       = f.input :password, as: :password, input_html: { autocomplete: 'current-password' }
-      = f.submit t('.sign_in_button'), class: 'btn btn-primary'
+      = f.input :password_confirmation, as: :password, input_html: { autocomplete: 'current-password' }
+      = f.submit t('.sign_up_button'), class: 'btn btn-primary'
   .col-md-4
     = render 'authentication/shared/links'

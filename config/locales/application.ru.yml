@@ -7,5 +7,6 @@ ru:
       gera: Управление курсами
     navbar_user_dropdown:
       profile: Личный кабинет
+      logout: Выйти
     footer:
       operator: 'Операторская'

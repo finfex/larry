@@ -6,5 +6,7 @@ class User < ApplicationRecord
   has_secure_password
   include Authority::Abilities
 
+  validates :email, presence: true, uniqueness: true
+
   has_one :partner
 end

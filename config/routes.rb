@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   scope module: :authentication do
     resource :session, only: %i[new create destroy]
-    resource :user
+    resource :user, only: %i[new create edit update]
     resources :password_resets, only: %i[new create edit update]
   end
 
@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   scope subdomain: '', as: :public, constraints: RouteConstraints::PublicConstraint.new do
     scope module: :public do
       root to: 'orders#new'
+      resource :profile, only: %i[show]
       resources :orders, only: %i[create show]
       constraints ->(request) { request.xhr? } do
         resources :rate_calculations, only: %i[create]

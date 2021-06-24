@@ -4,8 +4,13 @@ ru:
       new:
         sign_in: Вход для зарегистрированных
         sign_in_button: Войти
+    users:
+      new:
+        sign_up: Регистрация
+        sign_up_button: Зарегистрироваться
     shared:
       links:
+        sign_in: Я уже зарегистрирован, дайте войти
         sign_up: Регистрация
         forget_password: Забыл пароль
 

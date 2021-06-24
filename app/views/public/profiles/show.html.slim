@@ -1,0 +1,9 @@
+h1= t '.profile'
+
+table.table
+  tr
+    th Email
+    td= current_user.email
+
+hr
+= link_to t('application.navbar_user_dropdown.logout'), main_app.session_url, method: :delete
