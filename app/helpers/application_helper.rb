@@ -47,7 +47,7 @@ module ApplicationHelper
 
   # TODO: show icon of payment system
   def ps_icon(payment_system, size: 32)
-    image_tag payment_system.icon.url, width: size, title: payment_system.name
+    image_tag payment_system.icon.url, width: size, title: payment_system.name, class: 'payment_system-icon'
   end
 
   def show_direction_popover?
