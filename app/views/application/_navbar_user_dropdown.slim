@@ -12,4 +12,4 @@
         = link_to t('.logout'), main_app.session_url, method: :delete, class: 'dropdown-item'
 - else
   ul.navbar-nav.navbar-right
-    = active_link_to t('.profile'), new_session_path, class: 'nav-link', wrap_tag: :li, wrap_class: 'nav-item'
+    = active_link_to t('.profile'), public_profile_url, class: 'nav-link', wrap_tag: :li, wrap_class: 'nav-item'

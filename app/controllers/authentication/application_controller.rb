@@ -1,6 +1,6 @@
 module Authentication
   class ApplicationController < ::ApplicationController
-    SCOPE_RESOURCES = { default: User, admin_user: AdminUser }.freeze
+    SCOPE_RESOURCES = { user: User, admin_user: AdminUser }.freeze
     helper_method :session_resource, :session_resoruce_class, :session_scope
 
     private
@@ -18,9 +18,10 @@ module Authentication
     end
 
     def session_resoruce_class
+      scope = (request.env['warden.options'] || {}).fetch(:scope, :user).to_sym
       SCOPE_RESOURCES[
-        (request.env['warden.options'] || {}).fetch(:scope, :default).to_sym
-      ] || raise('Unknown session_resource')
+        scope
+      ] || raise("Unknown session_resource scope (#{scope})")
     end
 
     def session_resource

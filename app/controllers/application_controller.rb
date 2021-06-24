@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
     render :exception, locals: { exception: exception }
   end
 
+  def unauthenticated!
+    throw(:warden, scope: :user, redirect_url: request.url)
+  end
+
   def not_found
     render :not_found, layout: 'simple'
   end

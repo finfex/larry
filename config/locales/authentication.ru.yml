@@ -4,6 +4,8 @@ ru:
       new:
         sign_in: Вход для зарегистрированных
         sign_in_button: Войти
+      destroy:
+        logged: Сессия прекращена
     users:
       new:
         sign_up: Регистрация
