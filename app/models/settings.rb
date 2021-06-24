@@ -17,6 +17,10 @@ else
 end
 
 class Settings
+  def domain
+    default_url_options.host
+  end
+
   def tld_length
     default_url_options.host.split('.').count - 1
   end
