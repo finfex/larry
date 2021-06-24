@@ -4,7 +4,6 @@
 
 class Partner < ApplicationRecord
   belongs_to :user
-  belongs_to :account, class_name: 'OpenbillAccount'
 
   before_create do
     self.ref_token = SecureRandom.hex(12)
@@ -18,6 +17,14 @@ class Partner < ApplicationRecord
         amount: currency.zero_money
       )
     end
+  end
+
+  def referal_url
+    Rails.application.routes.url_helpers.public_root_url(ref_token: ref_token)
+  end
+
+  def accounts
+    OpenbillCategory.partners.accounts.where(reference: self)
   end
 
   def to_s

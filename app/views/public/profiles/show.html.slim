@@ -1,9 +1,22 @@
 h1= t '.profile'
 
-table.table
+table.table.table-narrow
   tr
     th Email
     td= current_user.email
+
+
+h2= t '.partner'
+
+
+- if current_user.partner.present?
+  table.table.table-narrow
+    tr
+      th Реферальная ссылка
+      td= link_to current_user.partner.referal_url, current_user.partner.referal_url, target: :blank
+- else
+  .alert.alert-warning У Вас не включен партнерский кабинет. Свяжитесь с администрацией
+
 
 hr
 = link_to t('application.navbar_user_dropdown.logout'), main_app.session_url, method: :delete

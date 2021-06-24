@@ -13,7 +13,7 @@ class Currency < ApplicationRecord
 
   alias_attribute :iso_code, :id
 
-  delegate :is_crypto?, to: :money_currency
+  delegate :zero_money, :is_crypto?, to: :money_currency
 
   def money_currency
     Money::Currency.find id

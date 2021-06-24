@@ -11,7 +11,7 @@ class OpenbillCategory < OpenbillRecord
   class << self
     Settings.openbill.categories.each_pair do |key, id|
       define_method key do
-        OpenbillCategory.find id
+        OpenbillCategory.create_with(name: key).find_or_create_by!(id: id)
       end
     end
   end
