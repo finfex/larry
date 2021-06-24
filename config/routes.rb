@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   scope module: :authentication do
     resource :session, only: %i[new create destroy]
+    resource :user
+    resources :password_resets, only: %i[new create edit update]
   end
 
   scope subdomain: 'operator', constraints: { subdomain: 'operator' } do

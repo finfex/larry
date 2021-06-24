@@ -16,11 +16,13 @@ class MoneyInput < SimpleForm::Inputs::StringInput
 
   def has_errors?
     return false if input_options[:disable_errors]
+
     super
   end
 
   def valid?
     return false if input_options[:disable_errors]
+
     super
   end
 end

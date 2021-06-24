@@ -41,15 +41,15 @@ gem 'dapi-archivable', require: 'archivable'
 gem 'env-tweaks', '~> 1.0.0'
 gem 'foreman'
 gem 'gera', path: 'vendor/gera' # github: 'finfex/gera', branch: 'master'
-gem 'ruby-progressbar'
 gem 'gravatarify', '~> 3.1'
 gem 'kaminari', '~> 1.2'
 gem 'money'
 gem 'money-rails'
 gem 'noty_flash', github: 'BrandyMint/noty_flash' # for gera
-gem 'rails-i18n', '~> 6.0'
-gem 'semver2', '~> 3.4'
 gem 'psych', '< 4.0'
+gem 'rails-i18n', '~> 6.0'
+gem 'ruby-progressbar'
+gem 'semver2', '~> 3.4'
 gem 'settingslogic'
 gem 'sidekiq'
 gem 'sidekiq-cron'
@@ -98,7 +98,6 @@ group :deploy do
   gem 'capistrano', require: false
   gem 'capistrano3-puma'
   gem 'capistrano-bundler', require: false
-  gem 'capistrano-rails-console', require: false
   gem 'capistrano-db-tasks', require: false
   gem 'capistrano-dotenv-tasks'
   gem 'capistrano-faster-assets', require: false
@@ -106,6 +105,7 @@ group :deploy do
   gem 'capistrano-master-key', require: false, github: 'virgoproz/capistrano-master-key'
   gem 'capistrano-nvm', require: false
   gem 'capistrano-rails', require: false
+  gem 'capistrano-rails-console', require: false
   gem 'capistrano-rbenv', require: false
   gem 'capistrano-shell', require: false
   gem 'capistrano-systemd-multiservice', github: 'groovenauts/capistrano-systemd-multiservice', require: false
@@ -132,4 +132,4 @@ gem 'ransack', '~> 2.4'
 gem 'rails_warden', github: 'wardencommunity/rails_warden'
 gem 'warden', '~> 1.2'
 
-gem "sd_notify", "~> 0.1.1"
+gem 'sd_notify', '~> 0.1.1'

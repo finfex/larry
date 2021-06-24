@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 class Partner < ApplicationRecord
   belongs_to :user
   belongs_to :account, class_name: 'OpenbillAccount'

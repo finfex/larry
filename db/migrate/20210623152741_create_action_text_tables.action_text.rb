@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 # This migration comes from action_text (originally 20180528164100)
 class CreateActionTextTables < ActiveRecord::Migration[6.0]
   def change
@@ -8,7 +12,7 @@ class CreateActionTextTables < ActiveRecord::Migration[6.0]
 
       t.timestamps
 
-      t.index [ :record_type, :record_id, :name ], name: "index_action_text_rich_texts_uniqueness", unique: true
+      t.index %i[record_type record_id name], name: 'index_action_text_rich_texts_uniqueness', unique: true
     end
   end
 end

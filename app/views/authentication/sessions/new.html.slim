@@ -1,14 +1,17 @@
-h1
+h1.mb-4
   = t('.sign_in')
-= simple_form_for session_resource, url: session_path do |f|
-  = hidden_field_tag :scope, session_scope
-  = hidden_field_tag :redirect_url, redirect_url
-  = f.input :email, as: :email, input_html: { autofocus: true, autocomplete: :email }
-  = f.input :password, as: :password, input_html: { autocomplete: 'current-password' }
-  = f.submit t('.sign_in'), class: 'btn btn-primary'
-= render 'authentication/shared/links'
-hr
+
+.row
+  .col-md-8
+    = simple_form_for session_resource, url: session_path do |f|
+      = hidden_field_tag :scope, session_scope
+      = hidden_field_tag :redirect_url, redirect_url
+      = f.input :email, as: :email, input_html: { autofocus: true, autocomplete: :email }
+      = f.input :password, as: :password, input_html: { autocomplete: 'current-password' }
+      = f.submit t('.sign_in_button'), class: 'btn btn-primary'
+  .col-md-4
+    = render 'authentication/shared/links'
 
 - if Rails.env.development?
-  p Session scope:
-  div= session_scope
+  pre.mt-4
+    | session_scope=#{session_scope}

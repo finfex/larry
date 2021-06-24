@@ -1,5 +1,7 @@
 ru:
   attributes:
+    email: Емайл
+    password: Пароль
     created_at: Создан
     archived_at: Архивирован
     updated_at: Обновлён

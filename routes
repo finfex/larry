@@ -57,6 +57,13 @@
                                          DELETE   /currencies/:id(.:format)                                                                         operator/currencies#destroy {:subdomain=>"operator"}
                                          GET|POST /*anything(.:format)                                                                              application#not_found {:subdomain=>"operator"}
                              public_root GET      /                                                                                                 public/orders#new {:subdomain=>""}
+                         new_public_user GET      /user/new(.:format)                                                                               public/users#new {:subdomain=>""}
+                        edit_public_user GET      /user/edit(.:format)                                                                              public/users#edit {:subdomain=>""}
+                             public_user GET      /user(.:format)                                                                                   public/users#show {:subdomain=>""}
+                                         PATCH    /user(.:format)                                                                                   public/users#update {:subdomain=>""}
+                                         PUT      /user(.:format)                                                                                   public/users#update {:subdomain=>""}
+                                         DELETE   /user(.:format)                                                                                   public/users#destroy {:subdomain=>""}
+                                         POST     /user(.:format)                                                                                   public/users#create {:subdomain=>""}
                            public_orders POST     /orders(.:format)                                                                                 public/orders#create {:subdomain=>""}
                             public_order GET      /orders/:id(.:format)                                                                             public/orders#show {:subdomain=>""}
                 public_rate_calculations POST     /rate_calculations(.:format)                                                                      public/rate_calculations#create {:subdomain=>""}

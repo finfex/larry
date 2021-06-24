@@ -1,3 +1,5 @@
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 # frozen_string_literal: true
 
 #  Позволяет удалять записи пакетами, гибко обрабатывая не удаляемые записи
@@ -59,8 +61,8 @@ module BatchPurger
 
       begin
         where("#{column} >= ? and #{column} <= ?", cur_value, next_value).delete_all
-      rescue ActiveRecord::StatementInvalid => err
-        logger.error err if logger.present?
+      rescue ActiveRecord::StatementInvalid => e
+        logger.error e if logger.present?
         if next_value > cur_value
           medium_value = cur_value + (next_value - cur_value) / 2
           batch_purge min_value: cur_value, max_value: medium_value

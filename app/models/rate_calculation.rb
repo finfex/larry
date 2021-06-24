@@ -36,7 +36,7 @@ class RateCalculation
   end
 
   def build_order
-    order=Order.new(
+    order = Order.new(
       income_amount: income_amount,
       income_payment_system: income_payment_system,
       outcome_payment_system: outcome_payment_system,
@@ -60,13 +60,15 @@ class RateCalculation
   def validate_minimal_income
     return unless income_amount < minimal_income_amount
 
-    errors.add :income_amount, "Минимальная допустима сумма для обмена в этом направлении #{humanized_money_with_currency minimal_income_amount}</span>".html_safe
+    errors.add :income_amount,
+               "Минимальная допустима сумма для обмена в этом направлении #{humanized_money_with_currency minimal_income_amount}</span>".html_safe
   end
 
   def validate_maximal_income
     return unless maximal_income_amount.present? && income_amount > maximal_income_amount
 
-    errors.add :income_amount, "Максимальная допустима сумма для обмена в этом направлении #{humanized_money_with_currency maximal_income_amount}</span>".html_safe
+    errors.add :income_amount,
+               "Максимальная допустима сумма для обмена в этом направлении #{humanized_money_with_currency maximal_income_amount}</span>".html_safe
   end
 
   def validate_reserves

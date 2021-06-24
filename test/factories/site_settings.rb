@@ -3,9 +3,8 @@
 # Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
 
 FactoryBot.define do
-  factory :partner do
-    user { '' }
-    account { '' }
-    ref_token { 'MyString' }
+  factory :site_setting, class: 'SiteSettings::SiteSetting' do
+    key { 'widget' }
+    value { 'MyText' }
   end
 end

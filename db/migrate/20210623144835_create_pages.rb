@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 class CreatePages < ActiveRecord::Migration[6.1]
   def change
     create_table :pages, id: :uuid do |t|

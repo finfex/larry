@@ -1,4 +1,9 @@
-/.form-group
+.form-group
+  - if session_scope == 'user'
+    - if controller_name == 'sessions'
+      = link_to t('.sign_up'), new_user_path
+      br
+      = link_to t('.forget_password'), new_password_reset_path
   /- if controller_name != 'sessions'
     /= link_to t(".sign_in"), new_session_path(resource_name)
     /br

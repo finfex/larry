@@ -28,10 +28,10 @@ set :nvm_map_bins, %w[node npm yarn rake]
 
 set :conditionally_migrate, true # Only attempt migration if db/migrate changed - not related to Webpacker, but a nice thing
 
-set :assets_roles, [:web, :app]
+set :assets_roles, %i[web app]
 set :assets_prefix, 'packs' # Assets are located in /packs/
 set :assets_manifests, ['app/assets/config/manifest.js']
-set :normalize_asset_timestamps, %w{public/images public/javascripts public/stylesheets}
+set :normalize_asset_timestamps, %w[public/images public/javascripts public/stylesheets]
 
 set :assets_dependencies,
     %w[
