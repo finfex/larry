@@ -30,6 +30,7 @@ Rails.application.routes.draw do
         scope module: :operator do
           root to: 'orders#index'
           resources :orders, only: %i[index show]
+          resources :users, only: %i[index show]
           resources :pages do
             concerns :archivable
           end

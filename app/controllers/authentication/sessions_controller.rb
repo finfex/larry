@@ -12,7 +12,6 @@ module Authentication
     end
 
     def create
-      binding.pry
       authenticate! scope: params.fetch(:scope)
       redirect_to params[:redirect_url].presence || welcome_url
     end

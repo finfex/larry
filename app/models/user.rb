@@ -11,4 +11,8 @@ class User < ApplicationRecord
   has_one :partner
 
   after_create :create_partner
+
+  def public_name
+    email
+  end
 end

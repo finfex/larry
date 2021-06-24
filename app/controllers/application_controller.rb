@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   helper NotyFlash::ApplicationHelper
   helper Gera::CurrencyRateHelper
   include RailsWarden::Authentication
+  include Referrer
   layout 'simple'
 
   rescue_from Gera::DirectionRatesRepository::NoActualSnapshot, with: :rescue_humanized_error

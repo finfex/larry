@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 module Authentication
   class ApplicationController < ::ApplicationController
     SCOPE_RESOURCES = { user: User, admin_user: AdminUser }.freeze

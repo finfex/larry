@@ -5,9 +5,13 @@
 class Partner < ApplicationRecord
   belongs_to :user
 
+  has_many :orders, as: :referrer
+
   before_create do
     self.ref_token = SecureRandom.hex(12)
   end
+
+  delegate :public_name, to: :user
 
   after_create do
     Currency.all.alive.each do |currency|
@@ -28,6 +32,6 @@ class Partner < ApplicationRecord
   end
 
   def to_s
-    "Partner #{user}"
+    public_name
   end
 end
