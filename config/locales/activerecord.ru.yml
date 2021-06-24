@@ -62,6 +62,9 @@ ru:
       gera/exchange_rate:
         value: Курс
         is_enabled: Разрешён обмен
+      gera/payment_system:
+        require_verify: Требуется подтверждение
+        icon: Логотип
       page:
         path: Путь
         menu_title: Название в меню

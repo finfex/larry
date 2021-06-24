@@ -5,34 +5,6 @@ GIT
     noty_flash (0.1.2)
 
 GIT
-  remote: https://github.com/finfex/gera.git
-  revision: fe8748bceeff9fd48a8bced60693074d2b1758bb
-  branch: master
-  specs:
-    gera (0.3.4)
-      active_link_to
-      authority
-      auto_logger (> 0.1.4)
-      best_in_place
-      breadcrumbs_on_rails
-      business_time
-      dapi-archivable
-      draper (> 3.0.0)
-      kaminari
-      money
-      money-rails
-      noty_flash
-      percentable
-      psych
-      rails (> 5.2.0)
-      request_store
-      require_all
-      rest-client (~> 2.0)
-      sidekiq
-      simple_form
-      virtus
-
-GIT
   remote: https://github.com/groovenauts/capistrano-systemd-multiservice.git
   revision: 955b99cc7588521ddc26ccd523ebba306e16fa0a
   specs:
@@ -62,6 +34,32 @@ GIT
     rails_warden (1.0.0)
       rails (>= 5)
       warden (>= 1.2.0)
+
+PATH
+  remote: vendor/gera
+  specs:
+    gera (0.3.4)
+      active_link_to
+      authority
+      auto_logger (> 0.1.4)
+      best_in_place
+      breadcrumbs_on_rails
+      business_time
+      dapi-archivable
+      draper (> 3.0.0)
+      kaminari
+      money
+      money-rails
+      noty_flash
+      percentable
+      psych
+      rails (> 5.2.0)
+      request_store
+      require_all
+      rest-client (~> 2.0)
+      sidekiq
+      simple_form
+      virtus
 
 GEM
   remote: https://rubygems.org/

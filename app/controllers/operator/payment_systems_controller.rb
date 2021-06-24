@@ -10,7 +10,7 @@ module Operator
 
     # TODO: наладить smart_input и добавить reservers_aggregator
     EDIT_COLUMNS = %i[name priority currency_iso_code is_available income_enabled outcome_enabled icon commission minimal_income_amount
-                      minimal_outcome_amount maximal_income_amount maximal_outcome_amount bestchange_key reserves_delta].freeze
+                      minimal_outcome_amount maximal_income_amount maximal_outcome_amount bestchange_key reserves_delta require_verify].freeze
 
     def index; end
 
