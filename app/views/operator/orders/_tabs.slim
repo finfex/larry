@@ -1,0 +1,4 @@
+ul.nav.nav-pills.mb-4
+  - %w[to_process in_process paid canceled].each do |tab_scope|
+    li.nav-item
+      = link_to t(tab_scope, scope: 'order.tabs', count: Order.tab_scope(tab_scope).count ), operator_orders_path(q: { tab_scope: tab_scope }), class: active_class('nav-link', current_tab == tab_scope)

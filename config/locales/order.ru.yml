@@ -4,3 +4,12 @@ ru:
       draft: Черновик
       published: Размещён
       accepted: В обработке
+      canceled: Отменена
+      paid: Оплачена
+    tabs:
+      to_process: Новые (%{count})
+      in_process: В обработке (%{count})
+      canceled: Отклонённые (%{count})
+      done: Завершённые (%{count})
+      search: Поиск (%{count})
+      paid: Оплачены (%{count})

@@ -4,7 +4,7 @@
 
 module SiteSettings
   UnknownSettingsKey = Class.new StandardError
-  KEYS = %w[extra_html]
+  KEYS = %w[extra_html].freeze
   class SiteSetting < ApplicationRecord
     validates :key, presence: true, uniqueness: true, inclusion: { in: KEYS }
   end

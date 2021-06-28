@@ -5,6 +5,7 @@
 module ApplicationHelper
   def present_time(time)
     return middot if time.nil?
+
     content_tag :span, class: 'text-nowrap', title: time do
       l time, format: :long
     end

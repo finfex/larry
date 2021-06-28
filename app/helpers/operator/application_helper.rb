@@ -7,9 +7,9 @@ module Operator
     CSS_CLASS = {
       'draft' => 'badge badge-secondary',
       'published' => 'badge badge-primary',
-      'accepted' => 'badge badge-warning',
+      'paid' => 'badge badge-success',
       'canceled' => 'badge badge-dark'
-    }
+    }.freeze
 
     def present_order_status(state)
       content_tag :span, class: CSS_CLASS[state], title: state do

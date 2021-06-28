@@ -1,4 +1,5 @@
 .btn-group
   - available_transitions = order.state_transitions.map(&:event)
   = link_to 'Начать обработоку', accept_operator_order_path(order), class: 'btn btn-warning', method: :put, data: { confirm: 'Принимаем к обработке?' } if available_transitions.include? :accept
+  = link_to 'Обработана', paid_operator_order_path(order), class: 'btn btn-primary', method: :put, data: { confirm: 'Деньги отправлены?' } if available_transitions.include? :paid
   = link_to 'Отклонить', cancel_operator_order_path(order), class: 'btn btn-secondary', method: :put, data: { confirm: 'Отклоняем?' } if available_transitions.include? :cancel

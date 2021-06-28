@@ -6,6 +6,8 @@
   - if  q.conditions.any?
     h2 Фильтр:
     pre= q.conditions
+
+  = render 'tabs', q: q
   - paginated_records.each do |order|
     .card.mb-4
       .card-header

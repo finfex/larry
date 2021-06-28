@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 class UserDecorator < ApplicationDecorator
   delegate_all
 
@@ -7,11 +11,13 @@ class UserDecorator < ApplicationDecorator
 
   def partner_ref_token
     return h.middot if partner.nil?
+
     h.link_to partner.ref_token, partner.referal_url, target: :_blank
   end
 
   def partner_orders
     return h.middot if partner.nil?
+
     h.link_to partner.orders.count, h.operator_orders_path(q: { referrer_id_eq: user.partner.id })
   end
 

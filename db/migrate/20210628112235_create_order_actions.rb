@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 class CreateOrderActions < ActiveRecord::Migration[6.1]
   def change
     create_table :order_actions, id: :uuid do |t|

@@ -33,6 +33,7 @@ Rails.application.routes.draw do
             member do
               put :accept
               put :cancel
+              put :paid
             end
           end
           resources :users, only: %i[index show]

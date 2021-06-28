@@ -36,6 +36,7 @@ Warden::Strategies.add(:password) do
 
   def scope_class
     return User if params.fetch(:scope) == 'default'
+
     params.fetch(:scope).classify.constantize
   end
 

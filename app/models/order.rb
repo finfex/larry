@@ -8,7 +8,7 @@ class Order < ApplicationRecord
 
   attr_accessor :action_operator
 
-  STATES = %i[draft published accepted canceled done].freeze
+  STATES = %i[draft published accepted canceled paid confirmed].freeze
 
   belongs_to :income_payment_system, class_name: 'Gera::PaymentSystem'
   belongs_to :outcome_payment_system, class_name: 'Gera::PaymentSystem'
@@ -25,7 +25,24 @@ class Order < ApplicationRecord
 
   before_create :assign_uid
 
-  scope :to_process, -> { where.not state: %i[draft done canceled] }
+  scope :to_process, -> { where.not state: %i[draft confirmed paid canceled] }
+
+  scope :tab_scope, -> (tab) {
+    case tab
+    when 'to_process'
+      to_process
+    when 'in_process'
+      accepted_state
+    when 'canceled'
+      canceled_state
+    when 'paid'
+      paid_state
+    when 'confirmed'
+      confirmed_state
+    else
+      raise "Unknown tab #{tab}"
+    end
+  }
 
   state_machine :state, initial: :draft do
     event :publish do
@@ -37,21 +54,27 @@ class Order < ApplicationRecord
     end
 
     event :cancel do
-      transition [:published, :accepted] => :canceled
+      transition %i[published accepted] => :canceled
     end
 
-    event :done do
-      transition accepted: :done
+    event :paid do
+      transition accepted: :paid
+    end
+
+    event :confirmed do
+      transition paid: :confirm
     end
 
     after_transition do |order, transition|
-      message = "#{transition.human_event}: #{transition.human_from_name}->#{transition.human_to_name}"
-      order.actions.create!(message: message, operator: order.action_operator)
+      after_transition do |order, transition|
+        message = "#{transition.human_event}: #{transition.human_from_name}->#{transition.human_to_name}"
+        order.actions.create!(message: message, operator: order.action_operator)
+      end
     end
   end
 
   def self.ransackable_scopes(_auth)
-    [:to_process]
+    %i[tab_scope]
   end
 
   def income_currency
@@ -69,6 +92,6 @@ class Order < ApplicationRecord
   private
 
   def assign_uid
-    self.uid ||= "%s%s" % ['EO', SecureRandom.hex(5).upcase]
+    self.uid ||= format('%s%s', 'EO', SecureRandom.hex(5).upcase)
   end
 end
