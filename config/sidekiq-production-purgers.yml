@@ -1,0 +1,5 @@
+:verbose: true
+:concurrency: 1
+:timeout: 30
+:queues:
+  - [purgers, 256]

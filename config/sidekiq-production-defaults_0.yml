@@ -1,0 +1,7 @@
+:verbose: true
+:concurrency: 8
+:timeout: 30
+:queues:
+  - [critical, 256]
+  - [default, 2]
+  - [mailers, 1]
