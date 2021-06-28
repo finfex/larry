@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
+  pool: <%= ENV.fetch("CONNECTIONS_POOL") { 100 } %>
   database: <%= ENV.fetch( 'LARRY_DATABASE_NAME', 'larry_production' ) %>
   username: <%= ENV.fetch('LARRY_DATABASE_USER', 'larry') %>
   password: <%= ENV['LARRY_DATABASE_PASSWORD'] %>
