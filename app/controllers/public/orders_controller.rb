@@ -59,6 +59,7 @@ module Public
       if rate_calculation.valid?
         order.ref_token = current_ref_token
         order.referrer = current_referrer
+        order.user = current_user
         order.save!
         redirect_to public_order_path(order), notice: 'Принята заявка на обмен. Ждём от Вас оплаты.'
       else

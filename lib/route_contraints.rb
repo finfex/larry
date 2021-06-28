@@ -6,7 +6,7 @@ module RouteConstraints
   # Contraint to user logged
   class UserRequiredConstraint
     def matches?(request)
-      request.env['warden'].user(:user).present? || throw(:warden, scope: :user)
+      request.env['warden'].user(:user).present? || throw(:warden, scope: :default)
     end
   end
 

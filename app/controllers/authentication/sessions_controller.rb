@@ -10,8 +10,7 @@ module Authentication
 
     def create
       authenticate! scope: params.fetch(:scope)
-      # It's already redirecited in authenticate!
-      # redirect_to params[:redirect_url].presence || welcome_url
+      redirect_to redirect_url || welcome_url
     end
 
     def destroy

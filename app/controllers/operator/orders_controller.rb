@@ -4,8 +4,5 @@
 
 module Operator
   class OrdersController < ApplicationController
-    def index
-      render locals: { orders: Order.order('created_at desc') }
-    end
   end
 end

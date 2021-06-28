@@ -52,6 +52,10 @@ class ApplicationDecorator < Draper::Decorator
     name.sub('Decorator', '').sub('Admin::', '').constantize
   end
 
+  def created_at
+    h.present_time object.created_at
+  end
+
   private
 
   def t(key)

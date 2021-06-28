@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_24_135021) do
+ActiveRecord::Schema.define(version: 2021_06_28_103355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -380,11 +380,13 @@ ActiveRecord::Schema.define(version: 2021_06_24_135021) do
     t.string "ref_token"
     t.uuid "referrer_id"
     t.string "state", default: "draft", null: false
+    t.uuid "user_id"
     t.index ["direction_rate_id"], name: "index_orders_on_direction_rate_id"
     t.index ["income_payment_system_id"], name: "index_orders_on_income_payment_system_id"
     t.index ["outcome_payment_system_id"], name: "index_orders_on_outcome_payment_system_id"
     t.index ["referrer_id", "state", "created_at"], name: "index_orders_on_referrer_id_and_state_and_created_at"
     t.index ["referrer_id"], name: "index_orders_on_referrer_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -493,6 +495,7 @@ ActiveRecord::Schema.define(version: 2021_06_24_135021) do
   add_foreign_key "orders", "gera_payment_systems", column: "income_payment_system_id"
   add_foreign_key "orders", "gera_payment_systems", column: "outcome_payment_system_id"
   add_foreign_key "orders", "partners", column: "referrer_id"
+  add_foreign_key "orders", "users"
   add_foreign_key "partners", "users"
   add_foreign_key "wallet_activities", "openbill_accounts", column: "opposit_account_id"
   add_foreign_key "wallet_activities", "wallets"

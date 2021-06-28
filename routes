@@ -17,6 +17,8 @@
                            operator_root GET      /                                                                                                 operator/orders#index {:subdomain=>"operator"}
                          operator_orders GET      /orders(.:format)                                                                                 operator/orders#index {:subdomain=>"operator"}
                           operator_order GET      /orders/:id(.:format)                                                                             operator/orders#show {:subdomain=>"operator"}
+                          operator_users GET      /users(.:format)                                                                                  operator/users#index {:subdomain=>"operator"}
+                           operator_user GET      /users/:id(.:format)                                                                              operator/users#show {:subdomain=>"operator"}
                    archive_operator_page PUT      /pages/:id/archive(.:format)                                                                      operator/pages#archive {:subdomain=>"operator"}
                    restore_operator_page PUT      /pages/:id/restore(.:format)                                                                      operator/pages#restore {:subdomain=>"operator"}
                           operator_pages GET      /pages(.:format)                                                                                  operator/pages#index {:subdomain=>"operator"}

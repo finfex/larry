@@ -20,7 +20,7 @@ module Authentication
     end
 
     def session_scope
-      session_resource.class.name.underscore
+      SCOPE_RESOURCES.invert.fetch session_resource.class
     end
 
     def session_resoruce_class

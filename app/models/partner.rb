@@ -5,7 +5,7 @@
 class Partner < ApplicationRecord
   belongs_to :user
 
-  has_many :orders, as: :referrer
+  has_many :orders, foreign_key: :referrer_id
 
   before_create do
     self.ref_token = SecureRandom.hex(12)

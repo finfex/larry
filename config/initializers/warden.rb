@@ -22,7 +22,7 @@ end
 
 Warden::Strategies.add(:password) do
   def valid?
-    params.fetch(scope).keys.sort == %w[password email].sort
+    params.fetch(params_scope).keys.sort == %w[password email].sort
   end
 
   def authenticate!
@@ -35,10 +35,15 @@ Warden::Strategies.add(:password) do
   end
 
   def scope_class
+    return User if params.fetch(:scope) == 'default'
     params.fetch(:scope).classify.constantize
   end
 
   def session_form_attrs
-    params.fetch scope
+    params.fetch params_scope
+  end
+
+  def params_scope
+    scope == 'default' ? :user : scope
   end
 end

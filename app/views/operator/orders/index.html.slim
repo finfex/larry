@@ -1,8 +1,15 @@
-.container
-  - orders.each do |order|
+.container.mt-4
+  - if q.conditions.any?
+    .mb-3= link_to '&larr; назад в список заявок'.html_safe, operator_orders_path
+
+  h1.mb-4= Order.model_name.human(count: 100)
+  - if  q.conditions.any?
+    h2 Фильтр:
+    pre= q.conditions
+  - paginated_records.each do |order|
     .card.mb-4
       .card-header
-        = l order.created_at
+        = present_time order.created_at
       .card-body
         .row
           .col-md-4
@@ -19,3 +26,4 @@
             = present_payment_system order.outcome_payment_system
           .col-md-4
             = humanized_money_with_currency order.outcome_amount
+  = paginate paginated_records

@@ -12,6 +12,7 @@ class Order < ApplicationRecord
   belongs_to :outcome_payment_system, class_name: 'Gera::PaymentSystem'
   belongs_to :direction_rate, class_name: 'Gera::DirectionRate'
   belongs_to :referrer, class_name: 'Partner', optional: true
+  belongs_to :user, class_name: 'User', optional: true
 
   monetize :income_amount_cents, as: :income_amount, allow_nil: false
   monetize :outcome_amount_cents, as: :outcome_amount, allow_nil: false

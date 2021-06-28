@@ -9,6 +9,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
 
   has_one :partner
+  has_many :orders
 
   after_create :create_partner
 

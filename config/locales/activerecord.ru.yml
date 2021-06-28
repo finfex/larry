@@ -5,6 +5,11 @@ ru:
     password_confirmation: Подтверждение пароля
     created_at: Создан
     archived_at: Архивирован
+    public_name: Публичное имя
+    partner_ref_token: Партнерская ссылка
+    partner_orders: Реферальные заявки
+    orders: Заявки
+    partner_balances: Партнерский баланс
     updated_at: Обновлён
     direction: Направление
     inverse_direction: Обратное направление
@@ -51,10 +56,10 @@ ru:
       currency: Валюты
       gera/payment_system: Платежные системы
       order:
-        one: Заказ
-        few: Заказы
-        many: Заказы
-        other: Заказы
+        one: Заявки
+        few: Заявки
+        many: Заявки
+        other: Заявки
       admin_user: Сотрудники
       user: Пользователи
       direction_rate: Конечный курс

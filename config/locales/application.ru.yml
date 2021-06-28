@@ -1,12 +1,10 @@
 ru:
   application:
     navbar:
-      rules: 'Правила обмена'
-      wallets: 'Кошельки'
-      pages: 'Страницы'
+      rules: Правила обмена
       gera: Управление курсами
     navbar_user_dropdown:
       profile: Личный кабинет
       logout: Выйти
     footer:
-      operator: 'Операторская'
+      operator: Операторская
