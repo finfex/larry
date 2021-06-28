@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_28_103355) do
+ActiveRecord::Schema.define(version: 2021_06_28_110019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -376,15 +376,16 @@ ActiveRecord::Schema.define(version: 2021_06_28_103355) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.jsonb "rate_calculation_dump", null: false
-    t.string "request_direction", null: false
     t.string "ref_token"
     t.uuid "referrer_id"
-    t.string "state", default: "draft", null: false
     t.uuid "user_id"
+    t.uuid "operator_id"
+    t.integer "state", default: 0, null: false
+    t.integer "request_direction", default: 0, null: false
     t.index ["direction_rate_id"], name: "index_orders_on_direction_rate_id"
     t.index ["income_payment_system_id"], name: "index_orders_on_income_payment_system_id"
+    t.index ["operator_id"], name: "index_orders_on_operator_id"
     t.index ["outcome_payment_system_id"], name: "index_orders_on_outcome_payment_system_id"
-    t.index ["referrer_id", "state", "created_at"], name: "index_orders_on_referrer_id_and_state_and_created_at"
     t.index ["referrer_id"], name: "index_orders_on_referrer_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -491,6 +492,7 @@ ActiveRecord::Schema.define(version: 2021_06_28_103355) do
   add_foreign_key "openbill_transactions", "openbill_accounts", column: "to_account_id", name: "openbill_transactions_to_account_id_fkey"
   add_foreign_key "openbill_transactions", "openbill_invoices", column: "invoice_id", name: "openbill_transactions_invoice_id_fk", on_delete: :restrict
   add_foreign_key "openbill_transactions", "openbill_transactions", column: "reverse_transaction_id", name: "reverse_transaction_foreign_key"
+  add_foreign_key "orders", "admin_users", column: "operator_id"
   add_foreign_key "orders", "gera_direction_rates", column: "direction_rate_id"
   add_foreign_key "orders", "gera_payment_systems", column: "income_payment_system_id"
   add_foreign_key "orders", "gera_payment_systems", column: "outcome_payment_system_id"
