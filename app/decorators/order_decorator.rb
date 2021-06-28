@@ -9,6 +9,10 @@ class OrderDecorator < ApplicationDecorator
     h.present_order_status object.state
   end
 
+  def public_url
+    h.link_to 'Публичкая ссылка', h.public_order_url(order), target: '_blank'
+  end
+
   def rate
     return '-' if object.rate_value.nil?
 

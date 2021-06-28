@@ -1,3 +1,4 @@
-h1 Заявка на обмен #{order.uid}
+.container.mt-4
+  h1.mb-4 Заявка на обмен #{order.uid}
 
-= render 'attributes_table', object: OrderDecorator.decorate(order), columns: %i[created_at income_amount outcome_amount income_payment_system outcome_payment_system rate]
+  = render 'attributes_table', object: OrderDecorator.decorate(order), columns: %i[created_at income_amount outcome_amount income_payment_system outcome_payment_system rate state]
