@@ -5,10 +5,10 @@ h1.mb-4
   .col-md-8
     = simple_form_for user, url: user_path do |f|
       = hidden_field_tag :scope, session_scope
-      -# = hidden_field_tag :redirect_url, redirect_url
+      = hidden_field_tag :redirect_url, redirect_url
       = f.input :email, as: :email, input_html: { autofocus: true, autocomplete: :email }
       = f.input :password, as: :password, input_html: { autocomplete: 'current-password' }
       = f.input :password_confirmation, as: :password, input_html: { autocomplete: 'current-password' }
-      = f.submit t('.sign_up_button'), class: 'btn btn-primary'
+      .mt-4= f.submit t('.sign_up_button'), class: 'btn btn-primary btn-lg'
   .col-md-4
     = render 'authentication/shared/links'

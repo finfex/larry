@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
   def unauthenticated!
-    throw(:warden, scope: :user, redirect_url: request.url)
+    throw(:warden, scope: :default, redirect_url: request.url)
   end
 
   def not_found
@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    user :user
+    user
   end
 
   def current_admin_user

@@ -5,7 +5,7 @@
 module Public
   class ProfilesController < ApplicationController
     def show
-      unauthenticated! unless authenticated?(:user)
+      unauthenticated! unless authenticated?
     end
   end
 end

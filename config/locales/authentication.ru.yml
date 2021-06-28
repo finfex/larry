@@ -5,7 +5,7 @@ ru:
         sign_in: Вход для зарегистрированных
         sign_in_button: Войти
       destroy:
-        logged: Сессия прекращена
+        logged_out: Сессия прекращена
     users:
       new:
         sign_up: Регистрация

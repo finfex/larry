@@ -11,7 +11,8 @@ module Authentication
     def create
       user = User.new permitted_params
       user.save!
-      redirect_to welcome_url, notice: 'Вы зарегитсрированы'
+      login! user
+      redirect_to redirect_url || welcome_url, notice: 'Вы зарегитсрированы'
     rescue ActiveRecord::RecordInvalid
       render :new, locals: { user: user }
     end
