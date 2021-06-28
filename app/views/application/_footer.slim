@@ -12,3 +12,4 @@ hr style='margin-top: 4em'
     span.ml-2= AppVersion
     span.ml-2 © #{link_to 'FINFEX', 'http://github.com/finfex'} #{Date.today.year}
 = render 'flashes'
+= raw SiteSettings.extra_html.to_s
