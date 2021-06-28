@@ -5,6 +5,10 @@
 class OrderDecorator < ApplicationDecorator
   delegate_all
 
+  def state
+    h.present_order_status object.state
+  end
+
   def rate
     return '-' if object.rate_value.nil?
 

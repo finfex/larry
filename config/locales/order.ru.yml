@@ -3,3 +3,4 @@ ru:
     states:
       draft: Черновик
       published: Размещён
+      accepted: В обработке

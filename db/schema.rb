@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_28_110019) do
+ActiveRecord::Schema.define(version: 2021_06_28_114251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -361,6 +361,16 @@ ActiveRecord::Schema.define(version: 2021_06_28_110019) do
     t.check_constraint "to_account_id <> from_account_id", name: "different_accounts"
   end
 
+  create_table "order_actions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "order_id", null: false
+    t.string "message", null: false
+    t.uuid "operator_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["operator_id"], name: "index_order_actions_on_operator_id"
+    t.index ["order_id"], name: "index_order_actions_on_order_id"
+  end
+
   create_table "orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.decimal "income_amount_cents", null: false
     t.string "income_amount_currency", null: false
@@ -382,11 +392,13 @@ ActiveRecord::Schema.define(version: 2021_06_28_110019) do
     t.uuid "operator_id"
     t.integer "state", default: 0, null: false
     t.integer "request_direction", default: 0, null: false
+    t.string "uid", null: false
     t.index ["direction_rate_id"], name: "index_orders_on_direction_rate_id"
     t.index ["income_payment_system_id"], name: "index_orders_on_income_payment_system_id"
     t.index ["operator_id"], name: "index_orders_on_operator_id"
     t.index ["outcome_payment_system_id"], name: "index_orders_on_outcome_payment_system_id"
     t.index ["referrer_id"], name: "index_orders_on_referrer_id"
+    t.index ["uid"], name: "index_orders_on_uid", unique: true
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -492,6 +504,8 @@ ActiveRecord::Schema.define(version: 2021_06_28_110019) do
   add_foreign_key "openbill_transactions", "openbill_accounts", column: "to_account_id", name: "openbill_transactions_to_account_id_fkey"
   add_foreign_key "openbill_transactions", "openbill_invoices", column: "invoice_id", name: "openbill_transactions_invoice_id_fk", on_delete: :restrict
   add_foreign_key "openbill_transactions", "openbill_transactions", column: "reverse_transaction_id", name: "reverse_transaction_foreign_key"
+  add_foreign_key "order_actions", "admin_users", column: "operator_id"
+  add_foreign_key "order_actions", "orders"
   add_foreign_key "orders", "admin_users", column: "operator_id"
   add_foreign_key "orders", "gera_direction_rates", column: "direction_rate_id"
   add_foreign_key "orders", "gera_payment_systems", column: "income_payment_system_id"

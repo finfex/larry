@@ -497,6 +497,7 @@ GEM
     sshkit-interactive (0.3.0)
       sshkit (~> 1.12)
     ssrf_filter (1.0.7)
+    state_machine (1.2.0)
     temple (0.8.2)
     thor (1.1.0)
     thread_safe (0.3.6)
@@ -617,6 +618,7 @@ DEPENDENCIES
   simple_form
   slim-rails
   spring
+  state_machine
   title (~> 0.0.8)
   turbolinks (~> 5)
   tzinfo-data

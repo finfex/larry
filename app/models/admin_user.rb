@@ -11,6 +11,10 @@ class AdminUser < ApplicationRecord
     email
   end
 
+  def to_s
+    name
+  end
+
   # rubocop:disable Naming/PredicateName
   def has_permission?(_subject, _method)
     true

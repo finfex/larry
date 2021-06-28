@@ -9,6 +9,7 @@
   - paginated_records.each do |order|
     .card.mb-4
       .card-header
+        span.mr-2.text-nowrap= link_to order.uid, operator_order_path(order)
         = present_time order.created_at
       .card-body
         .row
@@ -34,7 +35,5 @@
         .row
           .col-md-12
             .mt-4
-              .btn-group
-                = link_to 'Принять', '#', class: 'btn btn-primary'
-                = link_to 'Отклонить', '#', class: 'btn btn-secondary'
+              = render 'actions', order: order
   = paginate paginated_records

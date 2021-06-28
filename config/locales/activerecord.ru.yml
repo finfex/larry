@@ -10,6 +10,7 @@ ru:
     partner_orders: Реферальные заявки
     orders: Заявки
     partner_balances: Партнерский баланс
+    state: Статус
     updated_at: Обновлён
     direction: Направление
     inverse_direction: Обратное направление
@@ -17,6 +18,7 @@ ru:
     rate_percent: Комиссия обмена
     ps_comission: Комиссия платёжной системы
     rate_value: Курс обмена
+    operator: Оператор
     id: ID
     mode: Режим
     external_rate: Курс источника

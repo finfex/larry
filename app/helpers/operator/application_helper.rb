@@ -5,8 +5,10 @@
 module Operator
   module ApplicationHelper
     CSS_CLASS = {
-      'draft' => 'badge badge-dark',
-      'published' => 'badge badge-primary'
+      'draft' => 'badge badge-secondary',
+      'published' => 'badge badge-primary',
+      'accepted' => 'badge badge-warning',
+      'canceled' => 'badge badge-dark'
     }
 
     def present_order_status(state)
