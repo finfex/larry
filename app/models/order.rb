@@ -8,7 +8,7 @@ class Order < ApplicationRecord
 
   attr_accessor :action_operator
 
-  STATES = %i[draft published accepted canceled].freeze
+  STATES = %i[draft published accepted canceled done].freeze
 
   belongs_to :income_payment_system, class_name: 'Gera::PaymentSystem'
   belongs_to :outcome_payment_system, class_name: 'Gera::PaymentSystem'
@@ -25,6 +25,8 @@ class Order < ApplicationRecord
 
   before_create :assign_uid
 
+  scope :to_process, -> { where.not state: %i[draft done canceled] }
+
   state_machine :state, initial: :draft do
     event :publish do
       transition draft: :published
@@ -38,10 +40,18 @@ class Order < ApplicationRecord
       transition [:published, :accepted] => :canceled
     end
 
+    event :done do
+      transition accepted: :done
+    end
+
     after_transition do |order, transition|
       message = "#{transition.human_event}: #{transition.human_from_name}->#{transition.human_to_name}"
       order.actions.create!(message: message, operator: order.action_operator)
     end
+  end
+
+  def self.ransackable_scopes(_auth)
+    [:to_process]
   end
 
   def income_currency

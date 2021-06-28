@@ -4,7 +4,6 @@
 
 module Operator
   class OrdersController < ApplicationController
-
     def cancel
       order.action_operator = current_admin_user
       order.cancel!
@@ -26,6 +25,11 @@ module Operator
 
     def order
       @order ||= Order.find params[:id]
+    end
+
+    def q_params
+      return params[:q] if params.key? :q
+      { to_process: true }
     end
   end
 end

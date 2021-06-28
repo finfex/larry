@@ -32,8 +32,12 @@ module RansackSupport
     @q ||= build_q
   end
 
+  def q_params
+    params[:q]
+  end
+
   def build_q
-    qq = model_class.ransack(params[:q])
+    qq = model_class.ransack(q_params)
     qq.sorts = 'created_at desc' if qq.sorts.empty?
     qq
   end
