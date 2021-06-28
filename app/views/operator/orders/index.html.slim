@@ -22,16 +22,17 @@
               | Реферал #{link_to order.referrer.public_name, operator_user_path(order.referrer.user_id)}
             - else
               .text-muted.text-small Без реферала
-            - if order.operator_id.present?
-              .text-small= "Оператор: #{order.operator}"
-            - else
-              .text-muted.text-small Оператор не установлен
-            = present_order_status order.state
         .row
           .col-md-4
             = present_payment_system order.outcome_payment_system
           .col-md-4
             = humanized_money_with_currency order.outcome_amount
+          .col-md-4
+            - if order.operator_id.present?
+              .text-small= "Оператор: #{order.operator}"
+            - else
+              .text-muted.text-small Оператор не установлен
+            = present_order_status order.state
         .row
           .col-md-12
             .mt-4
