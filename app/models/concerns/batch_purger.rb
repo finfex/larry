@@ -33,7 +33,8 @@ module BatchPurger
   # На боевом сервере 100 тыс записей удаляется примерно за 10 секунд
   DEFAULT_BATCH_SIZE = Rails.env.production? ? 100_000 : 10_000
 
-  def batch_purge(batch_size: DEFAULT_BATCH_SIZE, min_value: nil, max_value: nil, column: :id, logger: nil)
+  def batch_purge(batch_size: DEFAULT_BATCH_SIZE, min_value: nil, max_value: nil, column: nil, logger: nil)
+    column ||= attribute_types['id'].is_a?(ActiveModel::Type::Integer) ? :id : :created_at
     min_value ||= minimum(column)
     max_value ||= maximum(column)
 
