@@ -29,7 +29,6 @@ module Operator
       page.update! permitted_params
       redirect_to operator_pages_path, notice: 'Изменения приняты'
     rescue ActiveRecord::RecordInvalid
-      binding.pry
       render :edit, locals: { page: page }
     end
 

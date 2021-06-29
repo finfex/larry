@@ -184,6 +184,7 @@ class FileUploaderInput < Formtastic::Inputs::FileInput
   end
 end
 # rubocop:enable Metrics/MethodLength
+# rubocop:enable Metrics/ClassLength
 
 # class FileUploaderInput < Formtastic::Inputs::FileInput
 

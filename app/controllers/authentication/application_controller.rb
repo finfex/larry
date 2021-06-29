@@ -11,10 +11,10 @@ module Authentication
     private
 
     def redirect_url
-      unless request.original_url.include?('/session')
-        (request.env['warden.options'] || {})
-          .fetch(:redirect_url, params[:redirect_url].presence || request.url)
-      end
+      return if request.original_url.include?('/session')
+
+      (request.env['warden.options'] || {})
+        .fetch(:redirect_url, params[:redirect_url].presence || request.url)
     end
 
     def welcome_url

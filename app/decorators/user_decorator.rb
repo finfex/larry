@@ -26,6 +26,6 @@ class UserDecorator < ApplicationDecorator
   end
 
   def partner_balances
-    balances = {}
+    # partner balances
   end
 end

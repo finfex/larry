@@ -4,7 +4,6 @@
 
 module Operator
   class OrdersController < ApplicationController
-
     helper_method :current_tab
 
     before_action only: [:index] do

@@ -27,7 +27,7 @@ class Order < ApplicationRecord
 
   scope :to_process, -> { where.not state: %i[draft confirmed paid canceled] }
 
-  scope :tab_scope, -> (tab) {
+  scope :tab_scope, lambda { |tab|
     case tab
     when 'to_process'
       to_process
@@ -65,7 +65,7 @@ class Order < ApplicationRecord
       transition paid: :confirm
     end
 
-    after_transition do |order, transition|
+    after_transition do |_order, _transition|
       after_transition do |order, transition|
         message = "#{transition.human_event}: #{transition.human_from_name}->#{transition.human_to_name}"
         order.actions.create!(message: message, operator: order.action_operator)

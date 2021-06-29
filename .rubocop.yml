@@ -23,6 +23,9 @@ Metrics/AbcSize:
   Exclude:
     - 'db/migrate/*'
 
+Style/FormatStringToken:
+  Enabled: false
+
 Lint/EmptyBlock:
   Exclude:
     - 'test/factories/*'
