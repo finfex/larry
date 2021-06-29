@@ -4,7 +4,7 @@
 
 FactoryBot.define do
   factory :site_setting, class: 'SiteSettings::SiteSetting' do
-    key { 'widget' }
+    key { SiteSettings::KEYS.first }
     value { 'MyText' }
   end
 end
