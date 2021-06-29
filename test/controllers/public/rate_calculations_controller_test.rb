@@ -28,7 +28,7 @@ module Public
                                          params: { request_direction: :from_outcome, direction_rate_id: @direction_rate.id, outcome_amount: outcome_amount }
       assert_response :success
       result = JSON.parse response.body
-      assert_equal result['income_amount'], (outcome_amount.to_d / @direction_rate.rate_value).round(2).to_s
+      assert_equal result['income_amount'], (outcome_amount.to_d / @direction_rate.rate_value).round(2).to_money(:rub).to_s
     end
   end
 end
