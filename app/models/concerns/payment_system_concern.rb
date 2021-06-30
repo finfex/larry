@@ -22,7 +22,7 @@ module PaymentSystemConcern
     end
 
     after_create do
-      Wallet.create! payment_system: self, details: "Default wallet for #{self.name} (#{self.currency})"
+      Wallet.create! payment_system: self, details: "Default wallet for #{name} (#{self.currency})"
       OpenbillCategory.storno.accounts.create! details: "Storno account for #{self}", reference: self, amount: self.currency.zero_money
     end
   end

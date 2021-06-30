@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 class AddPercentagesToPartners < ActiveRecord::Migration[6.1]
   def change
     add_column :partners, :accrual_method, :integer, null: false, default: 0

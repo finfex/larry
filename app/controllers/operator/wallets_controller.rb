@@ -25,7 +25,6 @@ module Operator
     end
 
     def update
-      binding.pry
       resource.update! wallet_params
       redirect_to operator_wallet_path(resource), notice: 'Изменения приняты'
     rescue ActiveRecord::RecordInvalid

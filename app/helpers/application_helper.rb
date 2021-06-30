@@ -4,13 +4,12 @@
 
 module ApplicationHelper
   def page_header(title:, back_link: true, float_link: nil)
-    if back_link == true
-      if respond_to? :resource
-        back_link = -> { link_to '&larr;&nbsp;'.html_safe + resource.class.model_name.human(count: 100), url_for([namespace, resource.class]) }
-      else
-        raise 'No resource to identify back_link'
-      end
-    elsif back_link == false
+    case back_link
+    when true
+      raise 'No resource to identify back_link' unless respond_to? :resource
+
+      back_link = -> { link_to '&larr;&nbsp;'.html_safe + resource.class.model_name.human(count: 100), url_for([namespace, resource.class]) }
+    when false
       back_link = nil
     end
     render 'page_header', title: title, back_link: back_link, float_link: float_link
