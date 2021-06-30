@@ -1,15 +1,16 @@
 hr style='margin-top: 4em'
-.container.text-muted
-  .float-left
-    - unless Rails.env.production?
-      = link_to t('.operator'), main_app.operator_root_url 
-      pre
-        | ref_token=#{current_ref_token || :nil}
-    - if authenticated?(:admin_user)
-      div= current_admin_user.email
-  .float-right
-    = Rails.env unless Rails.env.production?
-    span.ml-2 title=AppVersion.to_s
-      | © #{link_to 'FINFEX', 'https://github.com/finfex/larry'} #{Date.today.year}
-= render 'flashes'
-= raw SiteSettings.extra_html.to_s
+= page_container do
+  .text-muted
+    .float-left
+      - unless Rails.env.production?
+        = link_to t('.operator'), main_app.operator_root_url 
+        pre
+          | ref_token=#{current_ref_token || :nil}
+      - if authenticated?(:admin_user)
+        div= current_admin_user.email
+    .float-right
+      = Rails.env unless Rails.env.production?
+      span.ml-2 title=AppVersion.to_s
+        | © #{link_to 'FINFEX', 'https://github.com/finfex/larry'} #{Date.today.year}
+    = render 'flashes'
+    = raw SiteSettings.extra_html.to_s

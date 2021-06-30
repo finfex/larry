@@ -7,7 +7,8 @@ module Operator
     include ArchivableActions
 
     def index
-      render locals: { wallets: Wallet.includes(:payment_system, :available_account, :locked_account) }
+      @container = :fluid
+      render locals: { wallets: Wallet.includes(:payment_system, :available_account, :locked_account).order('archived_at desc, address') }
     end
 
     def show

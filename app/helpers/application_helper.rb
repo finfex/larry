@@ -35,6 +35,10 @@ module ApplicationHelper
     content_tag :div, '&middot;'.html_safe, class: 'text-muted'
   end
 
+  def page_container(&block)
+    content_tag :div, class: page_layout_container_class, &block
+  end
+
   def page_layout_container
     @container || :fixed # or fluid
   end

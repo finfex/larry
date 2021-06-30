@@ -1,3 +1,4 @@
-.container.mt-4
-  = page_header title: Wallet.model_name.human(count: 100), back_link: false, float_link: -> {  link_to 'Добавить кошелёк', new_operator_wallet_path, class: 'btn btn-success' }
-  = render 'table', items: WalletDecorator.decorate_collection(wallets)
+.mt-4
+  = page_container do
+    = page_header title: Wallet.model_name.human(count: 100), back_link: false, float_link: -> {  link_to 'Добавить кошелёк', new_operator_wallet_path, class: 'btn btn-success' }
+    = render 'table', items: WalletDecorator.decorate_collection(wallets)
