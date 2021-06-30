@@ -15,4 +15,6 @@ FactoryBot.define do
   sequence :email do |n|
     "email#{n}@onelec.ru"
   end
+
+  sequence :wallet_address, &:to_s
 end

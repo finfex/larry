@@ -22,7 +22,8 @@ module PaymentSystemConcern
     end
 
     after_create do
-      Wallet.create! payment_system: self, details: "Default wallet for #{name} (#{self.currency})"
+      # TODO: generate default address
+      # Wallet.create! payment_system: self, details: "Default wallet for #{name} (#{self.currency})", address: generate
       OpenbillCategory.storno.accounts.create! details: "Storno account for #{self}", reference: self, amount: self.currency.zero_money
     end
   end
