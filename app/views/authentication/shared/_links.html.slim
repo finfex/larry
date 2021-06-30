@@ -1,6 +1,6 @@
 .form-group
   - if controller_name == 'sessions'
-    - if session_scope == 'user'
+    - if session_scope == :default
       .mb-4= link_to t('.sign_up'), new_user_path(redirect_url: redirect_url)
     -#= link_to t('.forget_password'), new_password_reset_path
   - elsif controller_name == 'users'
