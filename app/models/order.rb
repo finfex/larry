@@ -92,6 +92,6 @@ class Order < ApplicationRecord
   private
 
   def assign_uid
-    self.uid ||= format('%s%s', 'EO', SecureRandom.hex(5).upcase)
+    self.uid ||= SecureRandom.hex(5).upcase
   end
 end
