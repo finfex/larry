@@ -1,9 +1,9 @@
 .container
-  = link_to operator_wallets_path do
-    = '&larr;'.html_safe + Wallet.model_name.human
-  h1= t '.wallet'
+  .mb-4= link_to operator_wallets_path do
+    = '&larr;'.html_safe + Wallet.model_name.human(count: 100)
+  h1.mb-4= Wallet.model_name.human
   = render 'table', items: [wallet]
-  h2= t '.manual_update'
+  h2.mb-4= t '.manual_update'
   div style='max-width: 400px'
     = render 'operator/wallet_activities/form', wallet_activity: wallet_activity
   hr

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_30_120620) do
+ActiveRecord::Schema.define(version: 2021_06_30_125214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -465,6 +465,10 @@ ActiveRecord::Schema.define(version: 2021_06_30_120620) do
     t.uuid "available_account_id", null: false
     t.uuid "locked_account_id", null: false
     t.datetime "archived_at"
+    t.string "address", null: false
+    t.boolean "income_enable", default: true, null: false
+    t.boolean "outcome_enable", default: true, null: false
+    t.index ["address"], name: "index_wallets_on_address", unique: true
     t.index ["available_account_id"], name: "index_wallets_on_available_account_id"
     t.index ["locked_account_id"], name: "index_wallets_on_locked_account_id"
     t.index ["payment_system_id"], name: "index_wallets_on_payment_system_id"

@@ -54,7 +54,11 @@ ru:
 
   activerecord:
     models:
-      wallet: Кошельки
+      wallet: 
+        one: Кошелёк
+        few: Кошельков
+        many: Кошельки
+        other: Кошельки
       page: Страницы
       currency: Валюты
       gera/payment_system: Платежные системы
@@ -83,6 +87,10 @@ ru:
         menu_title: Название в меню
         html_title: Заголовок в HTML
         content: Содержимое
+      wallet:
+        address: Адрес или номер счёта
+        income_enable: Разрешён приём средств
+        outcome_enable: Разрешён вывод средств
       nomenclature_in_stock_cell:
         in_stock_quantity: В Наличии
         to_selection_quantity: К Отбору

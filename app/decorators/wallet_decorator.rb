@@ -6,7 +6,7 @@ class WalletDecorator < ApplicationDecorator
   delegate_all
 
   def self.table_columns
-    %i[payment_system currency details available_amount locked_amount total_amount]
+    %i[payment_system currency address income_enable outcome_enable details available_amount locked_amount total_amount]
   end
 
   %i[available_amount locked_amount total_amount].each do |method|

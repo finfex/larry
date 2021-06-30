@@ -8,5 +8,5 @@
     .col-md-9
       = render 'form', payment_system: payment_system, columns: edit_columns
 
-  h3.mt-4.mb-2= Wallet.model_name.human
+  h3.mt-4.mb-4= Wallet.model_name.human(count: 100)
   = render 'table', items: payment_system.wallets

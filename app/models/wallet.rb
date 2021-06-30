@@ -14,6 +14,8 @@ class Wallet < ApplicationRecord
 
   delegate :currency, to: :payment_system
 
+  validates :address, presence: true, uniqueness: { scope: :payment_system_id }
+
   def self.create_for_payment_system!(payment_system)
     Wallet.transaction do
       available_account = OpenbillAccount.create!(category_id: Settings.openbill.categories.wallets, amount_cents: 0,
