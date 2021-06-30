@@ -1,12 +1,10 @@
 .container
-  = link_to '&larr; назад в список платежных систем'.html_safe, operator_payment_systems_path
-  hr
-  .page-header
-    h2.mb-4 Редактируем платежную систему
-
+  = page_header title: 'Редактируем платёжную систему'
   .row
     .col-md-9
       = render 'form', payment_system: payment_system, columns: edit_columns
 
+  hr.mt-4
+  .float-right= link_to 'Добавить кошелёк', new_operator_wallet_path(wallet: { payment_system_id: payment_system.id }), class: 'btn btn-success'
   h3.mt-4.mb-4= Wallet.model_name.human(count: 100)
   = render 'table', items: payment_system.wallets

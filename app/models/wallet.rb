@@ -16,18 +16,18 @@ class Wallet < ApplicationRecord
 
   validates :address, presence: true, uniqueness: { scope: :payment_system_id }
 
-  def self.create_for_payment_system!(payment_system)
-    Wallet.transaction do
-      available_account = OpenbillAccount.create!(category_id: Settings.openbill.categories.wallets, amount_cents: 0,
-                                                  amount_currency: payment_system.currency.iso_code)
-      locked_account = OpenbillAccount.create!(category_id: Settings.openbill.categories.wallets, amount_cents: 0,
-                                               amount_currency: payment_system.currency.iso_code)
-      wallet = create! payment_system: payment_system, available_account: available_account, locked_account: locked_account,
-                       details: "Wallet for #{payment_system.name} (#{payment_system.currency})"
-      available_account.update details: "Availability account for wallet #{wallet.id}", reference: wallet
-      locked_account.update details: "Locked account for wallet #{wallet.id}", reference: wallet
-      wallet
-    end
+  before_validation on: :create, if: :payment_system do
+    self.available_account ||= OpenbillAccount
+      .create!(category_id: Settings.openbill.categories.wallets, amount_cents: 0,
+               amount_currency: payment_system.currency.iso_code)
+    self.locked_account ||= OpenbillAccount
+      .create!(category_id: Settings.openbill.categories.wallets, amount_cents: 0,
+               amount_currency: payment_system.currency.iso_code)
+  end
+
+  after_create do
+    available_account.update details: "Availability account for wallet #{self.id}", reference: self
+    locked_account.update details: "Locked account for wallet #{self.id}", reference: self
   end
 
   def available_amount

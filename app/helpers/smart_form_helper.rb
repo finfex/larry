@@ -39,16 +39,24 @@ module SmartFormHelper
       as = :input
     elsif column_type.type == :boolean
       as = :checkbox
+
+      # enum
     elsif record_class.respond_to?(:enumerized_attributes) && record_class.enumerized_attributes[column].present? || # gem enumerize
           record_class.defined_enums[attribute_name].present? # rails enum rubocop:disable Layout/MultilineOperationIndentation
 
       as = :select
       collection = smart_get_collection(record_class, attribute_name, record)
+
+      # belongs_to
     elsif record.class.uploaders.include? column.to_sym
       as = :file
+    elsif record.class.attribute_types[column.to_s].is_a? ActiveRecord::Type::Text
+      as = :text
     else
       as = :input
     end
+
+    binding.pry if column.to_s == 'payment_system_id'
 
     disabled = false
     disabled = true if record.persisted? && DISABLED_COLUMNS.include?(column.to_sym)

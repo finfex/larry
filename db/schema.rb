@@ -466,8 +466,8 @@ ActiveRecord::Schema.define(version: 2021_06_30_125214) do
     t.uuid "locked_account_id", null: false
     t.datetime "archived_at"
     t.string "address", null: false
-    t.boolean "income_enable", default: true, null: false
-    t.boolean "outcome_enable", default: true, null: false
+    t.boolean "income_enabled", default: true, null: false
+    t.boolean "outcome_enabled", default: true, null: false
     t.index ["address"], name: "index_wallets_on_address", unique: true
     t.index ["available_account_id"], name: "index_wallets_on_available_account_id"
     t.index ["locked_account_id"], name: "index_wallets_on_locked_account_id"

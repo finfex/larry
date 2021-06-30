@@ -1,3 +1,6 @@
 = f.error_notification
-- f.object.errors.full_messages.each do |msg|
-  li= msg
+- if f.object.errors.any?
+  .alert.alert-danger
+    ul
+      - f.object.errors.full_messages.each do |msg|
+        li= msg

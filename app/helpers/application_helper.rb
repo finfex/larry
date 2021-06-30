@@ -3,6 +3,19 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  def page_header(title:, back_link: true, float_link: nil)
+    if back_link == true
+      if respond_to? :resource
+        back_link = -> { link_to '&larr;&nbsp;'.html_safe + resource.class.model_name.human(count: 100), url_for([namespace, resource.class]) }
+      else
+        raise 'No resource to identify back_link'
+      end
+    elsif back_link == false
+      back_link = nil
+    end
+    render 'page_header', title: title, back_link: back_link, float_link: float_link
+  end
+
   def present_time(time)
     return middot if time.nil?
 

@@ -18,13 +18,13 @@ module Operator
 
     def index; end
 
+    def show
+      redirect_to edit_operator_payment_system_path(resource)
+    end
+
     def new
       @resource ||= Gera::PaymentSystem.new
       render :new, locals: { payment_system: resource, edit_columns: EDIT_COLUMNS }
-    end
-
-    def show
-      redirect_to edit_operator_payment_system_path(resource)
     end
 
     def edit

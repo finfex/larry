@@ -1,0 +1,11 @@
+.page-header.mt-4
+  - unless back_link.nil?
+    = back_link.call
+  - unless float_link.nil?
+    .float-right
+      = float_link.call
+  - unless back_link.nil?
+    hr
+  h2.mb-4= title
+
+

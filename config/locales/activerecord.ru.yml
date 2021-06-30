@@ -39,6 +39,7 @@ ru:
     reserves_delta: Дельта резервов
     reservers_aggregator: Агрегатор по резервам
     payment_system: Платежная система
+    payment_system_id: Платежная система
     currency: Валюта
     details: Описание
     available_amount: Доступный баланс
@@ -89,8 +90,8 @@ ru:
         content: Содержимое
       wallet:
         address: Адрес или номер счёта
-        income_enable: Разрешён приём средств
-        outcome_enable: Разрешён вывод средств
+        income_enabled: Разрешён приём средств
+        outcome_enabled: Разрешён вывод средств
       nomenclature_in_stock_cell:
         in_stock_quantity: В Наличии
         to_selection_quantity: К Отбору

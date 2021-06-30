@@ -1,7 +1,7 @@
 .container
-  .mb-4= link_to operator_wallets_path do
-    = '&larr;'.html_safe + Wallet.model_name.human(count: 100)
-  h1.mb-4= Wallet.model_name.human
+  = page_header title: Wallet.model_name.human, 
+    float_link: -> { link_to 'Изменить', edit_operator_wallet_path(wallet), class: 'btn btn-success' }
+
   = render 'table', items: [wallet]
   h2.mb-4= t '.manual_update'
   div style='max-width: 400px'
