@@ -8,8 +8,9 @@ ru:
     public_name: Публичное имя
     partner_ref_token: Партнерская ссылка
     partner_orders: Реферальные заявки
-    orders: Заявки
     partner_balances: Партнерский баланс
+    partner_accruals: Отчисления
+    orders: Заявки
     state: Статус
     updated_at: Обновлён
     direction: Направление

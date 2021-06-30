@@ -6,7 +6,7 @@ class UserDecorator < ApplicationDecorator
   delegate_all
 
   def self.table_columns
-    %i[created_at public_name email orders partner_ref_token partner_orders partner_balances]
+    %i[created_at public_name email orders partner_ref_token partner_orders partner_balances partner_accruals]
   end
 
   def partner_ref_token
@@ -27,5 +27,9 @@ class UserDecorator < ApplicationDecorator
 
   def partner_balances
     # partner balances
+  end
+
+  def partner_accruals
+    h.render 'partner_accruals', partner: object.partner if object.partner.present?
   end
 end

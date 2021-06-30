@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_28_114251) do
+ActiveRecord::Schema.define(version: 2021_06_30_120620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -416,6 +416,9 @@ ActiveRecord::Schema.define(version: 2021_06_28_114251) do
     t.string "ref_token", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "accrual_method", default: 0, null: false
+    t.decimal "profit_percentage", default: "10.0", null: false
+    t.decimal "income_percentage", default: "0.1", null: false
     t.index ["ref_token"], name: "index_partners_on_ref_token", unique: true
     t.index ["user_id"], name: "index_partners_on_user_id", unique: true
   end

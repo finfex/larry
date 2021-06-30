@@ -7,6 +7,8 @@ class Partner < ApplicationRecord
 
   has_many :orders, foreign_key: :referrer_id
 
+  enum accrual_method: %i[income profit]
+
   before_create do
     self.ref_token = SecureRandom.hex(12)
   end
