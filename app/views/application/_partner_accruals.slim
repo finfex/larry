@@ -1,0 +1,5 @@
+.text-nowrap
+  - if partner.income?
+    div От прихода #{Percent.new(partner.income_percentage)}
+  - elsif partner.profit?
+    div От дохода #{Percent.new(partner.profit_percentage)}

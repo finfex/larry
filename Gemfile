@@ -56,7 +56,7 @@ gem 'sidekiq-cron'
 gem 'simple_form'
 gem 'slim-rails'
 gem 'state_machine'
-gem 'percentage', '~> 1.4'
+gem 'percentable'
 
 gem 'dotenv'
 gem 'dotenv-rails'

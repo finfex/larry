@@ -15,9 +15,11 @@
       tr
         th Реферальная ссылка
         td= link_to current_user.partner.referal_url, current_user.partner.referal_url, target: :blank
+      tr
+        th Условия начисления
+        td= render 'partner_accruals', partner: current_user.partner
   - else
     .alert.alert-warning У Вас не включен партнерский кабинет. Свяжитесь с администрацией
-
 
   hr
   = link_to t('application.navbar_user_dropdown.logout'), main_app.session_url, method: :delete, class: 'btn btn-secondary'
