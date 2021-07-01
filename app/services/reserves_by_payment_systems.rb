@@ -19,7 +19,11 @@ class ReservesByPaymentSystems
 
   # Returns balances in cents
   def wallet_available_balances
-    @wallet_available_balances ||= Wallet.alive.joins(:available_account).group(:payment_system_id).sum(:amount_cents)
+    @wallet_available_balances ||= Wallet.alive.
+      where(outcome_enabled: true).
+      joins(:available_account).
+      group(:payment_system_id).
+      sum(:amount_cents)
   end
 
   def final_reserves
