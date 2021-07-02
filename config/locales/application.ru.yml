@@ -3,6 +3,7 @@ ru:
     navbar:
       rules: Правила обмена
       gera: Управление курсами
+      exchange: Обмен
     navbar_user_dropdown:
       profile: Личный кабинет
       logout: Выйти

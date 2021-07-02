@@ -3,6 +3,7 @@ defaults: &defaults
   # то ставим новый курс
   max_incomde_diff_to_suggest: 5
 
+  logo_path: /uploads/interchange_logo.svg
   max_export_records_count: 1000
   default_url_options: &default_url_options
     protocol: <%= ENV.fetch('HTTP_PROTOCOL', 'https') %>
