@@ -29,7 +29,7 @@ module OrderActions
       update operator: operator
       accept!
       WalletIncomeCommand.call(order: self, operator: operator)
-      RewardCommand.call(self) if referrer_reward.positive?
+      RewardCommand.call(order: self) if referrer_reward.positive?
       actions.create!(key: :accepted, operator: operator)
     end
   end

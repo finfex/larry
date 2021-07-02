@@ -26,7 +26,7 @@ class UserDecorator < ApplicationDecorator
   end
 
   def partner_balances
-    # partner balances
+    h.render 'partner_balances', accounts: object.partner.accounts if object.partner.present?
   end
 
   def partner_accruals

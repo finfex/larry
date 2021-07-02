@@ -1,4 +1,4 @@
-.container.mt-4
+.mt-4= page_container do
   h1.mb-4= User.model_name.human
   = render 'table', items: users
   = paginate users

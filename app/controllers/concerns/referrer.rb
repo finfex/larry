@@ -7,6 +7,9 @@ module Referrer
 
   included do
     helper_method :current_ref_token
+    before_action do
+      session[:ref_token] = params[:ref_token] if params[:ref_token].present?
+    end
   end
 
   private
@@ -18,7 +21,6 @@ module Referrer
   end
 
   def current_ref_token
-    session[:ref_token] = params[:ref_token] if params[:ref_token].present?
     session[:ref_token]
   end
 end

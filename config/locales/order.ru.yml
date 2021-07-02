@@ -10,7 +10,7 @@ ru:
     states:
       draft: Черновик
       user_confirmed: Ожидает обработки
-      accepted: Заявка принятя к обработке
+      accepted: Заявка принята к обработке
       canceled: Отменена
       done: Оплачена
     tabs:

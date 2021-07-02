@@ -56,8 +56,6 @@ module SmartFormHelper
       as = :input
     end
 
-    binding.pry if column.to_s == 'payment_system_id'
-
     disabled = false
     disabled = true if record.persisted? && DISABLED_COLUMNS.include?(column.to_sym)
     [as, collection, disabled]

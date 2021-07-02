@@ -115,7 +115,7 @@ module Public
                                       profit_percentage: current_referrer.profit_percentage,
                                       income_percentage: current_referrer.income_percentage,
                                       income_amount: order.income_amount,
-                                      direction_rate: direction_rate)
+                                      direction_rate: order.direction_rate)
       else
         order.referrer_reward = order.income_amount.currency.zero_money
       end
