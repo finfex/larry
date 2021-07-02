@@ -1,5 +1,7 @@
-.btn-group
-  - available_transitions = order.state_transitions.map(&:event)
-  = link_to 'Подтвердить получение суммы', accept_operator_order_path(order), class: 'btn btn-warning', method: :put, data: { confirm: 'Принимаем к обработке?' } if available_transitions.include? :accept
-  = link_to 'Обработана (деньги отправлены)', done_operator_order_path(order), class: 'btn btn-primary', method: :put, data: { confirm: 'Деньги отправлены?' } if available_transitions.include? :done
-  = link_to 'Отклонить', cancel_operator_order_path(order), class: 'btn btn-secondary', method: :put, data: { confirm: 'Отклоняем?' } if available_transitions.include? :cancel
+    - available_transitions = order.state_transitions.map(&:event)
+    - if available_transitions.include? :accept
+      .mt-2
+        = link_to 'Подтвердить', accept_operator_order_path(order), class: 'btn btn-warning', method: :put, data: { confirm: 'Принимаем к обработке?' } 
+        span.ml-2 Сумма #{format_money order.income_amount} на #{order.income_wallet.name} #{present_wallet_address order.income_wallet} поступила
+    .mt-2= link_to 'Обработана (деньги отправлены)', done_operator_order_path(order), class: 'btn btn-primary', method: :put, data: { confirm: 'Деньги отправлены?' } if available_transitions.include? :done
+    .mt-2= link_to 'Отклонить', cancel_operator_order_path(order), class: 'btn btn-secondary', method: :put, data: { confirm: 'Отклоняем?' } if available_transitions.include? :cancel

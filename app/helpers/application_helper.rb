@@ -3,6 +3,10 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  def present_wallet_address(wallet)
+    wallet.address
+  end
+
   def page_header(title:, back_link: true, float_link: nil)
     case back_link
     when true

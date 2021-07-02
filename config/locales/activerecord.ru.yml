@@ -57,6 +57,7 @@ ru:
     user_confirmed_at: Подтверждение пользователем
     rate: Курс
     public_url: Публичная ссылка
+    wallet_name: Название кошелька/счета
 
   activerecord:
     models:

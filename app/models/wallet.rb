@@ -41,4 +41,8 @@ class Wallet < ApplicationRecord
   def total_amount
     available_amount + locked_amount
   end
+
+  def name
+    payment_system.wallet_name
+  end
 end
