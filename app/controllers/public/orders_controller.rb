@@ -10,11 +10,15 @@ module Public
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Layout/LineLength
     # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/PerceivedComplexity
+    # rubocop:disable Metrics/CyclomaticComplexity
     def new
-      income_payment_system = income_payment_systems.find_by(id: params[:cur_from]) if params[:cur_from]
+      income_payment_system = income_payment_systems.find_by(id: params[:income_payment_system_id]) if params[:income_payment_system_id]
+      income_payment_system ||= income_payment_systems.find_by(bestchange_key: params[:cur_from]) if params[:cur_from]
       income_payment_system ||= income_payment_systems.first
 
-      outcome_payment_system = outcome_payment_systems.find_by(id: params[:cur_to]) if params[:cur_to]
+      outcome_payment_system = outcome_payment_systems.find_by(id: params[:outcome_payment_system_id]) if params[:outcome_payment_system_id]
+      outcome_payment_system ||= outcome_payment_systems.find_by(bestchange_key: params[:cur_to]) if params[:cur_to]
       outcome_payment_system ||= outcome_payment_systems.where.not(id: income_payment_system).first
       # Подбор платежной системы из доступных в exchange_rate и для которых есть direction_rate
       #
@@ -41,6 +45,8 @@ module Public
       order.outcome_payment_system = outcome_payment_system
       render locals: { order: order, rate_calculation: rate_calculation }
     end
+    # rubocop:enable Metrics/PerceivedComplexity
+    # rubocop:enable Metrics/CyclomaticComplexity
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Layout/LineLength
     # rubocop:enable Metrics/MethodLength
