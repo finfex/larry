@@ -87,6 +87,8 @@ module Public
                                           income_percentage: current_referrer.income_percentage,
                                           income_amount: order.income_amount,
                                           direction_rate: direction_rate)
+          else
+            order.referrer_reward = order.income_amount.currency.zero_money
           end
           order.save!
           order.actions.create! key: :created
