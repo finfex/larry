@@ -4,12 +4,6 @@ hr style='margin-top: 4em'
     .float-left
       = link_to 'https://www.bestchange.ru', target: '_blank' do
         img src='https://www.bestchange.ru/images/logo-orig.png' width=80
-      - unless Rails.env.production?
-        = link_to t('.operator'), main_app.operator_root_url 
-        pre
-          | ref_token=#{current_ref_token || :nil}
-      - if authenticated?(:admin_user)
-        div= current_admin_user.email
     .float-right
       = Rails.env unless Rails.env.production?
       span.ml-2 title=AppVersion.to_s

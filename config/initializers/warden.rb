@@ -30,7 +30,7 @@ Warden::Strategies.add(:password) do
     if person.present? && person.authenticate(session_form_attrs.fetch(:password))
       success! person, 'You are welcome!'
     else
-      fail! 'Wring credentials'
+      fail! 'Wrong credentials'
     end
   end
 
