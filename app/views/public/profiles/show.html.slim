@@ -18,6 +18,9 @@
       tr
         th Условия начисления
         td= render 'partner_accruals', partner: current_user.partner
+      tr
+        th Свершившиеся обмены
+        td = current_user.partner.orders.by_state(:done).count
   - else
     .alert.alert-warning У Вас не включен партнерский кабинет. Свяжитесь с администрацией
 

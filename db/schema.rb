@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_02_051800) do
+ActiveRecord::Schema.define(version: 2021_07_02_094524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -401,6 +401,11 @@ ActiveRecord::Schema.define(version: 2021_07_02_051800) do
     t.string "user_remote_ip"
     t.string "user_agent"
     t.string "state", default: "draft", null: false
+    t.decimal "referrer_accrual_method"
+    t.decimal "referrer_profit_percentage"
+    t.decimal "referrer_income_percentage"
+    t.decimal "referrer_reward_cents"
+    t.string "referrer_reward_currency"
     t.index ["direction_rate_id"], name: "index_orders_on_direction_rate_id"
     t.index ["income_payment_system_id"], name: "index_orders_on_income_payment_system_id"
     t.index ["income_wallet_id"], name: "index_orders_on_income_wallet_id"

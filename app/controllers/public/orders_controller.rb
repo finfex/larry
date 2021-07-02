@@ -59,17 +59,29 @@ module Public
 
       order = rate_calculation.build_order
       if rate_calculation.valid?
-        order.ref_token = current_ref_token
-        order.referrer = current_referrer
         order.user_remote_ip = request.remote_ip
         order.user_agent = request.user_agent
         order.user = current_user
+        order.ref_token = current_ref_token
 
         # TODO: Move to OrderCreator. Lock balances, save referrals
         Order.transaction do
           wallet_selector = WalletSelector.new(order)
           order.income_wallet = wallet_selector.select_income_wallet
           order.outcome_wallet = wallet_selector.select_outcome_wallet
+          if current_referrer.present?
+            order.referrer = current_referrer
+            order.referrer_accrual_method = current_referrer.accrual_method
+            order.referrer_profit_percentage = current_referrer.profit_percentage
+            order.referrer_income_percentage = current_referrer.income_percentage
+            order.referrer_reward = ReferrerRewardCalculator
+              .new
+              .call(accrual_method: current_referrer.accrual_method,
+                    profit_percentage: current_referrer.profit_percentage,
+                    income_percentage: current_referrer.income_percentage,
+                    income_amount: order.income_amount,
+                    direction_rate: direction_rate)
+          end
           order.save!
           order.actions.create! key: :created
         end

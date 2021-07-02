@@ -1,4 +1,9 @@
 - if order.referrer.present?
   | Реферал #{link_to order.referrer.public_name, operator_user_path(order.referrer.user_id)}
+  div
+    - if order.referrer_reward.present?
+      | Сумма вознаграждения #{format_money order.referrer_reward} 
+    - else
+      | Вознаграждение отсутствует
 - else
   .text-muted.text-small Без реферала
