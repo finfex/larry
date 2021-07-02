@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 class AddWalletsToOrders < ActiveRecord::Migration[6.1]
   def up
     Order.destroy_all

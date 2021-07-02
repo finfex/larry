@@ -7,7 +7,6 @@ class Order < ApplicationRecord
   include RateCalculationSerialization
   include OrderActions
 
-
   belongs_to :income_payment_system, class_name: 'Gera::PaymentSystem'
   belongs_to :outcome_payment_system, class_name: 'Gera::PaymentSystem'
   belongs_to :direction_rate, class_name: 'Gera::DirectionRate'
@@ -24,11 +23,10 @@ class Order < ApplicationRecord
 
   enum request_direction: RateCalculation::DIRECTIONS
 
-  scope :by_state, -> (state) { where state: state }
+  scope :by_state, ->(state) { where state: state }
 
   # draft - пользователь оставил заявку ,но еще не подтвердил что отправил средства
   state_machine :state, initial: :draft do
-
     # Пользователь подтвердил
     event :user_confirm do
       transition draft: :user_confirmed

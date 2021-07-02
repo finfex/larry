@@ -16,7 +16,7 @@ module Operator
     end
 
     def cancel
-      order.cancel_order! current_admin_user
+      order.action_cancel! current_admin_user
       redirect_back fallback_location: operator_orders_path, notice: 'Заявка отменена'
     end
 

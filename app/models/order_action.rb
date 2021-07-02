@@ -9,6 +9,6 @@ class OrderAction < ApplicationRecord
   validates :key, presence: true
 
   def message
-    custom_message.presence || I18n.t(key, scope: [:order,:actions], default: key.to_s)
+    custom_message.presence || I18n.t(key, scope: %i[order actions], default: key.to_s)
   end
 end

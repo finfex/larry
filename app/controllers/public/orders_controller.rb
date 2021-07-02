@@ -65,7 +65,7 @@ module Public
         order.user_agent = request.user_agent
         order.user = current_user
 
-        # TODO Move to OrderCreator. Lock balances, save referrals
+        # TODO: Move to OrderCreator. Lock balances, save referrals
         Order.transaction do
           wallet_selector = WalletSelector.new(order)
           order.income_wallet = wallet_selector.select_income_wallet

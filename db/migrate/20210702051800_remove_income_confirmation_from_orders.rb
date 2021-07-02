@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 class RemoveIncomeConfirmationFromOrders < ActiveRecord::Migration[6.1]
   def change
     remove_column :orders, :income_confirm_operator_id

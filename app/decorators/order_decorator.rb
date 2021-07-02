@@ -23,6 +23,7 @@ class OrderDecorator < ApplicationDecorator
 
   def user_confirmed_at
     return 'Не подтверждено' if object.user_confirmed_at.nil?
+
     I18n.l object.user_confirmed_at, format: :default
   end
 

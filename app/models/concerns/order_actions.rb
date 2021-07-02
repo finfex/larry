@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 module OrderActions
   # Пользователь подтверждает что средства отправил
   #
@@ -8,7 +12,6 @@ module OrderActions
       actions.create!(key: :user_confirmed)
     end
   end
-
 
   # Меняем оператора
   #
