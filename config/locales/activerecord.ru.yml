@@ -1,6 +1,8 @@
 ru:
   attributes:
     email: Емайл
+    order: Заявка
+    amount: Сумма
     password: Пароль
     password_confirmation: Подтверждение пароля
     created_at: Создан
@@ -61,6 +63,11 @@ ru:
 
   activerecord:
     models:
+      booked_amount:
+        one: Бронь
+        few: Брони
+        many: Брони
+        other: Брони
       wallet: 
         one: Кошелёк
         few: Кошельков

@@ -6,9 +6,11 @@ module PaymentSystemConcern
   extend ActiveSupport::Concern
   included do
     has_many :wallets
-    scope :by_currency, ->(currency) { where(currency_iso_code: currency.iso_code) }
+    has_many :booked_amounts
 
     belongs_to :reservers_aggregator, class_name: 'Gera::PaymentSystem', optional: true
+
+    scope :by_currency, ->(currency) { where(currency_iso_code: currency.iso_code) }
 
     monetize :reserves_delta_cents, as: :reserves_delta, with_model_currency: :currency_iso_code
 
@@ -26,6 +28,21 @@ module PaymentSystemConcern
       # Wallet.create! payment_system: self, details: "Default wallet for #{name} (#{self.currency})", address: generate
       OpenbillCategory.storno.accounts.create! details: "Storno account for #{self}", reference: self, amount: self.currency.zero_money
     end
+  end
+
+  def total_booked_amounts
+    Money.new(booked_amounts.sum(:amount_cents) || 0, currency)
+  end
+
+  def total_amount
+    Money.new(
+      wallets
+      .alive
+      .where(outcome_enabled: true)
+      .joins(:account)
+      .sum(:amount_cents) || 0,
+      currency
+    )
   end
 
   def archive!

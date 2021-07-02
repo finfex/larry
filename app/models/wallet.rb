@@ -17,8 +17,8 @@ class Wallet < ApplicationRecord
 
   before_validation on: :create, if: :payment_system do
     self.account ||= OpenbillAccount
-      .create!(category_id: Settings.openbill.categories.wallets, amount_cents: 0,
-               amount_currency: payment_system.currency.iso_code)
+                     .create!(category_id: Settings.openbill.categories.wallets, amount_cents: 0,
+                              amount_currency: payment_system.currency.iso_code)
   end
 
   after_create do
@@ -27,6 +27,10 @@ class Wallet < ApplicationRecord
 
   def available_amount
     account.amount
+  end
+
+  def to_s
+    [name, address].join(' ')
   end
 
   def name

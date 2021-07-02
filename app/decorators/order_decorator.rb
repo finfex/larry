@@ -42,4 +42,12 @@ class OrderDecorator < ApplicationDecorator
   def outcome_payment_system
     h.present_payment_system object.outcome_payment_system
   end
+
+  def income_wallet
+    h.link_to object.income_wallet, h.operator_wallet_path(object.income_wallet)
+  end
+
+  def outcome_wallet
+    h.link_to object.outcome_wallet, h.operator_wallet_path(object.outcome_wallet)
+  end
 end

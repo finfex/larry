@@ -17,6 +17,7 @@ class Order < ApplicationRecord
   belongs_to :outcome_wallet, class_name: 'Wallet'
 
   has_many :actions, class_name: 'OrderAction', dependent: :destroy
+  has_one :booked_amount, dependent: :destroy
 
   monetize :income_amount_cents, as: :income_amount, allow_nil: false
   monetize :outcome_amount_cents, as: :outcome_amount, allow_nil: false
@@ -41,7 +42,7 @@ class Order < ApplicationRecord
     end
 
     event :cancel do
-      transition %i[user_confirmed accepted] => :canceled
+      transition %i[user_confirmed] => :canceled
     end
 
     # Заявка выплачена

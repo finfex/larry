@@ -46,6 +46,7 @@ Rails.application.routes.draw do
             concerns :archivable
           end
           resources :wallet_activities
+          resources :reserves, only: %(index)
           resources :payment_systems do
             concerns :archivable
           end
@@ -54,7 +55,7 @@ Rails.application.routes.draw do
           end
         end
       end
-      scope :constraints => { :formats => 'html' } do
+      scope constraints: { formats: /html/ } do
         match '*anything', to: 'application#not_found', via: %i[get post]
       end
     end
@@ -72,13 +73,13 @@ Rails.application.routes.draw do
       constraints ->(request) { request.xhr? } do
         resources :rate_calculations, only: %i[create]
       end
-      scope :constraints => { :formats => 'html' } do
+      scope constraints: { formats: /html/ } do
         match '*path', to: 'pages#show', via: %i[get], as: :page
       end
     end
   end
 
-  scope :constraints => { :formats => 'html' } do
+  scope constraints: { formats: /html/ } do
     match '*anything', to: 'application#not_found', via: %i[get post]
   end
 end

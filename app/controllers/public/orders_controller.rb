@@ -51,8 +51,6 @@ module Public
     # rubocop:enable Layout/LineLength
     # rubocop:enable Metrics/MethodLength
 
-    # rubocop:disable Metrics/AbcSize
-    # rubocop:disable Metrics/MethodLength
     def create
       direction_rate = Gera::DirectionRate.find order_params.fetch(:direction_rate_id)
       calculator = RateCalculator.new(direction_rate)
@@ -65,41 +63,12 @@ module Public
 
       order = rate_calculation.build_order
       if rate_calculation.valid?
-        order.user_remote_ip = request.remote_ip
-        order.user_agent = request.user_agent
-        order.user = current_user
-        order.ref_token = current_ref_token
-
-        # TODO: Move to OrderCreator. Lock balances, save referrals
-        Order.transaction do
-          wallet_selector = WalletSelector.new(order)
-          order.income_wallet = wallet_selector.select_income_wallet
-          order.outcome_wallet = wallet_selector.select_outcome_wallet
-          if current_referrer.present?
-            order.referrer = current_referrer
-            order.referrer_accrual_method = current_referrer.accrual_method
-            order.referrer_profit_percentage = current_referrer.profit_percentage
-            order.referrer_income_percentage = current_referrer.income_percentage
-            order.referrer_reward = ReferrerRewardCalculator
-                                    .new
-                                    .call(accrual_method: current_referrer.accrual_method,
-                                          profit_percentage: current_referrer.profit_percentage,
-                                          income_percentage: current_referrer.income_percentage,
-                                          income_amount: order.income_amount,
-                                          direction_rate: direction_rate)
-          else
-            order.referrer_reward = order.income_amount.currency.zero_money
-          end
-          order.save!
-          order.actions.create! key: :created
-        end
+        create_order order
         redirect_to public_order_path(order), notice: 'Принята заявка на обмен. Ждём от Вас оплаты.'
       else
         render :new, locals: { order: order, rate_calculation: rate_calculation }
       end
     end
-    # rubocop:enable Metrics/AbcSize
-    # rubocop:enable Metrics/MethodLength
 
     def show
       render locals: { order: Order.find(params[:id]) }
@@ -112,6 +81,45 @@ module Public
     end
 
     private
+
+    def create_order(order)
+      # TODO: Move to OrderCreator. Lock balances, save referrals
+      Order.transaction do
+        order.user_remote_ip = request.remote_ip
+        order.user_agent = request.user_agent
+        order.user = current_user
+        order.ref_token = current_ref_token
+        select_wallets order
+        add_referrer order
+        order.save!
+        order.actions.create! key: :created
+        order.create_booked_amount!
+      end
+    end
+
+    def select_wallets(order)
+      wallet_selector = WalletSelector.new(order)
+      order.income_wallet = wallet_selector.select_income_wallet
+      order.outcome_wallet = wallet_selector.select_outcome_wallet
+    end
+
+    def add_referrer(order)
+      if current_referrer.present?
+        order.referrer = current_referrer
+        order.referrer_accrual_method = current_referrer.accrual_method
+        order.referrer_profit_percentage = current_referrer.profit_percentage
+        order.referrer_income_percentage = current_referrer.income_percentage
+        order.referrer_reward = ReferrerRewardCalculator
+                                .new
+                                .call(accrual_method: current_referrer.accrual_method,
+                                      profit_percentage: current_referrer.profit_percentage,
+                                      income_percentage: current_referrer.income_percentage,
+                                      income_amount: order.income_amount,
+                                      direction_rate: direction_rate)
+      else
+        order.referrer_reward = order.income_amount.currency.zero_money
+      end
+    end
 
     def order_params
       params

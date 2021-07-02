@@ -7,8 +7,9 @@
       = link_to 'Конечный курс', gera.direction_rates_path, class: 'dropdown-item'
       = link_to 'Комиссии', gera.exchange_rates_path, class: 'dropdown-item'
       .dropdown-divider
-      = link_to 'Платежные системы', main_app.operator_payment_systems_path, class: 'dropdown-item'
   = active_link_to Order.model_name.human(count: 100), main_app.operator_orders_path, class: 'nav-link', wrap_tag: :li, wrap_class: 'nav-item'
   = active_link_to Wallet.model_name.human(count: 100), main_app.operator_wallets_path, class: 'nav-link', wrap_tag: :li, wrap_class: 'nav-item'
   = active_link_to Page.model_name.human(count: 100), main_app.operator_pages_path, class: 'nav-link', wrap_tag: :li, wrap_class: 'nav-item'
   = active_link_to User.model_name.human(count: 100), main_app.operator_users_path, class: 'nav-link', wrap_tag: :li, wrap_class: 'nav-item'
+  = active_link_to 'Платежные системы', main_app.operator_payment_systems_path, class: 'nav-link', wrap_tag: :li, wrap_class: 'nav-item'
+  = active_link_to 'Резервы', main_app.operator_reserves_path, class: 'nav-link', wrap_tag: :li, wrap_class: 'nav-item'

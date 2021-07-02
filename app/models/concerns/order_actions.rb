@@ -28,6 +28,8 @@ module OrderActions
     with_lock do
       update operator: operator
       accept!
+      WalletIncomeCommand.call(order: self, operator: operator)
+      RewardCommand.call(self) if referrer_reward.positive?
       actions.create!(key: :accepted, operator: operator)
     end
   end
@@ -36,6 +38,7 @@ module OrderActions
     with_lock do
       update operator: operator
       done!
+      booked_amount.try :destroy!
       actions.create!(key: :done, operator: operator)
     end
   end
@@ -44,6 +47,7 @@ module OrderActions
     with_lock do
       update operator: operator, cancel_reason: cancel_reason
       cancel!
+      booked_amount.try :destroy!
       actions.create!(key: :canceled, operator: operator)
     end
   end

@@ -6,6 +6,7 @@ class Partner < ApplicationRecord
   belongs_to :user
 
   has_many :orders, foreign_key: :referrer_id
+  has_many :accounts, class_name: 'OpenbillAccount'
 
   enum accrual_method: %i[income profit]
 

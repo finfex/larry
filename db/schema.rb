@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_02_143859) do
+ActiveRecord::Schema.define(version: 2021_07_02_152606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -75,6 +75,17 @@ ActiveRecord::Schema.define(version: 2021_07_02_143859) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "booked_amounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "payment_system_id", null: false
+    t.decimal "amount_cents", null: false
+    t.string "amount_currency", null: false
+    t.uuid "order_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_booked_amounts_on_order_id"
+    t.index ["payment_system_id"], name: "index_booked_amounts_on_payment_system_id"
   end
 
   create_table "currencies", id: :string, force: :cascade do |t|
@@ -469,6 +480,7 @@ ActiveRecord::Schema.define(version: 2021_07_02_143859) do
     t.integer "activity_type", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "amount_currency", null: false
     t.index ["admin_user_id"], name: "index_wallet_activities_on_admin_user_id"
     t.index ["opposit_account_id"], name: "index_wallet_activities_on_opposit_account_id"
     t.index ["wallet_id"], name: "index_wallet_activities_on_wallet_id"
@@ -493,6 +505,8 @@ ActiveRecord::Schema.define(version: 2021_07_02_143859) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "booked_amounts", "gera_payment_systems", column: "payment_system_id"
+  add_foreign_key "booked_amounts", "orders"
   add_foreign_key "gera_cross_rate_modes", "gera_currency_rate_modes", column: "currency_rate_mode_id", on_delete: :cascade
   add_foreign_key "gera_cross_rate_modes", "gera_rate_sources", column: "rate_source_id", on_delete: :cascade
   add_foreign_key "gera_currency_rate_modes", "gera_currency_rate_mode_snapshots", column: "currency_rate_mode_snapshot_id", on_delete: :cascade

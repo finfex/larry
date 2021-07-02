@@ -14,7 +14,7 @@ class PaymentSystemDecorator < ApplicationDecorator
   end
 
   def self.table_columns
-    super - %i[id archived_at updated_at created_at total_computation_method transfer_comission_payer] + %i[is_crypto? actions]
+    super - %i[id archived_at updated_at created_at total_computation_method transfer_comission_payer total_booked_amounts] + %i[is_crypto? actions]
   end
 
   def self.object_class

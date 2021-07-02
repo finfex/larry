@@ -1,0 +1,38 @@
+= page_header title: 'Резервы', back_link: false
+
+h2 По платежным системам
+
+table.table.table-condensed.table-striped
+  thead
+    tr
+      th Платежная система
+      th.text-right На счетах действующих исходящих кошельков
+      th.text-right Забронировано
+      th.text-right Дельта
+      th.text-right Итого доступные резервы
+
+  tbody
+    - Gera::PaymentSystem.alive.order(:name).each do |ps|
+      tr
+        td
+          = link_to present_payment_system(ps), operator_payment_system_path(ps)
+        td.text-right.text-nowrap= format_money ps.total_amount
+        td.text-right.text-nowrap= format_money ps.total_booked_amounts
+        td.text-right.text-nowrap= format_money ps.reserves_delta
+        td.text-right.text-nowrap= format_money ps.reserve_amount
+
+h2 По валютам
+
+table.table.table-condensed.table-narrow.table-striped
+  thead
+    tr
+      th Валюта
+      th.text-right Итого доступные резервы
+
+  tbody
+    - ReservesByCurrencies.new.final_reserves.each_pair do |currency, amount|
+      tr
+        td= currency
+        td.text-right.text-nowrap= format_money amount
+
+

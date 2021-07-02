@@ -13,7 +13,7 @@ module Operator
 
     def show
       wallet = Wallet.find params[:id]
-      render locals: { resource: wallet, wallet: wallet, wallet_activity: wallet.activities.build }
+      render locals: { resource: wallet, wallet: wallet, wallet_activity: wallet.activities.build(amount: wallet.currency.zero_money) }
     end
 
     def new

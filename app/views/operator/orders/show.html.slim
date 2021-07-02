@@ -5,8 +5,8 @@
 
   = render 'attributes_table', 
     object: OrderDecorator.decorate(order), 
-    columns: %i[created_at income_amount outcome_amount income_payment_system outcome_payment_system rate operator state public_url]
+    columns: %i[created_at income_amount income_payment_system income_wallet outcome_payment_system outcome_amount outcome_wallet rate operator state public_url]
   .mt-4
     = render 'buttons', order: order
 
-  = render 'actions_log', order: order
+  .mt-4= render 'actions_log', order: order

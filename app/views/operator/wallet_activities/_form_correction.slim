@@ -4,7 +4,7 @@
   = f.input :activity_type, as: :hidden, input_html: { value: activity_type }
   .row
     .col-md-8
-      = f.input :amount, as: :money, wrapper: :input_group,  append: f.object.amount.currency
+      = f.input :amount, as: :money, wrapper: :input_group, append: f.object.amount_currency
   .row
     .col-md-12
       = f.input :details
