@@ -9,7 +9,7 @@ class OrderActionDecorator < ApplicationDecorator
     %i[created_at operator message]
   end
 
-  def data_attribute(namespace: nil)
+  def data_attribute(namespace: nil) # rubocop:disable Lint/UnusedMethodArgument
     {}
   end
 end

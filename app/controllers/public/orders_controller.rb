@@ -75,12 +75,12 @@ module Public
             order.referrer_profit_percentage = current_referrer.profit_percentage
             order.referrer_income_percentage = current_referrer.income_percentage
             order.referrer_reward = ReferrerRewardCalculator
-              .new
-              .call(accrual_method: current_referrer.accrual_method,
-                    profit_percentage: current_referrer.profit_percentage,
-                    income_percentage: current_referrer.income_percentage,
-                    income_amount: order.income_amount,
-                    direction_rate: direction_rate)
+                                    .new
+                                    .call(accrual_method: current_referrer.accrual_method,
+                                          profit_percentage: current_referrer.profit_percentage,
+                                          income_percentage: current_referrer.income_percentage,
+                                          income_amount: order.income_amount,
+                                          direction_rate: direction_rate)
           end
           order.save!
           order.actions.create! key: :created
