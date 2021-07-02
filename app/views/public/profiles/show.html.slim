@@ -20,7 +20,10 @@
         td= render 'partner_accruals', partner: current_user.partner
       tr
         th Свершившиеся обмены
-        td = current_user.partner.orders.by_state(:done).count
+        td= current_user.partner.orders.by_state(:done).count
+      tr
+        th Вознаграждение
+        td= render 'partner_balances', accounts: current_user.partner.accounts
   - else
     .alert.alert-warning У Вас не включен партнерский кабинет. Свяжитесь с администрацией
 
