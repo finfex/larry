@@ -54,7 +54,9 @@ Rails.application.routes.draw do
           end
         end
       end
-      match '*anything', to: 'application#not_found', via: %i[get post]
+      scope :constraints => { :formats => 'html' } do
+        match '*anything', to: 'application#not_found', via: %i[get post]
+      end
     end
   end
 
@@ -70,9 +72,13 @@ Rails.application.routes.draw do
       constraints ->(request) { request.xhr? } do
         resources :rate_calculations, only: %i[create]
       end
-      match '*path', to: 'pages#show', via: %i[get], as: :page
+      scope :constraints => { :formats => 'html' } do
+        match '*path', to: 'pages#show', via: %i[get], as: :page
+      end
     end
   end
 
-  match '*anything', to: 'application#not_found', via: %i[get post]
+  scope :constraints => { :formats => 'html' } do
+    match '*anything', to: 'application#not_found', via: %i[get post]
+  end
 end

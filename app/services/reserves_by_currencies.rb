@@ -8,7 +8,7 @@ class ReservesByCurrencies
   def wallets_balances
     @wallets_balances ||= Wallet
                           .alive
-                          .joins(:available_account)
+                          .joins(:account)
                           .where(outcome_enabled: true)
                           .group(:amount_currency)
                           .sum(:amount_cents)

@@ -8,7 +8,7 @@ module Operator
 
     def index
       @container = :fluid
-      render locals: { wallets: Wallet.includes(:payment_system, :available_account, :locked_account).order('archived_at desc, address') }
+      render locals: { wallets: Wallet.includes(:payment_system, :account).order('archived_at desc, address') }
     end
 
     def show

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_02_143054) do
+ActiveRecord::Schema.define(version: 2021_07_02_143859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -479,17 +479,15 @@ ActiveRecord::Schema.define(version: 2021_07_02_143054) do
     t.text "details"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.uuid "available_account_id", null: false
-    t.uuid "locked_account_id", null: false
+    t.uuid "account_id", null: false
     t.datetime "archived_at"
     t.string "address", null: false
     t.boolean "income_enabled", default: true, null: false
     t.boolean "outcome_enabled", default: true, null: false
     t.datetime "last_used_as_income_at"
     t.datetime "last_used_as_outcome_at"
+    t.index ["account_id"], name: "index_wallets_on_account_id"
     t.index ["address"], name: "index_wallets_on_address", unique: true
-    t.index ["available_account_id"], name: "index_wallets_on_available_account_id"
-    t.index ["locked_account_id"], name: "index_wallets_on_locked_account_id"
     t.index ["payment_system_id"], name: "index_wallets_on_payment_system_id"
   end
 
@@ -544,6 +542,5 @@ ActiveRecord::Schema.define(version: 2021_07_02_143054) do
   add_foreign_key "wallet_activities", "openbill_accounts", column: "opposit_account_id"
   add_foreign_key "wallet_activities", "wallets"
   add_foreign_key "wallets", "gera_payment_systems", column: "payment_system_id"
-  add_foreign_key "wallets", "openbill_accounts", column: "available_account_id"
-  add_foreign_key "wallets", "openbill_accounts", column: "locked_account_id"
+  add_foreign_key "wallets", "openbill_accounts", column: "account_id"
 end

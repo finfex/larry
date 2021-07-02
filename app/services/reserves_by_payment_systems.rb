@@ -21,7 +21,7 @@ class ReservesByPaymentSystems
   def wallet_available_balances
     @wallet_available_balances ||= Wallet.alive
                                          .where(outcome_enabled: true)
-                                         .joins(:available_account)
+                                         .joins(:account)
                                          .group(:payment_system_id)
                                          .sum(:amount_cents)
   end
