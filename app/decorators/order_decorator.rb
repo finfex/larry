@@ -21,6 +21,11 @@ class OrderDecorator < ApplicationDecorator
     h.humanized_rate_detailed object.rate_value
   end
 
+  def user_confirmed_at
+    return 'Не подтверждено' if object.user_confirmed_at.nil?
+    I18n.l object.user_confirmed_at, format: :default
+  end
+
   def outcome_amount
     h.humanized_money_with_currency object.outcome_amount
   end

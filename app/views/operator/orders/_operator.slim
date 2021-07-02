@@ -1,0 +1,6 @@
+div.mb-4
+  - if order.operator_id.present?
+    span.mr-2.text-small= "Оператор: #{order.operator}"
+  - else
+    span.mr-2.text-muted.text-small Оператор не установлен
+  = link_to 'Забрать заявку себе', change_operator_operator_order_path(order), method: :put, class: 'btn btn-sm btn-secondary' if order.operator.present? && order.operator != current_admin_user

@@ -5,10 +5,8 @@
 class Order < ApplicationRecord
   include DirectionRateSerialization
   include RateCalculationSerialization
+  include OrderActions
 
-  attr_accessor :action_operator
-
-  STATES = %i[draft published accepted canceled paid confirmed].freeze
 
   belongs_to :income_payment_system, class_name: 'Gera::PaymentSystem'
   belongs_to :outcome_payment_system, class_name: 'Gera::PaymentSystem'
@@ -16,65 +14,55 @@ class Order < ApplicationRecord
   belongs_to :referrer, class_name: 'Partner', optional: true
   belongs_to :user, class_name: 'User', optional: true
   belongs_to :operator, class_name: 'AdminUser', optional: true
-  has_many :actions, class_name: 'OrderAction'
+  belongs_to :income_wallet, class_name: 'Wallet'
+  belongs_to :outcome_wallet, class_name: 'Wallet'
+
+  has_many :actions, class_name: 'OrderAction', dependent: :destroy
 
   monetize :income_amount_cents, as: :income_amount, allow_nil: false
   monetize :outcome_amount_cents, as: :outcome_amount, allow_nil: false
 
-  enum request_direction: RateCalculation::DIRECTIONS, state: STATES, _suffix: true
+  enum request_direction: RateCalculation::DIRECTIONS
 
-  before_create :assign_uid
+  scope :by_state, -> (state) { where state: state }
 
-  scope :to_process, -> { where.not state: %i[draft confirmed paid canceled] }
-
-  scope :tab_scope, lambda { |tab|
-    case tab
-    when 'to_process'
-      to_process
-    when 'in_process'
-      accepted_state
-    when 'canceled'
-      canceled_state
-    when 'paid'
-      paid_state
-    when 'confirmed'
-      confirmed_state
-    else
-      raise "Unknown tab #{tab}"
-    end
-  }
-
+  # draft - пользователь оставил заявку ,но еще не подтвердил что отправил средства
   state_machine :state, initial: :draft do
-    event :publish do
-      transition draft: :published
+
+    # Пользователь подтвердил
+    event :user_confirm do
+      transition draft: :user_confirmed
     end
 
+    # Оператор подтвердил и принял в обработку
     event :accept do
-      transition published: :accepted
+      transition user_confirmed: :accepted, if: :user_confirmed_at?
     end
 
     event :cancel do
-      transition %i[published accepted] => :canceled
+      transition %i[user_confirmed accepted] => :canceled
     end
 
-    event :paid do
-      transition accepted: :paid
-    end
-
-    event :confirmed do
-      transition paid: :confirm
-    end
-
-    after_transition do |_order, _transition|
-      after_transition do |order, transition|
-        message = "#{transition.human_event}: #{transition.human_from_name}->#{transition.human_to_name}"
-        order.actions.create!(message: message, operator: order.action_operator)
-      end
+    # Заявка выплачена
+    event :done do
+      transition accepted: :done
     end
   end
 
+  before_create do
+    self.income_address = income_wallet.address
+    income_wallet.update last_used_as_income_at: Time.zone.now
+    outcome_wallet.update last_used_as_outcome_at: Time.zone.now
+  end
+
+  before_create :assign_uid
+
   def self.ransackable_scopes(_auth)
-    %i[tab_scope]
+    %i[by_state]
+  end
+
+  def state
+    super.to_sym
   end
 
   def income_currency

@@ -4,15 +4,19 @@
 
 module Operator
   class OrdersController < ApplicationController
-    helper_method :current_tab
+    helper_method :current_state
 
     before_action only: [:index] do
-      redirect_to operator_orders_path(q: { tab_scope: :to_process }) unless params.key? :q
+      redirect_to operator_orders_path(q: { by_state: :user_confirmed }) unless params.key? :q
+    end
+
+    def change_operator
+      order.change_operator! current_admin_user
+      redirect_back fallback_location: operator_order_path(order), notice: 'Оператор установлен'
     end
 
     def cancel
-      order.action_operator = current_admin_user
-      order.cancel!
+      order.cancel_order! current_admin_user
       redirect_back fallback_location: operator_orders_path, notice: 'Заявка отменена'
     end
 
@@ -21,22 +25,19 @@ module Operator
     end
 
     def accept
-      order.action_operator = current_admin_user
-      order.operator = current_admin_user
-      order.accept!
+      order.action_accept! current_admin_user
       redirect_to operator_order_path(order), notice: 'Заявка принята к обработке'
     end
 
-    def paid
-      order.action_operator = current_admin_user
-      order.paid!
+    def done
+      order.action_done! current_admin_user
       redirect_to operator_order_path(order), notice: 'Деньги отправлены'
     end
 
     private
 
-    def current_tab
-      q_params['tab_scope']
+    def current_state
+      q_params['by_state']
     end
 
     def order

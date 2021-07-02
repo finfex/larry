@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_30_125214) do
+ActiveRecord::Schema.define(version: 2021_07_02_051800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -363,10 +363,11 @@ ActiveRecord::Schema.define(version: 2021_06_30_125214) do
 
   create_table "order_actions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "order_id", null: false
-    t.string "message", null: false
+    t.string "custom_message"
     t.uuid "operator_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "key", null: false
     t.index ["operator_id"], name: "index_order_actions_on_operator_id"
     t.index ["order_id"], name: "index_order_actions_on_order_id"
   end
@@ -390,14 +391,24 @@ ActiveRecord::Schema.define(version: 2021_06_30_125214) do
     t.uuid "referrer_id"
     t.uuid "user_id"
     t.uuid "operator_id"
-    t.integer "state", default: 0, null: false
     t.integer "request_direction", default: 0, null: false
     t.string "uid", null: false
+    t.uuid "income_wallet_id", null: false
+    t.uuid "outcome_wallet_id", null: false
+    t.string "income_address", null: false
+    t.datetime "user_confirmed_at"
+    t.string "cancel_reason"
+    t.string "user_remote_ip"
+    t.string "user_agent"
+    t.string "state", default: "draft", null: false
     t.index ["direction_rate_id"], name: "index_orders_on_direction_rate_id"
     t.index ["income_payment_system_id"], name: "index_orders_on_income_payment_system_id"
+    t.index ["income_wallet_id"], name: "index_orders_on_income_wallet_id"
     t.index ["operator_id"], name: "index_orders_on_operator_id"
     t.index ["outcome_payment_system_id"], name: "index_orders_on_outcome_payment_system_id"
+    t.index ["outcome_wallet_id"], name: "index_orders_on_outcome_wallet_id"
     t.index ["referrer_id"], name: "index_orders_on_referrer_id"
+    t.index ["state"], name: "index_orders_on_state"
     t.index ["uid"], name: "index_orders_on_uid", unique: true
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -468,6 +479,8 @@ ActiveRecord::Schema.define(version: 2021_06_30_125214) do
     t.string "address", null: false
     t.boolean "income_enabled", default: true, null: false
     t.boolean "outcome_enabled", default: true, null: false
+    t.datetime "last_used_as_income_at"
+    t.datetime "last_used_as_outcome_at"
     t.index ["address"], name: "index_wallets_on_address", unique: true
     t.index ["available_account_id"], name: "index_wallets_on_available_account_id"
     t.index ["locked_account_id"], name: "index_wallets_on_locked_account_id"
@@ -519,6 +532,8 @@ ActiveRecord::Schema.define(version: 2021_06_30_125214) do
   add_foreign_key "orders", "gera_payment_systems", column: "outcome_payment_system_id"
   add_foreign_key "orders", "partners", column: "referrer_id"
   add_foreign_key "orders", "users"
+  add_foreign_key "orders", "wallets", column: "income_wallet_id"
+  add_foreign_key "orders", "wallets", column: "outcome_wallet_id"
   add_foreign_key "partners", "users"
   add_foreign_key "wallet_activities", "openbill_accounts", column: "opposit_account_id"
   add_foreign_key "wallet_activities", "wallets"

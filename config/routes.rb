@@ -31,9 +31,11 @@ Rails.application.routes.draw do
           root to: 'orders#index'
           resources :orders, only: %i[index show] do
             member do
+              put :change_operator
               put :accept
               put :cancel
-              put :paid
+              put :done
+              put :income_confirm
             end
           end
           resources :users, only: %i[index show]
@@ -60,7 +62,11 @@ Rails.application.routes.draw do
     scope module: :public do
       root to: 'orders#new'
       resource :profile, only: %i[show]
-      resources :orders, only: %i[create show]
+      resources :orders, only: %i[create show] do
+        member do
+          put :confirm
+        end
+      end
       constraints ->(request) { request.xhr? } do
         resources :rate_calculations, only: %i[create]
       end

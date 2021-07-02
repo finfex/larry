@@ -1,0 +1,4 @@
+- if order.user_confirmed_at.nil?
+  .badge.badge-warning Ждём подтверждения от пользователя
+- else 
+  .badge.badge-primary Пользователь подтвердил #{l order.user_confirmed_at, format: :short }

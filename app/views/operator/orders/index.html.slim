@@ -16,27 +16,23 @@
       .card-body
         .row
           .col-md-4
-            = present_payment_system order.income_payment_system
+            h3 Принимаем:
+            .mb-2= present_payment_system order.income_payment_system
+            .mb-2= humanized_money_with_currency order.income_amount
+            .mb-2
+              span.mr-2 На кошелёк
+              = link_to order.income_address, operator_wallet_path(order.income_wallet), target: '_blank'
+            = render 'user_confirmation', order: order
           .col-md-4
-            = humanized_money_with_currency order.income_amount
-          .col-md-4
-            - if order.referrer.present?
-              | Реферал #{link_to order.referrer.public_name, operator_user_path(order.referrer.user_id)}
-            - else
-              .text-muted.text-small Без реферала
-        .row
-          .col-md-4
-            = present_payment_system order.outcome_payment_system
-          .col-md-4
+            h3 Отдаём:
+            .mb-2= present_payment_system order.outcome_payment_system
             = humanized_money_with_currency order.outcome_amount
           .col-md-4
-            - if order.operator_id.present?
-              .text-small= "Оператор: #{order.operator}"
-            - else
-              .text-muted.text-small Оператор не установлен
+            = render 'referal', order: order
+            = render 'operator', order: order
             = present_order_status order.state
         .row
           .col-md-12
             .mt-4
-              = render 'actions', order: order
+              = render 'buttons', order: order
   = paginate paginated_records

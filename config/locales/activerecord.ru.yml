@@ -40,6 +40,9 @@ ru:
     reservers_aggregator: Агрегатор по резервам
     payment_system: Платежная система
     payment_system_id: Платежная система
+    income_address: "Номер счета/адрес зачисления"
+    income_wallet: Входящий кошелёк
+    outcome_wallet: Иходящий кошелёк
     currency: Валюта
     details: Описание
     available_amount: Доступный баланс
@@ -51,7 +54,9 @@ ru:
     outcome_amount: Выходящая сумма
     income_payment_system: Входящая платёжная система
     outcome_payment_system: Исходящая платёжная система
+    user_confirmed_at: Подтверждение пользователем
     rate: Курс
+    public_url: Публичная ссылка
 
   activerecord:
     models:

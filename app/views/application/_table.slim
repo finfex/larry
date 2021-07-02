@@ -17,7 +17,7 @@
     tbody
       - items.each do |item|
         - item_decorated = item.decorated? ? item : decorator.decorate(item)
-        tr is='dapi-tr' data-href=url_for([namespace, item]) class=item_decorated.class.table_tr_class(item)
+        tr is='dapi-tr' class=item_decorated.class.table_tr_class(item) data=item.data_attribute(namespace: namespace)
           - columns.each do |column|
             td class=item_decorated.class.table_td_class(column)
               = item_decorated.send column

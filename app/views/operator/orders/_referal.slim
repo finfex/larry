@@ -1,0 +1,4 @@
+- if order.referrer.present?
+  | Реферал #{link_to order.referrer.public_name, operator_user_path(order.referrer.user_id)}
+- else
+  .text-muted.text-small Без реферала

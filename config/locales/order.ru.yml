@@ -1,15 +1,22 @@
 ru:
   order:
+    actions:
+      user_confirmed: Пользователь подтвердил отправку средств
+      change_operator: Установлен оператор
+      accepted: Приняка к обработке
+      done: Обработана
+      canceled: Отклонена
+      created: Создана
     states:
       draft: Черновик
-      published: Размещён
-      accepted: В обработке
+      user_confirmed: Ожидает обработки
+      accepted: Заявка принятя к обработке
       canceled: Отменена
-      paid: Оплачена
+      done: Оплачена
     tabs:
-      to_process: Новые (%{count})
-      in_process: В обработке (%{count})
+      draft: Ожидают подтверждения пользователя (%{count})
+      user_confirmed: Ожидают обработки (%{count})
+      accepted: В обработке (%{count})
       canceled: Отклонённые (%{count})
-      done: Завершённые (%{count})
+      done: Оплачены (%{count})
       search: Поиск (%{count})
-      paid: Оплачены (%{count})

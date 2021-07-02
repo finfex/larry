@@ -61,9 +61,18 @@ module Public
       if rate_calculation.valid?
         order.ref_token = current_ref_token
         order.referrer = current_referrer
+        order.user_remote_ip = request.remote_ip
+        order.user_agent = request.user_agent
         order.user = current_user
-        order.publish!
-        order.save!
+
+        # TODO Move to OrderCreator. Lock balances, save referrals
+        Order.transaction do
+          wallet_selector = WalletSelector.new(order)
+          order.income_wallet = wallet_selector.select_income_wallet
+          order.outcome_wallet = wallet_selector.select_outcome_wallet
+          order.save!
+          order.actions.create! key: :created
+        end
         redirect_to public_order_path(order), notice: 'Принята заявка на обмен. Ждём от Вас оплаты.'
       else
         render :new, locals: { order: order, rate_calculation: rate_calculation }
@@ -74,6 +83,12 @@ module Public
 
     def show
       render locals: { order: Order.find(params[:id]) }
+    end
+
+    def confirm
+      order = Order.find(params[:id])
+      order.action_user_confirm! if order.user_confirmed_at.nil?
+      redirect_to public_order_path(order), notice: 'Принято уведомлени об отправке средств'
     end
 
     private

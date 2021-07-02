@@ -15,8 +15,11 @@
                                     gera          /gera                                                                                             Gera::Engine {:subdomain=>"operator"}
                              sidekiq_web          /sidekiq                                                                                          Sidekiq::Web {:subdomain=>"operator"}
                            operator_root GET      /                                                                                                 operator/orders#index {:subdomain=>"operator"}
+          change_operator_operator_order PUT      /orders/:id/change_operator(.:format)                                                             operator/orders#change_operator {:subdomain=>"operator"}
                    accept_operator_order PUT      /orders/:id/accept(.:format)                                                                      operator/orders#accept {:subdomain=>"operator"}
                    cancel_operator_order PUT      /orders/:id/cancel(.:format)                                                                      operator/orders#cancel {:subdomain=>"operator"}
+                     paid_operator_order PUT      /orders/:id/paid(.:format)                                                                        operator/orders#paid {:subdomain=>"operator"}
+           income_confirm_operator_order PUT      /orders/:id/income_confirm(.:format)                                                              operator/orders#income_confirm {:subdomain=>"operator"}
                          operator_orders GET      /orders(.:format)                                                                                 operator/orders#index {:subdomain=>"operator"}
                           operator_order GET      /orders/:id(.:format)                                                                             operator/orders#show {:subdomain=>"operator"}
                           operator_users GET      /users(.:format)                                                                                  operator/users#index {:subdomain=>"operator"}
@@ -72,6 +75,7 @@
                                          GET|POST /*anything(.:format)                                                                              application#not_found {:subdomain=>"operator"}
                              public_root GET      /                                                                                                 public/orders#new {:subdomain=>""}
                           public_profile GET      /profile(.:format)                                                                                public/profiles#show {:subdomain=>""}
+                    confirm_public_order PUT      /orders/:id/confirm(.:format)                                                                     public/orders#confirm {:subdomain=>""}
                            public_orders POST     /orders(.:format)                                                                                 public/orders#create {:subdomain=>""}
                             public_order GET      /orders/:id(.:format)                                                                             public/orders#show {:subdomain=>""}
                 public_rate_calculations POST     /rate_calculations(.:format)                                                                      public/rate_calculations#create {:subdomain=>""}

@@ -7,4 +7,6 @@
     object: OrderDecorator.decorate(order), 
     columns: %i[created_at income_amount outcome_amount income_payment_system outcome_payment_system rate operator state public_url]
   .mt-4
-    = render 'actions', order: order
+    = render 'buttons', order: order
+
+  = render 'actions_log', order: order
