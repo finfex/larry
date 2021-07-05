@@ -31,6 +31,10 @@ class OrderDecorator < ApplicationDecorator
     h.humanized_money_with_currency object.outcome_amount
   end
 
+  def based_income_amount
+    h.humanized_money_with_currency object.based_income_amount
+  end
+
   def income_amount
     h.humanized_money_with_currency object.income_amount
   end

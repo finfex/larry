@@ -17,6 +17,6 @@ class RewardCalculator < ApplicationCommand
 
     return reward_amount if Settings.rewards_currency.nil?
 
-    reward_amount.exchange_to Money::Currency.find Settings.rewards_currency
+    reward_amount.exchange_to Settings.rewards_currency
   end
 end

@@ -55,11 +55,13 @@ ru:
     total_amount: Всего на счету
     is_available: Доступно
     is_enabled: Разрешено
+    based_income_amount: Входящая сумма в USD
     income_amount: Входящая сумма
     outcome_amount: Выходящая сумма
     income_payment_system: Входящая платёжная система
     outcome_payment_system: Исходящая платёжная система
     user_confirmed_at: Подтверждение пользователем
+    partner_order_based_income_amounts: Сумма исполненных обменов
     rate: Курс
     public_url: Публичная ссылка
     wallet_name: Название кошелька/счета

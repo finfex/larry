@@ -28,6 +28,7 @@
             .mb-2= present_payment_system order.outcome_payment_system
             = humanized_money_with_currency order.outcome_amount
           .col-md-4
+            p Сумма в USD #{humanized_money_with_currency order.based_income_amount}
             = render 'referal', order: order
             = render 'operator', order: order
             = present_order_status order.state

@@ -61,6 +61,7 @@ module Public
                            calculator.build_from_outcome(order_params.fetch(:outcome_amount).to_money(direction_rate.outcome_currency))
                          end
 
+      # TODO: Проверять не устарел ли курс
       order = rate_calculation.build_order
       if rate_calculation.valid?
         create_order order

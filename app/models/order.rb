@@ -20,14 +20,13 @@ class Order < ApplicationRecord
   has_one :booked_amount, dependent: :destroy
 
   monetize :income_amount_cents, as: :income_amount, allow_nil: false
+  monetize :based_income_amount_cents, as: :based_income_amount, allow_nil: false
   monetize :outcome_amount_cents, as: :outcome_amount, allow_nil: false
   monetize :referrer_reward_cents, as: :referrer_reward, allow_nil: false
 
   enum request_direction: RateCalculation::DIRECTIONS
 
   scope :by_state, ->(state) { where state: state }
-
-  validates :referrer_reward, presence: true, if: :referrer
 
   # draft - пользователь оставил заявку ,но еще не подтвердил что отправил средства
   state_machine :state, initial: :draft do
@@ -50,6 +49,11 @@ class Order < ApplicationRecord
       transition accepted: :done
     end
   end
+
+  before_validation do
+    self.based_income_amount = income_amount.exchange_to Settings.rewards_currency
+  end
+  validates :referrer_reward, presence: true, if: :referrer
 
   before_create do
     self.income_address = income_wallet.address
