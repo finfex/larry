@@ -2,6 +2,7 @@
 
 # frozen_string_literal: true
 
+# Model validator for account address format
 class AccountAddressFormatValidator < ActiveModel::EachValidator
   def validate_each(object, attribute, value)
     payment_system = object.send(payment_system_option) || raise("Отсутсвует платежная система для валидации формата кошелька #{payment_system_option}")

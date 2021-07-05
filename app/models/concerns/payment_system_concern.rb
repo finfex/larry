@@ -22,15 +22,21 @@ module PaymentSystemConcern
 
     validates :bestchange_key, presence: true, uniqueness: true
 
-    # Брать доступные меотды из AccountAddressValidation
-    ADDRESS_FORMATS = %i[by_currency credit_card okpay advcash payeer telebank alfaclick qiwi yandex_money perfect_money none].freeze
+    # rubocop:disable Lint/ConstantDefinitionInBlock
+    ADDRESS_FORMATS = AccountAddressValidation
+                      .methods
+                      .select { |m| m.to_s.ends_with? '_valid?' }
+                      .map { |m| m.to_s.gsub('_valid?', '') }
+                      .map(&:to_sym) + %i[none]
+    # rubocop:enable Lint/ConstantDefinitionInBlock
+
     enumerize :address_format, in: ADDRESS_FORMATS
 
     mount_uploader :icon, PaymentSystemLogoUploader
 
     before_create do
       if currency.is_crypto?
-        system_type == :crypto
+        self.system_type = :crypto
         self.address_format = 'by_currency'
       end
     end
@@ -77,12 +83,13 @@ module PaymentSystemConcern
       .split(/\s*,\s*/)
   end
 
+  # rubocop:disable Metrics/MethodLength
   def address_valid?(address)
     case address_format
     when :none
       address.blank?
     when :credit_card
-      !!AccountAddressValidation.credit_card_valid?(address.to_s, available_outcome_card_brands_list)
+      !AccountAddressValidation.credit_card_valid?(address.to_s, available_outcome_card_brands_list).nil?
     else
       method = "#{address_format}_valid?"
       raise "В AccountAddressValidation отсутвует метод валидации #{method}" unless AccountAddressValidation.respond_to? method
@@ -90,12 +97,13 @@ module PaymentSystemConcern
       arity = AccountAddressValidation.method(method).arity
       case arity
       when 1
-        !!AccountAddressValidation.send(method, address.to_s)
+        !AccountAddressValidation.send(method, address.to_s).nil?
       when 2
-        !!AccountAddressValidation.send(method, address.to_s, currency)
+        !AccountAddressValidation.send(method, address.to_s, currency).nil?
       else
         raise "Unknown arity #{arity} for validation #{method}"
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength
 end

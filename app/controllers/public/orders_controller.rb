@@ -51,6 +51,7 @@ module Public
     # rubocop:enable Layout/LineLength
     # rubocop:enable Metrics/MethodLength
 
+    # rubocop:disable Metrics/MethodLength
     def create
       direction_rate = Gera::DirectionRate.find order_params.fetch(:direction_rate_id)
       calculator = RateCalculator.new(direction_rate)
@@ -74,6 +75,7 @@ module Public
 
       render :new, locals: { order: order, rate_calculation: rate_calculation }
     end
+    # rubocop:enable Metrics/MethodLength
 
     def show
       render locals: { order: Order.find(params[:id]) }

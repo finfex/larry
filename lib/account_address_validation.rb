@@ -4,6 +4,9 @@
 
 # Валидации различного вида адресов счетов
 #
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/MethodLength
+# rubocop:disable Metrics/PerceivedComplexity
 module AccountAddressValidation
   def self.by_currency_valid?(address, currency)
     if [BTC, USDT].include?(currency)
@@ -134,3 +137,6 @@ module AccountAddressValidation
     cheque_number !~ /\D/ && pin !~ /\D/
   end
 end
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/MethodLength
+# rubocop:enable Metrics/PerceivedComplexity
