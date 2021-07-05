@@ -69,8 +69,9 @@ module Public
       else
         render :new, locals: { order: order, rate_calculation: rate_calculation }
       end
-    rescue ActiveRecord::RecordInvalid => err
-      raise err unless err.record.is_a? Order
+    rescue ActiveRecord::RecordInvalid => e
+      raise e unless e.record.is_a? Order
+
       render :new, locals: { order: order, rate_calculation: rate_calculation }
     end
 

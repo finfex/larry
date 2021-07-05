@@ -1,6 +1,10 @@
+# Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
+
 # frozen_string_literal: true
 
-module Validations
+# Валидации различного вида адресов счетов
+#
+module AccountAddressValidation
   def self.by_currency_valid?(address, currency)
     if [BTC, USDT].include?(currency)
       bitcoin_valid? address
@@ -76,7 +80,7 @@ module Validations
   end
 
   def self.neo_valid?(address)
-    address =~ /^[A][a-zA-Z0-9]{33}$/
+    address =~ /^A[a-zA-Z0-9]{33}$/
   end
 
   def self.advcash_valid?(address, currency)
@@ -115,15 +119,15 @@ module Validations
   end
 
   def self.exmo_rub_cheque_valid?(cheque_number)
-    cheque_number =~ /EX-CODE_\d+_RUB[\w\-\_]+/
+    cheque_number =~ /EX-CODE_\d+_RUB[\w\-_]+/
   end
 
   def self.exmo_usd_cheque_valid?(cheque_number)
-    cheque_number =~ /EX-CODE_\d+_USD[\w\-\_]+/
+    cheque_number =~ /EX-CODE_\d+_USD[\w\-_]+/
   end
 
   def self.exmo_eur_cheque_valid?(cheque_number)
-    cheque_number =~ /EX-CODE_\d+_EUR[\w\-\_]+/
+    cheque_number =~ /EX-CODE_\d+_EUR[\w\-_]+/
   end
 
   def self.evoucher_cheque_valid?(cheque_number, pin)

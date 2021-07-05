@@ -2,7 +2,7 @@
 
 # frozen_string_literal: true
 
-require 'validations'
+require 'account_address_validation'
 
 module PaymentSystemConcern
   extend ActiveSupport::Concern
@@ -22,7 +22,7 @@ module PaymentSystemConcern
 
     validates :bestchange_key, presence: true, uniqueness: true
 
-    # Брать доступные меотды из Validations
+    # Брать доступные меотды из AccountAddressValidation
     ADDRESS_FORMATS = %i[by_currency credit_card okpay advcash payeer telebank alfaclick qiwi yandex_money perfect_money none].freeze
     enumerize :address_format, in: ADDRESS_FORMATS
 
@@ -30,7 +30,7 @@ module PaymentSystemConcern
 
     before_create do
       if currency.is_crypto?
-        self.system_type == :crypto
+        system_type == :crypto
         self.address_format = 'by_currency'
       end
     end
@@ -78,20 +78,21 @@ module PaymentSystemConcern
   end
 
   def address_valid?(address)
-    case address_format.to_s
+    case address_format
     when :none
       address.blank?
     when :credit_card
-      !!Validations.credit_card_valid?(address.to_s, available_outcome_card_brands_list)
+      !!AccountAddressValidation.credit_card_valid?(address.to_s, available_outcome_card_brands_list)
     else
       method = "#{address_format}_valid?"
-      raise "В Validations отсутвует метод валидации #{method}" unless Validations.respond_to? method
+      raise "В AccountAddressValidation отсутвует метод валидации #{method}" unless AccountAddressValidation.respond_to? method
 
-      arity = Validations.method(method).arity
-      if arity == 1
-        !!Validations.send(method, address.to_s)
-      elsif arity == 2
-        !!Validations.send(method, address.to_s, currency)
+      arity = AccountAddressValidation.method(method).arity
+      case arity
+      when 1
+        !!AccountAddressValidation.send(method, address.to_s)
+      when 2
+        !!AccountAddressValidation.send(method, address.to_s, currency)
       else
         raise "Unknown arity #{arity} for validation #{method}"
       end

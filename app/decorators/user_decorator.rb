@@ -23,6 +23,7 @@ class UserDecorator < ApplicationDecorator
 
   def partner_order_based_income_amounts
     return h.middot if partner.nil?
+
     h.render 'balances', balances: partner.orders.by_state(:done).group(:based_income_amount_currency).sum(:based_income_amount_cents)
   end
 

@@ -28,19 +28,19 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'caxlsx', '~> 3.0'
 gem 'caxlsx_rails'
 
-gem 'credit_card_validations'
-gem 'date_validator'
-gem 'valid_email' # , require: 'valid_email/validate_email'
 gem 'auto_strip_attributes'
-gem 'nilify_blanks'
 gem 'bitcoin-ruby', require: 'bitcoin'
 gem 'cashaddress'
+gem 'credit_card_validations'
+gem 'date_validator'
+gem 'nilify_blanks'
+gem 'valid_email' # , require: 'valid_email/validate_email'
 # gem 'eth'
 
 # базы данных
 gem 'carrierwave'
-gem 'enum_help'
 gem 'enumerize'
+gem 'enum_help'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
