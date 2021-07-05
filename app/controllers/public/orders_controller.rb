@@ -109,8 +109,7 @@ module Public
         order.referrer_accrual_method = current_referrer.accrual_method
         order.referrer_profit_percentage = current_referrer.profit_percentage
         order.referrer_income_percentage = current_referrer.income_percentage
-        order.referrer_reward = ReferrerRewardCalculator
-                                .new
+        order.referrer_reward = RewardCalculator
                                 .call(accrual_method: current_referrer.accrual_method,
                                       profit_percentage: current_referrer.profit_percentage,
                                       income_percentage: current_referrer.income_percentage,

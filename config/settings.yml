@@ -3,6 +3,10 @@ defaults: &defaults
   # то ставим новый курс
   max_incomde_diff_to_suggest: 5
 
+  # Если установлено, то считаем все вознаграждения в этой валюте, если не установлено, то в валюте оригинала.
+  #
+  rewards_currency: USD
+
   logo_path: /uploads/interchange_logo.svg
   max_export_records_count: 1000
   default_url_options: &default_url_options

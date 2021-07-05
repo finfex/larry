@@ -6,24 +6,29 @@ require 'test_helper'
 
 class ReferrerRewardCalculatorTest < ActiveSupport::TestCase
   def test_for_income
-    result = ReferrerRewardCalculator
+    FactoryBot.create :currency_rate, cur_from: Money::Currency.find(:RUB), cur_to: Money::Currency.find(:USD), rate_value: 1.0 / 60.0
+    result = RewardCalculator
              .call(accrual_method: :income,
                    income_percentage: 10,
-                   income_amount: 100,
+                   income_amount: 100.to_money(:rub),
                    profit_percentage: nil,
                    direction_rate: nil)
-    assert_equal result, 10
+    assert_equal result, Money.new(17, 'USD')
   end
 
   def test_for_profit_percentage
     direction_rate = FactoryBot.create :gera_direction_rate
-    result = ReferrerRewardCalculator
+
+    # Create currency rate after direction rate to make snapshot fresh
+    FactoryBot.create :currency_rate, cur_from: 'RUB', cur_to: 'USD', rate_value: 1.0 / 60.0
+
+    result = RewardCalculator
              .call(accrual_method: :profit_percentage,
                    income_percentage: nil,
-                   income_amount: 100,
-                   profit_percentage: 1,
+                   income_amount: 1000.to_money(:rub),
+                   profit_percentage: 30,
                    direction_rate: direction_rate)
 
-    assert_equal result, 0.1
+    assert_equal result, Money.new(1, 'USD')
   end
 end

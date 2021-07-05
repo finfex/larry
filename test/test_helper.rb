@@ -9,7 +9,7 @@ require 'rails/test_help'
 module ActiveSupport
   class TestCase
     # Run tests in parallel with specified workers
-    parallelize(workers: :number_of_processors)
+    parallelize(workers: :number_of_processors) unless ENV.true?('SINGLE_THREAD_TESTS')
 
     setup do
       Settings.openbill.categories.each_pair do |name, id|
