@@ -3,6 +3,7 @@
 # frozen_string_literal: true
 
 Money.locale_backend = :i18n
+Money.default_currency = :RUB
 
 MoneyRails.configure do |config|
   config.default_bank = Money::Bank::VariableExchange.new(Gera::CurrencyExchange)

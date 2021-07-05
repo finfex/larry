@@ -16,5 +16,11 @@ module Public
       get public_root_url
       assert_response :success
     end
+
+    def test_success_create_order
+      order = {}
+      post public_orders_url, params: { order: order }
+      assert_response :success
+    end
   end
 end
