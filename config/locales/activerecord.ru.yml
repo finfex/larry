@@ -69,6 +69,7 @@ ru:
     rate: Курс
     public_url: Публичная ссылка
     wallet_name: Название кошелька/счета
+    require_full_name: Требование ФИО при оформлении заявки
 
   activerecord:
     models:

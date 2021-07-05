@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_05_132418) do
+ActiveRecord::Schema.define(version: 2021_07_05_135040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -283,6 +283,7 @@ ActiveRecord::Schema.define(version: 2021_07_05_132418) do
     t.string "address_format"
     t.string "wrong_address_format_message", default: "Неверный формат", null: false
     t.string "available_outcome_card_brands", default: "", null: false
+    t.boolean "require_full_name", default: false, null: false
     t.index ["bestchange_key"], name: "index_gera_payment_systems_on_bestchange_key", unique: true
     t.index ["income_enabled"], name: "index_payment_systems_on_income_enabled"
     t.index ["outcome_enabled"], name: "index_payment_systems_on_outcome_enabled"
