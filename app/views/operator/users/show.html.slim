@@ -1,0 +1,7 @@
+= page_header title: "Пользователь #{user.public_name}", back_link: -> { present_back_link user }
+
+.row
+  .col-md-6
+    = render 'attributes_table', object: UserDecorator.decorate(user)
+  .col-md-6
+    = render 'operator/partners/form', partner: user.partner, columns: %i[accrual_method profit_percentage income_percentage]

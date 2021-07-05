@@ -39,6 +39,7 @@ Rails.application.routes.draw do
             end
           end
           resources :users, only: %i[index show]
+          resources :partners, only: %(update)
           resources :pages do
             concerns :archivable
           end

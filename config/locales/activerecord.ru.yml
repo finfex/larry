@@ -22,6 +22,9 @@ ru:
     ps_comission: Комиссия платёжной системы
     rate_value: Курс обмена
     operator: Оператор
+    accrual_method: Метод начисления
+    profit_percentage: Процент с маржи
+    income_percentage: Процент с вала
     id: ID
     mode: Режим
     external_rate: Курс источника
@@ -75,6 +78,11 @@ ru:
         other: Кошельки
       page: Страницы
       currency: Валюты
+      partner: 
+        one: Партнёр
+        few: Партнёра
+        many: Партнёров
+        other: Партнёров
       gera/payment_system: Платежные системы
       order:
         one: Заявки

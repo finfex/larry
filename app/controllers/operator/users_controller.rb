@@ -7,8 +7,21 @@ module Operator
     before_action do
       @container = :fluid
     end
+
+    helper_method :resource
+
+    def show
+      render locals: { user: resource }
+    end
+
     def index
       render locals: { users: paginate(User.includes(:partner).order('created_at desc')) }
+    end
+
+    private
+
+    def resource
+      @resource ||= User.find(params[:id])
     end
   end
 end

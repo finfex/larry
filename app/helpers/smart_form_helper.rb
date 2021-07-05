@@ -56,8 +56,7 @@ module SmartFormHelper
       as = :input
     end
 
-    disabled = false
-    disabled = true if record.persisted? && DISABLED_COLUMNS.include?(column.to_sym)
+    disabled = record.persisted? && DISABLED_COLUMNS.include?(column.to_sym)
     [as, collection, disabled]
   end
 

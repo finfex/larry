@@ -1,0 +1,7 @@
+ru:
+  enums:
+    partner:
+      accrual_method:
+        income: От вала
+        profit: От маржи
+

@@ -10,6 +10,9 @@ class Partner < ApplicationRecord
 
   enum accrual_method: %i[income profit]
 
+  validates :profit_percentage, presence: true, numericality: { equal_or_greater_than: 0, less_than_or_equal_to: 30 }
+  validates :income_percentage, presence: true, numericality: { equal_or_greater_than: 0, less_than_or_equal_to: 5 }
+
   before_create do
     self.ref_token = SecureRandom.hex(12)
   end
