@@ -35,6 +35,10 @@ class OrderDecorator < ApplicationDecorator
     h.humanized_money_with_currency object.based_income_amount
   end
 
+  def user_income_address
+    h.content_tag :pre, object.user_income_address
+  end
+
   def income_amount
     h.humanized_money_with_currency object.income_amount
   end

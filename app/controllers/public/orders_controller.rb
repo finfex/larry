@@ -62,13 +62,16 @@ module Public
                          end
 
       # TODO: Проверять не устарел ли курс
-      order = rate_calculation.build_order
+      order = rate_calculation.build_order(order_params)
       if rate_calculation.valid?
         create_order order
         redirect_to public_order_path(order), notice: 'Принята заявка на обмен. Ждём от Вас оплаты.'
       else
         render :new, locals: { order: order, rate_calculation: rate_calculation }
       end
+    rescue ActiveRecord::RecordInvalid => err
+      raise err unless err.record.is_a? Order
+      render :new, locals: { order: order, rate_calculation: rate_calculation }
     end
 
     def show
@@ -125,9 +128,7 @@ module Public
       params
         .require(:order)
         .permit(:request_direction,
-                # Не нужны
-                # :income_payment_system_id,
-                # :outcome_payment_system_id,
+                :user_income_address,
                 :income_amount,
                 :outcome_amount,
                 :direction_rate_id)

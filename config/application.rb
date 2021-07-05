@@ -22,6 +22,7 @@ module Larry
 
     config.autoload_paths += Dir[
       "#{Rails.root}/app/inputs",
+      "#{Rails.root}/app/validators",
       "#{Rails.root}/app/commands",
     ]
     # Configuration for the application, engines, and railties goes here.

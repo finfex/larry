@@ -62,6 +62,10 @@ ru:
     outcome_payment_system: Исходящая платёжная система
     user_confirmed_at: Подтверждение пользователем
     partner_order_based_income_amounts: Сумма исполненных обменов
+    user_income_address: Адрес поступления
+    wrong_address_format_message: Сообщение о неверном адресе отправления
+    available_outcome_card_brands: Разрешённые для вывода банки
+    address_format: Формат адреса
     rate: Курс
     public_url: Публичная ссылка
     wallet_name: Название кошелька/счета

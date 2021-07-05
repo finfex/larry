@@ -9,10 +9,10 @@ class RewardCalculator < ApplicationCommand
       case accrual_method.to_sym
       when :income
         Percent.new(income_percentage).percent_of income_amount
-      when :profit_percentage
+      when :profit
         Percent.new(profit_percentage).percent_of Money.new(direction_rate.get_profit_result(income_amount.to_d).profit_amount, income_amount.currency)
       else
-        raise 'WTF'
+        raise "Unknown accrual_method #{accrual_method}"
       end
 
     return reward_amount if Settings.rewards_currency.nil?

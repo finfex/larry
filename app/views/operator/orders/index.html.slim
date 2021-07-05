@@ -27,6 +27,9 @@
             h3 Отдаём:
             .mb-2= present_payment_system order.outcome_payment_system
             = humanized_money_with_currency order.outcome_amount
+            .mt-2 
+              | На адрес 
+              pre= order.user_income_address
           .col-md-4
             p Сумма в USD #{humanized_money_with_currency order.based_income_amount}
             = render 'referal', order: order

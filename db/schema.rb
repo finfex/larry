@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_05_085940) do
+ActiveRecord::Schema.define(version: 2021_07_05_132418) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -280,6 +280,9 @@ ActiveRecord::Schema.define(version: 2021_07_05_085940) do
     t.string "system_type"
     t.boolean "require_verify", default: false, null: false
     t.string "wallet_name", default: "Wallet", null: false
+    t.string "address_format"
+    t.string "wrong_address_format_message", default: "Неверный формат", null: false
+    t.string "available_outcome_card_brands", default: "", null: false
     t.index ["bestchange_key"], name: "index_gera_payment_systems_on_bestchange_key", unique: true
     t.index ["income_enabled"], name: "index_payment_systems_on_income_enabled"
     t.index ["outcome_enabled"], name: "index_payment_systems_on_outcome_enabled"
@@ -420,6 +423,8 @@ ActiveRecord::Schema.define(version: 2021_07_05_085940) do
     t.string "referrer_reward_currency"
     t.decimal "based_income_amount_cents", null: false
     t.string "based_income_amount_currency", null: false
+    t.string "user_income_address"
+    t.string "full_name"
     t.index ["direction_rate_id"], name: "index_orders_on_direction_rate_id"
     t.index ["income_payment_system_id"], name: "index_orders_on_income_payment_system_id"
     t.index ["income_wallet_id"], name: "index_orders_on_income_wallet_id"

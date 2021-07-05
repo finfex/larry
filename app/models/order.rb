@@ -54,6 +54,8 @@ class Order < ApplicationRecord
     self.based_income_amount = income_amount.exchange_to Settings.rewards_currency
   end
   validates :referrer_reward, presence: true, if: :referrer
+  # TODO validate format
+  validates :user_income_address, presence: true, account_address_format: { payment_system: :outcome_payment_system }
 
   before_create do
     self.income_address = income_wallet.address

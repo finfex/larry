@@ -35,8 +35,9 @@ class RateCalculation
     new attrs
   end
 
-  def build_order
-    order = Order.new(
+  def build_order(attrs = {})
+    order = Order.new attrs
+    order.assign_attributes(
       income_amount: income_amount,
       income_payment_system: income_payment_system,
       outcome_payment_system: outcome_payment_system,
