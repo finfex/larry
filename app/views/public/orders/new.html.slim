@@ -42,6 +42,7 @@
       = render 'errors', order: order, rate_calculation: rate_calculation
 
       - if order.direction_rate.present?
+        = f.input :user_full_name, label: 'ФИО' if order.require_full_name?
         = f.input :income_amount, 
           as: :money, 
           error: '',
@@ -67,8 +68,7 @@
           label: 'Получаете', 
           disable_errors: true,
           input_html: { id: :disabled_outcome_amount }
-        = f.input :user_income_address, 
-          label: 'На адрес'
+        = f.input :user_income_address, label: 'На адрес' if order.require_income_address?
         = f.submit 'Обменять сейчас', class: 'btn btn-primary btn-lg mt-4 pt-3 pb-3', style: 'width: 100%', disabled: rate_calculation.errors.any?
 
         - if Rails.env.development? && params[:debug]

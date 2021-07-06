@@ -132,6 +132,7 @@ module Public
         .require(:order)
         .permit(:request_direction,
                 :user_income_address,
+                :user_full_name,
                 :income_amount,
                 :outcome_amount,
                 :direction_rate_id)

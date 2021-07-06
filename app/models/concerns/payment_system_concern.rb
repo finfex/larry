@@ -22,15 +22,7 @@ module PaymentSystemConcern
 
     validates :bestchange_key, presence: true, uniqueness: true
 
-    # rubocop:disable Lint/ConstantDefinitionInBlock
-    ADDRESS_FORMATS = AccountAddressValidation
-                      .methods
-                      .select { |m| m.to_s.ends_with? '_valid?' }
-                      .map { |m| m.to_s.gsub('_valid?', '') }
-                      .map(&:to_sym) + %i[none]
-    # rubocop:enable Lint/ConstantDefinitionInBlock
-
-    enumerize :address_format, in: ADDRESS_FORMATS
+    enumerize :address_format, in: AccountAddressValidation.formats
 
     mount_uploader :icon, PaymentSystemLogoUploader
 
@@ -86,7 +78,7 @@ module PaymentSystemConcern
   # rubocop:disable Metrics/MethodLength
   def address_valid?(address)
     case address_format
-    when :none
+    when nil, ''
       address.blank?
     when :credit_card
       !AccountAddressValidation.credit_card_valid?(address.to_s, available_outcome_card_brands_list).nil?

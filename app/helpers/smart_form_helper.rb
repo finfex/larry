@@ -62,7 +62,7 @@ module SmartFormHelper
 
   def smart_get_collection(record_class, attribute_name, _record = nil)
     if record_class.respond_to?(:enumerized_attributes) && record_class.enumerized_attributes[attribute_name.to_sym].present? # gem enumerize
-      [[t('.not_selected'), '']] + record_class.enumerized_attributes[attribute_name.to_sym].values.map { |v| [v, v] }
+      [[t('.blank'), '']] + record_class.enumerized_attributes[attribute_name.to_sym].values.map { |v| [v, v] }
     elsif record_class.defined_enums[attribute_name.to_s].present? # рельсовый enum
       record_class.defined_enums[attribute_name].keys.map do |attribute_value|
         scope = "enums.#{record_class.name.underscore}.#{attribute_name}.#{attribute_value}"

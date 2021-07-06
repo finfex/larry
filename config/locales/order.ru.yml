@@ -8,7 +8,7 @@ ru:
       canceled: Отклонена
       created: Создана
     states:
-      draft: Черновик
+      draft: Ожидает поступления средств
       user_confirmed: Ожидает обработки
       accepted: Заявка принята к обработке
       canceled: Отменена

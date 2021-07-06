@@ -68,7 +68,7 @@ gem 'sidekiq'
 gem 'sidekiq-cron'
 gem 'simple_form'
 gem 'slim-rails'
-gem 'state_machine'
+gem 'state_machines-activerecord'
 
 gem 'dotenv'
 gem 'dotenv-rails'

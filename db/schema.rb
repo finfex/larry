@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_05_135040) do
+ActiveRecord::Schema.define(version: 2021_07_05_135209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -82,8 +82,7 @@ ActiveRecord::Schema.define(version: 2021_07_05_135040) do
     t.decimal "amount_cents", null: false
     t.string "amount_currency", null: false
     t.uuid "order_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
     t.index ["order_id"], name: "index_booked_amounts_on_order_id"
     t.index ["payment_system_id"], name: "index_booked_amounts_on_payment_system_id"
   end
@@ -283,7 +282,8 @@ ActiveRecord::Schema.define(version: 2021_07_05_135040) do
     t.string "address_format"
     t.string "wrong_address_format_message", default: "Неверный формат", null: false
     t.string "available_outcome_card_brands", default: "", null: false
-    t.boolean "require_full_name", default: false, null: false
+    t.boolean "require_full_name_on_income", default: false, null: false
+    t.boolean "require_full_name_on_outcome", default: false, null: false
     t.index ["bestchange_key"], name: "index_gera_payment_systems_on_bestchange_key", unique: true
     t.index ["income_enabled"], name: "index_payment_systems_on_income_enabled"
     t.index ["outcome_enabled"], name: "index_payment_systems_on_outcome_enabled"
@@ -426,6 +426,7 @@ ActiveRecord::Schema.define(version: 2021_07_05_135040) do
     t.string "based_income_amount_currency", null: false
     t.string "user_income_address"
     t.string "full_name"
+    t.string "user_full_name"
     t.index ["direction_rate_id"], name: "index_orders_on_direction_rate_id"
     t.index ["income_payment_system_id"], name: "index_orders_on_income_payment_system_id"
     t.index ["income_wallet_id"], name: "index_orders_on_income_wallet_id"

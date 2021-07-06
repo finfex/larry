@@ -48,14 +48,16 @@ class Order < ApplicationRecord
     event :done do
       transition accepted: :done
     end
+
+    state :draft
   end
 
   before_validation do
     self.based_income_amount = income_amount.exchange_to Settings.rewards_currency
   end
   validates :referrer_reward, presence: true, if: :referrer
-  # TODO: validate format
-  validates :user_income_address, presence: true, account_address_format: { payment_system: :outcome_payment_system }
+  validates :user_income_address, presence: true, account_address_format: { payment_system: :outcome_payment_system }, if: :require_income_address?
+  validates :user_full_name, presence: true, if: :require_full_name?
 
   before_create do
     self.income_address = income_wallet.address
@@ -69,8 +71,12 @@ class Order < ApplicationRecord
     %i[by_state]
   end
 
-  def state
-    super.to_sym
+  def require_income_address?
+    income_payment_system.address_format.present?
+  end
+
+  def require_full_name?
+    income_payment_system.require_full_name_on_income? || outcome_payment_system.require_full_name_on_outcome?
   end
 
   def income_currency

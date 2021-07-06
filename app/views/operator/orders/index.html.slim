@@ -29,9 +29,10 @@
             = humanized_money_with_currency order.outcome_amount
             .mt-2 
               | На адрес 
-              pre= order.user_income_address
+              pre= order.user_income_address.presence || 'Не указан'
           .col-md-4
             p Сумма в USD #{humanized_money_with_currency order.based_income_amount}
+            p ФИО: #{order.user_full_name}
             = render 'referal', order: order
             = render 'operator', order: order
             = present_order_status order.state

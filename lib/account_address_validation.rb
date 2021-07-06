@@ -7,7 +7,15 @@
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/PerceivedComplexity
+# rubocop:disable Metrics/ModuleLength
 module AccountAddressValidation
+  def self.formats
+    methods
+      .select { |m| m.to_s.ends_with? '_valid?' }
+      .map { |m| m.to_s.gsub('_valid?', '') }
+      .map(&:to_sym)
+  end
+
   def self.by_currency_valid?(address, currency)
     if [BTC, USDT].include?(currency)
       bitcoin_valid? address
@@ -140,3 +148,4 @@ end
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/PerceivedComplexity
+# rubocop:enable Metrics/ModuleLength
