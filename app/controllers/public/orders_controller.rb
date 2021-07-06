@@ -3,6 +3,7 @@
 # frozen_string_literal: true
 
 module Public
+  # rubocop:disable Metrics/ClassLength
   class OrdersController < ApplicationController
     helper Gera::ApplicationHelper
     helper Gera::DirectionRateHelper
@@ -133,9 +134,11 @@ module Public
         .permit(:request_direction,
                 :user_income_address,
                 :user_full_name,
+                :user_email,
                 :income_amount,
                 :outcome_amount,
                 :direction_rate_id)
     end
   end
+  # rubocop:enable Metrics/ClassLength
 end

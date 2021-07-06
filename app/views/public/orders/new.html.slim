@@ -39,10 +39,11 @@
 
     .col-md-4
       h2.mb-3 3. Ввод данных
-      = render 'errors', order: order, rate_calculation: rate_calculation
+      = render 'errors', order: order, rate_calculation: rate_calculation if Rails.env.development?
 
       - if order.direction_rate.present?
         = f.input :user_full_name, label: 'ФИО' if order.require_full_name?
+        = f.input :user_email, label: 'Email' if order.require_email?
         = f.input :income_amount, 
           as: :money, 
           error: '',

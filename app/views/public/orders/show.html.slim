@@ -1,7 +1,7 @@
 .container.mt-4
   h1.mb-4 Заявка на обмен #{order.uid}
 
-  = render 'attributes_table', object: OrderDecorator.decorate(order), columns: %i[created_at income_amount outcome_amount income_payment_system income_address outcome_payment_system rate user_confirmed_at user_income_address state]
+  = render 'attributes_table', object: UserOrderDecorator.decorate(order), columns: %i[created_at income_amount outcome_amount income_payment_system income_address outcome_payment_system rate user_confirmed_at user_income_address user_email user_full_name state]
 
   - if order.draft?
     = link_to 'Средства отправил', confirm_public_order_path(order), method: :put, class: 'btn btn-success btn-lg', data: { confirm: "Отправили средства на указанный адрес #{order.income_address}" }

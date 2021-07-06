@@ -23,7 +23,7 @@ module Public
         outcome_payment_system_id: @outcome_payment_system.id,
         income_amount: 100,
         outcome_amount: 200,
-        request_direction: :income,
+        request_direction: :from_income,
         direction_rate_id: @direction_rate.id
       }
       post public_orders_url, params: { order: order }

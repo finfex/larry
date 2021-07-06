@@ -18,6 +18,7 @@ module Operator
       minimal_outcome_amount maximal_income_amount maximal_outcome_amount bestchange_key reserves_delta require_verify
       wallet_name address_format wrong_address_format_message
       require_full_name_on_income require_full_name_on_outcome
+      require_email_on_income require_email_on_outcome
     ].freeze
 
     def index; end

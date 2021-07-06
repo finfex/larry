@@ -33,6 +33,7 @@
           .col-md-4
             p Сумма в USD #{humanized_money_with_currency order.based_income_amount}
             p ФИО: #{order.user_full_name}
+            p Email: #{order.user_email} 
             = render 'referal', order: order
             = render 'operator', order: order
             = present_order_status order.state

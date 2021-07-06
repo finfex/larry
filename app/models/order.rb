@@ -58,6 +58,7 @@ class Order < ApplicationRecord
   validates :referrer_reward, presence: true, if: :referrer
   validates :user_income_address, presence: true, account_address_format: { payment_system: :outcome_payment_system }, if: :require_income_address?
   validates :user_full_name, presence: true, if: :require_full_name?
+  validates :user_email, presence: true, email: true, if: :require_email?
 
   before_create do
     self.income_address = income_wallet.address
@@ -73,6 +74,10 @@ class Order < ApplicationRecord
 
   def require_income_address?
     income_payment_system.address_format.present?
+  end
+
+  def require_email?
+    income_payment_system.require_email_on_income? || outcome_payment_system.require_email_on_outcome?
   end
 
   def require_full_name?

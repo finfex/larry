@@ -62,7 +62,7 @@ ru:
     outcome_payment_system: Исходящая платёжная система
     user_confirmed_at: Подтверждение пользователем
     partner_order_based_income_amounts: Сумма исполненных обменов
-    user_income_address: Адрес поступления
+    user_income_address: Адрес пользователя для зачисления
     wrong_address_format_message: Сообщение о неверном адресе отправления
     available_outcome_card_brands: Разрешённые для вывода банки
     address_format: Формат адреса
@@ -71,6 +71,10 @@ ru:
     wallet_name: Название кошелька/счета
     require_full_name_on_income: Требование ФИО при оформлении заявки на прием по этой ПС
     require_full_name_on_outcome: Требование ФИО при оформлении заявки на выплату по этой ПС
+    require_email_on_income: Требовать email при оформлении заявки на прием по этой ПС
+    require_email_on_outcome: Требовать email при оформлении заявки на выплату по этой ПС
+    user_email: Email
+    user_full_name: ФИО
 
   activerecord:
     models:

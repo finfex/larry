@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_05_135209) do
+ActiveRecord::Schema.define(version: 2021_07_06_064902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -284,6 +284,8 @@ ActiveRecord::Schema.define(version: 2021_07_05_135209) do
     t.string "available_outcome_card_brands", default: "", null: false
     t.boolean "require_full_name_on_income", default: false, null: false
     t.boolean "require_full_name_on_outcome", default: false, null: false
+    t.boolean "require_email_on_income", default: false, null: false
+    t.boolean "require_email_on_outcome", default: false, null: false
     t.index ["bestchange_key"], name: "index_gera_payment_systems_on_bestchange_key", unique: true
     t.index ["income_enabled"], name: "index_payment_systems_on_income_enabled"
     t.index ["outcome_enabled"], name: "index_payment_systems_on_outcome_enabled"
@@ -427,6 +429,7 @@ ActiveRecord::Schema.define(version: 2021_07_05_135209) do
     t.string "user_income_address"
     t.string "full_name"
     t.string "user_full_name"
+    t.string "user_email"
     t.index ["direction_rate_id"], name: "index_orders_on_direction_rate_id"
     t.index ["income_payment_system_id"], name: "index_orders_on_income_payment_system_id"
     t.index ["income_wallet_id"], name: "index_orders_on_income_wallet_id"
