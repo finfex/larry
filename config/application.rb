@@ -32,6 +32,7 @@ module Larry
     # in config/environments, which are processed later.
     #
     config.time_zone = ENV.fetch('TIME_ZONE', 'Europe/Moscow')
+    config.active_record.default_timezone = :utc
 
     if ENV.key? 'LARRY_HOST'
       config.hosts << ENV['LARRY_HOST']
