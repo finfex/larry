@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_06_064902) do
+ActiveRecord::Schema.define(version: 2021_07_07_041512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -277,7 +277,6 @@ ActiveRecord::Schema.define(version: 2021_07_06_064902) do
     t.decimal "reserves_delta_cents", default: "0.0", null: false
     t.uuid "reserves_aggregator_id"
     t.string "system_type"
-    t.boolean "require_verify", default: false, null: false
     t.string "wallet_name", default: "Wallet", null: false
     t.string "address_format"
     t.string "wrong_address_format_message", default: "Неверный формат", null: false

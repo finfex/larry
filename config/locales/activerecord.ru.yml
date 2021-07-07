@@ -112,7 +112,6 @@ ru:
         value: Курс
         is_enabled: Разрешён обмен
       gera/payment_system:
-        require_verify: Требуется подтверждение
         icon: Логотип
       order:
         created_at: Создана
