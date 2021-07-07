@@ -25,13 +25,14 @@ module Larry
       "#{Rails.root}/app/validators",
       "#{Rails.root}/app/commands",
     ]
+    # config.eager_load_paths << Rails.root.join("extras")
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
-    # config.eager_load_paths << Rails.root.join("extras")
+    config.time_zone = ENV.fetch('TIME_ZONE', 'Europe/Moscow')
+
     if ENV.key? 'LARRY_HOST'
       config.hosts << ENV['LARRY_HOST']
       config.hosts << '*.' + ENV['LARRY_HOST']
