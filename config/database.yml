@@ -21,6 +21,24 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+  # Connect on a TCP socket. Omitted by default since the client uses a
+  # domain socket that doesn't need configuration. Windows does not have
+  # domain sockets, so uncomment these lines.
+  <% if ENV.key?('DATABASE_HOST') %>
+  host: <%= ENV.fetch('DATABASE_HOST', '127.0.0.1') %>
+  <% end %>
+  <% if ENV.key?('DATABASE_PASS') %>
+  password: <%= ENV['DATABASE_PASS'] %>
+  <% end %>
+  <% if ENV.key?('DATABASE_USER') %>
+  username: <%= ENV.fetch('DATABASE_USER', `whoami`.chomp) %>
+  <% end %>
+
+  # The TCP port the server listens on. Defaults to 5432.
+  # If your server runs on a different port number, change accordingly.
+  #port: 5432
+
+
 development:
   <<: *default
   database: larry_development
@@ -33,19 +51,6 @@ development:
 
   # The password associated with the postgres role (username).
   #password:
-
-  # Connect on a TCP socket. Omitted by default since the client uses a
-  # domain socket that doesn't need configuration. Windows does not have
-  # domain sockets, so uncomment these lines.
-  #host: localhost
-  <% if ENV.key?('DATABASE_HOST') %>
-  host: <%= ENV.fetch('DATABASE_HOST', '127.0.0.1') %>
-  <% end %>
-
-  # The TCP port the server listens on. Defaults to 5432.
-  # If your server runs on a different port number, change accordingly.
-  #port: 5432
-
   # Schema search path. The server defaults to $user,public
   #schema_search_path: myapp,sharedapp,public
 
