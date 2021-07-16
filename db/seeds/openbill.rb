@@ -13,6 +13,5 @@ OpenbillPolicy.find_or_create_by(name: 'Allow all')
 
 puts 'Create wallets for payment systems'
 Gera::PaymentSystem.find_each do |ps|
-  ps.wallets.create_for_payment_system! ps
   OpenbillCategory.storno.accounts.create! details: "Storno account for #{ps}", reference: ps, amount: ps.currency.zero_money
 end
