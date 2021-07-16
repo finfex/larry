@@ -19,6 +19,7 @@ jobs:
       RAILS_ENV: test
       DATABASE_USER: postgres
       DATABASE_PASS: postgres
+      DATABASE_HOST: 127.0.0.1
     runs-on: ubuntu-latest
     strategy:
       matrix:
