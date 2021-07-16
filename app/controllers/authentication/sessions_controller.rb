@@ -5,7 +5,8 @@
 module Authentication
   class SessionsController < ApplicationController
     def new
-      flash.now.alert = request.env['warden.options'].fetch(:message, nil)
+      alert = (request.env['warden.options'] || {}).fetch(:message, nil)
+      flash.now.alert = alert if alert.present?
       render locals: { redirect_url: redirect_url }
     end
 

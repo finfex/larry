@@ -38,6 +38,14 @@ Rails.application.routes.draw do
               put :income_confirm
             end
           end
+          resources :credit_cards
+          resources :credit_card_verifications do
+            member do
+              put :accept
+              put :reject
+              put :start
+            end
+          end
           resources :users, only: %i[index show]
           resources :partners, only: %(update)
           resources :pages do
@@ -66,6 +74,8 @@ Rails.application.routes.draw do
     scope module: :public do
       root to: 'orders#new'
       resource :profile, only: %i[show]
+      resources :credit_cards, only: %i[index show]
+      resources :credit_card_verifications, only: %i[index show new create]
       resources :orders, only: %i[create show] do
         member do
           put :confirm

@@ -1,0 +1,15 @@
+= simple_form_for [:public, ccv] do |f|
+  .row
+    .col-md-6
+      = f.input :number, input_html: { pattern: "[0-9]*", type: :tel, inputmode: "numeric", autocomplete: "cc-number", maxlength: "19" }
+    .col-md-3
+      = f.input :exp_month
+    .col-md-3
+      = f.input :exp_year
+  .row
+    .col-md-9
+      = f.input :full_name
+    .col-md-3
+      = f.input :image
+      = f.input :image_cache, as: :hidden
+  = f.submit 'Отправить на проверку', class: 'btn btn-lg btn-primary mt-2'

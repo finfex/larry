@@ -33,7 +33,7 @@ module RansackSupport
   end
 
   def q_params
-    params[:q]
+    params.fetch(:q, {})
   end
 
   def build_q

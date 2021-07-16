@@ -1,0 +1,16 @@
+.card.mb-4
+  .card-header
+    span.mr-2 Карта отправлена на проверку:
+    = present_time credit_card_verification.created_at
+  .card-body
+    .row
+      .col-md-9
+        span.mr-2 Номер карты
+        code= credit_card_verification.number
+      .col-md-3
+        span.mr-2 Статус
+        span.mr-2.text-nowrap
+          = present_credit_card_verification_state credit_card_verification
+
+        - if credit_card_verification.rejected?
+          p Причина отказа: #{credit_card_verification.reject_message}

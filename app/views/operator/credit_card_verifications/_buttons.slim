@@ -1,0 +1,4 @@
+- available_transitions = credit_card_verification.state_transitions.map(&:event)
+.mt-2= link_to 'Начать оработку', start_operator_credit_card_verification_path(credit_card_verification), class: 'btn btn-primary', method: :put if available_transitions.include? :process
+.mt-2= link_to 'Принять', accept_operator_credit_card_verification_path(credit_card_verification), class: 'btn btn-warning', method: :put, data: { confirm: 'Принимаем?' } if available_transitions.include? :accept
+.mt-2= link_to 'Отклонить', reject_operator_credit_card_verification_path(credit_card_verification), class: 'btn btn-secondary', method: :put, data: { confirm: 'Отклоняем?' } if available_transitions.include? :reject

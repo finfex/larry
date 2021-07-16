@@ -1,0 +1,14 @@
+.container.mt-4
+  h1.mb-4= t '.credit_cards'
+  - if credit_cards.any?
+    = credit_cards.map(&:number).join(', ')
+  - else
+    p Отсутствуют
+
+  .float-right= link_to 'Отправить карту на верификацию', new_public_credit_card_verification_path, class: 'btn btn-secondary'
+  h1.mb-4= t '.credit_card_verifications'
+
+  - if verifications.any?
+    hr
+    = render partial: 'public/credit_card_verifications/block', collection: verifications, as: :credit_card_verification
+
