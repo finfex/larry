@@ -30,6 +30,14 @@
           .row
             .col-md-12
               .mt-4
+                - if credit_card_verification.rejected? || credit_card_verification.accepted?
+                  = link_to 'Показать изображение', credit_card_verification.image.url, target: '_blank'
+                - else
+                  = link_to credit_card_verification.image.url, target: '_blank' do
+                    = image_tag credit_card_verification.image.url, height: '200px'
+          .row
+            .col-md-12
+              .mt-4
                 = render 'buttons', credit_card_verification: credit_card_verification
     = paginate paginated_records
   - else
