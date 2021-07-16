@@ -1,0 +1,68 @@
+---
+ru:
+  simple_form:
+    "yes": 'да'
+    "no": 'нет'
+    required:
+      text: 'обязательное поле'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    include_blank:
+      hotel:
+        hotel_kind_id: 'Любой'
+
+    error_notification:
+      default_message: "Обнаружены ошибки, пожалуйста, взгляните на них"
+      blank: "Не может быть пустым"
+    confirm: Вы уверены?
+    button:
+      disble_with:
+        sending: Отправляем...
+        saving: Сохраняем...
+        waiting: Подождите...
+    labels:
+      defaults:
+        login: email или телефон
+        password: пароль
+        password_confirmation: Подтверждение пароля
+        comment: Комментарий
+        name: Название
+        title: Название
+        company_name: Полное наименование организации или индивидуального предпринимателя
+        inn: ИНН
+        kpp: КПП
+        legal_address: Юридический адрес
+        delivery_address: Адрес доставки
+        phone: Телефон для связи
+        email: Email для связи
+        first_name: Ваше имя
+        second_name: Ваша фамилия
+        organization_id: Организация
+        emails_list: Список емайлов
+        phones_list: Список телефонов
+      user:
+        login: Телефон или email
+        password: Пароль
+        password_confirmation: Подтверждение пароля
+      partner:
+        party: ИНН или наименование для поиска
+        name: Краткое наименование
+        full_name: Полное наименование
+        form: Форма
+        inn: ИНН
+        address: Юридический адрес
+
+    placeholders:
+      defaults:
+        title: Название
+      credit_card_verification:
+        number: 'XXXX XXXX XXXX XXXX'
+      q:
+        query: Поиск по сайту
+    hints:
+      defaults:
+        request_text: "Например: MSP430F47197IPZ 100 шт"
+      credit_card_verification:
+        number: 'Например: 1234 5678 1234 5678'

@@ -1,0 +1,36 @@
+.container.mt-4
+  - if q.conditions.any?
+    .mb-3= link_to '&larr; назад в список верификаций'.html_safe, operator_credit_card_verifications_path
+
+  h1.mb-4= CreditCardVerification.model_name.human(count: 100)
+  - if  q.conditions.any?
+    h2 Фильтр:
+    pre= q.conditions
+
+  = render 'tabs', q: q
+
+  - if records.any?
+    - paginated_records.each do |credit_card_verification|
+      .card.mb-4
+        .card-header
+          span.mr-2 Карта отправлена на проверку:
+          = present_time credit_card_verification.created_at
+        .card-body
+          .row
+            .col-md-9
+              span.mr-2 Номер карты
+              code= credit_card_verification.number
+            .col-md-3
+              span.mr-2 Статус
+              span.mr-2.text-nowrap
+                = present_credit_card_verification_state credit_card_verification
+
+              - if credit_card_verification.rejected?
+                p Причина отказа: #{credit_card_verification.reject_message}
+          .row
+            .col-md-12
+              .mt-4
+                = render 'buttons', credit_card_verification: credit_card_verification
+    = paginate paginated_records
+  - else
+    div= t 'helpers.empty'

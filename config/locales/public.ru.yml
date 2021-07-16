@@ -1,5 +1,9 @@
 ru:
   public:
+    credit_cards:
+      index:
+        credit_cards: Верифицированные карты
+        credit_card_verifications: Карты на верификации
     profiles:
       show:
         profile: Личный профиль

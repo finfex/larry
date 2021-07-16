@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_07_041512) do
+ActiveRecord::Schema.define(version: 2021_07_16_164405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -85,6 +85,35 @@ ActiveRecord::Schema.define(version: 2021_07_07_041512) do
     t.datetime "created_at", null: false
     t.index ["order_id"], name: "index_booked_amounts_on_order_id"
     t.index ["payment_system_id"], name: "index_booked_amounts_on_payment_system_id"
+  end
+
+  create_table "credit_card_verifications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "order_id"
+    t.uuid "user_id"
+    t.string "session_id"
+    t.string "number", null: false
+    t.string "full_name", null: false
+    t.string "exp_year", null: false
+    t.string "exp_month", null: false
+    t.string "state", null: false
+    t.string "image", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "reject_message"
+    t.index ["order_id"], name: "index_credit_card_verifications_on_order_id"
+    t.index ["user_id"], name: "index_credit_card_verifications_on_user_id"
+  end
+
+  create_table "credit_cards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "number", null: false
+    t.uuid "verification_id", null: false
+    t.string "full_name", null: false
+    t.string "exp_year", null: false
+    t.string "exp_month", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["number"], name: "index_credit_cards_on_number", unique: true
+    t.index ["verification_id"], name: "index_credit_cards_on_verification_id"
   end
 
   create_table "currencies", id: :string, force: :cascade do |t|
@@ -470,6 +499,16 @@ ActiveRecord::Schema.define(version: 2021_07_07_041512) do
     t.index ["key"], name: "index_site_settings_on_key", unique: true
   end
 
+  create_table "user_to_credit_cards", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "credit_card_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["credit_card_id"], name: "index_user_to_credit_cards_on_credit_card_id"
+    t.index ["user_id", "credit_card_id"], name: "index_user_to_credit_cards_on_user_id_and_credit_card_id", unique: true
+    t.index ["user_id"], name: "index_user_to_credit_cards_on_user_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
@@ -518,6 +557,9 @@ ActiveRecord::Schema.define(version: 2021_07_07_041512) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "booked_amounts", "gera_payment_systems", column: "payment_system_id"
   add_foreign_key "booked_amounts", "orders"
+  add_foreign_key "credit_card_verifications", "orders"
+  add_foreign_key "credit_card_verifications", "users"
+  add_foreign_key "credit_cards", "credit_card_verifications", column: "verification_id"
   add_foreign_key "gera_cross_rate_modes", "gera_currency_rate_modes", column: "currency_rate_mode_id", on_delete: :cascade
   add_foreign_key "gera_cross_rate_modes", "gera_rate_sources", column: "rate_source_id", on_delete: :cascade
   add_foreign_key "gera_currency_rate_modes", "gera_currency_rate_mode_snapshots", column: "currency_rate_mode_snapshot_id", on_delete: :cascade
@@ -564,6 +606,8 @@ ActiveRecord::Schema.define(version: 2021_07_07_041512) do
   add_foreign_key "orders", "wallets", column: "income_wallet_id"
   add_foreign_key "orders", "wallets", column: "outcome_wallet_id"
   add_foreign_key "partners", "users"
+  add_foreign_key "user_to_credit_cards", "credit_cards"
+  add_foreign_key "user_to_credit_cards", "users"
   add_foreign_key "wallet_activities", "openbill_accounts", column: "opposit_account_id"
   add_foreign_key "wallet_activities", "wallets"
   add_foreign_key "wallets", "gera_payment_systems", column: "payment_system_id"

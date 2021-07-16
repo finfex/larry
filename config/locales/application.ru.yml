@@ -4,6 +4,7 @@ ru:
       rules: Правила обмена
       gera: Управление курсами
       exchange: Обмен
+      credit_cards: Карты
     navbar_user_dropdown:
       profile: Личный кабинет
       logout: Выйти

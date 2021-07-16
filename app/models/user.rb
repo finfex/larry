@@ -10,6 +10,9 @@ class User < ApplicationRecord
 
   has_one :partner
   has_many :orders
+  has_many :user_to_credit_cards
+  has_many :credit_cards, through: :user_to_credit_cards
+  has_many :credit_card_verifications
 
   after_create :create_partner
 

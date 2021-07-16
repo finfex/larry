@@ -1,0 +1,4 @@
+ul.nav.nav-pills.mb-4
+  - CreditCardVerification.state_machines[:state].states.map(&:name).each do |state|
+    li.nav-item
+      = link_to t(state, scope: 'credit_card_verification.tabs', count: CreditCardVerification.by_state(state).count ), operator_credit_card_verifications_path(q: { by_state: state }), class: active_class('nav-link', current_state == state.to_s)

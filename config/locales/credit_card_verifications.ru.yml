@@ -1,0 +1,12 @@
+ru:
+  credit_card_verification:
+    tabs:
+      pending: Ожидает старта проверки
+      processing: На проверке
+      accepted: Принята
+      rejected: Отвергнута
+    states:
+      pending: Ожидает проверки
+      proccessing: На проверке
+      accepted: Принята
+      rejected: Отклонена

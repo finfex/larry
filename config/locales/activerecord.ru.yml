@@ -78,6 +78,15 @@ ru:
 
   activerecord:
     models:
+      credit_card:
+        one: Кредитная карта
+        many: Кредитные карты
+        other: Кредитные карты
+      credit_card_verification:
+        one: Верификация карты
+        many: Верификация карт
+        other: Верификация карт
+
       booked_amount:
         one: Бронь
         few: Брони
@@ -113,6 +122,11 @@ ru:
         is_enabled: Разрешён обмен
       gera/payment_system:
         icon: Логотип
+      credit_card_verification:
+        number: Номер карты
+        full_name: Имя и Фамилия на карте
+        image: Изображение
+
       order:
         created_at: Создана
       page:
