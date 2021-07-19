@@ -23,7 +23,7 @@ class ReferrerRewardCalculatorTest < ActiveSupport::TestCase
     FactoryBot.create :currency_rate, cur_from: 'RUB', cur_to: 'USD', rate_value: 1.0 / 60.0
 
     result = RewardCalculator
-             .call(accrual_method: :profit_percentage,
+             .call(accrual_method: :profit,
                    income_percentage: nil,
                    income_amount: 1000.to_money(:rub),
                    profit_percentage: 30,
