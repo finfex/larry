@@ -7,6 +7,8 @@ class AdminUser < ApplicationRecord
   include Authority::UserAbilities
   include Authority::Abilities
 
+  validates :email, presence: true, email: true
+
   def name
     email
   end

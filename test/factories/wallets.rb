@@ -7,6 +7,6 @@ FactoryBot.define do
     payment_system factory: :gera_payment_system
     details { 'MyText' }
     address { generate :wallet_address }
-    account factory: :openbill_account
+    # account factory: :openbill_account
   end
 end

@@ -4,5 +4,7 @@
 
 FactoryBot.define do
   factory :user do
+    password { 'password' }
+    email
   end
 end

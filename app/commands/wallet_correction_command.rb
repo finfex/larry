@@ -2,13 +2,19 @@
 
 # Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
 
-# make correction in wallet balance
+# Make wallets balance correction
 #
 class WalletCorrectionCommand < ApplicationCommand
-  def call(wallet:, attrs:, admin_user:)
+  def call(wallet:, admin_user:, amount:, details:)
     wallet.account.with_lock do
       opposit_account = wallet.payment_system.storno_account
-      wa = wallet.activities.create! attrs.merge(admin_user: admin_user, opposit_account: opposit_account)
+      wa = wallet.activities.create!(
+        activity_type: :correction,
+        details: details,
+        amount: amount,
+        admin_user: admin_user,
+        opposit_account: opposit_account
+      )
 
       raise if wa.amount.zero?
 

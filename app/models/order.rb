@@ -29,10 +29,26 @@ class Order < ApplicationRecord
   scope :by_state, ->(state) { where state: state }
 
   # draft - пользователь оставил заявку ,но еще не подтвердил что отправил средства
+  # verify - ожидает от пользователя подтверждения карты
+  # wait - ожидает подтверждения оплаты от пользователя
+  # user_confirm - пользователь подтвердил отправку
+  # accepted - принято оператором, в состоянии оплаты
+  # cancel - отменена оператором
+  # done - выполнена
+  #
   state_machine :state, initial: :draft do
+    event :start do
+      transition draft: :wait, unless: :require_verify_on_start?
+      transition draft: :verify, if: :require_verify_on_start?
+    end
+
+    event :verified do
+      transition verify: :wait
+    end
+
     # Пользователь подтвердил
     event :user_confirm do
-      transition draft: :user_confirmed
+      transition wait: :user_confirmed
     end
 
     # Оператор подтвердил и принял в обработку
@@ -70,6 +86,10 @@ class Order < ApplicationRecord
 
   def self.ransackable_scopes(_auth)
     %i[by_state]
+  end
+
+  def require_verify_on_start?
+    income_payment_system.require_verify_income_card?
   end
 
   def require_income_address?

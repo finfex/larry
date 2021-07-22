@@ -302,6 +302,10 @@ GEM
     guard-rubocop (1.4.0)
       guard (~> 2.0)
       rubocop (< 2.0)
+    hairtrigger (0.2.24)
+      activerecord (>= 5.0, < 7)
+      ruby2ruby (~> 2.4)
+      ruby_parser (~> 3.10)
     htmlentities (4.3.4)
     http-accept (1.7.0)
     http-cookie (1.0.4)
@@ -463,6 +467,11 @@ GEM
     ruby-progressbar (1.11.0)
     ruby-vips (2.1.2)
       ffi (~> 1.12)
+    ruby2ruby (2.4.4)
+      ruby_parser (~> 3.1)
+      sexp_processor (~> 4.6)
+    ruby_parser (3.16.0)
+      sexp_processor (~> 4.15, >= 4.15.1)
     rubyzip (2.3.0)
     sass (3.2.10)
     sass-rails (6.0.0)
@@ -488,6 +497,7 @@ GEM
     semver2 (3.4.2)
     set (1.0.1)
     settingslogic (2.0.9)
+    sexp_processor (4.15.3)
     shellany (0.0.1)
     sidekiq (6.2.1)
       connection_pool (>= 2.2.2)
@@ -629,6 +639,7 @@ DEPENDENCIES
   guard
   guard-minitest
   guard-rubocop
+  hairtrigger (~> 0.2.24)
   jbuilder (~> 2.7)
   kaminari (~> 1.2)
   listen (~> 3.3)

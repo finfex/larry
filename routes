@@ -30,6 +30,9 @@
                                          PATCH    /credit_cards/:id(.:format)                                                                       operator/credit_cards#update {:subdomain=>"operator"}
                                          PUT      /credit_cards/:id(.:format)                                                                       operator/credit_cards#update {:subdomain=>"operator"}
                                          DELETE   /credit_cards/:id(.:format)                                                                       operator/credit_cards#destroy {:subdomain=>"operator"}
+accept_operator_credit_card_verification PUT      /credit_card_verifications/:id/accept(.:format)                                                   operator/credit_card_verifications#accept {:subdomain=>"operator"}
+reject_operator_credit_card_verification PUT      /credit_card_verifications/:id/reject(.:format)                                                   operator/credit_card_verifications#reject {:subdomain=>"operator"}
+ start_operator_credit_card_verification PUT      /credit_card_verifications/:id/start(.:format)                                                    operator/credit_card_verifications#start {:subdomain=>"operator"}
       operator_credit_card_verifications GET      /credit_card_verifications(.:format)                                                              operator/credit_card_verifications#index {:subdomain=>"operator"}
                                          POST     /credit_card_verifications(.:format)                                                              operator/credit_card_verifications#create {:subdomain=>"operator"}
    new_operator_credit_card_verification GET      /credit_card_verifications/new(.:format)                                                          operator/credit_card_verifications#new {:subdomain=>"operator"}
@@ -94,6 +97,13 @@
                                          GET|POST /*anything(.:format)                                                                              application#not_found {:subdomain=>"operator"}
                              public_root GET      /                                                                                                 public/orders#new {:subdomain=>""}
                           public_profile GET      /profile(.:format)                                                                                public/profiles#show {:subdomain=>""}
+                     public_credit_cards GET      /credit_cards(.:format)                                                                           public/credit_cards#index {:subdomain=>""}
+                      public_credit_card GET      /credit_cards/:id(.:format)                                                                       public/credit_cards#show {:subdomain=>""}
+        public_credit_card_verifications GET      /credit_card_verifications(.:format)                                                              public/credit_card_verifications#index {:subdomain=>""}
+                                         POST     /credit_card_verifications(.:format)                                                              public/credit_card_verifications#create {:subdomain=>""}
+     new_public_credit_card_verification GET      /credit_card_verifications/new(.:format)                                                          public/credit_card_verifications#new {:subdomain=>""}
+         public_credit_card_verification GET      /credit_card_verifications/:id(.:format)                                                          public/credit_card_verifications#show {:subdomain=>""}
+                     verify_public_order GET      /orders/:id/verify(.:format)                                                                      public/orders#verify {:subdomain=>""}
                     confirm_public_order PUT      /orders/:id/confirm(.:format)                                                                     public/orders#confirm {:subdomain=>""}
                            public_orders POST     /orders(.:format)                                                                                 public/orders#create {:subdomain=>""}
                             public_order GET      /orders/:id(.:format)                                                                             public/orders#show {:subdomain=>""}

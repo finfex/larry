@@ -15,10 +15,11 @@ class Wallet < ApplicationRecord
 
   validates :address, presence: true, uniqueness: { scope: :payment_system_id }
 
-  before_validation on: :create, if: :payment_system do
-    self.account ||= OpenbillAccount
-                     .create!(category_id: Settings.openbill.categories.wallets, amount_cents: 0,
-                              amount_currency: payment_system.currency.iso_code)
+  before_validation on: :create, if: :payment_system, unless: :account do
+    create_account!(
+      category_id: Settings.openbill.categories.wallets,
+      amount_currency: payment_system.currency.iso_code
+    )
   end
 
   after_create do

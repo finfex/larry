@@ -78,6 +78,7 @@ Rails.application.routes.draw do
       resources :credit_card_verifications, only: %i[index show new create]
       resources :orders, only: %i[create show] do
         member do
+          get :verify
           put :confirm
         end
       end

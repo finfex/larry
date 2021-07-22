@@ -52,6 +52,7 @@ Metrics/MethodLength:
   Exclude:
     - 'db/migrate/*'
     - 'app/commands/*'
+    - 'test/**/*'
 
 # Offense count: 2
 # Configuration parameters: IgnoredMethods.

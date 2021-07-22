@@ -2,7 +2,7 @@
 
 # Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
 
-# Log income amounts
+# Log income amounts from order confirmed by operator
 #
 class WalletIncomeCommand < ApplicationCommand
   def call(order:, operator:)

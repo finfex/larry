@@ -53,6 +53,7 @@ module Public
     # rubocop:enable Metrics/MethodLength
 
     # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
     def create
       direction_rate = Gera::DirectionRate.find order_params.fetch(:direction_rate_id)
       calculator = RateCalculator.new(direction_rate)
@@ -67,7 +68,12 @@ module Public
       order = rate_calculation.build_order(order_params)
       if rate_calculation.valid?
         create_order order
-        redirect_to public_order_path(order), notice: 'Принята заявка на обмен. Ждём от Вас оплаты.'
+        order.start!
+        if order.verify?
+          redirect_to verify_public_order_path(order), notice: 'Заявка принята. Пройдите верификацию карты'
+        else
+          redirect_to public_order_path(order), notice: 'Принята заявка на обмен. Ждём от Вас оплаты.'
+        end
       else
         render :new, locals: { order: order, rate_calculation: rate_calculation }
       end
@@ -76,6 +82,7 @@ module Public
 
       render :new, locals: { order: order, rate_calculation: rate_calculation }
     end
+    # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
 
     def show

@@ -614,4 +614,273 @@ ActiveRecord::Schema.define(version: 2021_07_22_140722) do
   add_foreign_key "wallet_activities", "wallets"
   add_foreign_key "wallets", "gera_payment_systems", column: "payment_system_id"
   add_foreign_key "wallets", "openbill_accounts", column: "account_id"
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute(<<-SQL)
+CREATE OR REPLACE FUNCTION public.add_current_user_to_transaction()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
+BEGIN
+  NEW.username := current_user;
+  RETURN NEW;
+END
+$function$
+  SQL
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute("CREATE TRIGGER add_current_user_to_transaction BEFORE INSERT OR UPDATE ON \"openbill_transactions\" FOR EACH ROW EXECUTE FUNCTION add_current_user_to_transaction()")
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute(<<-SQL)
+CREATE OR REPLACE FUNCTION public.constraint_accounts_currency_in_transactions()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
+BEGIN
+  PERFORM * FROM OPENBILL_ACCOUNTS where id = NEW.from_account_id and amount_currency = NEW.amount_currency;
+  IF NOT FOUND THEN
+    RAISE EXCEPTION 'Account (from #%) has wrong currency', NEW.from_account_id;
+  END IF;
+
+  PERFORM * FROM OPENBILL_ACCOUNTS where id = NEW.to_account_id and amount_currency = NEW.amount_currency;
+  IF NOT FOUND THEN
+    RAISE EXCEPTION 'Account (to #%) has wrong currency', NEW.to_account_id;
+  END IF;
+
+  IF NEW.invoice_id IS NOT NULL THEN
+    PERFORM * FROM OPENBILL_INVOICES where id = NEW.invoice_id and amount_currency = NEW.amount_currency;
+    IF NOT FOUND THEN
+      RAISE EXCEPTION 'Invoice (to #%) has wrong currency', NEW.invoice_id;
+    END IF;
+
+    PERFORM * FROM OPENBILL_INVOICES where id = NEW.invoice_id and destination_account_id = NEW.to_account_id;
+    IF NOT FOUND THEN
+      RAISE EXCEPTION 'Invoice destination account (to #%) is wrong', NEW.invoice_id;
+    END IF;
+  END IF;
+
+  return NEW;
+END
+
+$function$
+  SQL
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute("CREATE TRIGGER constraint_accounts_currency_in_transactions BEFORE INSERT OR UPDATE ON \"openbill_transactions\" FOR EACH ROW EXECUTE FUNCTION constraint_accounts_currency_in_transactions()")
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute(<<-SQL)
+CREATE OR REPLACE FUNCTION public.constraint_transaction_ownership()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
+BEGIN
+  PERFORM id FROM OPENBILL_ACCOUNTS WHERE id = NEW.from_account_id and (owner_id = NEW.owner_id OR (owner_id is NULL and NEW.owner_id is NULL) );
+  IF NOT FOUND THEN
+    RAISE EXCEPTION 'No such source account in this owner (to #%)', NEW.owner_id;
+  END IF;
+
+  PERFORM id FROM OPENBILL_ACCOUNTS WHERE id = NEW.to_account_id and (owner_id = NEW.owner_id OR (owner_id is NULL and NEW.owner_id is NULL) );
+  IF NOT FOUND THEN
+    RAISE EXCEPTION 'No such destination account in this owner (to #%)', NEW.owner_id;
+  END IF;
+
+
+  return NEW;
+END
+
+$function$
+  SQL
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute("CREATE TRIGGER constraint_transaction_ownership AFTER INSERT ON \"openbill_transactions\" FOR EACH ROW EXECUTE FUNCTION constraint_transaction_ownership()")
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute(<<-SQL)
+CREATE OR REPLACE FUNCTION public.disable_delete_account()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
+BEGIN
+  RAISE EXCEPTION 'Cannot delete account';
+END
+
+$function$
+  SQL
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute("CREATE TRIGGER disable_delete_account BEFORE DELETE ON \"openbill_accounts\" FOR EACH ROW EXECUTE FUNCTION disable_delete_account()")
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute(<<-SQL)
+CREATE OR REPLACE FUNCTION public.notify_transaction()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
+BEGIN
+  PERFORM pg_notify('openbill_transactions', CAST(NEW.id AS text));
+
+  return NEW;
+END
+
+$function$
+  SQL
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute("CREATE TRIGGER notify_transaction AFTER INSERT ON \"openbill_transactions\" FOR EACH ROW EXECUTE FUNCTION notify_transaction()")
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute(<<-SQL)
+CREATE OR REPLACE FUNCTION public.openbill_transaction_delete()
+ RETURNS trigger
+ LANGUAGE plpgsql
+ SECURITY DEFINER
+AS $function$
+BEGIN
+  -- установить last_transaction_id, counts и _at
+  UPDATE OPENBILL_ACCOUNTS SET amount_cents = amount_cents - OLD.amount_cents, transactions_count = transactions_count - 1 WHERE id = OLD.to_account_id;
+  UPDATE OPENBILL_ACCOUNTS SET amount_cents = amount_cents + OLD.amount_cents, transactions_count = transactions_count - 1 WHERE id = OLD.from_account_id;
+
+  UPDATE OPENBILL_INVOICES SET paid_cents = -OLD.amount_cents WHERE id = OLD.invoice_id;
+
+  return OLD;
+END
+
+$function$
+  SQL
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute("CREATE TRIGGER openbill_transaction_delete BEFORE DELETE ON \"openbill_transactions\" FOR EACH ROW EXECUTE FUNCTION openbill_transaction_delete()")
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute(<<-SQL)
+CREATE OR REPLACE FUNCTION public.openbill_transaction_update()
+ RETURNS trigger
+ LANGUAGE plpgsql
+ SECURITY DEFINER
+AS $function$
+BEGIN
+
+  UPDATE OPENBILL_ACCOUNTS SET amount_cents = amount_cents - OLD.amount_cents, transactions_count = transactions_count - 1 WHERE id = OLD.to_account_id;
+  UPDATE OPENBILL_ACCOUNTS SET amount_cents = amount_cents + NEW.amount_cents, transactions_count = transactions_count + 1 WHERE id = NEW.to_account_id;
+
+  UPDATE OPENBILL_ACCOUNTS SET amount_cents = amount_cents + OLD.amount_cents, transactions_count = transactions_count - 1 WHERE id = OLD.from_account_id;
+  UPDATE OPENBILL_ACCOUNTS SET amount_cents = amount_cents - NEW.amount_cents, transactions_count = transactions_count + 1 WHERE id = NEW.from_account_id;
+
+  UPDATE OPENBILL_INVOICES SET paid_cents = paid_cents - OLD.amount_cents + NEW.amount_cents WHERE id = NEW.invoice_id;
+
+  return NEW;
+END
+
+$function$
+  SQL
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute("CREATE TRIGGER openbill_transaction_update AFTER UPDATE ON \"openbill_transactions\" FOR EACH ROW EXECUTE FUNCTION openbill_transaction_update()")
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute(<<-SQL)
+CREATE OR REPLACE FUNCTION public.process_account_transaction()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
+BEGIN
+  -- У всех счетов и транзакции должна быть одинаковая валюта
+
+  PERFORM * FROM OPENBILL_ACCOUNTS where id = NEW.from_account_id and amount_currency = NEW.amount_currency;
+  IF NOT FOUND THEN
+    RAISE EXCEPTION 'Account (from #%) has wrong currency', NEW.from_account_id;
+  END IF;
+
+  PERFORM * FROM OPENBILL_ACCOUNTS where id = NEW.to_account_id and amount_currency = NEW.amount_currency;
+  IF NOT FOUND THEN
+    RAISE EXCEPTION 'Account (to #%) has wrong currency', NEW.to_account_id;
+  END IF;
+
+  UPDATE OPENBILL_ACCOUNTS SET amount_cents = amount_cents - NEW.amount_cents, transactions_count = transactions_count + 1 WHERE id = NEW.from_account_id;
+  UPDATE OPENBILL_ACCOUNTS SET amount_cents = amount_cents + NEW.amount_cents, transactions_count = transactions_count + 1 WHERE id = NEW.to_account_id;
+
+  UPDATE OPENBILL_INVOICES SET paid_cents = paid_cents + NEW.amount_cents WHERE id = NEW.invoice_id;
+
+  return NEW;
+END
+
+$function$
+  SQL
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute("CREATE TRIGGER process_account_transaction AFTER INSERT ON \"openbill_transactions\" FOR EACH ROW EXECUTE FUNCTION process_account_transaction()")
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute(<<-SQL)
+CREATE OR REPLACE FUNCTION public.process_reverse_transaction()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
+BEGIN
+  IF NEW.reverse_transaction_id IS NOT NULL THEN
+    PERFORM * FROM openbill_transactions
+      WHERE amount_cents = NEW.amount_cents 
+        AND amount_currency = NEW.amount_currency 
+        AND from_account_id = NEW.to_account_id
+        AND to_account_id = NEW.from_account_id
+        AND id = NEW.reverse_transaction_id;
+
+    IF NOT FOUND THEN
+      RAISE EXCEPTION 'Not found reverse transaction with same accounts and amount (#%)', NEW.reverse_transaction_id;
+    END IF;
+
+  END IF;
+
+  return NEW;
+END
+
+$function$
+  SQL
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute("CREATE TRIGGER process_reverse_transaction AFTER INSERT ON \"openbill_transactions\" FOR EACH ROW EXECUTE FUNCTION process_reverse_transaction()")
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute(<<-SQL)
+CREATE OR REPLACE FUNCTION public.restrict_transaction()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
+DECLARE
+  _from_category_id uuid;
+  _to_category_id uuid;
+BEGIN
+  SELECT category_id FROM OPENBILL_ACCOUNTS where id = NEW.from_account_id INTO _from_category_id;
+  SELECT category_id FROM OPENBILL_ACCOUNTS where id = NEW.to_account_id INTO _to_category_id;
+  PERFORM * FROM OPENBILL_POLICIES WHERE 
+    (
+      NEW.reverse_transaction_id is null AND
+      (from_category_id is null OR from_category_id = _from_category_id) AND
+      (to_category_id is null OR to_category_id = _to_category_id) AND
+      (from_account_id is null OR from_account_id = NEW.from_account_id) AND
+      (to_account_id is null OR to_account_id = NEW.to_account_id)
+    ) OR
+    (
+      NEW.reverse_transaction_id is not null AND
+      (to_category_id is null OR to_category_id = _from_category_id) AND
+      (from_category_id is null OR from_category_id = _to_category_id) AND
+      (to_account_id is null OR to_account_id = NEW.from_account_id) AND
+      (from_account_id is null OR from_account_id = NEW.to_account_id) AND
+      allow_reverse
+    );
+
+  IF NOT FOUND THEN
+    RAISE EXCEPTION 'No policy for this transaction';
+  END IF;
+
+  RETURN NEW;
+END
+
+$function$
+  SQL
+
+  # no candidate create_trigger statement could be found, creating an adapter-specific one
+  execute("CREATE TRIGGER restrict_transaction AFTER INSERT ON \"openbill_transactions\" FOR EACH ROW EXECUTE FUNCTION restrict_transaction()")
+
 end

@@ -17,7 +17,12 @@ module Operator
       wallet = Wallet.find attrs.fetch(:wallet_id)
       command = COMMANDS.fetch attrs.fetch(:activity_type)
 
-      command.call wallet: wallet, attrs: attrs.permit!, admin_user: current_admin_user
+      command.call(
+        wallet: wallet,
+        amount: attrs.fetch(:amount),
+        details: attrs.fetch(:details),
+        admin_user: current_admin_user
+      )
 
       redirect_to operator_wallet_path(wallet), notice: t('.created')
     rescue ActiveRecord::RecordInvalid => e
