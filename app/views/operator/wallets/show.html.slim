@@ -1,5 +1,6 @@
 .container
   = page_header title: Wallet.model_name.human, 
+    back_link: Wallet,
     float_link: -> { link_to 'Изменить', edit_operator_wallet_path(wallet), class: 'btn btn-success' }
 
   = render 'table', items: [wallet]
