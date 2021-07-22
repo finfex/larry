@@ -5,7 +5,7 @@
 
   = render 'attributes_table', 
     object: OrderDecorator.decorate(order), 
-    columns: %i[created_at income_amount income_payment_system income_wallet outcome_payment_system outcome_amount outcome_wallet rate operator state based_income_amount user_income_address user_full_name user_email public_url]
+    columns: %i[created_at income_amount income_payment_system income_wallet outcome_payment_system outcome_amount outcome_wallet rate operator state based_income_amount user_income_address user_full_name user_email public_url credit_card_verification]
   = render 'referal', order: order
   = render 'operator', order: order
   .mt-4

@@ -51,6 +51,7 @@ class CreditCardVerification < ApplicationRecord
                     number: number,
                     full_name: full_name
                   )
+    return if user.nil?
     credit_card.users << user unless credit_card.users.include? user
   end
 end

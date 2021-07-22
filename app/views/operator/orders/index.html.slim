@@ -37,6 +37,11 @@
             = render 'referal', order: order
             = render 'operator', order: order
             = present_order_status order.state
+            - if order.verify?
+              - if order.credit_card_verification.present?
+                = link_to 'Подтверждение карты', operator_credit_card_verification_path(order.credit_card_verification)
+              - else
+                div Отсутствует ссылка на верификацию
         .row
           .col-md-12
             .mt-4

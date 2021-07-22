@@ -21,7 +21,12 @@ module Operator
 
     def accept
       credit_card_verification.accept! current_admin_user
-      redirect_to operator_credit_card_verifications_path, notice: 'Карта принята'
+      flash.notice = 'Карта принята'
+      if credit_card_verification.order.present?
+        redirect_to operator_order_path(credit_card_verification.order)
+      else
+        redirect_to operator_credit_card_verifications_path
+      end
     end
 
     def reject

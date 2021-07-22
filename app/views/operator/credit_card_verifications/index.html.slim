@@ -10,35 +10,7 @@
   = render 'tabs', q: q
 
   - if records.any?
-    - paginated_records.each do |credit_card_verification|
-      .card.mb-4
-        .card-header
-          span.mr-2 Карта отправлена на проверку:
-          = present_time credit_card_verification.created_at
-        .card-body
-          .row
-            .col-md-9
-              span.mr-2 Номер карты
-              code= credit_card_verification.number
-            .col-md-3
-              span.mr-2 Статус
-              span.mr-2.text-nowrap
-                = present_credit_card_verification_state credit_card_verification
-
-              - if credit_card_verification.rejected?
-                p Причина отказа: #{credit_card_verification.reject_message}
-          .row
-            .col-md-12
-              .mt-4
-                - if credit_card_verification.rejected? || credit_card_verification.accepted?
-                  = link_to 'Показать изображение', credit_card_verification.image.url, target: '_blank'
-                - else
-                  = link_to credit_card_verification.image.url, target: '_blank' do
-                    = image_tag credit_card_verification.image.url, height: '200px'
-          .row
-            .col-md-12
-              .mt-4
-                = render 'buttons', credit_card_verification: credit_card_verification
+    = render partial: 'credit_card_verification', collection: paginated_records
     = paginate paginated_records
   - else
     div= t 'helpers.empty'
