@@ -33,7 +33,9 @@ module Public
       rate_calculation = if params.fetch('request_direction',
                                          'from_income') == 'from_income'
                            calculator.build_from_income(
-                             params[:income_amount].present? ? params[:income_amount].to_d.to_money(income_payment_system.currency) : income_payment_system.minimal_income_amount
+                             params[:income_amount].present? ?
+                             params[:income_amount].to_d.to_money(income_payment_system.currency) :
+                             [income_payment_system.minimal_income_amount, direction_rate.reverse_exchange(outcome_payment_system.minimal_outcome_amount)].max
                            )
                          else
                            calculator.build_from_outcome(
