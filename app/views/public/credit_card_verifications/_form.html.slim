@@ -1,4 +1,7 @@
+- if ccv.order.present?
+  alert.
 = simple_form_for [:public, ccv] do |f|
+  = f.input :order_id, as: :hidden
   .row
     .col-md-6
       = f.input :number, input_html: { pattern: "[0-9]*", type: :tel, inputmode: "numeric", autocomplete: "cc-number", maxlength: "19" }

@@ -4,16 +4,32 @@
 
 module Operator
   module ApplicationHelper
-    CSS_CLASS = {
+    ORDER_CSS_CLASSES = {
       'draft' => 'badge badge-secondary',
+      'verify' => 'badge badge-secondary',
+      'wait' => 'badge badge-secondary',
+      'user_confirmed' => 'badge badge-info',
       'published' => 'badge badge-primary',
       'paid' => 'badge badge-success',
       'canceled' => 'badge badge-dark'
     }.freeze
 
     def present_order_status(state)
-      content_tag :span, class: CSS_CLASS[state], title: state do
+      content_tag :span, class: ORDER_CSS_CLASSES[state], title: state do
         I18n.t state, scope: 'order.states', default: state
+      end
+    end
+
+    CCV_CSS_CLASSES = {
+      'pending' => 'badge badge-secondary',
+      'processing' => 'badge badge-primary',
+      'accepted' => 'badge badge-success',
+      'rejected' => 'badge badge-warn'
+    }.freeze
+
+    def present_ccv_state(state)
+      content_tag :span, class: CCV_CSS_CLASSES[state], title: state do
+        I18n.t state, scope: 'credit_card_verification.states', default: state
       end
     end
 

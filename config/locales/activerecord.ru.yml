@@ -74,6 +74,7 @@ ru:
     require_email_on_income: Требовать email при оформлении заявки на прием по этой ПС
     require_email_on_outcome: Требовать email при оформлении заявки на выплату по этой ПС
     require_verify_income_card: Верифицировать карту на приём?
+    credit_card_verification: Верификация кредитной карты
     user_email: Email
     user_full_name: ФИО
 

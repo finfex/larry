@@ -15,6 +15,7 @@ class Order < ApplicationRecord
   belongs_to :operator, class_name: 'AdminUser', optional: true
   belongs_to :income_wallet, class_name: 'Wallet'
   belongs_to :outcome_wallet, class_name: 'Wallet'
+  has_one :credit_card_verification
 
   has_many :actions, class_name: 'OrderAction', dependent: :destroy
   has_one :booked_amount, dependent: :destroy

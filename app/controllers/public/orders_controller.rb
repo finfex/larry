@@ -70,7 +70,7 @@ module Public
         create_order order
         order.start!
         if order.verify?
-          redirect_to verify_public_order_path(order), notice: 'Заявка принята. Пройдите верификацию карты'
+          redirect_to new_public_credit_card_verification_path(order_id: order.id), notice: 'Заявка принята. Пройдите верификацию карты'
         else
           redirect_to public_order_path(order), notice: 'Принята заявка на обмен. Ждём от Вас оплаты.'
         end

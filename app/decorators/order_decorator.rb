@@ -9,8 +9,14 @@ class OrderDecorator < ApplicationDecorator
     h.present_order_status object.state
   end
 
+  def credit_card_verification
+    return 'Не требуется' unless object.require_verify_on_start?
+
+    h.present_ccv_state object.credit_card_verification.state
+  end
+
   def public_url
-    h.link_to 'Публичкая ссылка', h.public_order_url(order), target: '_blank'
+    h.link_to 'Публичная ссылка', h.public_order_url(object), target: '_blank'
   end
 
   def rate

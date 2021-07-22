@@ -1,2 +1,10 @@
-= page_header title: 'Добавляем карту на верификацию', back_link: -> { link_to '&larr; Назад в список карт'.html_safe, public_credit_cards_path }
-= render 'form', ccv: ccv
+- if authenticated?
+  = page_header title: 'Добавляем карту на верификацию', back_link: -> { link_to '&larr; Назад в список карт'.html_safe, public_credit_cards_path }
+  = render 'form', ccv: ccv
+- elsif ccv.order.present?
+  .alert.alert-success Ваша заявка #{ccv.order.uid} принята. Осталось немного.
+  .page-header.mt-4
+    h2.mb-4 Необходимо верифицировать карту
+  = render 'form', ccv: ccv
+- else
+  .alert.alert-warning Авторизуйтесь или оформите заявку для верификации карты.

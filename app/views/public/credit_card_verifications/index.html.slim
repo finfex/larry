@@ -1,0 +1,6 @@
+h1.mb-4= t '.credit_card_verifications'
+
+- if verifications.any?
+  hr
+  = render partial: 'public/credit_card_verifications/block', collection: verifications, as: :credit_card_verification
+

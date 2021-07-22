@@ -20,7 +20,7 @@ module ApplicationHelper
   end
 
   def present_back_link(resource)
-    resource = resource.is_a?(Class) ? resource : resource.class
+    resource_class = resource.is_a?(Class) ? resource : resource.class
     link_to '&larr;&nbsp;'.html_safe + resource_class.model_name.human(count: 100), url_for([namespace, resource_class])
   end
 
