@@ -44,6 +44,10 @@ module PaymentSystemConcern
     Money.new(booked_amounts.sum(:amount_cents) || 0, currency)
   end
 
+  def require_verify?
+    require_verify_income_card?
+  end
+
   def total_amount
     Money.new(
       wallets

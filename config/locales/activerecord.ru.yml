@@ -73,6 +73,7 @@ ru:
     require_full_name_on_outcome: Требование ФИО при оформлении заявки на выплату по этой ПС
     require_email_on_income: Требовать email при оформлении заявки на прием по этой ПС
     require_email_on_outcome: Требовать email при оформлении заявки на выплату по этой ПС
+    require_verify_income_card: Верифицировать карту на приём?
     user_email: Email
     user_full_name: ФИО
 
