@@ -19,7 +19,7 @@ module Public
     def create
       ccv = CreditCardVerification.new(
         params[:credit_card_verification]
-        .permit(:order_id, :number, :exp_month, :exp_year, :full_name, :image)
+        .permit(:order_id, :number, :full_name, :image)
         .merge(session_id: session.id.to_s, user_id: current_user.try(:id))
       )
       ccv.save!

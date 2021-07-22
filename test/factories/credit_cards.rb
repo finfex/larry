@@ -4,7 +4,8 @@
 
 FactoryBot.define do
   factory :credit_card do
-    number { 'MyString' }
-    verification { nil }
+    number { '3700 0000 0000 002' }
+    full_name { generate :name }
+    verification { create :credit_card_verification }
   end
 end

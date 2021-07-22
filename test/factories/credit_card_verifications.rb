@@ -4,8 +4,8 @@
 
 FactoryBot.define do
   factory :credit_card_verification do
-    credit_card_number { 'MyString' }
-    user { nil }
-    status { 'MyString' }
+    number { '3700 0000 0000 002' }
+    full_name { generate :name }
+    image { Rack::Test::UploadedFile.new(Rails.root.join('test/fixtures/card.png'), 'image/png') }
   end
 end
