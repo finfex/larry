@@ -35,7 +35,7 @@ module Public
                            calculator.build_from_income(
                              params[:income_amount].present? ?
                              params[:income_amount].to_d.to_money(income_payment_system.currency) :
-                             [income_payment_system.minimal_income_amount, direction_rate.reverse_exchange(outcome_payment_system.minimal_outcome_amount)].max
+                             [income_payment_system.minimal_income_amount, direction_rate.try(:reverse_exchange,outcome_payment_system.minimal_outcome_amount)].max
                            )
                          else
                            calculator.build_from_outcome(
