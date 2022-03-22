@@ -15,6 +15,8 @@ module ApplicationHelper
       back_link = -> { present_back_link resource }
     when false
       back_link = nil
+    else
+      back_link = -> { present_back_link resource }
     end
     render 'page_header', title: title, back_link: back_link, float_link: float_link
   end
