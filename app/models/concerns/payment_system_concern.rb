@@ -81,10 +81,10 @@ module PaymentSystemConcern
 
   # rubocop:disable Metrics/MethodLength
   def address_valid?(address)
-    case address_format
+    case address_format.to_s
     when nil, ''
       address.blank?
-    when :credit_card
+    when 'credit_card'
       !AccountAddressValidation.credit_card_valid?(address.to_s, available_outcome_card_brands_list).nil?
     else
       method = "#{address_format}_valid?"
