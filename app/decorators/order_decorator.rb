@@ -11,7 +11,7 @@ class OrderDecorator < ApplicationDecorator
 
   def credit_card_verification
     return 'Не требуется' unless object.require_verify_on_start?
-
+    return 'Нет верификации карты' if object.credit_card_verification.nil?
     h.present_ccv_state object.credit_card_verification.state
   end
 
