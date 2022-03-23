@@ -1,4 +1,5 @@
 ru:
   helpers:
+    not_specified: Не указано
     disable_with: В процессе
     empty: Пусто

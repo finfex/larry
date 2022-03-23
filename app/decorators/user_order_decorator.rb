@@ -8,6 +8,7 @@ class UserOrderDecorator < OrderDecorator
   end
 
   def user_full_name
+    return I18n.l('helpers.not_specified') if object.user_full_name.nil?
     secure object.user_full_name
   end
 

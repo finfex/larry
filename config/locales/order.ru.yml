@@ -22,5 +22,5 @@ ru:
       canceled: Отклонённые (%{count})
       done: Оплачены (%{count})
       search: Поиск (%{count})
-      wait: Ожидают подтверждения
-      verify: На верификации
+      wait: Ожидают подтверждения (%{count})
+      verify: На верификации (%{count})
