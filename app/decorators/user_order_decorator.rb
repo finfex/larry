@@ -13,7 +13,9 @@ class UserOrderDecorator < OrderDecorator
   end
 
   def user_income_address
-    secure object.user_income_address
+    h.content_tag :code do
+      object.user_income_address
+    end
   end
 
   def self.decorated_class
