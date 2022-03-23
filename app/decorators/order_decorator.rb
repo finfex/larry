@@ -3,7 +3,7 @@
 # Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
 
 class OrderDecorator < ApplicationDecorator
-  COLUMNS = %i[created_at income_amount income_payment_system income_wallet outcome_payment_system outcome_amount outcome_wallet rate operator state based_income_amount user_income_address user_full_name user_email user_phone user_telegram public_url credit_card_verification]
+  COLUMNS = %i[created_at income_amount income_payment_system income_wallet outcome_payment_system outcome_amount outcome_wallet rate operator state based_income_amount user_income_address user_full_name user_email user_phone user_telegram city public_url credit_card_verification]
   delegate_all
 
   def state

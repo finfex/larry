@@ -7,6 +7,7 @@ class Order < ApplicationRecord
   include RateCalculationSerialization
   include OrderActions
 
+  belongs_to :city, optional: true
   belongs_to :income_payment_system, class_name: 'Gera::PaymentSystem'
   belongs_to :outcome_payment_system, class_name: 'Gera::PaymentSystem'
   belongs_to :direction_rate, class_name: 'Gera::DirectionRate'
@@ -77,6 +78,7 @@ class Order < ApplicationRecord
   validates :user_full_name, presence: true, if: :require_full_name?, on: :create
   validates :user_email, presence: true, email: true, if: :require_email?, on: :create
   validates :user_phone, presence: true, phone: true, if: :require_phone?, on: :create
+  validates :city, presence: true, if: :require_city?, on: :create
 
   before_create do
     self.income_address = income_wallet.address
@@ -112,6 +114,10 @@ class Order < ApplicationRecord
 
   def require_phone?
     income_payment_system.require_phone_on_income? || outcome_payment_system.require_phone_on_outcome?
+  end
+
+  def require_city?
+    income_payment_system.require_city_on_income? || outcome_payment_system.require_city_on_outcome?
   end
 
   def income_currency

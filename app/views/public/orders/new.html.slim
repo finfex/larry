@@ -46,6 +46,7 @@
         = f.input :user_email, label: 'Email' if order.require_email?
         = f.input :user_phone, label: 'Телефон' if order.require_phone?
         = f.input :user_telegram, label: 'Telegram' if order.require_telegram?
+        = f.input :city, label: 'Город' if order.require_city?
         = f.input :income_amount, 
           as: :money, 
           error: '',

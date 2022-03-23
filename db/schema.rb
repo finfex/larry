@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_23_085249) do
+ActiveRecord::Schema.define(version: 2022_03_23_115356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -85,6 +85,13 @@ ActiveRecord::Schema.define(version: 2022_03_23_085249) do
     t.datetime "created_at", null: false
     t.index ["order_id"], name: "index_booked_amounts_on_order_id"
     t.index ["payment_system_id"], name: "index_booked_amounts_on_payment_system_id"
+  end
+
+  create_table "cities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_cities_on_name", unique: true
   end
 
   create_table "credit_card_verifications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -326,6 +333,8 @@ ActiveRecord::Schema.define(version: 2022_03_23_085249) do
     t.boolean "require_phone_on_outcome", default: false, null: false
     t.boolean "require_telegram_on_income", default: false, null: false
     t.boolean "require_telegram_on_outcome", default: false, null: false
+    t.boolean "require_city_on_income", default: false, null: false
+    t.boolean "require_city_on_outcome", default: false, null: false
     t.index ["bestchange_key"], name: "index_gera_payment_systems_on_bestchange_key", unique: true
     t.index ["income_enabled"], name: "index_payment_systems_on_income_enabled"
     t.index ["outcome_enabled"], name: "index_payment_systems_on_outcome_enabled"

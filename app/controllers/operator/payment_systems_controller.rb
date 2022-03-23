@@ -22,6 +22,7 @@ module Operator
       require_phone_on_income require_phone_on_outcome
       require_telegram_on_income require_telegram_on_outcome
       require_verify_income_card
+      require_city_on_income require_city_on_outcome
     ].freeze
 
     def index; end
