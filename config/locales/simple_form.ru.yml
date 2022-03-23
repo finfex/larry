@@ -10,6 +10,10 @@ ru:
       # When using html, text and mark won't be used.
       # html: '<abbr title="required">*</abbr>'
     include_blank:
+      payment_system:
+        address_format: 'Не требуется1'
+      gera_payment_system:
+        address_format: 'Не требуется'
       hotel:
         hotel_kind_id: 'Любой'
 
