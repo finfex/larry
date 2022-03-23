@@ -30,7 +30,7 @@ module Public
       direction_rate = direction.direction_rate
 
       calculator = RateCalculator.new(direction_rate)
-      rate_calculation = build_rate_calculation
+      rate_calculation = build_rate_calculation(income_payment_system, outcome_payment_system, calculator)
       rate_calculation.validate
       order = rate_calculation.build_order
       order.income_payment_system = income_payment_system
@@ -130,16 +130,17 @@ module Public
       params.fetch('request_direction', 'from_income') == 'from_income'
     end
 
-    def build_rate_calculation
+    def build_rate_calculation(income_payment_system, outcome_payment_system, calculator)
       if direction_income?
         income = params[:income_amount].present? ?
           params[:income_amount].to_d.to_money(income_payment_system.currency) :
-          [income_payment_system.minimal_income_amount, direction_rate.try(:reverse_exchange,outcome_payment_system.minimal_outcome_amount)].compact.max
-        calculator.build_from_income( income )
+          [income_payment_system.minimal_income_amount, calculator.direction_rate.try(:reverse_exchange,outcome_payment_system.minimal_outcome_amount)].compact.max
+
+        calculator.build_from_income income
       else
-        calculator.build_from_outcome(
-          direction_rate.nil? ? outcome_payment_system.currency.zero_money : direction_rate.exchange(income_amount)
-        )
+        outcome = direction_rate.nil? ? outcome_payment_system.currency.zero_money : direction_rate.exchange(income_amount)
+
+        calculator.build_from_outcome outcome
       end
     end
 
