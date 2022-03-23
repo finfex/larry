@@ -1,6 +1,8 @@
 ru:
   attributes:
     email: Емайл
+    city: Город
+    city_id: Город
     order: Заявка
     amount: Сумма
     password: Пароль
