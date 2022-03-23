@@ -65,6 +65,7 @@ module Public
           redirect_to public_order_path(order), notice: 'Принята заявка на обмен. Ждём от Вас оплаты.'
         end
       else
+        Rails.logger.info("new render #{order.valid?}")
         render :new, locals: { order: order, rate_calculation: rate_calculation }
       end
     rescue ActiveRecord::RecordInvalid => e
