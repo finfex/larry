@@ -39,7 +39,7 @@
             = present_order_status order.state
             - if order.verify?
               - if order.credit_card_verification.present?
-                = link_to 'Подтверждение карты', operator_credit_card_verification_path(order.credit_card_verification)
+                = link_to 'Верификация карты', operator_credit_card_verification_path(order.credit_card_verification)
               - else
                 div Отсутствует ссылка на верификацию
         .row

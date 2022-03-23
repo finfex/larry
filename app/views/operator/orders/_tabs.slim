@@ -1,4 +1,4 @@
 ul.nav.nav-pills.mb-4
-  - Order.state_machines[:state].states.map(&:name).each do |state|
+  - (Order.state_machines[:state].states.map(&:name) - %i[draft]).each do |state|
     li.nav-item
       = link_to t(state, scope: 'order.tabs', count: Order.by_state(state).count ), operator_orders_path(q: { by_state: state }), class: active_class('nav-link', current_state == state.to_s)
