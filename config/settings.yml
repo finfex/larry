@@ -7,7 +7,7 @@ defaults: &defaults
   #
   rewards_currency: USD
 
-  logo_path: /uploads/interchange_logo.svg
+  logo_path: /uploads/logo.svg
   max_export_records_count: 1000
   default_url_options: &default_url_options
     protocol: <%= ENV.fetch('HTTP_PROTOCOL', 'https') %>
