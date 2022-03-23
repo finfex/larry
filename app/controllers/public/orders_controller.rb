@@ -56,26 +56,18 @@ module Public
 
       # TODO: Проверять не устарел ли курс
       order = rate_calculation.build_order(order_params)
-      Rails.logger.info("-1")
       if rate_calculation.valid?
-        Rails.logger.info("-2")
         create_order order
         order.start!
-        Rails.logger.info("-3")
         if order.verify?
-          Rails.logger.info("-4")
           redirect_to new_public_credit_card_verification_path(order_id: order.id), notice: 'Заявка принята. Пройдите верификацию карты'
         else
-          Rails.logger.info("-5")
           redirect_to public_order_path(order), notice: 'Принята заявка на обмен. Ждём от Вас оплаты.'
         end
       else
-        Rails.logger.info("new render #{order.valid?}")
         render :new, locals: { order: order, rate_calculation: rate_calculation }
       end
-      Rails.logger.info("-6")
     rescue ActiveRecord::RecordInvalid => e
-      Rails.logger.info("-7")
       raise e unless e.record.is_a? Order
 
       render :new, locals: { order: order, rate_calculation: rate_calculation }
@@ -159,6 +151,9 @@ module Public
                 :user_income_address,
                 :user_full_name,
                 :user_email,
+                :user_phone,
+                :user_telegram,
+                :city_id,
                 :income_amount,
                 :outcome_amount,
                 :direction_rate_id)
