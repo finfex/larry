@@ -5,7 +5,7 @@
 require 'account_address_validation'
 
 module PaymentSystemConcern
-  ADDRESS_FORMATS = AccountAddressValidation.formats + %i[cash]
+  ADDRESS_FORMATS = AccountAddressValidation.formats
   extend ActiveSupport::Concern
   included do
     extend Enumerize

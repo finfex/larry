@@ -42,11 +42,6 @@
       = render 'errors', order: order, rate_calculation: rate_calculation if Rails.env.development?
 
       - if order.direction_rate.present?
-        = f.input :user_full_name, label: 'ФИО' if order.require_full_name?
-        = f.input :user_email, label: 'Email' if order.require_email?
-        = f.input :user_phone, label: 'Телефон' if order.require_phone?
-        = f.input :user_telegram, label: 'Telegram' if order.require_telegram?
-        = f.input :city_id, collection: City.available.ordered, label: 'Город', require: true, include_blank: false if order.require_city?
         = f.input :income_amount, 
           as: :money, 
           error: '',
@@ -72,7 +67,17 @@
           label: 'Получаете', 
           disable_errors: true,
           input_html: { id: :disabled_outcome_amount }
+        = f.input :user_full_name, label: 'ФИО' if order.require_full_name?
+        = f.input :user_email, label: 'Email' if order.require_email?
+        = f.input :user_phone, label: 'Телефон' if order.require_phone?
+        = f.input :user_telegram, label: 'Telegram' if order.require_telegram?
+        = f.input :city_id, collection: City.available.ordered, label: 'Город', require: true, include_blank: false if order.require_city?
         = f.input :user_income_address, label: 'На адрес' if order.require_income_address?
+        hr
+        = order.require_income_address? 
+        hr
+        = order.income_payment_system.address_format.present? 
+        hr
         = f.submit 'Обменять сейчас', class: 'btn btn-primary btn-lg mt-4 pt-3 pb-3', style: 'width: 100%', disabled: rate_calculation.errors.any?
 
         - if Rails.env.development? && params[:debug]
