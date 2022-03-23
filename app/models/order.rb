@@ -38,6 +38,8 @@ class Order < ApplicationRecord
   # done - выполнена
   #
   state_machine :state, initial: :draft do
+    state :draft
+
     event :start do
       transition draft: :wait, unless: :require_verify_on_start?
       transition draft: :verify, if: :require_verify_on_start?
@@ -58,15 +60,13 @@ class Order < ApplicationRecord
     end
 
     event :cancel do
-      transition %i[user_confirmed] => :canceled
+      transition %i[user_confirmed verified wait] => :canceled
     end
 
     # Заявка выплачена
     event :done do
       transition accepted: :done
     end
-
-    state :draft
   end
 
   before_validation do
