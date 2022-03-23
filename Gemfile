@@ -149,3 +149,5 @@ gem 'warden', '~> 1.2'
 gem 'sd_notify', '~> 0.1.1'
 
 gem 'hairtrigger', '~> 0.2.24'
+
+gem "phonelib", "~> 0.6.57"

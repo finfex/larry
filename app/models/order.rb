@@ -76,6 +76,7 @@ class Order < ApplicationRecord
   validates :user_income_address, presence: true, account_address_format: { payment_system: :outcome_payment_system }, if: :require_income_address?
   validates :user_full_name, presence: true, if: :require_full_name?
   validates :user_email, presence: true, email: true, if: :require_email?
+  validates :user_phone, presence: true, phone: true, if: :require_phone?
 
   before_create do
     self.income_address = income_wallet.address

@@ -378,6 +378,7 @@ GEM
       ast (~> 2.4.1)
     percentable (1.1.2)
     pg (1.2.3)
+    phonelib (0.6.57)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -649,6 +650,7 @@ DEPENDENCIES
   noty_flash!
   percentable
   pg (~> 1.1)
+  phonelib (~> 0.6.57)
   pry
   pry-byebug
   pry-rails
