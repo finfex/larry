@@ -117,7 +117,7 @@ module AccountAddressValidation
 
   def self.qiwi_valid?(address)
     address = '7' + address if address.start_with?('9') && address.length == 10
-    Phoner::Phone.valid? address
+    Phonelib.valid? address
   end
 
   def self.yandex_money_valid?(address)
