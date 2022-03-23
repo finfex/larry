@@ -28,7 +28,7 @@ module Operator
     rescue ActiveRecord::RecordInvalid => e
       raise e unless e.record.is_a? WalletActivity
 
-      render 'operator/wallets/show', locals: { wallet: wallet, wallet_activity: e.record }
+      render 'operator/wallets/show', locals: { wallet: wallet, resource: wallet, wallet_activity: e.record }
     end
   end
 end
