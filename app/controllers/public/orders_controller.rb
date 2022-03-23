@@ -29,8 +29,7 @@ module Public
       direction = Gera::Direction.new(ps_from: income_payment_system, ps_to: outcome_payment_system).freeze
       direction_rate = direction.direction_rate
 
-      calculator = RateCalculator.new(direction_rate)
-      rate_calculation = build_rate_calculation(income_payment_system, outcome_payment_system, calculator)
+      rate_calculation = build_rate_calculation(income_payment_system, outcome_payment_system, direction_rate)
       rate_calculation.validate
       order = rate_calculation.build_order
       order.income_payment_system = income_payment_system
@@ -130,7 +129,8 @@ module Public
       params.fetch('request_direction', 'from_income') == 'from_income'
     end
 
-    def build_rate_calculation(income_payment_system, outcome_payment_system, calculator)
+    def build_rate_calculation(income_payment_system, outcome_payment_system, direction_rate)
+      calculator = RateCalculator.new(direction_rate)
       if direction_income?
         income = params[:income_amount].present? ?
           params[:income_amount].to_d.to_money(income_payment_system.currency) :

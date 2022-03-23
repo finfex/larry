@@ -8,8 +8,6 @@
 class RateCalculator
   MAX_INCOME_DIFF_TO_SUGGEST = Settings.max_incomde_diff_to_suggest.percents
 
-  attr_reader :direction_rate
-
   def initialize(direction_rate)
     @direction_rate = direction_rate
   end
