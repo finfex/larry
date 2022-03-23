@@ -72,11 +72,11 @@ class Order < ApplicationRecord
   before_validation do
     self.based_income_amount = income_amount.exchange_to Settings.rewards_currency
   end
-  validates :referrer_reward, presence: true, if: :referrer
-  validates :user_income_address, presence: true, account_address_format: { payment_system: :outcome_payment_system }, if: :require_income_address?
-  validates :user_full_name, presence: true, if: :require_full_name?
-  validates :user_email, presence: true, email: true, if: :require_email?
-  validates :user_phone, presence: true, phone: true, if: :require_phone?
+  validates :referrer_reward, presence: true, if: :referrer, on: :create
+  validates :user_income_address, presence: true, account_address_format: { payment_system: :outcome_payment_system }, if: :require_income_address?, on: :create
+  validates :user_full_name, presence: true, if: :require_full_name?, on: :create
+  validates :user_email, presence: true, email: true, if: :require_email?, on: :create
+  validates :user_phone, presence: true, phone: true, if: :require_phone?, on: :create
 
   before_create do
     self.income_address = income_wallet.address
