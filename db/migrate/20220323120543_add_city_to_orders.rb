@@ -1,5 +1,9 @@
 class AddCityToOrders < ActiveRecord::Migration[6.1]
-  def change
-    add_reference :orders, :city
+  def up
+    add_reference :orders, :city, foreign_key: true, type: :uuid
+  end
+
+  def down
+    remove_column :orders, :city_id
   end
 end
