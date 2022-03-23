@@ -9,13 +9,11 @@ ru:
       # You can uncomment the line below if you need to overwrite the whole required html.
       # When using html, text and mark won't be used.
       # html: '<abbr title="required">*</abbr>'
-    include_blank:
+    include_blanks:
       payment_system:
         address_format: 'Не требуется1'
       gera_payment_system:
         address_format: 'Не требуется'
-      hotel:
-        hotel_kind_id: 'Любой'
 
     error_notification:
       default_message: "Обнаружены ошибки, пожалуйста, взгляните на них"

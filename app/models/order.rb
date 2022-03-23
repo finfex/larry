@@ -97,7 +97,7 @@ class Order < ApplicationRecord
   end
 
   def require_income_address?
-    income_payment_system.address_format.present?
+    outcome_payment_system.address_format.present?
   end
 
   def require_email?

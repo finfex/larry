@@ -73,13 +73,6 @@
         = f.input :user_telegram, label: 'Telegram' if order.require_telegram?
         = f.input :city_id, collection: City.available.ordered, label: 'Город', require: true, include_blank: false if order.require_city?
         = f.input :user_income_address, label: 'На адрес' if order.require_income_address?
-        hr
-        = order.require_income_address? 
-        hr
-        = order.income_payment_system.address_format.present? 
-        hr
-        = order.income_payment_system.address_format
-        hr
         = f.submit 'Обменять сейчас', class: 'btn btn-primary btn-lg mt-4 pt-3 pb-3', style: 'width: 100%', disabled: rate_calculation.errors.any?
 
         - if Rails.env.development? && params[:debug]
