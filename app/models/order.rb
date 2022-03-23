@@ -79,7 +79,7 @@ class Order < ApplicationRecord
   validates :user_email, presence: true, email: true, if: :require_email?, on: :create
   validates :user_phone, presence: true, phone: true, if: :require_phone?, on: :create
   validates :user_telegram, presence: true, if: :require_telegram?, on: :create
-  validates :city, presence: true, if: :require_city?, on: :create
+  validates :city_id, presence: true, if: :require_city?, on: :create
 
   before_create do
     self.income_address = income_wallet.address
