@@ -134,7 +134,7 @@ module Public
       if direction_income?
         income = params[:income_amount].present? ?
           params[:income_amount].to_d.to_money(income_payment_system.currency) :
-          [income_payment_system.minimal_income_amount, calculator.direction_rate.try(:reverse_exchange,outcome_payment_system.minimal_outcome_amount)].compact.max
+          [income_payment_system.minimal_income_amount, direction_rate.try(:reverse_exchange,outcome_payment_system.minimal_outcome_amount)].compact.max
 
         calculator.build_from_income income
       else
