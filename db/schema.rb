@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_23_115356) do
+ActiveRecord::Schema.define(version: 2022_03_23_120543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -481,6 +481,8 @@ ActiveRecord::Schema.define(version: 2022_03_23_115356) do
     t.string "user_email"
     t.string "user_phone"
     t.string "user_telegram"
+    t.bigint "city_id"
+    t.index ["city_id"], name: "index_orders_on_city_id"
     t.index ["direction_rate_id"], name: "index_orders_on_direction_rate_id"
     t.index ["income_payment_system_id"], name: "index_orders_on_income_payment_system_id"
     t.index ["income_wallet_id"], name: "index_orders_on_income_wallet_id"
