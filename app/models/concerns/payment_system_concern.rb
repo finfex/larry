@@ -5,6 +5,7 @@
 require 'account_address_validation'
 
 module PaymentSystemConcern
+  ADDRESS_FORMATS = AccountAddressValidation.formats + %i[cash]
   extend ActiveSupport::Concern
   included do
     extend Enumerize
@@ -22,7 +23,7 @@ module PaymentSystemConcern
 
     validates :bestchange_key, presence: true, uniqueness: true
 
-    enumerize :address_format, in: AccountAddressValidation.formats
+    enumerize :address_format, in: ADDRESS_FORMATS
 
     mount_uploader :icon, PaymentSystemLogoUploader
 
