@@ -12,6 +12,11 @@ module Operator
       'correction' => WalletCorrectionCommand
     }.freeze
 
+    def show
+      wa = WalletActivity.find params[:id]
+      redirect_to operator_wallet_path(wa.wallet, anchor: 'wallet_activity_' + wa.id.to_s)
+    end
+
     def create
       attrs = params.require(:wallet_activity)
       wallet = Wallet.find attrs.fetch(:wallet_id)
