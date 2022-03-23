@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_23_063142) do
+ActiveRecord::Schema.define(version: 2022_03_23_085249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -305,9 +305,9 @@ ActiveRecord::Schema.define(version: 2022_03_23_063142) do
     t.string "icon"
     t.float "commission", default: 0.0, null: false
     t.decimal "minimal_income_amount_cents", default: "0.0", null: false
-    t.decimal "maximal_income_amount_cents"
-    t.decimal "minimal_outcome_amount_cents"
-    t.decimal "maximal_outcome_amount_cents"
+    t.decimal "maximal_income_amount_cents", default: "1000.0", null: false
+    t.decimal "minimal_outcome_amount_cents", default: "1.0", null: false
+    t.decimal "maximal_outcome_amount_cents", default: "1000.0", null: false
     t.string "bestchange_key", null: false
     t.decimal "reserves_delta_cents", default: "0.0", null: false
     t.uuid "reserves_aggregator_id"
