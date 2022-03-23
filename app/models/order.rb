@@ -78,6 +78,7 @@ class Order < ApplicationRecord
   validates :user_full_name, presence: true, if: :require_full_name?, on: :create
   validates :user_email, presence: true, email: true, if: :require_email?, on: :create
   validates :user_phone, presence: true, phone: true, if: :require_phone?, on: :create
+  validates :user_telegram, presence: true, if: :require_telegram?, on: :create
   validates :city, presence: true, if: :require_city?, on: :create
 
   before_create do
