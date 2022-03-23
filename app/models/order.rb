@@ -105,6 +105,14 @@ class Order < ApplicationRecord
     income_payment_system.require_full_name_on_income? || outcome_payment_system.require_full_name_on_outcome?
   end
 
+  def require_telegram?
+    income_payment_system.require_telegram_on_income? || outcome_payment_system.require_full_name_on_outcome?
+  end
+
+  def require_phone?
+    income_payment_system.require_phone_on_income? || outcome_payment_system.require_full_name_on_outcome?
+  end
+
   def income_currency
     income_payment_system.currency
   end

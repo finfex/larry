@@ -3,6 +3,7 @@
 # Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
 
 class OrderDecorator < ApplicationDecorator
+  COLUMNS = %i[created_at income_amount income_payment_system income_wallet outcome_payment_system outcome_amount outcome_wallet rate operator state based_income_amount user_income_address user_full_name user_email user_phone user_telegram public_url credit_card_verification]
   delegate_all
 
   def state
@@ -63,5 +64,17 @@ class OrderDecorator < ApplicationDecorator
 
   def outcome_wallet
     h.link_to object.outcome_wallet, h.operator_wallet_path(object.outcome_wallet)
+  end
+
+  %i[user_telegram user_email user_phone user_full_name].each do |method|
+    define_method method do
+      object.send(method).presence || blank
+    end
+  end
+
+  private
+
+  def blank
+    h.content_tag :i, I18n.t('helpers.not_specified')
   end
 end

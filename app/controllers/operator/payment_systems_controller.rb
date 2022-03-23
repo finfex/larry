@@ -19,6 +19,8 @@ module Operator
       wallet_name address_format wrong_address_format_message
       require_full_name_on_income require_full_name_on_outcome
       require_email_on_income require_email_on_outcome
+      require_phone_on_income require_phone_on_outcome
+      require_telegram_on_income require_telegram_on_outcome
       require_verify_income_card
     ].freeze
 
