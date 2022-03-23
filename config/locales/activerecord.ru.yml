@@ -73,10 +73,16 @@ ru:
     require_full_name_on_outcome: Требование ФИО при оформлении заявки на выплату по этой ПС
     require_email_on_income: Требовать email при оформлении заявки на прием по этой ПС
     require_email_on_outcome: Требовать email при оформлении заявки на выплату по этой ПС
+    require_phone_on_income: Требовать номер телефона при оформлеии заявка на прием по этой ПС
+    require_phone_on_outcome: Требовать номер телефона при оформлении заявки на выплату по этой ПС
+    require_telegram_on_income: Требовать адрес telegram при оформлеии заявка на прием по этой ПС
+    require_telegram_on_outcome: Требовать адрес telegram при оформлении заявки на выплату по этой ПС
     require_verify_income_card: Верифицировать карту на приём?
     credit_card_verification: Верификация карты
     user_email: Email
     user_full_name: ФИО
+    user_phone: Телефон
+    user_telegram: Телеграм
 
   activerecord:
     models:

@@ -44,6 +44,8 @@
       - if order.direction_rate.present?
         = f.input :user_full_name, label: 'ФИО' if order.require_full_name?
         = f.input :user_email, label: 'Email' if order.require_email?
+        = f.input :user_phone, label: 'Телефон' if order.require_phone?
+        = f.input :user_telegram, label: 'Telegram' if order.require_telegram?
         = f.input :income_amount, 
           as: :money, 
           error: '',
