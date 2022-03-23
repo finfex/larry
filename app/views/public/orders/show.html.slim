@@ -3,5 +3,5 @@
 
   = render 'attributes_table', object: UserOrderDecorator.decorate(order), columns: %i[created_at income_amount outcome_amount income_payment_system income_address outcome_payment_system rate user_confirmed_at user_income_address user_email user_full_name state credit_card_verification]
 
-  - if order.draft?
+  - if order.wait?
     = link_to 'Средства отправил', confirm_public_order_path(order), method: :put, class: 'btn btn-success btn-lg', data: { confirm: "Отправили средства на указанный адрес #{order.income_address}" }
