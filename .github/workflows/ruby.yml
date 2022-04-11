@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: ['3.0.1']
+        ruby-version: ['3.0.3']
     services:
       # Label used to access the service container
       redis:
