@@ -9,10 +9,6 @@ module Public
     helper Gera::DirectionRateHelper
 
     # rubocop:disable Metrics/AbcSize
-    # rubocop:disable Layout/LineLength
-    # rubocop:disable Metrics/MethodLength
-    # rubocop:disable Metrics/PerceivedComplexity
-    # rubocop:disable Metrics/CyclomaticComplexity
     def new
       income_payment_system = income_payment_systems.find_by(id: params[:income_payment_system_id]) if params[:income_payment_system_id]
       income_payment_system ||= income_payment_systems.find_by(bestchange_key: params[:cur_from]) if params[:cur_from]
@@ -36,12 +32,8 @@ module Public
       order.outcome_payment_system = outcome_payment_system
       render locals: { order: order, rate_calculation: rate_calculation }
     end
-    # rubocop:enable Metrics/PerceivedComplexity
-    # rubocop:enable Metrics/CyclomaticComplexity
-    # rubocop:enable Metrics/AbcSize
-    # rubocop:enable Layout/LineLength
-    # rubocop:enable Metrics/MethodLength
 
+    # rubocop:enable Metrics/AbcSize
     # rubocop:disable Metrics/MethodLength
     # rubocop:disable Metrics/AbcSize
     def create
@@ -132,9 +124,12 @@ module Public
     def build_rate_calculation(income_payment_system, outcome_payment_system, direction_rate)
       calculator = RateCalculator.new(direction_rate)
       if direction_income?
-        income = params[:income_amount].present? ?
-          params[:income_amount].to_d.to_money(income_payment_system.currency) :
-          [income_payment_system.minimal_income_amount, direction_rate.try(:reverse_exchange,outcome_payment_system.minimal_outcome_amount)].compact.max
+        income = if params[:income_amount].present?
+                   params[:income_amount].to_d.to_money(income_payment_system.currency)
+                 else
+                   [income_payment_system.minimal_income_amount,
+                    direction_rate.try(:reverse_exchange, outcome_payment_system.minimal_outcome_amount)].compact.max
+                 end
 
         calculator.build_from_income income
       else

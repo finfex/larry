@@ -3,7 +3,8 @@
 # Copyright (c) 2019 Danil Pismenny <danil@brandymint.ru>
 
 class OrderDecorator < ApplicationDecorator
-  COLUMNS = %i[created_at income_amount income_payment_system income_wallet outcome_payment_system outcome_amount outcome_wallet rate operator state based_income_amount user_income_address user_full_name user_email user_phone user_telegram city public_url credit_card_verification]
+  COLUMNS = %i[created_at income_amount income_payment_system income_wallet outcome_payment_system outcome_amount outcome_wallet rate operator state
+               based_income_amount user_income_address user_full_name user_email user_phone user_telegram city public_url credit_card_verification].freeze
   delegate_all
 
   def state
@@ -13,6 +14,7 @@ class OrderDecorator < ApplicationDecorator
   def credit_card_verification
     return 'Не требуется' unless object.require_verify_on_start?
     return 'Нет верификации карты' if object.credit_card_verification.nil?
+
     h.present_ccv_state object.credit_card_verification.state
   end
 
