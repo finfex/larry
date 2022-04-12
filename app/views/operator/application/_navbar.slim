@@ -4,9 +4,8 @@
       = t '.gera'
     .dropdown-menu.dropdown-menu-left[aria-labelledby="geraDropdown"]
       = link_to 'Базовый курс', gera.currency_rates_path, class: 'dropdown-item'
-      = link_to 'Конечный курс', gera.direction_rates_path, class: 'dropdown-item'
       = link_to 'Комиссии', gera.exchange_rates_path, class: 'dropdown-item'
-      .dropdown-divider
+      = link_to 'Конечный курс', gera.direction_rates_path, class: 'dropdown-item'
   = active_link_to Order.model_name.human(count: 100), main_app.operator_orders_path, class: 'nav-link', wrap_tag: :li, wrap_class: 'nav-item'
   = active_link_to CreditCardVerification.model_name.human(count:100), main_app.operator_credit_card_verifications_path, class: 'nav-link', wrap_tag: :li, wrap_class: 'nav-item'
   = active_link_to Wallet.model_name.human(count: 100), main_app.operator_wallets_path, class: 'nav-link', wrap_tag: :li, wrap_class: 'nav-item'
