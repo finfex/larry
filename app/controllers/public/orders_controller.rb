@@ -28,6 +28,8 @@ module Public
       rate_calculation = build_rate_calculation(income_payment_system, outcome_payment_system, direction_rate)
       rate_calculation.validate
       order = rate_calculation.build_order
+      order.income_payment_system = income_payment_system
+      order.outcome_payment_system = outcome_payment_system
       render locals: { order: order, rate_calculation: rate_calculation }
     end
 
