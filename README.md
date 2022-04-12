@@ -47,5 +47,7 @@ Run auto tests:
 > bundle exec cap production master_key:setup  
 > bundle exec cap production config:set RAILS_ENV=production
 > bundle exec cap production systemd:puma:setup systemd:sidekiq:setup 
+> bundle exec cap production shell
+> RAILS_ENV=production bunld exec rake db:seed
 
 

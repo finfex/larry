@@ -16,14 +16,13 @@ FactoryBot.create :rate_source_bitfinex, title: 'bitfinex'
 
 puts 'Create payments systems for every currencies'
 Money::Currency.all.each do |cur|
-  Gera::PaymentSystem.create!(
+  Gera::PaymentSystem.create_with(
     name: cur.name,
-    currency: cur,
     income_enabled: true,
     outcome_enabled: true,
     minimal_income_amount: (cur.is_crypto? ? 0.01 : 10).to_money(cur),
     bestchange_key: cur.name
-  )
+  ).find_or_create_by!(currency_iso_code: cur)
 end
 
 puts 'Fetch rates'
