@@ -13,9 +13,6 @@
         label: false, 
         input_html: { autofocus: true },
         error: ''
-      p= f.object.income_amount.try :currency
-      p= f.object.income_currency
-      p= order.income_payment_system.try(:currency)
       = render 'payment_systems', 
         payment_systems: income_payment_systems, 
         param_name: :income_payment_system_id, 
