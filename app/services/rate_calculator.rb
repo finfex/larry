@@ -18,7 +18,7 @@ class RateCalculator
         direction_rate: direction_rate,
         income_amount: income_amount,
         request_direction: :from_income,
-        outcome_amount: direction_rate.try(:exchange, income_amount) || outcome_currency.zero_money
+        outcome_amount: direction_rate.persisted? ? direction_rate.exchange(income_amount) : outcome_currency.zero_money
       )
       .tap { |rc| suggest_profitable_income rc }
   end
@@ -29,7 +29,7 @@ class RateCalculator
         direction_rate: direction_rate,
         outcome_amount: outcome_amount,
         request_direction: :from_outcome,
-        income_amount: direction_rate.try(:reverse_exchange, outcome_amount) || income_currency.zero_money
+        income_amount: direction_rate.persisted? ? direction_rate.reverse_exchange(outcome_amount) : income_currency.zero_money
       )
   end
 
