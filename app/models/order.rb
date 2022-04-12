@@ -122,11 +122,11 @@ class Order < ApplicationRecord
   end
 
   def income_currency
-    income_payment_system.currency
+    income_payment_system.try :currency
   end
 
   def outcome_currency
-    outcome_payment_system.currency
+    outcome_payment_system.try :currency
   end
 
   def currency_pair

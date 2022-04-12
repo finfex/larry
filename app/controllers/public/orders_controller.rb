@@ -23,9 +23,9 @@ module Public
       # Gera::ExchangeRate.available.where(payment_system_from_id: income_payment_system.id).take
       #
       direction = Gera::Direction.new(ps_from: income_payment_system, ps_to: outcome_payment_system).freeze
-      direction_rate = direction.direction_rate
+      direction_rate = direction.mandatory_direction_rate
 
-      rate_calculation = build_rate_calculation(income_payment_system, outcome_payment_system, direction_rate)
+      rate_calculation = build_rate_calculation direction_rate
       rate_calculation.validate
       order = rate_calculation.build_order
       order.income_payment_system = income_payment_system
@@ -121,19 +121,23 @@ module Public
       params.fetch('request_direction', 'from_income') == 'from_income'
     end
 
-    def build_rate_calculation(income_payment_system, outcome_payment_system, direction_rate)
+    def build_rate_calculation(direction_rate)
       calculator = RateCalculator.new(direction_rate)
       if direction_income?
+        max_alue = direction_rate.persisted? ?
+          direction_rate.reverse_exchange(direction_rate.outcome_payment_system.minimal_outcome_amount) :
+          direction_rate.income_currency.zero_money
         income = if params[:income_amount].present?
-                   params[:income_amount].to_d.to_money(income_payment_system.currency)
+                   params[:income_amount].to_d.to_money(direction_rate.income_payment_system.currency)
                  else
-                   [income_payment_system.minimal_income_amount,
-                    direction_rate.try(:reverse_exchange, outcome_payment_system.minimal_outcome_amount)].compact.max
+                   [direction_rate.income_payment_system.minimal_income_amount, max_alue].compact.max
                  end
 
         calculator.build_from_income income
       else
-        outcome = direction_rate.nil? ? outcome_payment_system.currency.zero_money : direction_rate.exchange(income_amount)
+        outcome = direction_rate.persisted? ?
+          direction_rate.exchange(income_amount) :
+          direction_rate.outcome_payment_system.currency.zero_money
 
         calculator.build_from_outcome outcome
       end

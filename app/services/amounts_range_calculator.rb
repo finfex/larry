@@ -40,12 +40,14 @@ class AmountsRangeCalculator
 
   def min_outcome_by_currency
     return unless outcome_currency.minimal_output_value
+    return unless direction_rate.persisted?
 
     direction_rate.reverse_exchange outcome_currency.minimal_output_value
   end
 
   def min_outcome_by_outcome_payment_system
     return unless outcome_payment_system.minimal_outcome_amount
+    return unless direction_rate.persisted?
 
     direction_rate.reverse_exchange outcome_payment_system.minimal_outcome_amount
   end
