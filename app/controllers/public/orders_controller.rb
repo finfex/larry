@@ -125,7 +125,7 @@ module Public
       calculator = RateCalculator.new(direction_rate)
       if direction_income?
         max_alue = direction_rate.persisted? ?
-          direction_rate.reverse_exchange(outcome_payment_system.minimal_outcome_amount) :
+          direction_rate.reverse_exchange(direction_rate.outcome_payment_system.minimal_outcome_amount) :
           direction_rate.income_currency.zero_money
         income = if params[:income_amount].present?
                    params[:income_amount].to_d.to_money(direction_rate.income_payment_system.currency)
@@ -137,7 +137,7 @@ module Public
       else
         outcome = direction_rate.persisted? ?
           direction_rate.exchange(income_amount) :
-          outcome_payment_system.currency.zero_money
+          direction_rate.outcome_payment_system.currency.zero_money
 
         calculator.build_from_outcome outcome
       end
