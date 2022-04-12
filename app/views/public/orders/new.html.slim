@@ -15,7 +15,6 @@
         error: ''
       p= f.object.income_amount.try :currency
       p= f.object.income_currency
-      p= income_payment_system.currency
       p= order.income_payment_system.currency
       = render 'payment_systems', 
         payment_systems: income_payment_systems, 
