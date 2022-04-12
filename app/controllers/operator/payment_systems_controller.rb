@@ -23,6 +23,7 @@ module Operator
       require_telegram_on_income require_telegram_on_outcome
       require_verify_income_card
       require_city_on_income require_city_on_outcome
+      order_comment
     ].freeze
 
     def index; end
