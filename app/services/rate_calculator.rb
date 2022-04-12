@@ -38,7 +38,7 @@ class RateCalculator
   attr_reader :direction_rate
 
   def suggest_profitable_income(rate_calculation)
-    return if direction_rate.nil?
+    return unless direction_rate.persisted?
 
     suggested_income_amount = direction_rate.reverse_exchange rate_calculation.outcome_amount
 
