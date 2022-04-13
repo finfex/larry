@@ -1,4 +1,4 @@
-class SupportMailer
+class SupportMailer < ApplicationMailer
   def new_order(order)
     @order = order
     mail to: Rails.configuration.settings.support_email, subject: t(:new_order)
