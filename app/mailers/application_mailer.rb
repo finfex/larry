@@ -4,10 +4,13 @@
 
 class ApplicationMailer < ActionMailer::Base
   default Settings.default_mailer.symbolize_keys
+
   layout 'mailer'
 
   helper :application
-  helper :'money_rails/action_view_extension'
+  helper :money
+  helper :rate
+  helper :mailer
 
   private
 
