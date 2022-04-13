@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_23_120543) do
+ActiveRecord::Schema.define(version: 2022_04_12_172946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -335,6 +335,7 @@ ActiveRecord::Schema.define(version: 2022_03_23_120543) do
     t.boolean "require_telegram_on_outcome", default: false, null: false
     t.boolean "require_city_on_income", default: false, null: false
     t.boolean "require_city_on_outcome", default: false, null: false
+    t.text "order_comment"
     t.index ["bestchange_key"], name: "index_gera_payment_systems_on_bestchange_key", unique: true
     t.index ["income_enabled"], name: "index_payment_systems_on_income_enabled"
     t.index ["outcome_enabled"], name: "index_payment_systems_on_outcome_enabled"
