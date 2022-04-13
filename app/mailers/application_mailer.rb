@@ -7,6 +7,7 @@ class ApplicationMailer < ActionMailer::Base
   layout 'mailer'
 
   helper :application
+  helper :'money_rails/action_view_extension'
 
   private
 
