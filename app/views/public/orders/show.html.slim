@@ -9,7 +9,7 @@
     .col-md-6
       - if order.order_comment.present?
         p Сообщение
-        = order.order_comment
+        = simple_format order.order_comment
 
   - if order.wait?
     = link_to 'Средства отправил', 
