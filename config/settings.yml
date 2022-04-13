@@ -13,10 +13,10 @@ defaults: &defaults
     from: <%= ENV.fetch('MAIL_FROM', 'noreply@localhost') %>
 
   smtp_settings:
-    port: 465
-    address: <%= ENV.fetch("SMTP_ADDRESS", 'localhost') %>
-    user_name: <%= ENV.fetch("SMTP_USER_NAME", 'user') %>
-    password: <%= ENV.fetch('SMTP_PASSWORD', 'passsord') %>
+    port:           465
+    address:        <%= ENV.fetch("SMTP_ADDRESS", 'localhost') %>
+    user_name:      <%= ENV.fetch("SMTP_USER_NAME", 'user') %>
+    password:       <%= ENV.fetch('SMTP_PASSWORD', 'passsord') %>
     domain:         yandex.ru
     authentication: plain
     tls:            true
