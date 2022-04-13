@@ -5,4 +5,10 @@
 class ApplicationMailer < ActionMailer::Base
   default Settings.default_mailer.symbolize_keys
   layout 'mailer'
+
+  private
+
+  def t(key)
+    I18n.t key, scope: :mailer
+  end
 end

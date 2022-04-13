@@ -1,0 +1,9 @@
+h1 Заявка на обмен #{@order.uid}
+
+= render 'attributes_table', 
+  object: UserOrderDecorator.decorate(@order), 
+  columns: UserOrderDecorator::COLUMNS
+hr
+- if @order.order_comment.present?
+  p Сообщение
+  = simple_format @order.order_comment

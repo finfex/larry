@@ -51,6 +51,8 @@ module Public
       if rate_calculation.valid?
         create_order order
         order.start!
+        ClientMailer.new_order(order).deliver_later
+        SupportMailer.new_order(order).deliver_later
         if order.verify?
           redirect_to new_public_credit_card_verification_path(order_id: order.id), notice: 'Заявка принята. Пройдите верификацию карты'
         else

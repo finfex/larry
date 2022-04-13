@@ -7,6 +7,8 @@ defaults: &defaults
   #
   rewards_currency: USD
 
+  support_email: <%= ENV.fetch('SUPPORT_EMAIL', 'support@localhost') %>
+
   default_mailer:
     from: <%= ENV.fetch('MAIL_FROM', 'noreply@localhost') %>
 

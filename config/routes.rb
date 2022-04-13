@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     end
   end
 
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
   scope module: :authentication do
     resource :session, only: %i[new create destroy]
     resource :user, only: %i[new create edit update]

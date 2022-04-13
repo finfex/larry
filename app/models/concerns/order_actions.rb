@@ -10,6 +10,8 @@ module OrderActions
       touch :user_confirmed_at
       user_confirm!
       actions.create!(key: :user_confirmed)
+      ClientMailer.user_confirm(self).deliver_later
+      SupportMailer.user_confirm(self).deliver_later
     end
   end
 
@@ -31,6 +33,7 @@ module OrderActions
       WalletIncomeCommand.call(order: self, operator: operator)
       RewardCommand.call(order: self) if referrer_reward.positive?
       actions.create!(key: :accepted, operator: operator)
+      ClientMailer.accept(self).deliver_later
     end
   end
 
@@ -40,6 +43,7 @@ module OrderActions
       done!
       booked_amount.try :destroy!
       actions.create!(key: :done, operator: operator)
+      ClientMailer.done(self).deliver_later
     end
   end
 
@@ -49,6 +53,7 @@ module OrderActions
       cancel!
       booked_amount.try :destroy!
       actions.create!(key: :canceled, operator: operator)
+      ClientMailer.cancel(self).deliver_later
     end
   end
 end
