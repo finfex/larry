@@ -5,6 +5,7 @@
 Bugsnag.configure do |config|
   config.app_version = AppVersion.format('%M.%m.%p')
   config.ignore_classes << HumanizedError
+  config.ignore_classes << Gera::DirectionRatesRepository::FinitRateNotFound
   config.send_code = true
   config.send_environment = true
   config.notify_release_stages = %w[production staging]
