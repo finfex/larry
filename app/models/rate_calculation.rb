@@ -76,7 +76,9 @@ class RateCalculation
     reserve_amount = outcome_payment_system.reserve_amount
     if outcome_amount > reserve_amount
       self.require_reserving = true
-      errors.add :outcome_amount, "Недостаточно резервов, есть всего #{humanized_money_with_currency reserve_amount}".html_safe
+      message = "Обмен на эту сумму не возможен. Недостаточно резервов"
+      message << ", есть всего #{humanized_money_with_currency reserve_amount}".html_safe if reserve_amount.positive?
+      errors.add :outcome_amount, message
     else
       self.require_reserving = false
     end

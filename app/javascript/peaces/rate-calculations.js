@@ -12,7 +12,7 @@ const showErrors = (errors) => {
   list.html('')
   $(INCOME_AMOUNT).removeClass('is-invalid')
   $(OUTCOME_AMOUNT).removeClass('is-invalid')
-  for (const [key, value] of Object.entries(errors)) {
+  for (const [key, values] of Object.entries(errors)) {
     switch(key) {
       case 'income_amount':
         $(INCOME_AMOUNT).addClass('is-invalid')
@@ -21,12 +21,14 @@ const showErrors = (errors) => {
         $(OUTCOME_AMOUNT).addClass('is-invalid')
         break
     }
-    //Object.values(errors).flat().forEach((element) => {
-    const d = document.createElement('li');
-    $(d)
-    .addClass(list.data('element-classes'))
-    .html(value)
-    .appendTo(list)
+    Object.values(values).forEach((value) => {
+      const d = document.createElement('li');
+      debugger
+      $(d)
+      .addClass(list.data('element-classes'))
+      .html(value)
+      .appendTo(list)
+    })
   }
 
   $(SUBMIT).attr('disabled', !jQuery.isEmptyObject(errors));
