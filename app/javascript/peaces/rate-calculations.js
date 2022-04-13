@@ -46,6 +46,7 @@ const sendRequest = () => {
   data.set('id', id);
 
   const onSuccess = (response) => {
+    console.log('onSuccess rate_calculations', response)
     if (response.id == window.current_rate_calculation_id) {
       $("#disabled_outcome_amount").val(response.outcome_amount)
       $("#disabled_income_amount").val(response.income_amount)
