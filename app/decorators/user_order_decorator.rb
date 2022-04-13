@@ -4,7 +4,7 @@
 
 class UserOrderDecorator < OrderDecorator
   COLUMNS = %i[created_at income_amount outcome_amount income_payment_system income_address outcome_payment_system rate user_confirmed_at user_income_address
-               user_email user_full_name user_phone user_telegram city state credit_card_verification].freeze
+               user_email user_full_name user_phone user_telegram city state credit_card_verification order_comment].freeze
 
   def user_email
     secure object.user_email

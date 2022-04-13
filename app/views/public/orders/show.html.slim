@@ -6,4 +6,8 @@
     columns: UserOrderDecorator::COLUMNS
 
   - if order.wait?
-    = link_to 'Средства отправил', confirm_public_order_path(order), method: :put, class: 'btn btn-success btn-lg', data: { confirm: "Отправили средства на указанный адрес #{order.income_address}" }
+    = link_to 'Средства отправил', 
+      confirm_public_order_path(order), 
+      method: :put, 
+      class: 'btn btn-success btn-lg', 
+      data: { confirm: "Отправили средства на указанный адрес #{order.income_address}" }
