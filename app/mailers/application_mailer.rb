@@ -6,6 +6,8 @@ class ApplicationMailer < ActionMailer::Base
   default Settings.default_mailer.symbolize_keys
   layout 'mailer'
 
+  helper :application
+
   private
 
   def t(key)
