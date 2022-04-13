@@ -39,7 +39,7 @@
 
     .col-md-4
       h2.mb-3 3. Ввод данных
-      = render 'errors', order: order, rate_calculation: rate_calculation if Rails.env.development?
+      = render 'errors', order: order, rate_calculation: rate_calculation
 
       - if order.direction_rate.persisted?
         = f.input :income_amount, 
