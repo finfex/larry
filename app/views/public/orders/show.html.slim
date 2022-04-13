@@ -1,9 +1,14 @@
 .container.mt-4
   h1.mb-4 Заявка на обмен #{order.uid}
 
-  = render 'attributes_table', 
-    object: UserOrderDecorator.decorate(order), 
-    columns: UserOrderDecorator::COLUMNS
+  .row
+    .col-md-6
+      = render 'attributes_table', 
+        object: UserOrderDecorator.decorate(order), 
+        columns: UserOrderDecorator::COLUMNS
+    .col-md-6
+      p Сообщение
+      = order.order_comment
 
   - if order.wait?
     = link_to 'Средства отправил', 
