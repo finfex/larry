@@ -7,8 +7,9 @@
         object: UserOrderDecorator.decorate(order), 
         columns: UserOrderDecorator::COLUMNS
     .col-md-6
-      p Сообщение
-      = order.order_comment
+      - if order.order_comment.present?
+        p Сообщение
+        = order.order_comment
 
   - if order.wait?
     = link_to 'Средства отправил', 

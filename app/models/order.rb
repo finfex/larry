@@ -89,7 +89,7 @@ class Order < ApplicationRecord
 
   before_create :assign_uid
 
-  delegate :order_comment, to: :income_payment_system
+  delegate :order_comment, to: :outcome_payment_system
 
   def self.ransackable_scopes(_auth)
     %i[by_state]
