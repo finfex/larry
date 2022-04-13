@@ -5,7 +5,6 @@
 Rails.application.reloader.to_prepare do
   AppVersion
   HumanizedError
-  Settings
   ActionText::ContentHelper
   ActionText::TagHelper
 end

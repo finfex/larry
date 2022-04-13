@@ -7,7 +7,7 @@ require 'sidekiq/cron/web'
 require 'route_contraints'
 
 Rails.application.routes.draw do
-  default_url_options Settings.default_url_options.symbolize_keys
+  default_url_options Rails.configuration.settings.default_url_options.symbolize_keys
 
   concern :archivable do
     member do
