@@ -497,7 +497,6 @@ GEM
     semantic_range (3.0.0)
     semver2 (3.4.2)
     set (1.0.1)
-    settingslogic (2.0.9)
     sexp_processor (4.15.3)
     shellany (0.0.1)
     sidekiq (6.2.1)
@@ -669,7 +668,6 @@ DEPENDENCIES
   sd_notify (~> 0.1.1)
   selenium-webdriver
   semver2 (~> 3.4)
-  settingslogic
   sidekiq
   sidekiq-cron
   simple_form

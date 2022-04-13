@@ -7,18 +7,26 @@ defaults: &defaults
   #
   rewards_currency: USD
 
+  default_mailer:
+    from: <%= ENV.fetch('MAIL_FROM', 'noreply@localhost') %>
+
+  smtp_settings:
+    port: 465
+    address: <%= ENV.fetch("SMTP_ADDRESS", 'localhost') %>
+    user_name: <%= ENV.fetch("SMTP_USER_NAME", 'user') %>
+    password: <%= ENV.fetch('SMTP_PASSWORD', 'passsord') %>
+
   logo_path: /uploads/logo.svg
   max_export_records_count: 1000
   default_url_options: &default_url_options
     protocol: <%= ENV.fetch('HTTP_PROTOCOL', 'https') %>
     host: <%= ENV.fetch('LARRY_HOST', 'localhost') %>
-  openbill:
-    categories:
-      system:  a8237d74-e30d-4123-8f26-eda8ba593209
-      wallets: a8237d74-e30d-4123-8f26-eda8ba593208
-      storno:  a8237d74-e30d-4123-8f26-eda8ba593207
-      partners:  a8237d74-e30d-4123-8f26-eda8ba593206
-      users: a8237d74-e30d-4123-8f26-eda8ba593205
+  categories:
+    system:  a8237d74-e30d-4123-8f26-eda8ba593209
+    wallets: a8237d74-e30d-4123-8f26-eda8ba593208
+    storno:  a8237d74-e30d-4123-8f26-eda8ba593207
+    partners:  a8237d74-e30d-4123-8f26-eda8ba593206
+    users: a8237d74-e30d-4123-8f26-eda8ba593205
 
 development:
   <<: *defaults

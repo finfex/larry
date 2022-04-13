@@ -3,6 +3,6 @@
 # frozen_string_literal: true
 
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  default Settings.default_mailer.symbolize_keys
   layout 'mailer'
 end

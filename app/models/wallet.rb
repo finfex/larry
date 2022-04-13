@@ -17,7 +17,7 @@ class Wallet < ApplicationRecord
 
   before_validation on: :create, if: :payment_system, unless: :account do
     create_account!(
-      category_id: Settings.openbill.categories.wallets,
+      category_id: Settings.categories.fetch(:wallets),
       amount_currency: payment_system.currency.iso_code
     )
   end
