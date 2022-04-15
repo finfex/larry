@@ -9,6 +9,8 @@ require 'route_contraints'
 Rails.application.routes.draw do
   default_url_options Rails.configuration.settings.default_url_options.symbolize_keys
 
+  telegram_webhook Telegram::WebhookController if Telegram.bots_config.present?
+
   concern :archivable do
     member do
       put :archive
