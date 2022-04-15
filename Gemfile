@@ -28,6 +28,10 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'caxlsx', '~> 3.0'
 gem 'caxlsx_rails'
 
+gem "redis-actionpack", "~> 5.2"
+gem 'redis-store'
+gem 'redis-rails'
+
 gem 'auto_strip_attributes'
 gem 'bitcoin-ruby', require: 'bitcoin'
 gem 'cashaddress'

@@ -50,6 +50,6 @@ Run auto tests:
 > bundle exec cap production shell
 
 > RAILS_ENV=production bundle exec rake db:seed
-> RAILS_ENV=production bundle rake telegram:bot:set_webhook 
+> RAILS_ENV=production bundle exec rake telegram:bot:set_webhook 
 
 
