@@ -1,4 +1,4 @@
-module HandleErrors
+module Telegram::HandleErrors
   extend ActiveSupport::Concern
 
   included do
