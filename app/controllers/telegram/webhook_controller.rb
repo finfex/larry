@@ -8,7 +8,7 @@ class Telegram::WebhookController < Telegram::Bot::UpdatesController
   before_action :require_authorization!
 
   def start!(word = nil, *other_words)
-    respond_with :message, text: 'Че надо?'
+    respond_with :message, text: "Че надо? #{from}"
   end
 
   private
