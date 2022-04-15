@@ -7,6 +7,8 @@ class Order < ApplicationRecord
   include RateCalculationSerialization
   include OrderActions
 
+  strip_attributes
+
   belongs_to :city, optional: true
   belongs_to :income_payment_system, class_name: 'Gera::PaymentSystem'
   belongs_to :outcome_payment_system, class_name: 'Gera::PaymentSystem'

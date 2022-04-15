@@ -157,3 +157,5 @@ gem 'hairtrigger', '~> 0.2.24'
 gem "phonelib", "~> 0.6.57"
 
 gem "telegram-bot", "~> 0.15.6"
+
+gem "strip_attributes", "~> 1.12"
