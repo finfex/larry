@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_15_105429) do
+ActiveRecord::Schema.define(version: 2022_04_16_072028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -484,8 +484,10 @@ ActiveRecord::Schema.define(version: 2022_04_15_105429) do
     t.string "user_phone"
     t.string "user_telegram"
     t.uuid "city_id"
+    t.uuid "gera_direction_rates_id"
     t.index ["city_id"], name: "index_orders_on_city_id"
     t.index ["direction_rate_id"], name: "index_orders_on_direction_rate_id"
+    t.index ["gera_direction_rates_id"], name: "index_orders_on_gera_direction_rates_id"
     t.index ["income_payment_system_id"], name: "index_orders_on_income_payment_system_id"
     t.index ["income_wallet_id"], name: "index_orders_on_income_wallet_id"
     t.index ["operator_id"], name: "index_orders_on_operator_id"
@@ -618,7 +620,6 @@ ActiveRecord::Schema.define(version: 2022_04_15_105429) do
   add_foreign_key "order_actions", "orders"
   add_foreign_key "orders", "admin_users", column: "operator_id"
   add_foreign_key "orders", "cities"
-  add_foreign_key "orders", "gera_direction_rates", column: "direction_rate_id"
   add_foreign_key "orders", "gera_payment_systems", column: "income_payment_system_id"
   add_foreign_key "orders", "gera_payment_systems", column: "outcome_payment_system_id"
   add_foreign_key "orders", "partners", column: "referrer_id"

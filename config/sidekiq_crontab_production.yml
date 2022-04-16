@@ -1,25 +1,25 @@
-Gera::ExportToBestchangeWorker:
-  cron: '*/3 * * * * *'
-  class: Gera::ExportToBestchangeWorker
-  queue: critical
+# Gera::ExportToBestchangeWorker:
+#  cron: '*/3 * * * * *'
+#  class: Gera::ExportToBestchangeWorker
+#  queue: critical
 
 ### Cleaners
 #
-# PurgeRateCalculationsWorker:
-#  cron: '12 */3 * * *'
-#  class: PurgeRateCalculationsWorker
-#  queue: purgers
+PurgeRateCalculationsWorker:
+ cron: '12 */3 * * *'
+ class: PurgeRateCalculationsWorker
+ queue: purgers
 
 # Чистка во время тех перерыва 00:30-01:00
-# CurrencyRateHistoryIntervalCleanerWorker:
-#  cron: '40 0 * * *'
-#  class: Gera::CurrencyRateHistoryIntervalCleanerWorker
-#  queue: default
+CurrencyRateHistoryIntervalCleanerWorker:
+  cron: '40 0 * * *'
+  class: Gera::CurrencyRateHistoryIntervalCleanerWorker
+  queue: default
 
-# DirectionRateHistoryIntervalCleanerWorker:
-#   cron: '50 0 * * *'
-#   class: Gera::DirectionRateHistoryIntervalCleanerWorker
-#  queue: default
+DirectionRateHistoryIntervalCleanerWorker:
+  cron: '50 0 * * *'
+  class: Gera::DirectionRateHistoryIntervalCleanerWorker
+  queue: default
 
 
 ###
@@ -46,6 +46,12 @@ Gera::PurgeDirectionRatesWorker:
   class: Gera::PurgeDirectionRatesWorker
   queue: purgers
 
+  Gera::PurgeExternalRatesWorker:
+    cron: '27 4 * * *'
+    class: Gera::PurgeExternalRatesWorker
+    queue: purgers
+
+  Gera::CreateHistoryIntervalsWorker:
 Gera::CreateHistoryIntervalsWorker:
   cron: '*/17 * * * *'
   class: Gera::CreateHistoryIntervalsWorker
