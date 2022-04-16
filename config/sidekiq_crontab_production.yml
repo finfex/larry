@@ -5,11 +5,6 @@
 
 ### Cleaners
 #
-PurgeRateCalculationsWorker:
- cron: '12 */3 * * *'
- class: PurgeRateCalculationsWorker
- queue: purgers
-
 # Чистка во время тех перерыва 00:30-01:00
 CurrencyRateHistoryIntervalCleanerWorker:
   cron: '40 0 * * *'
