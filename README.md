@@ -40,6 +40,9 @@ Run auto tests:
 
 > rm db/migrate/*.gera.*; rake gera:install:migrations  
 
+## Добавление валют
+
+через модель Currency
 
 # Deploy with capistrano
 
