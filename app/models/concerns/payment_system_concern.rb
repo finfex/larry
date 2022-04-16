@@ -27,6 +27,10 @@ module PaymentSystemConcern
 
     mount_uploader :icon, PaymentSystemLogoUploader
 
+    after_update do
+      currency.restore! if currency.archived?
+    end
+
     before_create do
       if currency.is_crypto?
         self.system_type = :crypto
