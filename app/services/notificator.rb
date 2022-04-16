@@ -1,4 +1,4 @@
-module Notificator
+class Notificator
   include Sidekiq::Worker
 
   def self.new_order(order)
