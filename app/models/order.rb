@@ -12,7 +12,7 @@ class Order < ApplicationRecord
   belongs_to :city, optional: true
   belongs_to :income_payment_system, class_name: 'Gera::PaymentSystem'
   belongs_to :outcome_payment_system, class_name: 'Gera::PaymentSystem'
-  belongs_to :direction_rate, class_name: 'Gera::DirectionRate'
+  belongs_to :direction_rate, class_name: 'Gera::DirectionRate', optional: true # Может пропусть при purg
   belongs_to :referrer, class_name: 'Partner', optional: true
   belongs_to :user, class_name: 'User', optional: true
   belongs_to :operator, class_name: 'AdminUser', optional: true
@@ -77,6 +77,7 @@ class Order < ApplicationRecord
   end
 
   before_validation :select_wallets, on: :create
+  validates :direction_rate, presence: true, on: :create
   validates :referrer_reward, presence: true, if: :referrer, on: :create
   validates :user_income_address, presence: true, account_address_format: { payment_system: :outcome_payment_system }, if: :require_income_address?, on: :create
   validates :user_full_name, presence: true, if: :require_full_name?, on: :create
