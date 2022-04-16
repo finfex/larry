@@ -2,10 +2,11 @@ class Notificator
   include Sidekiq::Worker
 
   def self.new_order(order)
-    perform_async order
+    perform_async order.id
   end
 
-  def perform(order)
+  def perform(order_id)
+    order = Order.find order_id
     ClientMailer.new_order(order).deliver_later
     SupportMailer.new_order(order).deliver_later
     AdminUser.where.not(telegram_id: nil).find_each do |au|
