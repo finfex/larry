@@ -63,7 +63,7 @@ class ApplicationDecorator < Draper::Decorator
   private
 
   def address
-    h.content_tag :code, object.address, class: 'text-monospace'
+    h.content_tag :code, object.address, class: 'text-monospace text-nowrap'
   end
 
   def t(key)
