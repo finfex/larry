@@ -7,6 +7,7 @@ class CurrencyRateHistoryIntervalCleanerWorker
 
   def perform
     Gera::CurrencyRateHistoryInterval
+      .unscoped
       .where('interval_to < ?', Time.zone.now - LIFETIME)
       .delete_all
   end

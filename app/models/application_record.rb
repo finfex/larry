@@ -11,4 +11,8 @@ class ApplicationRecord < ActiveRecord::Base
     sql = "SELECT pg_size_pretty(pg_database_size('#{database_name}'));"
     connection.execute(sql)[0]["pg_size_pretty"]
   end
+
+  def self.vacuum
+    connection.execute "vacuum full #{table_name}"
+  end
 end

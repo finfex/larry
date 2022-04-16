@@ -7,6 +7,7 @@ class DirectionRateHistoryIntervalCleanerWorker
 
   def perform
     Gera::DirectionRateHistoryInterval
+      .unscoped
       .where('interval_to < ?', Time.zone.now - LIFETIME)
       .delete_all
   end
