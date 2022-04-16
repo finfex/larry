@@ -50,6 +50,7 @@ Rails.application.routes.draw do
               put :start
             end
           end
+          resources :admin_users
           resources :users, only: %i[index show]
           resources :partners, only: %i(update)
           resources :pages do

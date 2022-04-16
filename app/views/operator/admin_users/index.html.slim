@@ -1,0 +1,5 @@
+.container.mt-4
+  .float-right= link_to t('.create_admin_user'), new_operator_page_path, class: 'btn btn-success' if current_admin_user.has_permission?(AdminUser, :create)
+  h1.mb-4= AdminUser.model_name.human
+
+  = render 'table', items: admin_users, columns: %i[email telegram_id updated_at]
