@@ -137,6 +137,14 @@ class Order < ApplicationRecord
     Gera::CurrencyPair.new income_currency, outcome_currency
   end
 
+  def operator_url
+    Rails.application.routes.url_helpers.operator_order_url(self)
+  end
+
+  def public_url
+    Rails.application.routes.url_helpers.public_order_url(self)
+  end
+
   private
 
   def assign_uid
