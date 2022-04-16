@@ -99,8 +99,6 @@ module Public
       wallet_selector = WalletSelector.new(order)
       order.income_wallet = wallet_selector.select_income_wallet
       order.outcome_wallet = wallet_selector.select_outcome_wallet
-    rescue WalletSelector::NoIncomeWallet => err
-      Rails.logger.error err
     end
 
     def add_referrer(order)
