@@ -5,4 +5,10 @@
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
   extend BatchPurger
+
+  def self.database_size
+    database_name = connection.instance_variable_get("@config")[:database]
+    sql = "SELECT pg_size_pretty(pg_database_size('#{database_name}'));"
+    connection.execute(sql)[0]["pg_size_pretty"]
+  end
 end
