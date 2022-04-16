@@ -6,6 +6,10 @@ module Operator
   class WalletActivitiesController < ApplicationController
     authorize_actions_for WalletActivity
 
+    helper_method :resource
+
+    attr_reader :resource
+
     COMMANDS = {
       # 'deposit' => WalletDepositCommand,
       # 'withdrawal' => WalletWithdrawalCommand,
@@ -14,12 +18,14 @@ module Operator
 
     def show
       wa = WalletActivity.find params[:id]
+      @resource = wa.wallet
       redirect_to operator_wallet_path(wa.wallet, anchor: 'wallet_activity_' + wa.id.to_s)
     end
 
     def create
       attrs = params.require(:wallet_activity)
       wallet = Wallet.find attrs.fetch(:wallet_id)
+      @resource = wallet
       command = COMMANDS.fetch attrs.fetch(:activity_type)
 
       command.call(
