@@ -14,6 +14,7 @@
       | Настройки
     .dropdown-menu.dropdown-menu-left[aria-labelledby="settingsDropdown"]
       = link_to Wallet.model_name.human(count: 100), main_app.operator_wallets_path, class: 'dropdown-item'
+      = link_to 'Валюты', main_app.operator_currencies_path, class: 'dropdown-item'
       = link_to 'Платежные системы', main_app.operator_payment_systems_path, class: 'dropdown-item'
       = link_to 'Резервы', main_app.operator_reserves_path, class: 'dropdown-item'
       = link_to AdminUser.model_name.human(count: 100), main_app.operator_admin_users_path, class: 'dropdown-item'

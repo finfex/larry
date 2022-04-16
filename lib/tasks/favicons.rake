@@ -12,34 +12,36 @@
 #   ./apple-touch-icon.png
 #   ./favicon.ico
 
-require "RMagick"
+if ENV['RMAGICK']
+  require "RMagick"
 
-desc "Generates favicons and webapp icons"
-task :favicons, :origin do |t, args|
-  name = "apple-touch-icon-%dx%d.png"
-  name_pre = "apple-touch-icon-%dx%d-precomposed.png"
+  desc "Generates favicons and webapp icons"
+  task :favicons, :origin do |t, args|
+    name = "apple-touch-icon-%dx%d.png"
+    name_pre = "apple-touch-icon-%dx%d-precomposed.png"
 
-  FileList["*apple-touch-ico*.png"].each do |img|
-    File.delete img
-  end
-
-  FileList["*favicon.ico"].each do |img|
-    File.delete img
-  end
-
-  FileList[args.origin].each do |img|
-    puts "creating favicon.ico"
-
-    Magick::Image::read(img).first.resize(16, 16).write("favicon.ico")
-
-    [114, 57, 72].each do |size|
-      puts "creating %d * %d icons" % [size, size]
-      Magick::Image::read(img).first.resize(size, size).write(name % [size, size]).write(name_pre % [size, size])
+    FileList["*apple-touch-ico*.png"].each do |img|
+      File.delete img
     end
 
-    puts "creating backward-compatible icons"
+    FileList["*favicon.ico"].each do |img|
+      File.delete img
+    end
 
-    cp name_pre % [57, 57], "apple-touch-icon.png"
-    cp name_pre % [57, 57], "apple-touch-icon-precomposed.png"
+    FileList[args.origin].each do |img|
+      puts "creating favicon.ico"
+
+      Magick::Image::read(img).first.resize(16, 16).write("favicon.ico")
+
+      [114, 57, 72].each do |size|
+        puts "creating %d * %d icons" % [size, size]
+        Magick::Image::read(img).first.resize(size, size).write(name % [size, size]).write(name_pre % [size, size])
+      end
+
+      puts "creating backward-compatible icons"
+
+      cp name_pre % [57, 57], "apple-touch-icon.png"
+      cp name_pre % [57, 57], "apple-touch-icon-precomposed.png"
+    end
   end
 end
