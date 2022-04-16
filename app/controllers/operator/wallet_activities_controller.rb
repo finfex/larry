@@ -30,7 +30,7 @@ module Operator
 
       command.call(
         wallet: wallet,
-        amount: attrs.fetch(:amount),
+        amount: attrs.fetch(:amount).to_money(wallet.currency),
         details: attrs.fetch(:details),
         admin_user: current_admin_user
       )

@@ -16,8 +16,6 @@ class WalletCorrectionCommand < ApplicationCommand
         opposit_account: opposit_account
       )
 
-      raise if wa.amount.zero?
-
       if wa.amount.positive?
         to_account = wallet.account
         from_account = opposit_account
