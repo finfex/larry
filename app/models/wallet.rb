@@ -9,6 +9,9 @@ class Wallet < ApplicationRecord
   belongs_to :payment_system, class_name: 'Gera::PaymentSystem'
   belongs_to :account, class_name: 'OpenbillAccount'
 
+  scope :income, ->  { where income_enabled: true }
+  scope :outcome, ->  { where outcome_enabled: true }
+
   has_many :activities, class_name: 'WalletActivity'
 
   delegate :currency, to: :payment_system

@@ -27,7 +27,7 @@
         - outcome_payment_systems.each do |ps|
           - active = ps == order.outcome_payment_system
           - direction = Gera::Direction.new(ps_from: order.income_payment_system, ps_to: ps).freeze
-          - disabled = direction.direction_rate.nil? || !direction.direction_rate.persisted? || final_reserves[ps.id].zero?
+          - disabled = order.income_payment_system.wallets.alive.income.empty? || direction.direction_rate.nil? || !direction.direction_rate.persisted? || final_reserves[ps.id].zero? || order.outcome_payment_system.wallets.alive.outcome.empty?
           a class=("nav-link" + (active ? ' active' : '') + (disabled ? ' disabled' : '')) role="tab" aria-controls="v-pills-home" aria-selected=active.to_s href=public_root_url( request.query_parameters.merge outcome_payment_system_id: ps.id)
             = present_payment_system ps
             .text-small.float-right
