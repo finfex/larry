@@ -7,8 +7,8 @@
 class WalletSelector
   Error = Class.new StandardError
   NoWallet = Class.new Error
-  NoIncomeWallet = Class.new Error
-  NoOutcomeWallet = Class.new Error
+  NoIncomeWallet = Class.new NoWallet
+  NoOutcomeWallet = Class.new NoWallet
 
   attr_reader :order
 
