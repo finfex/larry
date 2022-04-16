@@ -1,9 +1,10 @@
 .mb-2
   = link_to '&larr; '.html_safe + Gera::PaymentSystem.model_name.human, operator_payment_systems_path
 .row
-  .col-md-6
+  .col-md-12
     h1= t 'gera.alive_currency'
     = render 'currencies', currencies: Currency.alive
-  .col-md-6
+.row
+  .col-md-12
     h1= t 'gera.archived_currency'
     = render 'currencies', currencies: Currency.archive

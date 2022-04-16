@@ -13,6 +13,10 @@ module Operator
 
     helper_method :model_class
 
+    before_action do
+      @container = :fluid
+    end
+
     private
 
     def model_class
