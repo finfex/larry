@@ -25,7 +25,7 @@ module Operator
     end
 
     def resource
-      partner
+      partner.user
     end
   end
 end

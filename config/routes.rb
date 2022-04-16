@@ -50,6 +50,7 @@ Rails.application.routes.draw do
               put :start
             end
           end
+          get :partners, to: redirect('/users')
           resources :admin_users
           resources :users, only: %i[index show]
           resources :partners, only: %i(update)

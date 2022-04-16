@@ -43,6 +43,15 @@ reject_operator_credit_card_verification PUT      /credit_card_verifications/:id
                                          PATCH    /credit_card_verifications/:id(.:format)                                                          operator/credit_card_verifications#update {:subdomain=>"operator"}
                                          PUT      /credit_card_verifications/:id(.:format)                                                          operator/credit_card_verifications#update {:subdomain=>"operator"}
                                          DELETE   /credit_card_verifications/:id(.:format)                                                          operator/credit_card_verifications#destroy {:subdomain=>"operator"}
+                       operator_partners GET      /partners(.:format)                                                                               redirect(301, /users) {:subdomain=>"operator"}
+                    operator_admin_users GET      /admin_users(.:format)                                                                            operator/admin_users#index {:subdomain=>"operator"}
+                                         POST     /admin_users(.:format)                                                                            operator/admin_users#create {:subdomain=>"operator"}
+                 new_operator_admin_user GET      /admin_users/new(.:format)                                                                        operator/admin_users#new {:subdomain=>"operator"}
+                edit_operator_admin_user GET      /admin_users/:id/edit(.:format)                                                                   operator/admin_users#edit {:subdomain=>"operator"}
+                     operator_admin_user GET      /admin_users/:id(.:format)                                                                        operator/admin_users#show {:subdomain=>"operator"}
+                                         PATCH    /admin_users/:id(.:format)                                                                        operator/admin_users#update {:subdomain=>"operator"}
+                                         PUT      /admin_users/:id(.:format)                                                                        operator/admin_users#update {:subdomain=>"operator"}
+                                         DELETE   /admin_users/:id(.:format)                                                                        operator/admin_users#destroy {:subdomain=>"operator"}
                           operator_users GET      /users(.:format)                                                                                  operator/users#index {:subdomain=>"operator"}
                            operator_user GET      /users/:id(.:format)                                                                              operator/users#show {:subdomain=>"operator"}
                         operator_partner PATCH    /partners/:id(.:format)                                                                           operator/partners#update {:subdomain=>"operator"}
