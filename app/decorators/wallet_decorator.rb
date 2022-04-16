@@ -13,6 +13,10 @@ class WalletDecorator < ApplicationDecorator
     h.format_money object.available_amount
   end
 
+  def address
+    h.content_tag :code, object.address, class: 'text-monospace'
+  end
+
   def payment_system
     h.link_to h.operator_payment_system_path(object.payment_system) do
       h.present_payment_system object.payment_system
