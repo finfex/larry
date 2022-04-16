@@ -51,15 +51,15 @@ Rails.application.routes.draw do
             end
           end
           resources :users, only: %i[index show]
-          resources :partners, only: %(update)
+          resources :partners, only: %i(update)
           resources :pages do
             concerns :archivable
           end
           resources :wallets do
             concerns :archivable
           end
-          resources :wallet_activities, only: %(create show)
-          resources :reserves, only: %(index)
+          resources :wallet_activities, only: %i(create show)
+          resources :reserves, only: %i(index)
           resources :payment_systems do
             concerns :archivable
           end

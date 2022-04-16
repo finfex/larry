@@ -1,4 +1,6 @@
                                   Prefix Verb     URI Pattern                                                                                       Controller#Action
+                        telegram_webhook POST     /telegram/EDXMq94BL-9lersTQqJVlq1PPXk                                                             #<Telegram::Bot::Middleware(Telegram::WebhookController)>
+                       letter_opener_web          /letter_opener                                                                                    LetterOpenerWeb::Engine
                              new_session GET      /session/new(.:format)                                                                            authentication/sessions#new
                                  session DELETE   /session(.:format)                                                                                authentication/sessions#destroy
                                          POST     /session(.:format)                                                                                authentication/sessions#create
@@ -65,14 +67,8 @@ reject_operator_credit_card_verification PUT      /credit_card_verifications/:id
                                          PATCH    /wallets/:id(.:format)                                                                            operator/wallets#update {:subdomain=>"operator"}
                                          PUT      /wallets/:id(.:format)                                                                            operator/wallets#update {:subdomain=>"operator"}
                                          DELETE   /wallets/:id(.:format)                                                                            operator/wallets#destroy {:subdomain=>"operator"}
-              operator_wallet_activities GET      /wallet_activities(.:format)                                                                      operator/wallet_activities#index {:subdomain=>"operator"}
-                                         POST     /wallet_activities(.:format)                                                                      operator/wallet_activities#create {:subdomain=>"operator"}
-            new_operator_wallet_activity GET      /wallet_activities/new(.:format)                                                                  operator/wallet_activities#new {:subdomain=>"operator"}
-           edit_operator_wallet_activity GET      /wallet_activities/:id/edit(.:format)                                                             operator/wallet_activities#edit {:subdomain=>"operator"}
+              operator_wallet_activities POST     /wallet_activities(.:format)                                                                      operator/wallet_activities#create {:subdomain=>"operator"}
                 operator_wallet_activity GET      /wallet_activities/:id(.:format)                                                                  operator/wallet_activities#show {:subdomain=>"operator"}
-                                         PATCH    /wallet_activities/:id(.:format)                                                                  operator/wallet_activities#update {:subdomain=>"operator"}
-                                         PUT      /wallet_activities/:id(.:format)                                                                  operator/wallet_activities#update {:subdomain=>"operator"}
-                                         DELETE   /wallet_activities/:id(.:format)                                                                  operator/wallet_activities#destroy {:subdomain=>"operator"}
                        operator_reserves GET      /reserves(.:format)                                                                               operator/reserves#index {:subdomain=>"operator"}
          archive_operator_payment_system PUT      /payment_systems/:id/archive(.:format)                                                            operator/payment_systems#archive {:subdomain=>"operator"}
          restore_operator_payment_system PUT      /payment_systems/:id/restore(.:format)                                                            operator/payment_systems#restore {:subdomain=>"operator"}
@@ -136,6 +132,13 @@ new_rails_conductor_inbound_email_source GET      /rails/conductor/action_mailbo
                       rails_disk_service GET      /rails/active_storage/disk/:encoded_key/*filename(.:format)                                       active_storage/disk#show
                update_rails_disk_service PUT      /rails/active_storage/disk/:encoded_token(.:format)                                               active_storage/disk#update
                     rails_direct_uploads POST     /rails/active_storage/direct_uploads(.:format)                                                    active_storage/direct_uploads#create
+
+Routes for LetterOpenerWeb::Engine:
+      letters GET  /                                letter_opener_web/letters#index
+clear_letters POST /clear(.:format)                 letter_opener_web/letters#clear
+       letter GET  /:id(/:style)(.:format)          letter_opener_web/letters#show
+delete_letter POST /:id/delete(.:format)            letter_opener_web/letters#destroy
+              GET  /:id/attachments/:file(.:format) letter_opener_web/letters#attachment
 
 Routes for Gera::Engine:
                                 root GET    /                                                    gera/direction_rates#index
