@@ -5,7 +5,7 @@ class Notificator
     perform_async order
   end
 
-  def new_order(order)
+  def perform(order)
     ClientMailer.new_order(order).deliver_later
     SupportMailer.new_order(order).deliver_later
     AdminUser.where.not(telegram_id: nil).find_each do |au|
