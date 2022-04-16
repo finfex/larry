@@ -75,6 +75,8 @@ class Order < ApplicationRecord
   before_validation do
     self.based_income_amount = income_amount.exchange_to Settings.rewards_currency
   end
+
+  before_validation :select_wallets, on: :create
   validates :referrer_reward, presence: true, if: :referrer, on: :create
   validates :user_income_address, presence: true, account_address_format: { payment_system: :outcome_payment_system }, if: :require_income_address?, on: :create
   validates :user_full_name, presence: true, if: :require_full_name?, on: :create
@@ -146,6 +148,17 @@ class Order < ApplicationRecord
   end
 
   private
+
+  def wallet_selector
+    @wallet_selector ||= WalletSelector.new self
+  end
+
+  def select_wallets
+    self.income_wallet = wallet_selector.select_income_wallet
+    self.outcome_wallet = wallet_selector.select_outcome_wallet
+  rescue WalletSelector::NoWallet => err
+    errors.add :base, 'В одной из платежных систем закончились кошельки для обработки средств. Заявку принять не возможно'
+  end
 
   def assign_uid
     self.uid ||= SecureRandom.hex(5).upcase

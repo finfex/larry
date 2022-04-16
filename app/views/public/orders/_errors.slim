@@ -1,3 +1,5 @@
 ul.list-group.mb-4#form_errors data-element-classes="list-group-item list-group-item-danger"
-  - order.errors.messages.values.flatten.each do |message|
+  - if order.errors.any?
+    li.list-group-item.list-group-item-danger Заявка не принята. Есть проблемы
+  - order.errors.full_messages.each do |message|
     li.list-group-item.list-group-item-danger= message.to_s.html_safe

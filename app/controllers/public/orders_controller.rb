@@ -87,20 +87,11 @@ module Public
         order.user_agent = request.user_agent
         order.user = current_user
         order.ref_token = current_ref_token
-        select_wallets order
         add_referrer order
         order.save!
         order.actions.create! key: :created
         order.create_booked_amount!
       end
-    end
-
-    def select_wallets(order)
-      wallet_selector = WalletSelector.new(order)
-      order.income_wallet = wallet_selector.select_income_wallet
-      order.outcome_wallet = wallet_selector.select_outcome_wallet
-    rescue WalletSelector::NoWallet => err
-      order.errors.add :base, 'В одной из платежных систем закончились кошельки для обработки средств. Заявку принять не возможно'
     end
 
     def add_referrer(order)
