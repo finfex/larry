@@ -58,7 +58,7 @@ Rails.application.routes.draw do
           resources :wallets do
             concerns :archivable
           end
-          resources :wallet_activities
+          resources :wallet_activities, only: %(create show)
           resources :reserves, only: %(index)
           resources :payment_systems do
             concerns :archivable
