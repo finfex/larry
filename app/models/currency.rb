@@ -15,6 +15,10 @@ class Currency < ApplicationRecord
 
   delegate :zero_money, :is_crypto?, to: :money_currency
 
+  def self.find_by_money_currency(money_currency)
+    find_by iso_code: money_currency.iso_code
+  end
+
   def money_currency
     Money::Currency.find id
   end

@@ -28,7 +28,7 @@ module PaymentSystemConcern
     mount_uploader :icon, PaymentSystemLogoUploader
 
     after_update do
-      currency.restore! if currency.archived?
+      record_currency.restore! if record_currency.archived?
     end
 
     before_create do
@@ -43,6 +43,10 @@ module PaymentSystemConcern
       # Wallet.create! payment_system: self, details: "Default wallet for #{name} (#{self.currency})", address: generate
       OpenbillCategory.storno.accounts.create! details: "Storno account for #{self}", reference: self, amount: self.currency.zero_money
     end
+  end
+
+  def record_currency
+    @record_currency ||= Currency.find_by_money_currency currency
   end
 
   def total_booked_amounts
