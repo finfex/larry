@@ -34,9 +34,9 @@
                 = humanized_money_with_currency Money.new(final_reserves[ps.id], ps.currency)
               - else
                 | Нет обмена
-                - if current_admin_user.present?
-                  hr.mt-2
-                    = direction.disable_reasons.map { |r| I18n.t(r, scope: :direction_disable_reasons, default: r) }.join(', ')
+            - if !direction.exchange_enabled? && current_admin_user.present?
+              - direction.disable_reasons.each do |reason|
+                .badge.badge-warning.text-small= I18n.t reason, scope: :direction_disable_reasons
 
     .col-md-4
       h2.mb-3 3. Ввод данных
