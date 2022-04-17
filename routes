@@ -181,13 +181,9 @@ Routes for Gera::Engine:
              external_rate_snapshots GET    /external_rate_snapshots(.:format)                   gera/external_rate_snapshots#index
               external_rate_snapshot GET    /external_rate_snapshots/:id(.:format)               gera/external_rate_snapshots#show
                       currency_rates GET    /currency_rates(.:format)                            gera/currency_rates#index
-                                     POST   /currency_rates(.:format)                            gera/currency_rates#create
-                   new_currency_rate GET    /currency_rates/new(.:format)                        gera/currency_rates#new
-                  edit_currency_rate GET    /currency_rates/:id/edit(.:format)                   gera/currency_rates#edit
                        currency_rate GET    /currency_rates/:id(.:format)                        gera/currency_rates#show
-                                     PATCH  /currency_rates/:id(.:format)                        gera/currency_rates#update
-                                     PUT    /currency_rates/:id(.:format)                        gera/currency_rates#update
-                                     DELETE /currency_rates/:id(.:format)                        gera/currency_rates#destroy
+             currency_rate_snapshots GET    /currency_rate_snapshots(.:format)                   gera/currency_rate_snapshots#index
+              currency_rate_snapshot GET    /currency_rate_snapshots/:id(.:format)               gera/currency_rate_snapshots#show
                  currency_rate_modes POST   /currency_rate_modes(.:format)                       gera/currency_rate_modes#create
               new_currency_rate_mode GET    /currency_rate_modes/new(.:format)                   gera/currency_rate_modes#new
              edit_currency_rate_mode GET    /currency_rate_modes/:id/edit(.:format)              gera/currency_rate_modes#edit

@@ -14,7 +14,7 @@ class ApplicationAuthorizer < Authority::Authorizer
       require_allowed_adjective! adjective
       return false if user.nil?
 
-      return true if user.superadmin?
+      return true if user.is_super_admin?
 
       user.has_permission? resource_name, verb_from_adjective(adjective)
     end
@@ -34,7 +34,7 @@ class ApplicationAuthorizer < Authority::Authorizer
   end
 
   def updatable_by?(user, attributes_to_change: [])
-    return true if user.superadmin?
+    return true if user.is_super_admin?
     return false unless user.has_permission? resource, :update
 
     changed_attributes = resource.respond_to?(:changed_attributes) ? resource.changed_attributes.keys : []

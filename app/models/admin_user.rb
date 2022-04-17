@@ -24,9 +24,4 @@ class AdminUser < ApplicationRecord
     # role.present? && role.has_any_permission?(subject, method, self)
   end
   # rubocop:enable Naming/PredicateName
-
-  # TODO: Move to table
-  def superadmin?
-    true
-  end
 end

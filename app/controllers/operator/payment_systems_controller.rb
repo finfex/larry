@@ -8,10 +8,6 @@ module Operator
 
     authorize_actions_for Gera::PaymentSystem
 
-    before_action do
-      @container = :fluid
-    end
-
     # TODO: наладить smart_input и добавить reservers_aggregator
     EDIT_COLUMNS = %i[
       name priority currency_iso_code is_available income_enabled outcome_enabled icon commission minimal_income_amount
