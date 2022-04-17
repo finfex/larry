@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_17_190259) do
+ActiveRecord::Schema.define(version: 2022_04_17_192553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -572,7 +572,7 @@ ActiveRecord::Schema.define(version: 2022_04_17_190259) do
     t.datetime "last_used_as_income_at"
     t.datetime "last_used_as_outcome_at"
     t.index ["account_id"], name: "index_wallets_on_account_id"
-    t.index ["address"], name: "index_wallets_on_address", unique: true
+    t.index ["payment_system_id", "address"], name: "index_wallets_on_payment_system_id_and_address", unique: true
     t.index ["payment_system_id"], name: "index_wallets_on_payment_system_id"
   end
 
