@@ -25,6 +25,8 @@ ru:
         saving: Сохраняем...
         waiting: Подождите...
     labels:
+      admin_user:
+        telegram_id: telegram_id
       defaults:
         login: email или телефон
         password: пароль
@@ -64,6 +66,8 @@ ru:
       q:
         query: Поиск по сайту
     hints:
+      admin_user:
+        telegram_id: Числовой идентификатор, например 1231231
       defaults:
         request_text: "Например: MSP430F47197IPZ 100 шт"
       credit_card_verification:

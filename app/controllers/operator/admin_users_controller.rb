@@ -6,25 +6,31 @@ module Operator
   class AdminUsersController < ApplicationController
     include ArchivableActions
 
-    helper_method :resource
+    helper_method :admin_user
+
+    before_action only: %i[create update edit] do
+      raise Unauthenticated if admin_user != current_admin_user && !current_admin_user.is_super_admin?
+    end
 
     def show
-      render locals: { admin_user: resource }
+      render locals: { admin_user: admin_user }
     end
 
     def edit
+      render :edit, locals: { admin_user: admin_user }
     end
 
     def update
-      resource.update! payment_system_params
-      redirect_to operator_payment_system_path(resource), notice: 'Изменения приняты'
+      admin_user.update! permitted_params
+      flash[:notice] = 'Изменения приняты'
+      edit
     rescue ActiveRecord::RecordInvalid
       edit
     end
 
     def create
-      resource.update! payment_system_params
-      redirect_to operator_payment_system_path(resource), notice: 'Изменения приняты'
+      admin_user.update! permitted_params
+      redirect_to operator_admin_users_path, notice: 'Изменения приняты'
     rescue ActiveRecord::RecordInvalid
       edit
     end
@@ -35,12 +41,18 @@ module Operator
 
     private
 
-    def resource
-      @resource ||= AdminUser.find(params[:id])
+    def admin_user
+      @admin_user ||= AdminUser.find(params[:id])
     end
 
-    def payment_system_params
-      params.require(:admin_user).permit(:email, :password, :telegarm_id)
+    def permitted_attributes
+      list = %i[email password telegram_id]
+      list << %i[is_super_admin] if current_admin_user.is_super_admin?
+      list
+    end
+
+    def permitted_params
+      params.require(:admin_user).permit( *permitted_attributes )
     end
   end
 end

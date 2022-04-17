@@ -1,0 +1,14 @@
+.container
+  h1.mb-4 Оператор
+  dl.row
+    dt.col-sm-3 Email
+    dd.col-sm-9= admin_user.email
+
+    dt.col-sm-3 Telegram ID
+    dd.col-sm-9= admin_user.telegram_id.presence || 'Не указан'
+
+    dt.col-sm-3 Супер админ?
+    dd.col-sm-9= admin_user.is_super_admin ? 'ДА' : 'нет'
+
+  - if current_admin_user.is_super_admin?
+    = link_to 'Изменить', edit_operator_admin_user_path(admin_user)
