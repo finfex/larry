@@ -75,10 +75,10 @@ Gera::EXMORatesWorker:
 
 # API разрешают дергать 30 раз в минуту у нас на каждый worker по 4 запроса
 #
-Gera::BitfinexRatesWorker:
-  cron: '*/1 * * * *'
-  class: Gera::BitfinexRatesWorker
-  queue: critical
+# Gera::BitfinexRatesWorker:
+#  cron: '*/1 * * * *'
+#  class: Gera::BitfinexRatesWorker
+#  queue: critical
 
 ### BestChange
 #
