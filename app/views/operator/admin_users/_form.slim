@@ -1,16 +1,14 @@
-.container
-  h2.mb-4 Профиль оператора
-  = simple_form_for [:operator, admin_user], wrapper_mappings: { boolean: :vertical_boolean } do |f|
-    .row
-      .col-md-4
-        = f.input :email
-      .col-md-4
-        = f.input :password
-      .col-md-4
-        = f.input :telegram_id
-    .row
-      .col-md-5
-        = f.input :is_super_admin, disabled: !current_admin_user.is_super_admin?
-    .row.mt-4
-      .col-md-12
-        = f.button :submit, class: 'btn btn-lg btn-primary'
+= simple_form_for [:operator, admin_user], wrapper_mappings: { boolean: :vertical_boolean } do |f|
+  .row
+    .col-md-4
+      = f.input :email
+    .col-md-4
+      = f.input :password
+    .col-md-4
+      = f.input :telegram_id
+  .row
+    .col-md-5
+      = f.input :is_super_admin, disabled: !current_admin_user.is_super_admin?
+  .row.mt-4
+    .col-md-12
+      = f.button :submit, class: 'btn btn-lg btn-primary'

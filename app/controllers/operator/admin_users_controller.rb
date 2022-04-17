@@ -21,7 +21,7 @@ module Operator
     end
 
     def new
-      render :edit, locals: { admin_user: AdminUser.new }
+      render :new, locals: { admin_user: AdminUser.new }
     end
 
     def edit
