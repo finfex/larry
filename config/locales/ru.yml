@@ -1,2 +1,7 @@
 ru:
   no_inverse_direction: Обраное направление отсутствует
+  direction_disable_reasons:
+    no_alive_income_wallet: Нет живого кошелька на приём
+    direction_rate_is_nil: Отсутвует курс для направления
+    direction_rate_is_not_persisted: Курс отсутствует или устарел
+    no_reserves: Нет резервов
