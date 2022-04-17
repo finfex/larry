@@ -8,7 +8,7 @@
           span= current_admin_user.email
       .dropdown-menu.dropdown-menu-right[aria-labelledby="navbarDropdown"]
         = link_to t('.dashboard'), Rails.application.routes.url_helpers.operator_root_url, class: 'dropdown-item'
-        = link_to t('.profile'), edit_operator_admin_user_path(current_admin_user), class: 'dropdown-item'
+        = link_to t('.profile'), Rails.application.routes.url_helpers.edit_operator_admin_user_path(current_admin_user), class: 'dropdown-item'
         - if current_admin_user.is_super_admin? || Rails.env.development?
           = link_to t('.sidekiq_web'), Rails.application.routes.url_helpers.sidekiq_web_url, class: 'dropdown-item'
           /= link_to t('.api'), root_api_url, class: 'dropdown-item'
