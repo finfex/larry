@@ -8,12 +8,20 @@ module Operator
 
     helper_method :admin_user
 
-    before_action only: %i[create update edit] do
+    before_action only: %i[create new] do
+      raise Unauthenticated unless current_admin_user.is_super_admin?
+    end
+
+    before_action only: %i[update edit] do
       raise Unauthenticated if admin_user != current_admin_user && !current_admin_user.is_super_admin?
     end
 
     def show
       render locals: { admin_user: admin_user }
+    end
+
+    def new
+      render :edit, locals: { admin_user: AdminUser.new }
     end
 
     def edit
@@ -29,10 +37,10 @@ module Operator
     end
 
     def create
-      admin_user.update! permitted_params
+      AdminUser.create! permitted_params
       redirect_to operator_admin_users_path, notice: 'Изменения приняты'
     rescue ActiveRecord::RecordInvalid
-      edit
+      new
     end
 
     def index
