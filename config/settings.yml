@@ -7,6 +7,11 @@ defaults: &defaults
   #
   rewards_currency: USD
 
+  # Сколько секундт курсы считать актуальными
+  actual_rates:
+    currency_rates_seconds: 60
+    direction_rates_seconds: 60
+
   support_email: <%= ENV.fetch('SUPPORT_EMAIL', 'support@localhost') %>
 
   default_mailer:
