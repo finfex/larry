@@ -40,6 +40,11 @@ defaults: &defaults
 
 development:
   <<: *defaults
+  # Сколько секундт курсы считать актуальными
+  actual_rates:
+    currency_rates_seconds: 86400
+    direction_rates_seconds: 86400
+
 staging:
   <<: *defaults
 production:
