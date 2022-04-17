@@ -8,12 +8,12 @@
 # Чистка во время тех перерыва 00:30-01:00
 CurrencyRateHistoryIntervalCleanerWorker:
   cron: '40 0 * * *'
-  class: Gera::CurrencyRateHistoryIntervalCleanerWorker
+  class: CurrencyRateHistoryIntervalCleanerWorker
   queue: default
 
 DirectionRateHistoryIntervalCleanerWorker:
   cron: '50 0 * * *'
-  class: Gera::DirectionRateHistoryIntervalCleanerWorker
+  class: DirectionRateHistoryIntervalCleanerWorker
   queue: default
 
 VacuumWorker:
