@@ -9,8 +9,8 @@ defaults: &defaults
 
   # Сколько секундт курсы считать актуальными
   actual_rates:
-    currency_rates_seconds: 60
-    direction_rates_seconds: 60
+    currency_rates_seconds: 180
+    direction_rates_seconds: 180
 
   support_email: <%= ENV.fetch('SUPPORT_EMAIL', 'support@localhost') %>
 
