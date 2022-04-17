@@ -1,0 +1,8 @@
+pushd vendor/gera
+git add .
+git commit -m m
+git push origin_https
+popd
+git add vendor/gera
+git commit -m 'Update vendor/gera'
+./release
