@@ -39,8 +39,8 @@ module Operator
     def create
       AdminUser.create! permitted_params
       redirect_to operator_admin_users_path, notice: 'Изменения приняты'
-    rescue ActiveRecord::RecordInvalid
-      new
+    rescue ActiveRecord::RecordInvalid => err
+      render :new, locals: { admin_user: err.record }
     end
 
     def index
