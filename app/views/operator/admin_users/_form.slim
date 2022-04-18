@@ -1,4 +1,5 @@
 = simple_form_for [:operator, admin_user], wrapper_mappings: { boolean: :vertical_boolean } do |f|
+  = render 'form_errors', f: f
   .row
     .col-md-4
       = f.input :email
