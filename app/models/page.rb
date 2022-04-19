@@ -6,7 +6,7 @@ class Page < ApplicationRecord
   include Authority::Abilities
   include Archivable
 
-  scope :for_menu, -> { order(:menu_title) }
+  scope :for_menu, -> { alive.order(:menu_title) }
 
   validates :menu_title, presence: true, uniqueness: true
   validates :html_title, presence: true

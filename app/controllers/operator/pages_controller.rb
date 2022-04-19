@@ -4,6 +4,7 @@
 
 module Operator
   class PagesController < ApplicationController
+    include ArchivableActions
     authorize_actions_for Page
 
     def index
@@ -15,17 +16,14 @@ module Operator
     end
 
     def show
-      page = Page.find params[:id]
       redirect_to public_page_url(page.path)
     end
 
     def edit
-      page = Page.find params[:id]
       render :edit, locals: { page: page }
     end
 
     def update
-      page = Page.find params[:id]
       page.update! permitted_params
       redirect_to operator_pages_path, notice: 'Изменения приняты'
     rescue ActiveRecord::RecordInvalid
@@ -41,6 +39,18 @@ module Operator
     end
 
     private
+
+    def resource
+      page
+    end
+
+    def success_redirect
+      redirect_to operator_pages_path
+    end
+
+    def page
+      @page ||= Page.find params[:id]
+    end
 
     def permitted_params
       params.require(:page).permit!
