@@ -13,6 +13,10 @@ module Operator
       raise Unauthenticated unless current_admin_user.is_super_admin?
     end
 
+    before_action only: %i[archive] do
+      raise HumanizedError, 'Нельзя архивировать самого себя' if current_admin_user == admin_user
+    end
+
     before_action only: %i[update edit] do
       raise Unauthenticated if admin_user != current_admin_user && !current_admin_user.is_super_admin?
     end
@@ -45,10 +49,18 @@ module Operator
     end
 
     def index
-      render locals: { admin_users: paginate(AdminUser.order('email desc')) }
+      render locals: { admin_users: paginate(AdminUser.order('archived_at desc, email desc')) }
     end
 
     private
+
+    def success_redirect
+      redirect_back fallback_location: operator_admin_users_path
+    end
+
+    def resource
+      admin_user
+    end
 
     def admin_user
       @admin_user ||= AdminUser.find(params[:id])

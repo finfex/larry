@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_19_191424) do
+ActiveRecord::Schema.define(version: 2022_04_19_200330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2022_04_19_191424) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "telegram_id"
     t.string "role", default: "operator", null: false
+    t.datetime "archived_at"
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
@@ -509,6 +510,7 @@ ActiveRecord::Schema.define(version: 2022_04_19_191424) do
     t.string "html_title", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "archived_at"
     t.index ["path"], name: "index_pages_on_path", unique: true
   end
 

@@ -6,6 +6,7 @@ class AdminUser < ApplicationRecord
   has_secure_password
   include Authority::UserAbilities
   include Authority::Abilities
+  include Archivable
   strip_attributes
 
   validates :email, presence: true, email: true

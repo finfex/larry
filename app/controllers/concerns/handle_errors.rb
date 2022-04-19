@@ -5,6 +5,7 @@ module HandleErrors
     rescue_from WalletSelector::NoWallet, with: :handle_no_wallet
     rescue_from Gera::DirectionRatesRepository::NoActualSnapshot, with: :rescue_humanized_error
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
+    rescue_from HumanizedError, with: :rescue_humanized_error
 
     # Source https://github.com/rails/rails/issues/4127
     rescue_from ActionView::MissingTemplate, :with => :catch_unacceptable_requests

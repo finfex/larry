@@ -13,9 +13,10 @@ module RouteConstraints
   # Contraint to admin-only resources
   class AdminRequiredConstraint
     def matches?(request)
-      return true if request.env['warden'].user(:admin_user).present?
+      admin_user = request.env['warden'].user(:admin_user)
+      return true if admin_user.present? && admin_user.alive?
 
-      throw(:warden, scope: :admin_user, redirect_url: request.url)
+      throw :warden, scope: :admin_user, redirect_url: request.url
     end
   end
 

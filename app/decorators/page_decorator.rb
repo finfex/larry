@@ -10,6 +10,9 @@ class PageDecorator < ApplicationDecorator
   end
 
   def actions
-    h.link_to t('actions.edit'), h.edit_operator_page_url(object.id)
+    buffer = []
+    buffer << h.link_to(t('actions.edit'), h.edit_operator_page_url(object.id), class: 'mr-2')
+    buffer << h.archive_button(object)
+    buffer.join.html_safe
   end
 end

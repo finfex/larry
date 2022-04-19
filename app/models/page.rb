@@ -4,6 +4,7 @@
 
 class Page < ApplicationRecord
   include Authority::Abilities
+  include Archivable
 
   scope :for_menu, -> { order(:menu_title) }
 

@@ -51,7 +51,9 @@ Rails.application.routes.draw do
             end
           end
           get :partners, to: redirect('/users')
-          resources :admin_users
+          resources :admin_users do
+            concerns :archivable
+          end
           resources :users, only: %i[index show]
           resources :partners, only: %i(update)
           resources :pages do
