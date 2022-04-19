@@ -5,7 +5,6 @@
 module Operator
   class CurrenciesController < ApplicationController
     include ArchivableActions
-
     authorize_actions_for Currency
 
     def index; end

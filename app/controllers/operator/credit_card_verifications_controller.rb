@@ -5,6 +5,7 @@
 module Operator
   class CreditCardVerificationsController < ApplicationController
     helper_method :current_state
+    authorize_actions_for CreditCardVerification
 
     before_action only: [:index] do
       redirect_to operator_credit_card_verifications_path(q: { by_state: :pending }) unless params.key? :q

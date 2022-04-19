@@ -10,6 +10,14 @@ class AdminUser < ApplicationRecord
 
   validates :email, presence: true, email: true
 
+  ROLES = %w[superadmin operator]
+
+  validates :role, presence: true, inclusion: { in: ROLES }
+
+  def is_super_admin?
+    role == 'superadmin'
+  end
+
   def name
     email
   end

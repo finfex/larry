@@ -4,6 +4,7 @@
 
 module Operator
   class UsersController < ApplicationController
+    authorize_actions_for User
     before_action do
       @container = :fluid
     end

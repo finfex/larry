@@ -4,7 +4,7 @@
 
 module Operator
   class PartnersController < ApplicationController
-
+    authorize_actions_for Partner
     helper_method :resource
 
     def show

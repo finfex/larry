@@ -4,6 +4,7 @@
 
 module Operator
   class WalletsController < ApplicationController
+    authorize_actions_for Wallet
     include ArchivableActions
 
     def index

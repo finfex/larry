@@ -5,6 +5,7 @@
 module Operator
   class AdminUsersController < ApplicationController
     include ArchivableActions
+    authorize_actions_for AdminUser
 
     helper_method :admin_user
 

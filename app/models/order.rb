@@ -6,6 +6,7 @@ class Order < ApplicationRecord
   include DirectionRateSerialization
   include RateCalculationSerialization
   include OrderActions
+  include Authority::Abilities
 
   strip_attributes
 

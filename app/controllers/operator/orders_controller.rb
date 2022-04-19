@@ -4,6 +4,7 @@
 
 module Operator
   class OrdersController < ApplicationController
+    authorize_actions_for Order
     helper_method :current_state
 
     before_action only: [:index] do

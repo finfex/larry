@@ -4,6 +4,7 @@
 
 module Operator
   class ReservesController < ApplicationController
+    authorize_actions_for Gera::PaymentSystem
     def index; end
   end
 end
