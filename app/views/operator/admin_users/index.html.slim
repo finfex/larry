@@ -3,4 +3,4 @@
     .float-right= link_to t('.create_admin_user'), new_operator_admin_user_path, class: 'btn btn-success' if current_admin_user.has_permission?(AdminUser, :create)
   h1.mb-4= AdminUser.model_name.human
 
-  = render 'table', items: admin_users, columns: %i[email telegram_id is_super_admin created_at]
+  = render 'table', items: admin_users, columns: %i[email telegram_id role created_at]

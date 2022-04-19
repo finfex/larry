@@ -9,7 +9,7 @@
       = f.input :telegram_id
   .row
     .col-md-5
-      = f.input :is_super_admin, disabled: !current_admin_user.is_super_admin?
+      = f.input :role, collection: AdminUser::ROLES, disabled: !current_admin_user.is_super_admin?
   .row.mt-4
     .col-md-12
       = f.button :submit, class: 'btn btn-lg btn-primary'

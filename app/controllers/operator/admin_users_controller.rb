@@ -56,7 +56,7 @@ module Operator
 
     def permitted_attributes
       list = %i[email password telegram_id]
-      list << %i[is_super_admin] if current_admin_user.is_super_admin?
+      list << %i[role] if current_admin_user.is_super_admin?
       list
     end
 

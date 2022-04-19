@@ -7,8 +7,8 @@
     dt.col-sm-3 Telegram ID
     dd.col-sm-9= admin_user.telegram_id.presence || 'Не указан'
 
-    dt.col-sm-3 Супер админ?
-    dd.col-sm-9= admin_user.is_super_admin ? 'ДА' : 'нет'
+    dt.col-sm-3 Роль
+    dd.col-sm-9= admin_user.role
 
   - if current_admin_user.is_super_admin?
     = link_to 'Изменить', edit_operator_admin_user_path(admin_user)
