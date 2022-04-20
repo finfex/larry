@@ -13,5 +13,3 @@ document.addEventListener("turbolinks:load", function() {
   $('.best_in_place[data-reload-on-success]').bind("ajax:success", function () {NProgress.start(); location.reload();});
 });
 
-
-console.log("Init best_in_place")

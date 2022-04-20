@@ -3,6 +3,9 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  def back_field
+    content_tag :input, nil, type: :hidden, name: :back, value: params[:back]
+  end
   def present_wallet_address(wallet)
     wallet.address
   end
