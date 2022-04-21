@@ -23,10 +23,6 @@ class Currency < ApplicationRecord
     Money::Currency.find id
   end
 
-  def bitfinex_ticker
-    custom_bitfinex_ticker.presence || iso_code.downcase
-  end
-
   def archive!
     super
     payment_systems.alive.find_each(&:archive!)

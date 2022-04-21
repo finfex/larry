@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_19_200330) do
+ActiveRecord::Schema.define(version: 2022_04_21_144159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -137,7 +137,6 @@ ActiveRecord::Schema.define(version: 2022_04_19_200330) do
     t.datetime "updated_at"
     t.decimal "minimal_input_value_cents", null: false
     t.decimal "minimal_output_value_cents", null: false
-    t.string "custom_bitfinex_ticker"
   end
 
   create_table "gera_cbr_external_rates", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
