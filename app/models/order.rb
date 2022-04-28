@@ -101,6 +101,19 @@ class Order < ApplicationRecord
     %i[by_state]
   end
 
+  def expire_at
+    created_at + Settings.order_active_period.minutes
+  end
+
+  def left_seconds
+    time = expire_at - Time.zone.now
+    time.negative? ? 0 : time
+  end
+
+  def expired?
+    left_seconds.zero?
+  end
+
   def require_verify_on_start?
     income_payment_system.require_verify_income_card?
   end

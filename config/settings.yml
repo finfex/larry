@@ -12,6 +12,9 @@ defaults: &defaults
     currency_rates_seconds: 180
     direction_rates_seconds: 180
 
+  # Сколько заявка считается активной
+  order_active_period: 20
+
   support_email: <%= ENV.fetch('SUPPORT_EMAIL', 'support@localhost') %>
 
   default_mailer:
