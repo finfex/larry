@@ -44,6 +44,8 @@ reject_operator_credit_card_verification PUT      /credit_card_verifications/:id
                                          PUT      /credit_card_verifications/:id(.:format)                                                          operator/credit_card_verifications#update {:subdomain=>"operator"}
                                          DELETE   /credit_card_verifications/:id(.:format)                                                          operator/credit_card_verifications#destroy {:subdomain=>"operator"}
                        operator_partners GET      /partners(.:format)                                                                               redirect(301, /users) {:subdomain=>"operator"}
+             archive_operator_admin_user PUT      /admin_users/:id/archive(.:format)                                                                operator/admin_users#archive {:subdomain=>"operator"}
+             restore_operator_admin_user PUT      /admin_users/:id/restore(.:format)                                                                operator/admin_users#restore {:subdomain=>"operator"}
                     operator_admin_users GET      /admin_users(.:format)                                                                            operator/admin_users#index {:subdomain=>"operator"}
                                          POST     /admin_users(.:format)                                                                            operator/admin_users#create {:subdomain=>"operator"}
                  new_operator_admin_user GET      /admin_users/new(.:format)                                                                        operator/admin_users#new {:subdomain=>"operator"}

@@ -28,8 +28,9 @@
         data: { toggle: 'dropdown' }, id: :geraDropdown, role: :button, 'aria-haspopup' => true, 'aria-expanded' => false do
         = t '.gera'
       .dropdown-menu.dropdown-menu-left[aria-labelledby="geraDropdown"]
-        = link_to 'Источники курсов', gera.rate_sources_path, class: 'dropdown-item'
         = link_to 'Валюты', main_app.operator_currencies_path, class: 'dropdown-item'
+        = link_to 'Источники курсов', gera.rate_sources_path, class: 'dropdown-item'
+        = link_to 'Методы расчёта', gera.currency_rate_mode_snapshots_path, class: 'dropdown-item'
         = link_to 'Базовый курс', gera.currency_rates_path, class: 'dropdown-item'
         = link_to 'Комиссии', gera.exchange_rates_path, class: 'dropdown-item'
         = link_to 'Конечный курс', gera.direction_rates_path, class: 'dropdown-item'
