@@ -6,6 +6,7 @@ module OrderActions
   # Пользователь подтверждает что средства отправил
   #
   def action_user_confirm!
+    raise HumanizedError, 'Заявка уже устарела. Уведомления не принимаются. Обратитесь в поддержку' if expired?
     with_lock do
       touch :user_confirmed_at
       user_confirm!
