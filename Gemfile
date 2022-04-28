@@ -163,3 +163,5 @@ gem "strip_attributes", "~> 1.12"
 gem "coffee-rails", "~> 5.0"
 
 gem 'cocoon'
+
+gem "request_store-sidekiq", "~> 0.1.0"
