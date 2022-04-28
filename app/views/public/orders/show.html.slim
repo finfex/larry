@@ -12,8 +12,38 @@
         = simple_format order.order_comment
 
   - if order.wait?
-    = link_to 'Средства отправил', 
-      confirm_public_order_path(order), 
-      method: :put, 
-      class: 'btn btn-success btn-lg', 
-      data: { confirm: "Отправили средства на указанный адрес #{order.income_address}" }
+    - if order.expired?
+      .alert.alert-warning Мы не дождались от вас средств. Заявка отменена
+    - else
+      = link_to 'Средства отправил', 
+        confirm_public_order_path(order), 
+        method: :put, 
+        id: 'confirm-button',
+        class: 'btn btn-success btn-lg float-left', 
+        data: { confirm: "Отправили средства на указанный адрес #{order.income_address}" }
+      .alert.alert-warning.float-left.ml-4
+        | До отмены заявки осталось
+        span.ml-1 id='timer' data-left-seconds=order.left_seconds
+
+      javascript:
+        var start = new Date;
+        var el = $('#timer');
+        var seconds = el.data('left-seconds');
+
+        var presentTime = function(seconds) { 
+          var minutes =  Math.floor(seconds / 60);
+          seconds = seconds - minutes * 60;
+          if (minutes>0) { 
+            return minutes + ' минут ' + seconds + ' секунд';
+          } else { 
+            return seconds + ' секунд';
+          }
+        }
+        var timer = setInterval(function() {
+          var left = seconds - Math.round((new Date - start) / 1000);
+          if (left <=0 ) { 
+            location.reload();
+          } else { 
+            el.text(presentTime(left));
+          }
+        }, 1000);

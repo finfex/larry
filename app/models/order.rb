@@ -107,7 +107,7 @@ class Order < ApplicationRecord
 
   def left_seconds
     time = expire_at - Time.zone.now
-    time.negative? ? 0 : time
+    time.negative? ? 0 : time.to_i
   end
 
   def expired?

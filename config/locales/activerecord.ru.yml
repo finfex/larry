@@ -139,6 +139,8 @@ ru:
 
       order:
         created_at: Создана
+        left_seconds: Осталось до отмены
+        expired?: Устарела?
       page:
         path: Путь
         menu_title: Название в меню
