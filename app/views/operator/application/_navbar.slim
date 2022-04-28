@@ -13,24 +13,4 @@
       class: 'nav-link', wrap_tag: :li, wrap_class: 'nav-item'
 
   - if current_admin_user.is_super_admin?
-    li.nav-item.dropdown.mr-2.d-flex.align-items-center
-      = link_to '#', class: 'my-lg-0 py-lg-0 nav-link dropdown-toggle', 
-        data: { toggle: 'dropdown' }, id: :settingsDropdown, role: :button, 'aria-haspopup' => true, 'aria-expanded' => false do
-        | Настройки
-      .dropdown-menu.dropdown-menu-left[aria-labelledby="settingsDropdown"]
-        = link_to Wallet.model_name.human(count: 100), main_app.operator_wallets_path, class: 'dropdown-item'
-        = link_to 'Платежные системы', main_app.operator_payment_systems_path, class: 'dropdown-item'
-        = link_to 'Резервы', main_app.operator_reserves_path, class: 'dropdown-item'
-        = link_to AdminUser.model_name.human(count: 100), main_app.operator_admin_users_path, class: 'dropdown-item'
-        = link_to Page.model_name.human(count: 100), main_app.operator_pages_path, class: 'dropdown-item'
-    li.nav-item.dropdown.mr-2.d-flex.align-items-center
-      = link_to '#', class: 'my-lg-0 py-lg-0 nav-link dropdown-toggle', 
-        data: { toggle: 'dropdown' }, id: :geraDropdown, role: :button, 'aria-haspopup' => true, 'aria-expanded' => false do
-        = t '.gera'
-      .dropdown-menu.dropdown-menu-left[aria-labelledby="geraDropdown"]
-        = link_to 'Валюты', main_app.operator_currencies_path, class: 'dropdown-item'
-        = link_to 'Источники курсов', gera.rate_sources_path, class: 'dropdown-item'
-        = link_to 'Методы расчёта', gera.currency_rate_mode_snapshots_path, class: 'dropdown-item'
-        = link_to 'Базовый курс', gera.currency_rates_path, class: 'dropdown-item'
-        = link_to 'Комиссии', gera.exchange_rates_path, class: 'dropdown-item'
-        = link_to 'Конечный курс', gera.direction_rates_path, class: 'dropdown-item'
+    = render 'admin_navbar'
