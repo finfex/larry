@@ -6,7 +6,8 @@ ru:
     work_finish_hm: 'Время окончания работы'
     mail_from: 'Емайл откуда приходят письма'
     support_email: 'Емайл для поддержки'
-    bot_token: 'Telegram BOT token'
+    telegram_bot_token: 'Telegram BOT token'
+    enabled: 'Сайт принимает заявки?'
   no_inverse_direction: Обраное направление отсутствует
   direction_disable_reasons:
     no_alive_income_wallet: Нет живого кошелька на приём

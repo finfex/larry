@@ -14,6 +14,11 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def public_enabled
+    check_work_time
+    raise HumanizedError, 'Сайт временно не работает' unless SiteSettings.enabled
+  end
+
   def check_work_time
     return if SiteSettings.is_work_time?
     raise HumanizedError, "У нас перерыв! Время работы с #{SiteSettings.work_start_hm} - #{SiteSettings.work_finish_hm}"

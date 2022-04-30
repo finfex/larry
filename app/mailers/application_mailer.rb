@@ -4,7 +4,7 @@
 
 class ApplicationMailer < ActionMailer::Base
   default from: -> { SiteSettings.mail_from },
-    delivery_method_options: -> { SiteSettings.smtp_settings }
+    delivery_method_options: -> { SiteSettings.smtp_settings.symbolize_keys }
 
   layout 'mailer'
 

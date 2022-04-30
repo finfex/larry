@@ -11,6 +11,16 @@ class Telegram::WebhookController < Telegram::Bot::UpdatesController
     respond_with :message, text: "Че надо, #{from.fetch('username')}?"
   end
 
+  def enable!(*args)
+    SiteSettings.get(:enabled).update value: true
+    respond_with :message, text: 'Сайт включён'
+  end
+
+  def disable!(*args)
+    SiteSettings.get(:enabled).update value: false
+    respond_with :message, text: 'Сайт отключен'
+  end
+
   private
 
   def multiline(*args)
@@ -31,7 +41,7 @@ class Telegram::WebhookController < Telegram::Bot::UpdatesController
   end
 
   def logged_in?
-    AdminUser.where(telegram_id: telegram_id).exists?
+    AdminUser.alive.where(telegram_id: telegram_id).exists?
   end
 
   def with_locale(&block)

@@ -4,6 +4,7 @@ defaults: &defaults
   max_incomde_diff_to_suggest: 5
 
   site_settings:
+    enabled: boolean
     html_title: string
     telegram_bot_token: string
     extra_html: text
