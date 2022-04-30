@@ -15,7 +15,7 @@ class SiteSettings < ApplicationRecord
     'string'  => 'string',
     'text'    => 'text',
     'integer' => 'numeric',
-    'ht'      => 'string',
+    'hm'      => 'string',
     'boolean' => 'boolean'
   }
 
@@ -72,6 +72,7 @@ class SiteSettings < ApplicationRecord
     case value_type
     when 'hm'
       errors.add :value, 'Должно быть в формате HH:MM' unless value=~/^(\d{2}):(\d{2})$/
+      Time.parse(value, Time.now) rescue errors.add(:value, 'Должно быть в формате HH:MM')
     end
   end
 end

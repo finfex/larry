@@ -8,6 +8,8 @@ module Public
     helper Gera::ApplicationHelper
     helper Gera::DirectionRateHelper
 
+    before_action :check_work_time, only: %i[new create]
+
     # rubocop:disable Metrics/AbcSize
     def new
       income_payment_system = income_payment_systems.find_by(id: params[:income_payment_system_id]) if params[:income_payment_system_id]
