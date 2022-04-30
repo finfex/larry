@@ -3,6 +3,8 @@ class Telegram::WebhookController < Telegram::Bot::UpdatesController
   include Telegram::Bot::UpdatesController::CallbackQueryContext
   include Telegram::HandleErrors
 
+  use_session!
+
   # use callbacks like in any other controller
   around_action :with_locale
   before_action :require_authorization!
@@ -19,6 +21,14 @@ class Telegram::WebhookController < Telegram::Bot::UpdatesController
   def disable!(*args)
     SiteSettings.get(:enabled).update value: false
     respond_with :message, text: 'Сайт отключен'
+  end
+
+  def destroy!(*args)
+    if args.first == 'yes'
+      respond_with :message, text: 'База удалена'
+    else
+      respond_with :message, text: 'Чтобы полностью удалить базу убедитесь что у вас есть бэкап и выполните `/destroy yes`'
+    end
   end
 
   private
