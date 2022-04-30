@@ -9,7 +9,7 @@ class OpenbillCategory < OpenbillRecord
   has_many :outcome_transactions, through: :accounts
 
   class << self
-    Settings.categories.each_pair do |key, id|
+    Settings.openbill_categories.each_pair do |key, id|
       define_method key do
         OpenbillCategory.create_with(name: key).find_or_create_by!(id: id)
       end

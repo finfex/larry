@@ -4,7 +4,7 @@
 
 puts 'Seed openbill categories and accounts'
 
-Settings.openbill.categories.each_pair do |name, id|
+Settings.openbill_categories.each_pair do |name, id|
   OpenbillCategory.create_with(name: name).find_or_create_by!(id: id)
 end
 

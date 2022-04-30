@@ -21,6 +21,7 @@ Money::Currency.all.each do |cur|
     income_enabled: true,
     outcome_enabled: true,
     minimal_income_amount: (cur.is_crypto? ? 0.01 : 10).to_money(cur),
+    maximal_income_amount: (cur.is_crypto? ? 1 : 1000).to_money(cur),
     bestchange_key: cur.name
   ).find_or_create_by!(currency_iso_code: cur)
 end

@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   def public_enabled
     check_work_time
-    raise HumanizedError, 'Сайт временно не работает' unless SiteSettings.enabled
+    raise SiteUnknown unless SiteSettings.enabled
   end
 
   def check_work_time

@@ -7,12 +7,17 @@ module HandleErrors
     rescue_from ActiveRecord::RecordNotFound, with: :not_found
     rescue_from HumanizedError, with: :rescue_humanized_error
     rescue_from Gera::CurrencyRateModeBuilderSupport::NotSupportedMode, with: :rescue_humanized_error
+    rescue_from SiteUnknown, with: :site_unknown
 
     # Source https://github.com/rails/rails/issues/4127
     rescue_from ActionView::MissingTemplate, :with => :catch_unacceptable_requests
   end
 
   private
+
+  def site_unknown
+    render :site_unknown
+  end
 
   def catch_unacceptable_requests(exception)
     if !ActionController::MimeResponds::Collector.new(collect_mimes_from_class_level).negotiate_format(request)
