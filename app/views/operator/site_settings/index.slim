@@ -1,12 +1,10 @@
 h1 Настройки сайта
 
-table.table.table-contensed
+table.table.table-contensed.table-narrow.table-bordered.table-striped
   - SiteSettings::KEYS.sort.each do |key|
     - ss = SiteSettings.get key
     tr
       th= ss.title
-      td.text-nowrap
-        code= ss.value_type
       td
         = present_settings_value ss.value
       td

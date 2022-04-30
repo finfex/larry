@@ -2,14 +2,14 @@
   .mb-4
     = link_to '&larr; Назад в список настроек'.html_safe, operator_site_settings_path
 
-  h1 Изменям настройку #{ss.title}
+  h1 Изменям настройку
   code= ss.key
 
   .mt-2
     = simple_form_for [:operator, ss] do |f|
       .row
         .col-md-9
-          = f.input :value, as: ss.input_type, label: false
+          = f.input :value, as: ss.input_type, label: ss.title
         .col-md-3
           = f.button :submit, value: 'Сохранить', class: 'btn btn-primary'
 

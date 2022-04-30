@@ -21,6 +21,11 @@ defaults: &defaults
     support_email: email
 
   site_settings_defaults:
+    smtp_settings_port: 465
+    smtp_settings_authentication: plain
+    smtp_settings_tls: true
+    smtp_settings_enable_starttls_auto: true
+
     order_wait_period: 20
     work_start_hm: '08:00'
     work_finish_hm: '18:00'
@@ -33,17 +38,6 @@ defaults: &defaults
   actual_rates:
     currency_rates_seconds: 180
     direction_rates_seconds: 180
-
-  support_email: <%= ENV.fetch('SUPPORT_EMAIL', 'support@localhost') %>
-
-  smtp_settings:
-    port:           465
-    address:        <%= ENV.fetch("SMTP_ADDRESS", 'localhost') %>
-    user_name:      <%= ENV.fetch("SMTP_USER_NAME", 'user') %>
-    password:       <%= ENV.fetch('SMTP_PASSWORD', 'passsord') %>
-    authentication: plain
-    tls:            true
-    enable_starttls_auto: true
 
   logo_path: /uploads/logo.svg
   max_export_records_count: 1000

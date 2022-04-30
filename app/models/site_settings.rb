@@ -41,6 +41,12 @@ class SiteSettings < ApplicationRecord
     super || KEYS.include?(key)
   end
 
+  def self.smtp_settings
+    KEYS.each_with_object({}) do |key, agg|
+      agg[key.gsub('smtp_settings_','')] = get(key).value if key.to_s.include? 'smtp_settings_'
+    end
+  end
+
   def value
     case value_type
     when 'integer'

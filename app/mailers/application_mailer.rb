@@ -3,7 +3,8 @@
 # frozen_string_literal: true
 
 class ApplicationMailer < ActionMailer::Base
-  default from: -> { SiteSettings.mail_from }
+  default from: -> { SiteSettings.mail_from },
+    delivery_method_options: -> { SiteSettings.smtp_settings }
 
   layout 'mailer'
 
