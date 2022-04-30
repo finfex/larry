@@ -62,7 +62,7 @@ class SiteSettings < ApplicationRecord
     when 'integer'
       super.to_i
     when 'boolean'
-      super == '1' || super == 'true'
+      %w[1 true t].include?(super) || super.is_a?(TrueClass)
     else
       super
     end
