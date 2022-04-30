@@ -15,15 +15,8 @@ class ApplicationController < ActionController::Base
   private
 
   def check_work_time
-    return if is_work_time?
+    return if SiteSettings.is_work_time?
     raise HumanizedError, "У нас перерыв! Время работы с #{SiteSettings.work_start_hm} - #{SiteSettings.work_finish_hm}"
-  end
-
-  def is_work_time?
-    start = Time.parse(SiteSettings.work_start_hm, Time.now)
-    finish = Time.parse(SiteSettings.work_finish_hm, Time.now)
-
-    start < Time.zone.now && Time.zone.now < finish
   end
 
   def unauthenticated!

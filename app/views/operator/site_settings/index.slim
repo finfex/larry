@@ -10,4 +10,4 @@ table.table.table-contensed.table-narrow.table-bordered.table-striped
       td
         = link_to 'Изменить', edit_operator_site_setting_path(ss)
 
-p Рабочее время? #{is_work_time?}
+p Рабочее время? #{SiteSettings.is_work_time?}

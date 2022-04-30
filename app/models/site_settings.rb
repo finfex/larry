@@ -47,6 +47,15 @@ class SiteSettings < ApplicationRecord
     end
   end
 
+  def self.is_work_time?
+    now = Time.now
+    start = Time.parse(work_start_hm, now)
+    finish = Time.parse(work_finish_hm, now)
+
+    start < now && now < finish
+  end
+
+
   def value
     case value_type
     when 'integer'
