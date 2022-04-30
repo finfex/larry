@@ -51,6 +51,7 @@ class SiteSettings < ApplicationRecord
     now = Time.zone.now
     start = Time.zone.parse(work_start_hm, now)
     finish = Time.zone.parse(work_finish_hm, now)
+    return true if start==finish
 
     start < now && now < finish
   end
