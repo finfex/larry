@@ -4,6 +4,7 @@ defaults: &defaults
   max_incomde_diff_to_suggest: 5
 
   site_settings:
+    html_title: string
     extra_html: text
     order_wait_period: integer
     work_start_hm: hm
