@@ -8,7 +8,7 @@ module Public
     helper Gera::ApplicationHelper
     helper Gera::DirectionRateHelper
 
-    before_action :public_enabled, only: %i[new create]
+    before_action :check_work_time, only: %i[new create]
 
     # rubocop:disable Metrics/AbcSize
     def new

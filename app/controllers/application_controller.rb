@@ -12,10 +12,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_admin_user, :current_user, :is_work_time?
 
+  before_action :check_enabled
+
   private
 
-  def public_enabled
-    check_work_time
+  def check_enabled
     raise SiteUnknown unless SiteSettings.enabled
   end
 
