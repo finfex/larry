@@ -42,7 +42,7 @@ module Operator
     end
 
     def present_settings(ss)
-      if ss.key.include? 'password'
+      if ss.key.include?('password') || ss.key.include?('token')
         if ss.value.present?
           return '***'
         else
