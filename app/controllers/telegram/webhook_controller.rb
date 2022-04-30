@@ -7,7 +7,8 @@ class Telegram::WebhookController < Telegram::Bot::UpdatesController
 
   # use callbacks like in any other controller
   around_action :with_locale
-  before_action :require_authorization!
+  before_action :authenticate!
+  before_action :authorize!, except: %i[start]
 
   def start!(word = nil, *other_words)
     respond_with :message, text: "Че надо, #{from.fetch('username')}?"
@@ -27,7 +28,7 @@ class Telegram::WebhookController < Telegram::Bot::UpdatesController
     if args.first == 'yes'
       respond_with :message, text: 'База удалена'
     else
-      respond_with :message, text: 'Чтобы полностью удалить базу убедитесь что у вас есть бэкап и выполните `/destroy yes`'
+      respond_with :message, text: 'Чтобы полностью удалить базу убедитесь что у вас есть бэкап и выполните: /destroy yes'
     end
   end
 
@@ -42,8 +43,12 @@ class Telegram::WebhookController < Telegram::Bot::UpdatesController
     '%14s' % (amount == 0 ? 0 : amount.to_s(:currency, unit: '', precision: 8))
   end
 
-  def require_authorization!
+  def authenticate!
     raise Unauthenticated, (chat || from) unless logged_in?
+  end
+
+  def authorize!
+    raise NotAuthorized unless logged_in? && admin_user.is_super_admin?
   end
 
   def telegram_id
@@ -51,7 +56,11 @@ class Telegram::WebhookController < Telegram::Bot::UpdatesController
   end
 
   def logged_in?
-    AdminUser.alive.where(telegram_id: telegram_id).exists?
+    admin_user.present?
+  end
+
+  def admin_user
+    @admin_user ||= AdminUser.alive.find_by(telegram_id: telegram_id)
   end
 
   def with_locale(&block)

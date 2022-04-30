@@ -1,0 +1,1 @@
+NotAuthorized = Class.new HumanizedError

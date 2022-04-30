@@ -9,6 +9,8 @@ module Telegram::HandleErrors
     case error
     when Telegram::Bot::Forbidden
       Bugsnag.notify error
+    when NotAuthorized
+      rescue_from :message, text: 'У вас нет доступа для этих действий'
     when Unauthenticated
       Bugsnag.notify error do |b|
         b.meta_data = { from: from, chat: chat }
