@@ -14,12 +14,12 @@ class Telegram::WebhookController < Telegram::Bot::UpdatesController
   end
 
   def enable!(*args)
-    SiteSettings.get(:enabled).update value: true
+    SiteSettings.get(:enabled).update! value: true
     respond_with :message, text: 'Сайт включён'
   end
 
   def disable!(*args)
-    SiteSettings.get(:enabled).update value: false
+    SiteSettings.get(:enabled).update! value: false
     respond_with :message, text: 'Сайт отключен'
   end
 

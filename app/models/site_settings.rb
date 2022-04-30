@@ -62,7 +62,7 @@ class SiteSettings < ApplicationRecord
     when 'integer'
       super.to_i
     when 'boolean'
-      !!super
+      super == '1' || super == 'true'
     else
       super
     end
