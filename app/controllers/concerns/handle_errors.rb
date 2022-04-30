@@ -16,7 +16,7 @@ module HandleErrors
   private
 
   def site_unknown
-    render :site_unknown
+    render :site_unknown, layout: false
   end
 
   def catch_unacceptable_requests(exception)
