@@ -8,6 +8,7 @@ li.nav-item.dropdown.mr-2.d-flex.align-items-center
     = link_to 'Резервы', main_app.operator_reserves_path, class: 'dropdown-item'
     = link_to AdminUser.model_name.human(count: 100), main_app.operator_admin_users_path, class: 'dropdown-item'
     = link_to Page.model_name.human(count: 100), main_app.operator_pages_path, class: 'dropdown-item'
+    = link_to 'Общие настройки', main_app.operator_site_settings_path, class: 'dropdown-item'
 li.nav-item.dropdown.mr-2.d-flex.align-items-center
   = link_to '#', class: 'my-lg-0 py-lg-0 nav-link dropdown-toggle', 
     data: { toggle: 'dropdown' }, id: :geraDropdown, role: :button, 'aria-haspopup' => true, 'aria-expanded' => false do

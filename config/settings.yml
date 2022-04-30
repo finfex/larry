@@ -3,6 +3,28 @@ defaults: &defaults
   # то ставим новый курс
   max_incomde_diff_to_suggest: 5
 
+  site_settings:
+    extra_html: text
+    order_wait_period: integer
+    work_start_hm: hm
+    work_finish_hm: hm
+
+    smtp_settings_port: integer
+    smtp_settings_address: string
+    smtp_settings_user_name: string
+    smtp_settings_password: string
+    smtp_settings_authentication: string
+    smtp_settings_tls: boolean
+    smtp_settings_enable_starttls_auto: boolean
+
+    mail_from: email
+    support_email: email
+
+  site_settings_defaults:
+    order_wait_period: 20
+    work_start_hm: '08:00'
+    work_finish_hm: '18:00'
+
   # Если установлено, то считаем все вознаграждения в этой валюте, если не установлено, то в валюте оригинала.
   #
   rewards_currency: USD
@@ -12,13 +34,7 @@ defaults: &defaults
     currency_rates_seconds: 180
     direction_rates_seconds: 180
 
-  # Сколько заявка считается активной
-  order_active_period: 20
-
   support_email: <%= ENV.fetch('SUPPORT_EMAIL', 'support@localhost') %>
-
-  default_mailer:
-    from: <%= ENV.fetch('MAIL_FROM', 'noreply@localhost') %>
 
   smtp_settings:
     port:           465

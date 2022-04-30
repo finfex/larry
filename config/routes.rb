@@ -42,6 +42,7 @@ Rails.application.routes.draw do
               put :income_confirm
             end
           end
+          resources :site_settings, only: %i[index edit update]
           resources :credit_cards
           resources :credit_card_verifications do
             member do

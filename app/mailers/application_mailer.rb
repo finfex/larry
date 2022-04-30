@@ -3,7 +3,7 @@
 # frozen_string_literal: true
 
 class ApplicationMailer < ActionMailer::Base
-  default Settings.default_mailer.symbolize_keys
+  default from: -> { SiteSettings.mail_from }
 
   layout 'mailer'
 

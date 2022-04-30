@@ -24,6 +24,10 @@
            income_confirm_operator_order PUT      /orders/:id/income_confirm(.:format)                                                              operator/orders#income_confirm {:subdomain=>"operator"}
                          operator_orders GET      /orders(.:format)                                                                                 operator/orders#index {:subdomain=>"operator"}
                           operator_order GET      /orders/:id(.:format)                                                                             operator/orders#show {:subdomain=>"operator"}
+                  operator_site_settings GET      /site_settings(.:format)                                                                          operator/site_settings#index {:subdomain=>"operator"}
+              edit_operator_site_setting GET      /site_settings/:id/edit(.:format)                                                                 operator/site_settings#edit {:subdomain=>"operator"}
+                   operator_site_setting PATCH    /site_settings/:id(.:format)                                                                      operator/site_settings#update {:subdomain=>"operator"}
+                                         PUT      /site_settings/:id(.:format)                                                                      operator/site_settings#update {:subdomain=>"operator"}
                    operator_credit_cards GET      /credit_cards(.:format)                                                                           operator/credit_cards#index {:subdomain=>"operator"}
                                          POST     /credit_cards(.:format)                                                                           operator/credit_cards#create {:subdomain=>"operator"}
                 new_operator_credit_card GET      /credit_cards/new(.:format)                                                                       operator/credit_cards#new {:subdomain=>"operator"}

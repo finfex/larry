@@ -1,4 +1,11 @@
 ru:
+  site_settings:
+    extra_html: 'Дополнительный HTML на все страницы'
+    order_wait_period: 'Период ожидания исполнения заявки'
+    work_start_hm: 'Время начала работы'
+    work_finish_hm: 'Время окончания работы'
+    mail_from: 'Емайл откуда приходят письма'
+    support_email: 'Емайл для поддержки'
   no_inverse_direction: Обраное направление отсутствует
   direction_disable_reasons:
     no_alive_income_wallet: Нет живого кошелька на приём

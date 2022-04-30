@@ -102,7 +102,7 @@ class Order < ApplicationRecord
   end
 
   def expire_at
-    created_at + Settings.order_active_period.minutes
+    created_at + SiteSettings.order_wait_period.minutes
   end
 
   def left_seconds

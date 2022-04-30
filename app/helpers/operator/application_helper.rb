@@ -40,5 +40,9 @@ module Operator
         link_to t('.archive'), url_for([:archive, :operator, resource]), method: :put, class: 'btn btn-sm btn-light'
       end
     end
+
+    def present_settings_value(value)
+      truncate value.to_s, length: 230
+    end
   end
 end
