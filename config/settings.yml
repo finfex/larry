@@ -20,8 +20,6 @@ defaults: &defaults
     mail_from: email
     support_email: email
 
-    bot_token: string
-
   site_settings_defaults:
     smtp_settings_port: 465
     smtp_settings_authentication: plain
