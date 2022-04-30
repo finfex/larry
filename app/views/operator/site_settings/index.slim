@@ -6,7 +6,7 @@ table.table.table-contensed.table-narrow.table-bordered.table-striped
     tr
       th= ss.title
       td
-        = present_settings_value ss.value
+        = present_settings ss
       td
         = link_to 'Изменить', edit_operator_site_setting_path(ss)
 

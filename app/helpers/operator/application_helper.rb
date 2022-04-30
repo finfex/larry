@@ -41,7 +41,16 @@ module Operator
       end
     end
 
-    def present_settings_value(value)
+    def present_settings(ss)
+      if ss.key.include? 'password'
+        if ss.value.present?
+          return '***'
+        else
+          return 'не установлен'
+        end
+      end
+
+      value = ss.value
       truncate value.to_s, length: 230
     end
   end
