@@ -5,6 +5,7 @@ defaults: &defaults
 
   site_settings:
     html_title: string
+    telegram_bot_token: string
     extra_html: text
     order_wait_period: integer
     work_start_hm: hm
