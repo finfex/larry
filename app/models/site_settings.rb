@@ -48,9 +48,9 @@ class SiteSettings < ApplicationRecord
   end
 
   def self.is_work_time?
-    now = Time.now
-    start = Time.parse(work_start_hm, now)
-    finish = Time.parse(work_finish_hm, now)
+    now = Time.zone.now
+    start = Time.zone.parse(work_start_hm, now)
+    finish = Time.zone.parse(work_finish_hm, now)
 
     start < now && now < finish
   end
