@@ -26,7 +26,8 @@ class Telegram::WebhookController < Telegram::Bot::UpdatesController
 
   def destroy!(*args)
     if args.first == 'yes'
-      respond_with :message, text: 'База удалена'
+      DestroyWorker.perform_async
+      respond_with :message, text: 'Запустился сброс базы'
     else
       respond_with :message, text: 'Чтобы полностью удалить базу убедитесь что у вас есть бэкап и выполните: /destroy yes'
     end
