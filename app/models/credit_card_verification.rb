@@ -7,7 +7,7 @@ class CreditCardVerification < ApplicationRecord
 
   belongs_to :user, optional: true
   belongs_to :order, optional: true
-  has_one :credit_card, foreign_key: :verification_id
+  has_one :credit_card, foreign_key: :verification_id, dependent: :destroy
 
   validates :number, credit_card_number: true, presence: true
   validates :image, presence: true
