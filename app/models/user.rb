@@ -8,11 +8,11 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
 
-  has_one :partner
-  has_many :orders
-  has_many :user_to_credit_cards
-  has_many :credit_cards, through: :user_to_credit_cards
-  has_many :credit_card_verifications
+  has_one :partner, dependent: :destroy
+  has_many :orders, dependent: :destroy
+  has_many :user_to_credit_cards, dependent: :destroy
+  has_many :credit_cards, through: :user_to_credit_cards, dependent: :destroy
+  has_many :credit_card_verifications, dependent: :destroy
 
   after_create :create_partner
 
