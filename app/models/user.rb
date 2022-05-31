@@ -11,8 +11,8 @@ class User < ApplicationRecord
   has_one :partner, dependent: :destroy
   has_many :orders, dependent: :destroy
   # has_many :user_to_credit_cards, dependent: :destroy
-  has_many :credit_cards, through: :user_to_credit_cards, dependent: :destroy
-  has_many :credit_card_verifications, dependent: :destroy
+  # has_many :credit_cards, through: :user_to_credit_cards, dependent: :destroy
+  # has_many :credit_card_verifications, dependent: :destroy
 
   after_create :create_partner
 
