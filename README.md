@@ -13,9 +13,11 @@
 rbenv install
 git submodule init
 git submodule update
-bundle
 nvm install
 yarn install
+bundle
+bundle exec rake db:create db:migrate
+bundle exec rake db:seed
 ```
 
 ## Development
