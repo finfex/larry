@@ -5,6 +5,7 @@
 class Wallet < ApplicationRecord
   include CurrencySupport
   include Archivable
+  include Authority::Abilities
 
   belongs_to :payment_system, class_name: 'Gera::PaymentSystem'
   belongs_to :account, class_name: 'OpenbillAccount'
@@ -20,7 +21,7 @@ class Wallet < ApplicationRecord
 
   before_validation on: :create, if: :payment_system, unless: :account do
     create_account!(
-      category_id: Settings.categories.fetch(:wallets),
+      category_id: Settings.openbill_categories.fetch(:wallets),
       amount_currency: payment_system.currency.iso_code
     )
   end
