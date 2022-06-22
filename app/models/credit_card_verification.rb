@@ -4,6 +4,7 @@
 
 class CreditCardVerification < ApplicationRecord
   include ClearCreditCardNumber
+  include Authority::Abilities
 
   belongs_to :user, optional: true
   belongs_to :order, optional: true

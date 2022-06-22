@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_29_061511) do
+ActiveRecord::Schema.define(version: 2022_06_20_152019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -356,6 +356,7 @@ ActiveRecord::Schema.define(version: 2022_04_29_061511) do
     t.boolean "is_enabled", default: true, null: false
     t.jsonb "supported_tickers", default: [], null: false
     t.datetime "supported_tickers_updated_at"
+    t.string "fetcher_klass"
     t.index ["actual_snapshot_id"], name: "fk_rails_0b6cf3ddaa"
     t.index ["key"], name: "index_rate_sources_on_key", unique: true
     t.index ["title"], name: "index_rate_sources_on_title", unique: true

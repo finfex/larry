@@ -25,8 +25,12 @@ class SiteSettings < ApplicationRecord
 
   validate :validate_value
 
-  def self.method_missing(key)
-    get(key).value
+  def self.method_missing(key, value = nil)
+    if key.ends_with? '='
+      get(key.to_s.tr('=','')).update! value: value
+    else
+      get(key).value
+    end
   end
 
   def self.get(key)

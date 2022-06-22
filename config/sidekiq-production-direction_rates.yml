@@ -1,5 +1,0 @@
-:verbose: true
-:concurrency: 1
-:timeout: 30
-:queues:
-  - [direction_rates, 256]

@@ -8,11 +8,11 @@ puts FactoryBot.definition_file_paths
 puts 'Seed GERA database'
 
 puts 'Create sources'
-FactoryBot.create :rate_source_exmo, title: 'exmo'
-FactoryBot.create :rate_source_cbr, title: 'Russian Central Bank'
-FactoryBot.create :rate_source_cbr_avg, title: 'Russian Central Bank (avg)'
+FactoryBot.create :rate_source_exmo, title: 'exmo', fetcher_klass: 'Gera::EXMORatesFetcher'
+FactoryBot.create :rate_source_cbr, title: 'Russian Central Bank', fetcher_klass: 'Gera::CBRRatesFetcher'
+FactoryBot.create :rate_source_cbr_avg, title: 'Russian Central Bank (avg)', fetcher_klass: 'Gera::CBRAvgRatesFetcher', is_enabled: false
+FactoryBot.create :rate_source_bitfinex, title: 'bitfinex', fetcher_klass: 'Gera::BitfinexRatesFetcher'
 FactoryBot.create :rate_source_manual, title: 'Manual'
-FactoryBot.create :rate_source_bitfinex, title: 'bitfinex'
 
 puts 'Create payments systems for every currencies'
 Money::Currency.all.each do |cur|
@@ -28,16 +28,6 @@ end
 
 puts 'Fetch rates'
 
-puts 'Fetch ЦБРФ'
-Gera::CBRRatesWorker.new.perform
-
-puts 'Fetch EXMO'
-Gera::EXMORatesWorker.new.perform
-
-puts 'Build DirectionsRates'
-Gera::DirectionsRatesWorker.new.perform
-
-puts 'Build BitfinexRates'
-Gera::BitfinexRatesWorker.new.perform
+Daemons::ExternalRatesFetcher.new.process
 
 Gera::ExchangeRate.update_all is_enabled: true

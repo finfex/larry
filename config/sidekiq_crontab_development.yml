@@ -8,15 +8,6 @@
 #
 # Обновляем раз в 15 минут просто на всякий случай
 #
-Gera::CurrencyRatesWorker:
-  cron: '*/15 * * * *'
-  class: Gera::CurrencyRatesWorker
-  queue: default
-
-Gera::DirectionsRatesWorker:
-  cron: '*/1 * * * *'
-  class: Gera::DirectionsRatesWorker
-
 Gera::PurgeCurrencyRatesWorker:
   cron: '27 2 * * *'
   class: Gera::PurgeCurrencyRatesWorker
@@ -32,34 +23,3 @@ Gera::CreateHistoryIntervalsWorker:
   class: Gera::CreateHistoryIntervalsWorker
   queue: default
 
-
-### Gera: Загрузчики внешних курсов
-#
-#
-Gera::CBRRatesWorker:
-  cron: '30 * * * *'
-  class: Gera::CBRRatesWorker
-  queue: critical
-
-# EXMO разрешает 180 раз в минуту
-# https://support.exmoney.com/hc/ru/articles/360013113933-%D0%94%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%BD%D0%BE%D0%B5-%D0%BA%D0%BE%D0%BB%D0%B8%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%BE-%D0%B2%D1%8B%D0%B7%D0%BE%D0%B2%D0%BE%D0%B2-API
-Gera::EXMORatesWorker:
-  cron: '*/15 * * * *'
-  class: Gera::EXMORatesWorker
-  queue: critical
-
-
-# API разрешают дергать 30 раз в минуту у нас на каждый worker по 4 запроса
-#
-Gera::BitfinexRatesWorker:
-  cron: '*/15 * * * *'
-  class: Gera::BitfinexRatesWorker
-  queue: critical
-
-### BestChange
-#
-#
-# BestChange::LoadingWorker:
-#  cron: '*/3 * * * * *'
-#   class: BestChange::LoadingWorker
-#   queue: critical

@@ -7,6 +7,10 @@
 * All database primary keys are UUID's
 * Предварительно рассчитанный курс
 
+## Dependencies
+
+* [overmind](https://github.com/DarthSim/overmind)
+
 ## Install for development
 
 ```
@@ -18,7 +22,12 @@ yarn install
 bundle
 bundle exec rake db:create db:migrate
 bundle exec rake db:seed
+bundle exec rails runner 'SiteSettings.enabled'
 ```
+
+## TODO
+
+* Отказаться от sidekiq cron в пользу отдельных демонов
 
 ## Development
 

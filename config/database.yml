@@ -41,7 +41,7 @@ default: &default
 
 development:
   <<: *default
-  database: larry_development
+  database: <%= ENV.fetch( 'LARRY_DATABASE_NAME', 'larry_development' ) %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
