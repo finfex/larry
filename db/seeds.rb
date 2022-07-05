@@ -11,3 +11,4 @@ SiteSettings.enabled=true
 SiteSettings.work_start_hm='00:00'
 SiteSettings.work_finish_hm='00:00'
 
+Gera::RateSource.find_by(type: 'Gera::RateSourceBitfinex').update_supported_tickers!

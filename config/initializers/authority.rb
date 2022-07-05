@@ -32,6 +32,10 @@ Authority.configure do |config|
     create: 'create',
     edit: 'update',
     update: 'update',
+    accept: 'update',
+    cancel: 'update',
+    done: 'update',
+    change_operator: 'update',
     destroy: 'delete'
   }
 

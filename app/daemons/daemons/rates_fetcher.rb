@@ -4,8 +4,10 @@ module Daemons
     def process
       logger.info('Fetch external rates')
       fetch_extrenal_rates
+      return unless running
       logger.info('Run currency rates worker')
       Gera::CurrencyRatesWorker.new.perform
+      return unless running
       logger.info('Run direction rates worker')
       Gera::DirectionsRatesWorker.new.perform
     rescue => err
@@ -20,6 +22,7 @@ module Daemons
         if rate_source.fetcher_klass.present?
           logger.info "Fetch for #{rate_source.type}"
           rate_source.fetch!
+          return unless running
         else
           logger.info "Skip #{rate_source.type} fetching (no fetcher_klass)"
         end

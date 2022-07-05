@@ -64,8 +64,11 @@ set :puma_start_task, 'systemd:puma:start'
 
 set :init_system, :systemd
 
+set :systemd_daemon_role, :app
+set :systemd_daemon_instances, -> { %i[rates_fetcher] }
+
 set :systemd_sidekiq_role, :sidekiq
-set :systemd_sidekiq_instances, -> { %i[direction_rates purgers critical defaults_0 defaults_1] } # rubocop:disable Naming/VariableNumber
+set :systemd_sidekiq_instances, -> { %i[critical defaults] } # rubocop:disable Naming/VariableNumber
 
 set :bugsnag_api_key, ENV['BUGSNAG_API_KEY']
 set :app_version, SemVer.find.to_s
