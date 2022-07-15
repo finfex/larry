@@ -12,6 +12,8 @@ ExecStop=/bin/kill -TERM $MAINPID
 RestartSec=5
 Restart=on-failure
 SyslogIdentifier=sidekiq
+MemoryHigh=1024M
+MemoryMax=1200M
 
 [Install]
 WantedBy=default.target

@@ -29,6 +29,8 @@ KillMode=mixed
 Restart=always
 RestartSec=1
 SyslogIdentifier=puma
+MemoryHigh=1024M
+MemoryMax=1200M
 
 #StandardOutput=append:<%= fetch(:puma_access_log) %>
 #StandardError=append:<%= fetch(:puma_error_log) %>

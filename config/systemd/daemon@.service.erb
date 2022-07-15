@@ -18,5 +18,8 @@ Restart=always
 RestartSec=1
 SyslogIdentifier=<%= fetch(:application) %>-daemon-%i
 
+MemoryHigh=1024M
+MemoryMax=1200M
+
 [Install]
 WantedBy=default.target
