@@ -39,7 +39,7 @@ gem 'credit_card_validations'
 gem 'date_validator'
 gem 'nilify_blanks'
 gem 'valid_email' # , require: 'valid_email/validate_email'
-# gem 'eth'
+gem 'eth'
 
 # базы данных
 gem 'carrierwave'
