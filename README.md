@@ -27,7 +27,8 @@ bundle exec rails runner 'SiteSettings.enabled'
 
 ## TODO
 
-* Отказаться от sidekiq cron в пользу отдельных демонов
+* [ ] Отказаться от sidekiq cron в пользу отдельных демонов
+* [ ] Перевести Intervals на Influx
 
 ## Development
 
