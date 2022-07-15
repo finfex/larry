@@ -72,7 +72,7 @@ end
 set :init_system, :systemd
 
 set :systemd_daemon_role, :app
-set :systemd_daemon_instances, -> { %i[rates_fetcher] }
+set :systemd_daemon_instances, -> { %i[rates_fetcher cleaner] }
 
 set :systemd_sidekiq_role, :sidekiq
 set :systemd_sidekiq_instances, -> { %i[critical defaults] } # rubocop:disable Naming/VariableNumber
