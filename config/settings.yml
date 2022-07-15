@@ -8,6 +8,7 @@ defaults: &defaults
     html_title: string
     telegram_bot_token: string
     extra_html: text
+    extra_css: text
     order_wait_period: integer
     work_start_hm: hm
     work_finish_hm: hm

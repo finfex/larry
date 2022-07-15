@@ -1,6 +1,7 @@
 ru:
   site_settings:
     extra_html: 'Дополнительный HTML на все страницы'
+    extra_css: 'Дополнительный CSS на все страницы'
     order_wait_period: 'Период ожидания исполнения заявки'
     work_start_hm: 'Время начала работы'
     work_finish_hm: 'Время окончания работы'
