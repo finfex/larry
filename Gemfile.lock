@@ -47,6 +47,7 @@ PATH
       business_time
       dapi-archivable
       draper (> 3.0.0)
+      env-tweaks
       kaminari
       money
       money-rails
