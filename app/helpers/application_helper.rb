@@ -41,8 +41,8 @@ module ApplicationHelper
     flag ? "#{css_classes} active" : css_classes
   end
 
-  def logo_image(size: 120)
-    image_tag Settings.logo_path, width: size, title: app_title
+  def logo_image
+    image_tag Settings.logo_path, title: app_title, id: 'logo'
   end
 
   def middot
