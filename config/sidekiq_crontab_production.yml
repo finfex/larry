@@ -16,10 +16,10 @@
 #   class: DirectionRateHistoryIntervalCleanerWorker
 #   queue: default
 
-# VacuumWorker:
-#   cron: '34 5 * * *'
-#   class: VacuumWorker
-#   queue: default
+VacuumWorker:
+  cron: '34 5 * * *'
+  class: VacuumWorker
+  queue: default
 
 ###
 #### Gera
