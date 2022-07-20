@@ -10,6 +10,9 @@ module Daemons
       return unless running
       logger.info('Run direction rates worker')
       Gera::DirectionsRatesWorker.new.perform
+      return unless running
+      logger.info("Run ExportToBestchangeWorker")
+      Gera::ExportToBestchangeWorker.new.perform
     rescue => err
       report_exception err
       logger.error err
