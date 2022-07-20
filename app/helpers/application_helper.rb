@@ -11,7 +11,7 @@ module ApplicationHelper
   end
 
   def bestchange_file_url
-    Rails.application.routes.url_helpers.public_root_url + '/uploads/valuta.xml'
+    Rails.application.routes.url_helpers.public_root_url + 'uploads/valuta.xml'
   end
 
   def page_header(title:, back_link: true, float_link: nil)
