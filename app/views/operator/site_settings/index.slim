@@ -11,3 +11,4 @@ table.table.table-contensed.table-narrow.table-bordered.table-striped
         = link_to 'Изменить', edit_operator_site_setting_path(ss)
 
 p Рабочее время? #{SiteSettings.is_work_time?}
+p Файл для импорта в bestchange: #{bestchange_file_url}
